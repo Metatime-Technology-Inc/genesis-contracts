@@ -7,11 +7,6 @@ import "../interfaces/IMinerHealthCheck.sol";
 import "../interfaces/IMinerList.sol";
 
 library MinerFormulas {
-    enum PoolType {
-        Reward,
-        Mining
-    }
-
     IMetaPoints public constant METAPOINTS =
         IMetaPoints(0xDAFEA492D9c6733ae3d56b7Ed1ADB60692c98Bc5);
     IMinerList public constant METALIST =
