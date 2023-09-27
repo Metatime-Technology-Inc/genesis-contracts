@@ -7,14 +7,17 @@ import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import "../libs/MinerTypes.sol";
 import "../interfaces/IBlockValidator.sol";
 import "../interfaces/IMinerList.sol";
+import "../interfaces/IMinerFormulas.sol";
 import "../helpers/RolesHandler.sol";
 
 contract Metaminer is Context, Initializable, RolesHandler {
     IBlockValidator public blockValidator;
     IMinerList public minerList;
-    uint256 constant STAKE_AMOUNT = 1_000_000 ether;
-    uint256 constant ANNUAL_AMOUNT = 100_000 ether;
-    uint256 constant YEAR = 31536000;
+    IMinerFormulas public minerFormulas;
+    uint256 public STAKE_AMOUNT = 1_000_000 ether;
+    uint256 public ANNUAL_AMOUNT = 100_000 ether;
+    uint256 private constant YEAR = 31536000;
+    address private MINER_POOL_ADDRESS; // should be constant
 
     struct Share {
         uint256 sharedPercent;
@@ -54,10 +57,14 @@ contract Metaminer is Context, Initializable, RolesHandler {
 
     function initialize(
         address blockValidatorAddress,
-        address minerListAddress
+        address minerListAddress,
+        address minerFormulasAddress,
+        address minerPoolAddress
     ) external initializer {
         blockValidator = IBlockValidator(blockValidatorAddress);
         minerList = IMinerList(minerListAddress);
+        minerFormulas = IMinerFormulas(minerFormulasAddress);
+        MINER_POOL_ADDRESS = minerPoolAddress;
     }
 
     function setMiner() external payable returns (bool) {
@@ -68,6 +75,11 @@ contract Metaminer is Context, Initializable, RolesHandler {
         shares[_msgSender()] = Share(0, 0);
         minerSubscription[_msgSender()] = _nextYear(_msgSender());
         minerList.addMiner(_msgSender(), MinerTypes.NodeType.Meta);
+        _addShareHolder(
+            _msgSender(),
+            MINER_POOL_ADDRESS,
+            minerFormulas.METAMINER_MINER_POOL_SHARE_PERCENT()
+        );
         emit MinerAdded(_msgSender(), minerSubscription[_msgSender()]);
         return (true);
     }
@@ -91,6 +103,11 @@ contract Metaminer is Context, Initializable, RolesHandler {
         shares[_miner] = Share(0, 0);
         minerSubscription[_miner] = _nextYear(_miner);
         minerList.addMiner(_miner, MinerTypes.NodeType.Meta);
+        _addShareHolder(
+            _miner,
+            MINER_POOL_ADDRESS,
+            minerFormulas.METAMINER_MINER_POOL_SHARE_PERCENT()
+        );
         emit MinerAdded(_miner, minerSubscription[_miner]);
         return (true);
     }
@@ -189,6 +206,7 @@ contract Metaminer is Context, Initializable, RolesHandler {
         require(sent, "unstake failed.");
         minerList.deleteMiner(_miner, MinerTypes.NodeType.Meta);
         minerSubscription[_miner] = 0;
+        // must be delete old shareholders
         return (true);
     }
 

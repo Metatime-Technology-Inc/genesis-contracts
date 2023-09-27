@@ -7,71 +7,82 @@ import "../helpers/RolesHandler.sol";
 import "../interfaces/IMinerList.sol";
 import "../interfaces/IMinerPool.sol";
 import "../interfaces/IMetaPoints.sol";
+import "../interfaces/IMinerFormulas.sol";
 import "../libs/MinerTypes.sol";
 
 // A long time ago in a galaxy far, far away! :D
 contract TxValidator is Initializable, RolesHandler {
-    // web2 decide which macrominer will take tx
-    // after decide event will be triggered
-    // micro miners will listen event, after trigger they will call getTransaction of announced tx
-    // micro miners can vote transactions of result -> true, false as existing on blocks
-
-
-    // should we;
-    // check activity of macrominer
-    // is it actually macrominer
-
-    // tx in kapanması verifyPoint || timeout
-    // micro only voting
-    // micro verifyPoint 3point(ether) & macro verifyPoint (5point(ether) * mpBalance)
-
-
-    // google || huawei loadbalance with geo location
-    // server anthill loadbalancer
-    // post request to client anthill and contract event trigger
-
     uint256 public votePointLimit = 100 ether;
     uint256 public voteCountLimit = 32;
     uint256 public defaultVotePoint = 2 ether;
+    uint256 public constant HANDLER_PERCENT = 50;
+
     IMinerList public minerList;
     IMinerPool public minerPool;
     IMetaPoints public metaPoints;
-    mapping (bytes32 => TxPayload) public txPayloads;
-    mapping (bytes32 => Votes[]) public txVotes;
+    IMinerFormulas public minerFormulas;
+
+    mapping(bytes32 => TxPayload) public txPayloads;
+    mapping(bytes32 => Vote[]) public txVotes;
     mapping(bytes32 => mapping(address => bool)) public previousVotes;
 
     struct Vote {
-        // macro & micro only
         MinerTypes.NodeType nodeType;
         address voter;
         bool decision;
     }
 
-    // ya votes 32 ya da vote points 100
     struct TxPayload {
         address handler;
         uint256 reward;
         uint256 votePoint;
+        bool voteResult;
         bool done;
     }
-    
-    event AddTransaction(bytes indexed txHash, address indexed handler, uint256 reward);
-    event VoteTransaction(bytes indexed txHash, address indexed voter, uint256 decision);
-    event DoneTransaction(bytes indexed txHash, uint256 reward);
 
-    function initialize(address minerListAddress, address minerPointsAddress) external {
+    event AddTransaction(
+        bytes32 indexed txHash,
+        address indexed handler,
+        uint256 reward
+    );
+    event VoteTransaction(
+        bytes32 indexed txHash,
+        address indexed voter,
+        bool decision
+    );
+    event DoneTransaction(bytes32 indexed txHash, uint256 reward);
+
+    function initialize(
+        address minerListAddress,
+        address minerPointsAddress,
+        address minerFormulasAddress
+    ) external {
         minerList = IMinerList(minerListAddress);
         metaPoints = IMetaPoints(minerPointsAddress);
+        minerFormulas = IMinerFormulas(minerFormulasAddress);
     }
 
-    function addTransaction(bytes32 txHash, address handler, uint256 reward) onlyManagerRole(msg.sender) external returns (bool) {
+    function addTransaction(
+        bytes32 txHash,
+        address handler,
+        uint256 reward
+    ) external onlyManagerRole(msg.sender) returns (bool) {
+        // check activity of macrominer
+        // is it actually macrominer
+        // timeout ?
+        TxPayload storage txPayload = txPayloads[txHash];
         require(txPayload.handler == address(0), "Tx is already exist");
-        txPayloads[txHash] = TxPayload(handler, reward, false);
+        txPayloads[txHash] = TxPayload(handler, reward, 0, false, false);
         emit AddTransaction(txHash, handler, reward);
         return (true);
     }
 
-    function voteTransaction(bytes32 txHash, bool decision, MinerTypes.NodeType nodeType) external returns (bool) {
+    function voteTransaction(
+        bytes32 txHash,
+        bool decision,
+        MinerTypes.NodeType nodeType
+    ) external returns (bool) {
+        // check activity of voter
         TxPayload storage txPayload = txPayloads[txHash];
         address voter = msg.sender;
         bool txState = _checkTransactionState(txHash);
@@ -80,12 +91,16 @@ contract TxValidator is Initializable, RolesHandler {
         require(txPayload.handler != address(0), "Tx doesn't exist");
         require(previousVotes[txHash][voter] != true, "Already voted");
         require(voter != txPayload.handler, "Handler cannot vote for tx");
-        require(minerList.list[voter][nodeType] == true && nodeType != MinerTypes.nodeType.Meta, "Address is not eligible to vote");
-        
+        require(
+            minerList.list(voter, nodeType) == true &&
+                nodeType != MinerTypes.NodeType.Meta,
+            "Address is not eligible to vote"
+        );
+
         uint256 votePoint = _calculateVotePoint(voter, nodeType);
 
         txPayload.votePoint += votePoint;
-        txPayload.votes[] = Vote(nodeType, voter, decision);
+        txVotes[txHash].push(Vote(nodeType, voter, decision));
 
         emit VoteTransaction(txHash, voter, decision);
         _checkTransactionState(txHash);
@@ -99,46 +114,72 @@ contract TxValidator is Initializable, RolesHandler {
 
     function _checkTransactionState(bytes32 txHash) internal returns (bool) {
         TxPayload storage txPayload = txPayloads[txHash];
-        Votes[] storage txVote = txVotes[txHash];
-        
-        if (txPayload.votePoint >= votePointLimit || txVote.length == voteCountLimit){
+        Vote[] storage txVote = txVotes[txHash];
+
+        if (
+            txPayload.votePoint >= votePointLimit ||
+            txVote.length == voteCountLimit
+        ) {
             txPayload.done = true;
+            _shareRewards(txHash);
             emit DoneTransaction(txHash, txPayload.reward);
         }
-        
+
         return txPayload.done;
     }
 
-    function _calculateVotePoint(address voter, MinerTypes.NodeType nodeType) internal view returns (uint256) {
-        if (nodeType == MinerTypes.NodeType.Macro) {
-            uint256 metaPointsBalance = metaPoints.balanceOf(voter);
-
-            return (defaultVotePoint * metaPointsBalance);
+    function _calculateVotePoint(
+        address voter,
+        MinerTypes.NodeType nodeType
+    ) internal view returns (uint256) {
+        if (nodeType == MinerTypes.NodeType.Micro) {
+            // for micro miners
+            return defaultVotePoint;
         }
 
-        // for micro miners
-        return defaultVotePoint;
+        uint256 metaPointsBalance = metaPoints.balanceOf(voter);
+        return (defaultVotePoint * metaPointsBalance);
     }
 
     function _shareRewards(bytes32 txHash) internal returns (bool) {
-        // metaminer blocktan geleni minerpool ve diğerlerine paylaştırıyor
-        // macrominer daily reward alıyor minerpooldan
-        
-        // minerpooldan çekilen paranın hardcap i var;
-        // archive a 75k - fullnode a 50k - light a 45k
-        // total 170k daily eksilme ihtimali var
-        // minerpool ilk balance i => 1_000_000_000 / 170_000 => 5882 gün => 16 yıl
-        // ben bugün 25 yaşındayım bitince pool, 41 olucam LOL
+        TxPayload storage txPayload = txPayloads[txHash];
+        Vote[] storage txVote = txVotes[txHash];
 
-        // ki bu fix orana göre iletlemekte bu değişken olması lazım fiyata göre (alt limiti şuanki fix oran)
+        address[] memory trueVoters;
+        address[] memory falseVoters;
+        for (uint256 i = 0; i < txVote.length; i++) {
+            Vote memory vote = txVote[i];
+            if(vote.decision){
+                trueVoters[trueVoters.length] = vote.voter;
+                continue;
+            }
+            falseVoters[falseVoters.length] = vote.voter;
+        }
 
-        // buna göre metaminer dan gelen paranın yüzdesi kaç ise o orana göre verilmesi lazım, örnek;
-        // blocktan gelen para 10 ether, 5 i minerpoola gidiyor bu sebeple %50 miner poolun,
-        // tx ten gelen para yani blocka verilen para 1 ether ise 0.5 ether paylaşıltırılması lazım
+        bool tie = (trueVoters.length == falseVoters.length ? true : false);
+        bool decision = (trueVoters.length > falseVoters.length ? true : false);
 
+        if(!tie){
+            uint256 txReward = txPayload.reward;
+            uint256 minerPoolPercent = (100 / minerFormulas.METAMINER_MINER_POOL_SHARE_PERCENT());
+            txReward /= minerPoolPercent;
 
-
-        // sharing rewards from minerPool
+            uint256 handlerReward = txReward / (100 / HANDLER_PERCENT);
+            uint256 voteReward = (txReward - handlerReward) / txVote.length;
+            if(decision){
+                // send handler reward
+                for (uint256 i2 = 0; i2 < trueVoters.length; i2++) {
+                    address trueVoter = trueVoters[i2];
+                    // send voter reward
+                }
+            } else {
+                voteReward = txReward / txVote.length;
+                for (uint256 i2 = 0; i2 < falseVoters.length; i2++) {
+                    address falseVoter = falseVoters[i2];
+                    // send voter reward
+                }
+            }
+        }
         return (true);
     }
 }

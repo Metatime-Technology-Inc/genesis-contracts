@@ -14,6 +14,8 @@ library MinerFormulas {
     IMinerHealthCheck public constant METAHEALTHCHECK =
         IMinerHealthCheck(0xDAFEA492D9c6733ae3d56b7Ed1ADB60692c98Bc5);
 
+    uint256 public constant METAMINER_MINER_POOL_SHARE_PERCENT = 50;
+
     uint256 public constant METAMINER_DAILY_BLOCK_COUNT = 17_280;
     uint256 public constant METAMINER_DAILY_PRIZE_POOL = 166_666;
     uint256 public constant METAMINER_DAILY_PRIZE_LIMIT = 450 * 10 ** 18;
@@ -23,17 +25,17 @@ library MinerFormulas {
     uint256 public constant MACROMINER_LIGHT_DAILY_MAX_REWARD = 50;
 
     uint256 public constant MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA =
-        60_000 * 10 ** 18;
+        135_000 * 10 ** 18;
     uint256 public constant MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA =
         15_000 * 10 ** 18;
 
     uint256 public constant MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA =
-        40_000 * 10 ** 18;
+        90_000 * 10 ** 18;
     uint256 public constant MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA =
         10_000 * 10 ** 18;
 
     uint256 public constant MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA =
-        40_000 * 10 ** 18;
+        45_000 * 10 ** 18;
     uint256 public constant MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA =
         5_000 * 10 ** 18;
 
