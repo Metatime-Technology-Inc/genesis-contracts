@@ -1,0 +1,136 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="535pt" height="431pt" viewBox="0.00 0.00 535.17 431.00">
+<g id="graph0" class="graph" transform="translate(4,427) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-427 531.17,-427 531.17,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterStrategicPool">
+
+<path fill="#445773" stroke="#445773" d="M20,-93C20,-93 402.17,-93 402.17,-93 408.17,-93 414.17,-99 414.17,-105 414.17,-105 414.17,-266 414.17,-266 414.17,-272 408.17,-278 402.17,-278 402.17,-278 20,-278 20,-278 14,-278 8,-272 8,-266 8,-266 8,-105 8,-105 8,-99 14,-93 20,-93" style=""/>
+<text text-anchor="middle" x="211.08" y="-261.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">StrategicPool</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterIMTC">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M285.12,-8C285.12,-8 334.59,-8 334.59,-8 340.59,-8 346.59,-14 346.59,-20 346.59,-20 346.59,-73 346.59,-73 346.59,-79 340.59,-85 334.59,-85 334.59,-85 285.12,-85 285.12,-85 279.12,-85 273.12,-79 273.12,-73 273.12,-73 273.12,-20 273.12,-20 273.12,-14 279.12,-8 285.12,-8" style=""/>
+<text text-anchor="middle" x="309.86" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMTC</text>
+</g>
+<g id="clust3" class="cluster" data-name="clusterTrigonometry">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M446.17,-147C446.17,-147 515.17,-147 515.17,-147 521.17,-147 527.17,-153 527.17,-159 527.17,-159 527.17,-212 527.17,-212 527.17,-218 521.17,-224 515.17,-224 515.17,-224 446.17,-224 446.17,-224 440.17,-224 434.17,-218 434.17,-212 434.17,-212 434.17,-159 434.17,-159 434.17,-153 440.17,-147 446.17,-147" style=""/>
+<text text-anchor="middle" x="480.67" y="-207.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">Trigonometry</text>
+</g>
+<g id="clust4" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="23.77,-286 23.77,-415 344.86,-415 344.86,-286 23.77,-286" style=""/>
+<text text-anchor="middle" x="184.31" y="-398.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- StrategicPool.&lt;Constructor&gt; -->
+<g id="node1" class="node" pointer-events="visible" data-name="StrategicPool.&lt;Constructor&gt;">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="96.77" cy="-227" rx="67.55" ry="18" style=""/>
+<text text-anchor="middle" x="96.77" y="-222.8" font-family="Times,serif" font-size="14.00" style="">&lt;Constructor&gt;</text>
+</g>
+<!-- StrategicPool.address -->
+<g id="node5" class="node" pointer-events="visible" data-name="StrategicPool.address">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="309.86" cy="-227" rx="40" ry="18" style=""/>
+<text text-anchor="middle" x="309.86" y="-222.8" font-family="Times,serif" font-size="14.00" style="">address</text>
+</g>
+<!-- StrategicPool.&lt;Constructor&gt;&#45;&gt;StrategicPool.address -->
+<g id="edge1" class="edge" data-name="StrategicPool.&lt;Constructor&gt;-&gt;StrategicPool.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M161.96,-220.73C192.57,-219.98 228.69,-220.11 257.45,-221.11" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="256.95,-224.59 267.08,-221.51 257.23,-217.6 256.95,-224.59" style=""/>
+</g>
+<!-- StrategicPool.&lt;Constructor&gt;&#45;&gt;StrategicPool.address -->
+<g id="edge2" class="edge" data-name="StrategicPool.&lt;Constructor&gt;-&gt;StrategicPool.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M161.96,-233.27C192.57,-234.02 228.69,-233.89 257.45,-232.89" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="257.23,-236.4 267.08,-232.49 256.95,-229.41 257.23,-236.4" style=""/>
+</g>
+<!-- StrategicPool.burnWithFormula -->
+<g id="node2" class="node" pointer-events="visible" data-name="StrategicPool.burnWithFormula">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="96.77" cy="-173" rx="80.54" ry="18" style=""/>
+<text text-anchor="middle" x="96.77" y="-168.8" font-family="Times,serif" font-size="14.00" style="">burnWithFormula</text>
+</g>
+<!-- StrategicPool.calculateBurnAmount -->
+<g id="node4" class="node" pointer-events="visible" data-name="StrategicPool.calculateBurnAmount">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="309.86" cy="-173" rx="96.13" ry="18" style=""/>
+<text text-anchor="middle" x="309.86" y="-168.8" font-family="Times,serif" font-size="14.00" style="">calculateBurnAmount</text>
+</g>
+<!-- StrategicPool.burnWithFormula&#45;&gt;StrategicPool.calculateBurnAmount -->
+<g id="edge3" class="edge" data-name="StrategicPool.burnWithFormula-&gt;StrategicPool.calculateBurnAmount">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M178.78,-173C185.59,-173 192.56,-173 199.54,-173" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="199.5,-176.5 209.5,-173 199.5,-169.5 199.5,-176.5" style=""/>
+</g>
+<!-- IMTC.burn -->
+<g id="node6" class="node" pointer-events="visible" data-name="IMTC.burn">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="309.86" cy="-34" rx="28.98" ry="18" style=""/>
+<text text-anchor="middle" x="309.86" y="-29.8" font-family="Times,serif" font-size="14.00" style="">burn</text>
+</g>
+<!-- StrategicPool.burnWithFormula&#45;&gt;IMTC.burn -->
+<g id="edge4" class="edge" data-name="StrategicPool.burnWithFormula-&gt;IMTC.burn">
+
+<path fill="none" stroke="white" stroke-width="2" d="M154.33,-159.3C162.61,-155.79 170.65,-151.43 177.54,-146 201.09,-127.47 191.94,-109.76 213.54,-89 230.57,-72.64 253.39,-59.25 272.42,-49.78" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="273.74,-53.03 281.26,-45.57 270.73,-46.71 273.74,-53.03" style=""/>
+</g>
+<!-- StrategicPool.burn -->
+<g id="node3" class="node" pointer-events="visible" data-name="StrategicPool.burn">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="96.77" cy="-119" rx="28.98" ry="18" style=""/>
+<text text-anchor="middle" x="96.77" y="-114.8" font-family="Times,serif" font-size="14.00" style="">burn</text>
+</g>
+<!-- StrategicPool.burn&#45;&gt;IMTC.burn -->
+<g id="edge5" class="edge" data-name="StrategicPool.burn-&gt;IMTC.burn">
+
+<path fill="none" stroke="white" stroke-width="2" d="M122.81,-108.92C159.79,-94.03 229.22,-66.07 272.01,-48.84" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="273.07,-52.18 281.04,-45.2 270.45,-45.69 273.07,-52.18" style=""/>
+</g>
+<!-- Trigonometry.cos -->
+<g id="node7" class="node" pointer-events="visible" data-name="Trigonometry.cos">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="480.17" cy="-173" rx="27" ry="18" style=""/>
+<text text-anchor="middle" x="480.17" y="-168.8" font-family="Times,serif" font-size="14.00" style="">cos</text>
+</g>
+<!-- StrategicPool.calculateBurnAmount&#45;&gt;Trigonometry.cos -->
+<g id="edge6" class="edge" data-name="StrategicPool.calculateBurnAmount-&gt;Trigonometry.cos">
+
+<path fill="none" stroke="white" stroke-width="2" d="M407.3,-173C418.38,-173 429.18,-173 438.89,-173" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="438.78,-176.5 448.78,-173 438.78,-169.5 438.78,-176.5" style=""/>
+</g>
+<!-- key -->
+<g id="node8" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="161.77,-382 31.77,-382 31.77,-294 161.77,-294 161.77,-382" style=""/>
+<text text-anchor="start" x="81.41" y="-363.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="77.52" y="-343.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="54.97" y="-323.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="41.37" y="-303.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node9" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="336.86,-382 282.86,-382 282.86,-294 336.86,-294 336.86,-382" style=""/>
+<text text-anchor="start" x="299.86" y="-363.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="299.86" y="-343.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="297.86,-318 297.86,-338 322.86,-338 322.86,-318 297.86,-318" style=""/>
+<text text-anchor="start" x="299.86" y="-323.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="299.86,-300 299.86,-316 320.86,-316 320.86,-300 299.86,-300" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge7" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M154.77,-368C213.36,-368 231.18,-368 283.87,-368" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="283.83,-371.5 293.83,-368 283.83,-364.5 283.83,-371.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge8" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M154.77,-348C213.36,-348 231.18,-348 283.87,-348" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="283.83,-351.5 293.83,-348 283.83,-344.5 283.83,-351.5" style=""/>
+</g>
+</g>
+</svg>

@@ -1,0 +1,243 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="508pt" height="763pt" viewBox="0.00 0.00 508.45 763.00">
+<g id="graph0" class="graph" transform="translate(4,759) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-759 504.45,-759 504.45,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterPoolFactory">
+
+<path fill="#445773" stroke="#445773" d="M20,-263C20,-263 480.45,-263 480.45,-263 486.45,-263 492.45,-269 492.45,-275 492.45,-275 492.45,-598 492.45,-598 492.45,-604 486.45,-610 480.45,-610 480.45,-610 20,-610 20,-610 14,-610 8,-604 8,-598 8,-598 8,-275 8,-275 8,-269 14,-263 20,-263" style=""/>
+<text text-anchor="middle" x="250.23" y="-593.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">PoolFactory</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterClones">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M341.41,-178C341.41,-178 397.31,-178 397.31,-178 403.31,-178 409.31,-184 409.31,-190 409.31,-190 409.31,-243 409.31,-243 409.31,-249 403.31,-255 397.31,-255 397.31,-255 341.41,-255 341.41,-255 335.41,-255 329.41,-249 329.41,-243 329.41,-243 329.41,-190 329.41,-190 329.41,-184 335.41,-178 341.41,-178" style=""/>
+<text text-anchor="middle" x="369.36" y="-238.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">Clones</text>
+</g>
+<g id="clust3" class="cluster" data-name="clusterIDistributor">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M328.54,-93C328.54,-93 410.18,-93 410.18,-93 416.18,-93 422.18,-99 422.18,-105 422.18,-105 422.18,-158 422.18,-158 422.18,-164 416.18,-170 410.18,-170 410.18,-170 328.54,-170 328.54,-170 322.54,-170 316.54,-164 316.54,-158 316.54,-158 316.54,-105 316.54,-105 316.54,-99 322.54,-93 328.54,-93" style=""/>
+<text text-anchor="middle" x="369.36" y="-153.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IDistributor</text>
+</g>
+<g id="clust4" class="cluster" data-name="clusterITokenDistributor">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M322.54,-8C322.54,-8 416.18,-8 416.18,-8 422.18,-8 428.18,-14 428.18,-20 428.18,-20 428.18,-73 428.18,-73 428.18,-79 422.18,-85 416.18,-85 416.18,-85 322.54,-85 322.54,-85 316.54,-85 310.54,-79 310.54,-73 310.54,-73 310.54,-20 310.54,-20 310.54,-14 316.54,-8 322.54,-8" style=""/>
+<text text-anchor="middle" x="369.36" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">ITokenDistributor</text>
+</g>
+<g id="clust5" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="44.13,-618 44.13,-747 404.36,-747 404.36,-618 44.13,-618" style=""/>
+<text text-anchor="middle" x="224.24" y="-730.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- PoolFactory.&lt;Constructor&gt; -->
+<g id="node1" class="node" pointer-events="visible" data-name="PoolFactory.&lt;Constructor&gt;">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="117.13" cy="-559" rx="67.55" ry="18" style=""/>
+<text text-anchor="middle" x="117.13" y="-554.8" font-family="Times,serif" font-size="14.00" style="">&lt;Constructor&gt;</text>
+</g>
+<!-- PoolFactory.address -->
+<g id="node8" class="node" pointer-events="visible" data-name="PoolFactory.address">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="369.36" cy="-559" rx="40" ry="18" style=""/>
+<text text-anchor="middle" x="369.36" y="-554.8" font-family="Times,serif" font-size="14.00" style="">address</text>
+</g>
+<!-- PoolFactory.&lt;Constructor&gt;&#45;&gt;PoolFactory.address -->
+<g id="edge1" class="edge" data-name="PoolFactory.&lt;Constructor&gt;-&gt;PoolFactory.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M182.57,-553.01C224.24,-551.88 277.76,-552.01 316.65,-553.41" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="316.33,-556.9 326.46,-553.82 316.62,-549.91 316.33,-556.9" style=""/>
+</g>
+<!-- PoolFactory.&lt;Constructor&gt;&#45;&gt;PoolFactory.address -->
+<g id="edge2" class="edge" data-name="PoolFactory.&lt;Constructor&gt;-&gt;PoolFactory.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M182.57,-564.99C224.24,-566.12 277.76,-565.99 316.65,-564.59" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="316.62,-568.09 326.46,-564.18 316.33,-561.1 316.62,-568.09" style=""/>
+</g>
+<!-- PoolFactory.getDistributor -->
+<g id="node2" class="node" pointer-events="visible" data-name="PoolFactory.getDistributor">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="117.13" cy="-505" rx="65.43" ry="18" style=""/>
+<text text-anchor="middle" x="117.13" y="-500.8" font-family="Times,serif" font-size="14.00" style="">getDistributor</text>
+</g>
+<!-- PoolFactory.getTokenDistributor -->
+<g id="node3" class="node" pointer-events="visible" data-name="PoolFactory.getTokenDistributor">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="117.13" cy="-451" rx="89.77" ry="18" style=""/>
+<text text-anchor="middle" x="117.13" y="-446.8" font-family="Times,serif" font-size="14.00" style="">getTokenDistributor</text>
+</g>
+<!-- PoolFactory.createDistributor -->
+<g id="node4" class="node" pointer-events="visible" data-name="PoolFactory.createDistributor">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="117.13" cy="-397" rx="76.42" ry="18" style=""/>
+<text text-anchor="middle" x="117.13" y="-392.8" font-family="Times,serif" font-size="14.00" style="">createDistributor</text>
+</g>
+<!-- PoolFactory._addNewDistributor -->
+<g id="node6" class="node" pointer-events="visible" data-name="PoolFactory._addNewDistributor">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="369.36" cy="-451" rx="90.35" ry="18" style=""/>
+<text text-anchor="middle" x="369.36" y="-446.8" font-family="Times,serif" font-size="14.00" style="">_addNewDistributor</text>
+</g>
+<!-- PoolFactory.createDistributor&#45;&gt;PoolFactory._addNewDistributor -->
+<g id="edge9" class="edge" data-name="PoolFactory.createDistributor-&gt;PoolFactory._addNewDistributor">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M176.48,-409.59C211,-417.04 255.09,-426.56 292.31,-434.59" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="291.17,-437.92 301.68,-436.61 292.65,-431.08 291.17,-437.92" style=""/>
+</g>
+<!-- PoolFactory.createDistributor&#45;&gt;PoolFactory.address -->
+<g id="edge3" class="edge" data-name="PoolFactory.createDistributor-&gt;PoolFactory.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M186.67,-405.79C198.28,-409.84 209.42,-415.66 218.26,-424 255.07,-458.72 216.92,-497.86 254.26,-532 270.68,-547.01 293.88,-554.13 315.08,-557.35" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="314.59,-560.82 324.93,-558.53 315.42,-553.87 314.59,-560.82" style=""/>
+</g>
+<!-- PoolFactory.IDistributor -->
+<g id="node9" class="node" pointer-events="visible" data-name="PoolFactory.IDistributor">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="369.36" cy="-505" rx="56.77" ry="18" style=""/>
+<text text-anchor="middle" x="369.36" y="-500.8" font-family="Times,serif" font-size="14.00" style="">IDistributor</text>
+</g>
+<!-- PoolFactory.createDistributor&#45;&gt;PoolFactory.IDistributor -->
+<g id="edge5" class="edge" data-name="PoolFactory.createDistributor-&gt;PoolFactory.IDistributor">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M183.17,-407.23C195.56,-411.14 207.88,-416.54 218.26,-424 241.69,-440.83 230.58,-461.53 254.26,-478 267.91,-487.49 284.47,-493.67 300.68,-497.69" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="299.49,-501.02 310.01,-499.72 300.98,-494.18 299.49,-501.02" style=""/>
+</g>
+<!-- PoolFactory.owner -->
+<g id="node10" class="node" pointer-events="visible" data-name="PoolFactory.owner">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="369.36" cy="-397" rx="35.34" ry="18" style=""/>
+<text text-anchor="middle" x="369.36" y="-392.8" font-family="Times,serif" font-size="14.00" style="">owner</text>
+</g>
+<!-- PoolFactory.createDistributor&#45;&gt;PoolFactory.owner -->
+<g id="edge7" class="edge" data-name="PoolFactory.createDistributor-&gt;PoolFactory.owner">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M190.84,-390.81C232.74,-389.86 284.2,-390.12 320.91,-391.57" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="320.55,-395.06 330.7,-392.02 320.87,-388.07 320.55,-395.06" style=""/>
+</g>
+<!-- PoolFactory.createDistributor&#45;&gt;PoolFactory.owner -->
+<g id="edge8" class="edge" data-name="PoolFactory.createDistributor-&gt;PoolFactory.owner">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M190.84,-403.19C232.74,-404.14 284.2,-403.88 320.91,-402.43" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="320.87,-405.93 330.7,-401.98 320.55,-398.94 320.87,-405.93" style=""/>
+</g>
+<!-- Clones.clone -->
+<g id="node12" class="node" pointer-events="visible" data-name="Clones.clone">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="369.36" cy="-204" rx="31.9" ry="18" style=""/>
+<text text-anchor="middle" x="369.36" y="-199.8" font-family="Times,serif" font-size="14.00" style="">clone</text>
+</g>
+<!-- PoolFactory.createDistributor&#45;&gt;Clones.clone -->
+<g id="edge4" class="edge" data-name="PoolFactory.createDistributor-&gt;Clones.clone">
+
+<path fill="none" stroke="white" stroke-width="2" d="M186.73,-388.26C198.33,-384.21 209.46,-378.38 218.26,-370 255.85,-334.26 220.16,-298.07 254.26,-259 273.1,-237.42 302.32,-223.56 326.47,-215.15" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="327.24,-218.58 335.68,-212.17 325.08,-211.92 327.24,-218.58" style=""/>
+</g>
+<!-- IDistributor.initialize -->
+<g id="node13" class="node" pointer-events="visible" data-name="IDistributor.initialize">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="369.36" cy="-119" rx="44.64" ry="18" style=""/>
+<text text-anchor="middle" x="369.36" y="-114.8" font-family="Times,serif" font-size="14.00" style="">initialize</text>
+</g>
+<!-- PoolFactory.createDistributor&#45;&gt;IDistributor.initialize -->
+<g id="edge6" class="edge" data-name="PoolFactory.createDistributor-&gt;IDistributor.initialize">
+
+<path fill="none" stroke="white" stroke-width="2" d="M188.17,-388.99C199.5,-384.86 210.15,-378.81 218.26,-370 278.28,-304.87 200.55,-244.42 254.26,-174 269.62,-153.86 294.26,-140.71 316.71,-132.34" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="317.7,-135.7 326.02,-129.15 315.43,-129.08 317.7,-135.7" style=""/>
+</g>
+<!-- PoolFactory.createTokenDistributor -->
+<g id="node5" class="node" pointer-events="visible" data-name="PoolFactory.createTokenDistributor">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="117.13" cy="-343" rx="101.26" ry="18" style=""/>
+<text text-anchor="middle" x="117.13" y="-338.8" font-family="Times,serif" font-size="14.00" style="">createTokenDistributor</text>
+</g>
+<!-- PoolFactory._addNewTokenDistributor -->
+<g id="node7" class="node" pointer-events="visible" data-name="PoolFactory._addNewTokenDistributor">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="369.36" cy="-289" rx="115.19" ry="18" style=""/>
+<text text-anchor="middle" x="369.36" y="-284.8" font-family="Times,serif" font-size="14.00" style="">_addNewTokenDistributor</text>
+</g>
+<!-- PoolFactory.createTokenDistributor&#45;&gt;PoolFactory._addNewTokenDistributor -->
+<g id="edge16" class="edge" data-name="PoolFactory.createTokenDistributor-&gt;PoolFactory._addNewTokenDistributor">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M185.52,-328.46C216.06,-321.87 252.48,-314.01 284.75,-307.04" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="285.36,-310.49 294.39,-304.96 283.88,-303.65 285.36,-310.49" style=""/>
+</g>
+<!-- PoolFactory.createTokenDistributor&#45;&gt;PoolFactory.address -->
+<g id="edge10" class="edge" data-name="PoolFactory.createTokenDistributor-&gt;PoolFactory.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M197.19,-355.14C205.04,-358.9 212.29,-363.75 218.26,-370 269.24,-423.31 202.47,-479.49 254.26,-532 270.14,-548.1 293.72,-555.31 315.33,-558.31" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="314.77,-561.77 325.08,-559.34 315.51,-554.81 314.77,-561.77" style=""/>
+</g>
+<!-- PoolFactory.createTokenDistributor&#45;&gt;PoolFactory.owner -->
+<g id="edge14" class="edge" data-name="PoolFactory.createTokenDistributor-&gt;PoolFactory.owner">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M200.41,-354.37C242.72,-362.75 292.47,-373.89 326.78,-382.85" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="325.64,-386.17 336.21,-385.38 327.46,-379.41 325.64,-386.17" style=""/>
+</g>
+<!-- PoolFactory.createTokenDistributor&#45;&gt;PoolFactory.owner -->
+<g id="edge15" class="edge" data-name="PoolFactory.createTokenDistributor-&gt;PoolFactory.owner">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M169.68,-359.71C213.89,-370.85 277.11,-384.45 320.29,-392.08" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="319.57,-395.51 330.02,-393.74 320.75,-388.61 319.57,-395.51" style=""/>
+</g>
+<!-- PoolFactory.ITokenDistributor -->
+<g id="node11" class="node" pointer-events="visible" data-name="PoolFactory.ITokenDistributor">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="369.36" cy="-343" rx="81.11" ry="18" style=""/>
+<text text-anchor="middle" x="369.36" y="-338.8" font-family="Times,serif" font-size="14.00" style="">ITokenDistributor</text>
+</g>
+<!-- PoolFactory.createTokenDistributor&#45;&gt;PoolFactory.ITokenDistributor -->
+<g id="edge12" class="edge" data-name="PoolFactory.createTokenDistributor-&gt;PoolFactory.ITokenDistributor">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M219.55,-343C237.64,-343 256.43,-343 274.31,-343" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="274.12,-346.5 284.11,-343 274.11,-339.5 274.12,-346.5" style=""/>
+</g>
+<!-- PoolFactory.createTokenDistributor&#45;&gt;Clones.clone -->
+<g id="edge11" class="edge" data-name="PoolFactory.createTokenDistributor-&gt;Clones.clone">
+
+<path fill="none" stroke="white" stroke-width="2" d="M146.3,-324.43C173.48,-306.79 216.02,-279.94 254.26,-259 279.32,-245.28 308.34,-231.31 330.84,-220.89" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="332.22,-224.11 339.85,-216.75 329.3,-217.75 332.22,-224.11" style=""/>
+</g>
+<!-- ITokenDistributor.initialize -->
+<g id="node14" class="node" pointer-events="visible" data-name="ITokenDistributor.initialize">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="369.36" cy="-34" rx="44.64" ry="18" style=""/>
+<text text-anchor="middle" x="369.36" y="-29.8" font-family="Times,serif" font-size="14.00" style="">initialize</text>
+</g>
+<!-- PoolFactory.createTokenDistributor&#45;&gt;ITokenDistributor.initialize -->
+<g id="edge13" class="edge" data-name="PoolFactory.createTokenDistributor-&gt;ITokenDistributor.initialize">
+
+<path fill="none" stroke="white" stroke-width="2" d="M123.79,-323.88C138.3,-277.81 180.93,-159.26 254.26,-89 272.53,-71.5 297.43,-58.62 319.3,-49.74" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="320.51,-53.03 328.59,-46.18 318,-46.49 320.51,-53.03" style=""/>
+</g>
+<!-- key -->
+<g id="node15" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="182.13,-714 52.13,-714 52.13,-626 182.13,-626 182.13,-714" style=""/>
+<text text-anchor="start" x="101.77" y="-695.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="97.88" y="-675.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="75.33" y="-655.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="61.73" y="-635.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node16" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="396.36,-714 342.36,-714 342.36,-626 396.36,-626 396.36,-714" style=""/>
+<text text-anchor="start" x="359.36" y="-695.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="359.36" y="-675.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="357.36,-650 357.36,-670 382.36,-670 382.36,-650 357.36,-650" style=""/>
+<text text-anchor="start" x="359.36" y="-655.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="359.36,-632 359.36,-648 380.36,-648 380.36,-632 359.36,-632" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge17" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M175.13,-700C251.27,-700 273.43,-700 343.67,-700" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="343.33,-703.5 353.33,-700 343.33,-696.5 343.33,-703.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge18" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M175.13,-680C251.27,-680 273.43,-680 343.67,-680" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="343.33,-683.5 353.33,-680 343.33,-676.5 343.33,-683.5" style=""/>
+</g>
+</g>
+</svg>

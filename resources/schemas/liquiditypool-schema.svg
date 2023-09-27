@@ -1,0 +1,142 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="496pt" height="516pt" viewBox="0.00 0.00 495.63 516.00">
+<g id="graph0" class="graph" transform="translate(4,512) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-512 491.63,-512 491.63,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterLiquidityPool">
+
+<path fill="#445773" stroke="#445773" d="M20.86,-178C20.86,-178 448.34,-178 448.34,-178 454.34,-178 460.34,-184 460.34,-190 460.34,-190 460.34,-351 460.34,-351 460.34,-357 454.34,-363 448.34,-363 448.34,-363 20.86,-363 20.86,-363 14.86,-363 8.86,-357 8.86,-351 8.86,-351 8.86,-190 8.86,-190 8.86,-184 14.86,-178 20.86,-178" style=""/>
+<text text-anchor="middle" x="234.6" y="-346.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">LiquidityPool</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterIERC20">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M365.63,-93C365.63,-93 459.05,-93 459.05,-93 465.05,-93 471.05,-99 471.05,-105 471.05,-105 471.05,-158 471.05,-158 471.05,-164 465.05,-170 459.05,-170 459.05,-170 365.63,-170 365.63,-170 359.63,-170 353.63,-164 353.63,-158 353.63,-158 353.63,-105 353.63,-105 353.63,-99 359.63,-93 365.63,-93" style=""/>
+<text text-anchor="middle" x="412.34" y="-153.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IERC20</text>
+</g>
+<g id="clust3" class="cluster" data-name="clusterSafeERC20">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M357.05,-8C357.05,-8 467.63,-8 467.63,-8 473.63,-8 479.63,-14 479.63,-20 479.63,-20 479.63,-73 479.63,-73 479.63,-79 473.63,-85 467.63,-85 467.63,-85 357.05,-85 357.05,-85 351.05,-85 345.05,-79 345.05,-73 345.05,-73 345.05,-20 345.05,-20 345.05,-14 351.05,-8 357.05,-8" style=""/>
+<text text-anchor="middle" x="412.34" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">SafeERC20</text>
+</g>
+<g id="clust4" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="8,-371 8,-500 284.53,-500 284.53,-371 8,-371" style=""/>
+<text text-anchor="middle" x="146.26" y="-483.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- LiquidityPool.&lt;Constructor&gt; -->
+<g id="node1" class="node" pointer-events="visible" data-name="LiquidityPool.&lt;Constructor&gt;">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="249.53" cy="-312" rx="67.55" ry="18" style=""/>
+<text text-anchor="middle" x="249.53" y="-307.8" font-family="Times,serif" font-size="14.00" style="">&lt;Constructor&gt;</text>
+</g>
+<!-- LiquidityPool.address -->
+<g id="node4" class="node" pointer-events="visible" data-name="LiquidityPool.address">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="412.34" cy="-312" rx="40" ry="18" style=""/>
+<text text-anchor="middle" x="412.34" y="-307.8" font-family="Times,serif" font-size="14.00" style="">address</text>
+</g>
+<!-- LiquidityPool.&lt;Constructor&gt;&#45;&gt;LiquidityPool.address -->
+<g id="edge1" class="edge" data-name="LiquidityPool.&lt;Constructor&gt;-&gt;LiquidityPool.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M314.08,-305.38C329.27,-305.14 345.31,-305.23 359.87,-305.65" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="359.63,-309.15 369.75,-306.03 359.89,-302.15 359.63,-309.15" style=""/>
+</g>
+<!-- LiquidityPool.&lt;Constructor&gt;&#45;&gt;LiquidityPool.address -->
+<g id="edge2" class="edge" data-name="LiquidityPool.&lt;Constructor&gt;-&gt;LiquidityPool.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M314.08,-318.62C329.27,-318.86 345.31,-318.77 359.87,-318.35" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="359.89,-321.85 369.75,-317.97 359.63,-314.85 359.89,-321.85" style=""/>
+</g>
+<!-- LiquidityPool.transferFunds -->
+<g id="node2" class="node" pointer-events="visible" data-name="LiquidityPool.transferFunds">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="81" cy="-231" rx="64.28" ry="18" style=""/>
+<text text-anchor="middle" x="81" y="-226.8" font-family="Times,serif" font-size="14.00" style="">transferFunds</text>
+</g>
+<!-- LiquidityPool._withdraw -->
+<g id="node3" class="node" pointer-events="visible" data-name="LiquidityPool._withdraw">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="249.53" cy="-204" rx="52.18" ry="18" style=""/>
+<text text-anchor="middle" x="249.53" y="-199.8" font-family="Times,serif" font-size="14.00" style="">_withdraw</text>
+</g>
+<!-- LiquidityPool.transferFunds&#45;&gt;LiquidityPool._withdraw -->
+<g id="edge3" class="edge" data-name="LiquidityPool.transferFunds-&gt;LiquidityPool._withdraw">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M138.84,-221.78C154.68,-219.22 171.94,-216.42 187.98,-213.82" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="188.23,-217.32 197.54,-212.27 187.11,-210.41 188.23,-217.32" style=""/>
+</g>
+<!-- LiquidityPool.owner -->
+<g id="node5" class="node" pointer-events="visible" data-name="LiquidityPool.owner">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="249.53" cy="-258" rx="35.34" ry="18" style=""/>
+<text text-anchor="middle" x="249.53" y="-253.8" font-family="Times,serif" font-size="14.00" style="">owner</text>
+</g>
+<!-- LiquidityPool.transferFunds&#45;&gt;LiquidityPool.owner -->
+<g id="edge4" class="edge" data-name="LiquidityPool.transferFunds-&gt;LiquidityPool.owner">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M138.84,-240.22C159.3,-243.53 182.14,-247.24 201.66,-250.4" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="200.83,-253.81 211.27,-251.96 201.95,-246.9 200.83,-253.81" style=""/>
+</g>
+<!-- LiquidityPool._withdraw&#45;&gt;LiquidityPool.address -->
+<g id="edge6" class="edge" data-name="LiquidityPool._withdraw-&gt;LiquidityPool.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M288.85,-217.09C298.36,-221 308.33,-225.68 317.05,-231 342.24,-246.36 367.41,-268.41 385.4,-285.63" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="382.84,-288.02 392.44,-292.51 387.74,-283.01 382.84,-288.02" style=""/>
+</g>
+<!-- IERC20.balanceOf -->
+<g id="node6" class="node" pointer-events="visible" data-name="IERC20.balanceOf">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="412.34" cy="-119" rx="50.92" ry="18" style=""/>
+<text text-anchor="middle" x="412.34" y="-114.8" font-family="Times,serif" font-size="14.00" style="">balanceOf</text>
+</g>
+<!-- LiquidityPool._withdraw&#45;&gt;IERC20.balanceOf -->
+<g id="edge5" class="edge" data-name="LiquidityPool._withdraw-&gt;IERC20.balanceOf">
+
+<path fill="none" stroke="white" stroke-width="2" d="M280.4,-188.21C305.67,-174.85 342.15,-155.57 370.19,-140.75" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="371.75,-143.89 378.95,-136.12 368.48,-137.7 371.75,-143.89" style=""/>
+</g>
+<!-- SafeERC20.safeTransfer -->
+<g id="node7" class="node" pointer-events="visible" data-name="SafeERC20.safeTransfer">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="412.34" cy="-34" rx="59.08" ry="18" style=""/>
+<text text-anchor="middle" x="412.34" y="-29.8" font-family="Times,serif" font-size="14.00" style="">safeTransfer</text>
+</g>
+<!-- LiquidityPool._withdraw&#45;&gt;SafeERC20.safeTransfer -->
+<g id="edge7" class="edge" data-name="LiquidityPool._withdraw-&gt;SafeERC20.safeTransfer">
+
+<path fill="none" stroke="white" stroke-width="2" d="M263.94,-185.57C281.43,-162.07 313.51,-120.69 345.05,-89 355.12,-78.88 366.91,-68.66 377.72,-59.82" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="379.73,-62.69 385.34,-53.71 375.35,-57.23 379.73,-62.69" style=""/>
+</g>
+<!-- key -->
+<g id="node8" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="146,-467 16,-467 16,-379 146,-379 146,-467" style=""/>
+<text text-anchor="start" x="65.64" y="-448.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="61.75" y="-428.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="39.2" y="-408.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="25.6" y="-388.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node9" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="276.53,-467 222.53,-467 222.53,-379 276.53,-379 276.53,-467" style=""/>
+<text text-anchor="start" x="239.53" y="-448.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="239.53" y="-428.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="237.53,-403 237.53,-423 262.53,-423 262.53,-403 237.53,-403" style=""/>
+<text text-anchor="start" x="239.53" y="-408.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="239.53,-385 239.53,-401 260.53,-401 260.53,-385 239.53,-385" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge8" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M139,-453C177.77,-453 190.53,-453 223.82,-453" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="223.5,-456.5 233.5,-453 223.5,-449.5 223.5,-456.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge9" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M139,-433C177.77,-433 190.53,-433 223.82,-433" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="223.5,-436.5 233.5,-433 223.5,-429.5 223.5,-436.5" style=""/>
+</g>
+</g>
+</svg>

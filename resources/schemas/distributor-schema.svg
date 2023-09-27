@@ -1,0 +1,240 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="754pt" height="748pt" viewBox="0.00 0.00 754.24 748.00">
+<g id="graph0" class="graph" transform="translate(48.79162413975314,683.0384919996192) scale(0.8691146494883674)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-744 750.24,-744 750.24,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterDistributor">
+
+<path fill="#445773" stroke="#445773" d="M20,-178C20,-178 726.24,-178 726.24,-178 732.24,-178 738.24,-184 738.24,-190 738.24,-190 738.24,-583 738.24,-583 738.24,-589 732.24,-595 726.24,-595 726.24,-595 20,-595 20,-595 14,-595 8,-589 8,-583 8,-583 8,-190 8,-190 8,-184 14,-178 20,-178" style=""/>
+<text text-anchor="middle" x="373.12" y="-578.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">Distributor</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterSafeERC20">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M279.23,-93C279.23,-93 389.81,-93 389.81,-93 395.81,-93 401.81,-99 401.81,-105 401.81,-105 401.81,-158 401.81,-158 401.81,-164 395.81,-170 389.81,-170 389.81,-170 279.23,-170 279.23,-170 273.23,-170 267.23,-164 267.23,-158 267.23,-158 267.23,-105 267.23,-105 267.23,-99 273.23,-93 279.23,-93" style=""/>
+<text text-anchor="middle" x="334.52" y="-153.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">SafeERC20</text>
+</g>
+<g id="clust3" class="cluster" data-name="clusterIERC20">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M287.81,-8C287.81,-8 381.23,-8 381.23,-8 387.23,-8 393.23,-14 393.23,-20 393.23,-20 393.23,-73 393.23,-73 393.23,-79 387.23,-85 381.23,-85 381.23,-85 287.81,-85 287.81,-85 281.81,-85 275.81,-79 275.81,-73 275.81,-73 275.81,-20 275.81,-20 275.81,-14 281.81,-8 287.81,-8" style=""/>
+<text text-anchor="middle" x="334.52" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IERC20</text>
+</g>
+<g id="clust4" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="25.92,-603 25.92,-732 369.52,-732 369.52,-603 25.92,-603" style=""/>
+<text text-anchor="middle" x="197.72" y="-715.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- Distributor.&lt;Constructor&gt; -->
+<g id="node1" class="node" pointer-events="visible" data-name="Distributor.&lt;Constructor&gt;">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="98.92" cy="-544" rx="67.55" ry="18" style=""/>
+<text text-anchor="middle" x="98.92" y="-539.8" font-family="Times,serif" font-size="14.00" style="">&lt;Constructor&gt;</text>
+</g>
+<!-- Distributor._disableInitializers -->
+<g id="node10" class="node" pointer-events="visible" data-name="Distributor._disableInitializers">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="334.52" cy="-544" rx="84.52" ry="18" style=""/>
+<text text-anchor="middle" x="334.52" y="-539.8" font-family="Times,serif" font-size="14.00" style="">_disableInitializers</text>
+</g>
+<!-- Distributor.&lt;Constructor&gt;&#45;&gt;Distributor._disableInitializers -->
+<g id="edge1" class="edge" data-name="Distributor.&lt;Constructor&gt;-&gt;Distributor._disableInitializers">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M167.8,-544C189.07,-544 212.98,-544 235.88,-544" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="235.82,-547.5 245.82,-544 235.82,-540.5 235.82,-547.5" style=""/>
+</g>
+<!-- Distributor.isParamsValid -->
+<g id="node2" class="node" pointer-events="visible" data-name="Distributor.isParamsValid">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="171.74,-478.54 171.74,-493.46 129.08,-504 68.75,-504 26.09,-493.46 26.09,-478.54 68.75,-468 129.08,-468 171.74,-478.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="175.74,-475.41 175.74,-496.59 129.57,-508 68.27,-508 22.09,-496.59 22.09,-475.41 68.27,-464 129.57,-464 175.74,-475.41" style=""/>
+<text text-anchor="middle" x="98.92" y="-481.8" font-family="Times,serif" font-size="14.00" style="">isParamsValid</text>
+</g>
+<!-- Distributor.isSettable -->
+<g id="node3" class="node" pointer-events="visible" data-name="Distributor.isSettable">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="151.59,-416.54 151.59,-431.46 120.73,-442 77.1,-442 46.25,-431.46 46.25,-416.54 77.1,-406 120.73,-406 151.59,-416.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="155.59,-413.69 155.59,-434.31 121.4,-446 76.43,-446 42.24,-434.31 42.24,-413.69 76.43,-402 121.4,-402 155.59,-413.69" style=""/>
+<text text-anchor="middle" x="98.92" y="-419.8" font-family="Times,serif" font-size="14.00" style="">isSettable</text>
+</g>
+<!-- Distributor.initialize -->
+<g id="node4" class="node" pointer-events="visible" data-name="Distributor.initialize">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="98.92" cy="-366" rx="44.64" ry="18" style=""/>
+<text text-anchor="middle" x="98.92" y="-361.8" font-family="Times,serif" font-size="14.00" style="">initialize</text>
+</g>
+<!-- Distributor.address -->
+<g id="node11" class="node" pointer-events="visible" data-name="Distributor.address">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="334.52" cy="-312" rx="40" ry="18" style=""/>
+<text text-anchor="middle" x="334.52" y="-307.8" font-family="Times,serif" font-size="14.00" style="">address</text>
+</g>
+<!-- Distributor.initialize&#45;&gt;Distributor.address -->
+<g id="edge2" class="edge" data-name="Distributor.initialize-&gt;Distributor.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M139.54,-356.84C179.62,-347.58 241.64,-333.24 284.72,-323.28" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="285.26,-326.75 294.21,-321.09 283.68,-319.93 285.26,-326.75" style=""/>
+</g>
+<!-- Distributor._transferOwnership -->
+<g id="node12" class="node" pointer-events="visible" data-name="Distributor._transferOwnership">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="334.52" cy="-420" rx="87.96" ry="18" style=""/>
+<text text-anchor="middle" x="334.52" y="-415.8" font-family="Times,serif" font-size="14.00" style="">_transferOwnership</text>
+</g>
+<!-- Distributor.initialize&#45;&gt;Distributor._transferOwnership -->
+<g id="edge3" class="edge" data-name="Distributor.initialize-&gt;Distributor._transferOwnership">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M139.54,-375.16C172.55,-382.79 220.44,-393.86 260.37,-403.09" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="259.55,-406.49 270.08,-405.34 261.13,-399.67 259.55,-406.49" style=""/>
+</g>
+<!-- Distributor.IERC20 -->
+<g id="node13" class="node" pointer-events="visible" data-name="Distributor.IERC20">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="334.52" cy="-474" rx="42.88" ry="18" style=""/>
+<text text-anchor="middle" x="334.52" y="-469.8" font-family="Times,serif" font-size="14.00" style="">IERC20</text>
+</g>
+<!-- Distributor.initialize&#45;&gt;Distributor.IERC20 -->
+<g id="edge4" class="edge" data-name="Distributor.initialize-&gt;Distributor.IERC20">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M140.83,-373.76C154.81,-377.83 169.92,-383.93 181.83,-393 204.79,-410.47 194.13,-430.57 217.83,-447 235.37,-459.15 257.62,-465.89 277.91,-469.61" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="277.15,-473.03 287.58,-471.13 278.24,-466.12 277.15,-473.03" style=""/>
+</g>
+<!-- Distributor.claim -->
+<g id="node5" class="node" pointer-events="visible" data-name="Distributor.claim">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="98.92" cy="-312" rx="32.47" ry="18" style=""/>
+<text text-anchor="middle" x="98.92" y="-307.8" font-family="Times,serif" font-size="14.00" style="">claim</text>
+</g>
+<!-- Distributor.calculateClaimableAmount -->
+<g id="node8" class="node" pointer-events="visible" data-name="Distributor.calculateClaimableAmount">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="334.52" cy="-366" rx="116.88" ry="18" style=""/>
+<text text-anchor="middle" x="334.52" y="-361.8" font-family="Times,serif" font-size="14.00" style="">calculateClaimableAmount</text>
+</g>
+<!-- Distributor.claim&#45;&gt;Distributor.calculateClaimableAmount -->
+<g id="edge5" class="edge" data-name="Distributor.claim-&gt;Distributor.calculateClaimableAmount">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M130.46,-319.06C161.46,-326.23 210.78,-337.63 253.04,-347.4" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="252.14,-350.78 262.67,-349.62 253.72,-343.96 252.14,-350.78" style=""/>
+</g>
+<!-- Distributor.owner -->
+<g id="node14" class="node" pointer-events="visible" data-name="Distributor.owner">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="334.52" cy="-258" rx="35.34" ry="18" style=""/>
+<text text-anchor="middle" x="334.52" y="-253.8" font-family="Times,serif" font-size="14.00" style="">owner</text>
+</g>
+<!-- Distributor.claim&#45;&gt;Distributor.owner -->
+<g id="edge7" class="edge" data-name="Distributor.claim-&gt;Distributor.owner">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M127.17,-301.18C166.01,-289.63 237.85,-272.68 285.67,-263.49" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="286.3,-266.93 295.5,-261.67 285.03,-260.05 286.3,-266.93" style=""/>
+</g>
+<!-- Distributor.claim&#45;&gt;Distributor.owner -->
+<g id="edge8" class="edge" data-name="Distributor.claim-&gt;Distributor.owner">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M132.4,-309.34C174.14,-302.07 246.63,-285.46 292.24,-272.84" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="293.05,-276.25 301.71,-270.14 291.13,-269.51 293.05,-276.25" style=""/>
+</g>
+<!-- SafeERC20.safeTransfer -->
+<g id="node15" class="node" pointer-events="visible" data-name="SafeERC20.safeTransfer">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="334.52" cy="-119" rx="59.08" ry="18" style=""/>
+<text text-anchor="middle" x="334.52" y="-114.8" font-family="Times,serif" font-size="14.00" style="">safeTransfer</text>
+</g>
+<!-- Distributor.claim&#45;&gt;SafeERC20.safeTransfer -->
+<g id="edge6" class="edge" data-name="Distributor.claim-&gt;SafeERC20.safeTransfer">
+
+<path fill="none" stroke="white" stroke-width="2" d="M131.94,-308.45C148.79,-305.02 168.63,-298.27 181.83,-285 218.42,-248.24 183.62,-212.98 217.83,-174 233.04,-156.67 254.9,-144.36 275.53,-135.84" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="276.57,-139.19 284.65,-132.34 274.06,-132.66 276.57,-139.19" style=""/>
+</g>
+<!-- Distributor.sweep -->
+<g id="node6" class="node" pointer-events="visible" data-name="Distributor.sweep">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="98.92" cy="-258" rx="35.34" ry="18" style=""/>
+<text text-anchor="middle" x="98.92" y="-253.8" font-family="Times,serif" font-size="14.00" style="">sweep</text>
+</g>
+<!-- Distributor.sweep&#45;&gt;Distributor.address -->
+<g id="edge10" class="edge" data-name="Distributor.sweep-&gt;Distributor.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M132.4,-265.51C171.96,-274.65 239.17,-290.19 284.9,-300.76" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="284,-304.15 294.53,-302.99 285.58,-297.33 284,-304.15" style=""/>
+</g>
+<!-- Distributor.sweep&#45;&gt;Distributor.owner -->
+<g id="edge12" class="edge" data-name="Distributor.sweep-&gt;Distributor.owner">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M134.39,-253.04C174.5,-250.87 240.97,-250.67 285.97,-252.44" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="285.74,-255.93 295.89,-252.9 286.06,-248.94 285.74,-255.93" style=""/>
+</g>
+<!-- Distributor.sweep&#45;&gt;Distributor.owner -->
+<g id="edge13" class="edge" data-name="Distributor.sweep-&gt;Distributor.owner">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M134.39,-262.96C174.5,-265.13 240.97,-265.33 285.97,-263.56" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="286.06,-267.06 295.89,-263.1 285.74,-260.07 286.06,-267.06" style=""/>
+</g>
+<!-- Distributor.sweep&#45;&gt;SafeERC20.safeTransfer -->
+<g id="edge11" class="edge" data-name="Distributor.sweep-&gt;SafeERC20.safeTransfer">
+
+<path fill="none" stroke="white" stroke-width="2" d="M133.93,-252.3C149.73,-248.35 168.02,-241.78 181.83,-231 205.45,-212.56 195.42,-193.88 217.83,-174 235.5,-158.33 258.4,-146.2 279.17,-137.37" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="280.33,-140.67 288.29,-133.68 277.7,-134.18 280.33,-140.67" style=""/>
+</g>
+<!-- IERC20.balanceOf -->
+<g id="node16" class="node" pointer-events="visible" data-name="IERC20.balanceOf">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="334.52" cy="-34" rx="50.92" ry="18" style=""/>
+<text text-anchor="middle" x="334.52" y="-29.8" font-family="Times,serif" font-size="14.00" style="">balanceOf</text>
+</g>
+<!-- Distributor.sweep&#45;&gt;IERC20.balanceOf -->
+<g id="edge9" class="edge" data-name="Distributor.sweep-&gt;IERC20.balanceOf">
+
+<path fill="none" stroke="white" stroke-width="2" d="M134.75,-254.28C151.13,-250.78 169.68,-244.03 181.83,-231 226.23,-183.38 176.51,-139.31 217.83,-89 233.3,-70.17 256.73,-57.38 278.47,-48.91" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="279.58,-52.23 287.8,-45.55 277.21,-45.64 279.58,-52.23" style=""/>
+</g>
+<!-- Distributor.updatePoolParams -->
+<g id="node7" class="node" pointer-events="visible" data-name="Distributor.updatePoolParams">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="98.92" cy="-204" rx="82.83" ry="18" style=""/>
+<text text-anchor="middle" x="98.92" y="-199.8" font-family="Times,serif" font-size="14.00" style="">updatePoolParams</text>
+</g>
+<!-- Distributor._calculateClaimableAmount -->
+<g id="node9" class="node" pointer-events="visible" data-name="Distributor._calculateClaimableAmount">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="608.72" cy="-366" rx="121.53" ry="18" style=""/>
+<text text-anchor="middle" x="608.72" y="-361.8" font-family="Times,serif" font-size="14.00" style="">_calculateClaimableAmount</text>
+</g>
+<!-- Distributor.calculateClaimableAmount&#45;&gt;Distributor._calculateClaimableAmount -->
+<g id="edge14" class="edge" data-name="Distributor.calculateClaimableAmount-&gt;Distributor._calculateClaimableAmount">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M452.54,-366C459.39,-366 466.3,-366 473.21,-366" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="473.01,-369.5 483.01,-366 473.01,-362.5 473.01,-369.5" style=""/>
+</g>
+<!-- key -->
+<g id="node17" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="163.92,-699 33.92,-699 33.92,-611 163.92,-611 163.92,-699" style=""/>
+<text text-anchor="start" x="83.55" y="-680.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="79.66" y="-660.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="57.12" y="-640.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="43.52" y="-620.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node18" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="361.52,-699 307.52,-699 307.52,-611 361.52,-611 361.52,-699" style=""/>
+<text text-anchor="start" x="324.52" y="-680.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="324.52" y="-660.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="322.52,-635 322.52,-655 347.52,-655 347.52,-635 322.52,-635" style=""/>
+<text text-anchor="start" x="324.52" y="-640.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="324.52,-617 324.52,-633 345.52,-633 345.52,-617 324.52,-617" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge15" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M156.92,-685C225.64,-685 245.95,-685 308.81,-685" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="308.49,-688.5 318.49,-685 308.49,-681.5 308.49,-688.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge16" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M156.92,-665C225.64,-665 245.95,-665 308.81,-665" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="308.49,-668.5 318.49,-665 308.49,-661.5 308.49,-668.5" style=""/>
+</g>
+</g>
+</svg>
