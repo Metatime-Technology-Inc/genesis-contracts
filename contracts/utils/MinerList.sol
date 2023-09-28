@@ -7,6 +7,10 @@ import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import "../helpers/RolesHandler.sol";
 import "../libs/MinerTypes.sol";
 
+/**
+ * @title MinerList
+ * @dev A smart contract for managing a list of miners.
+ */
 contract MinerList is Context, Initializable, RolesHandler {
     mapping(address => mapping(MinerTypes.NodeType => bool)) public list;
     mapping(MinerTypes.NodeType => uint256) public count;
@@ -20,10 +24,20 @@ contract MinerList is Context, Initializable, RolesHandler {
         MinerTypes.NodeType indexed nodeType
     );
 
+    /**
+     * @dev Initializes the MinerList contract with the address of the RolesHandler contract.
+     * @param rolesAddress The address of the RolesHandler contract.
+     */
     function initialize(address rolesAddress) external initializer {
         roles = IRoles(rolesAddress);
     }
 
+    /**
+     * @dev Checks if an address is a miner of the specified node type.
+     * @param minerAddress The address to check.
+     * @param nodeType The type of miner node to check.
+     * @return A boolean indicating whether the address is a miner.
+     */
     function isMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
@@ -31,6 +45,12 @@ contract MinerList is Context, Initializable, RolesHandler {
         return list[minerAddress][nodeType];
     }
 
+    /**
+     * @dev Adds an address as a miner of the specified node type.
+     * @param minerAddress The address to add as a miner.
+     * @param nodeType The type of miner node to add.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function addMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
@@ -39,6 +59,12 @@ contract MinerList is Context, Initializable, RolesHandler {
         return (true);
     }
 
+    /**
+     * @dev Deletes an address from the list of miners of the specified node type.
+     * @param minerAddress The address to delete from the list of miners.
+     * @param nodeType The type of miner node to delete from.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function deleteMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
@@ -47,6 +73,12 @@ contract MinerList is Context, Initializable, RolesHandler {
         return (true);
     }
 
+    /**
+     * @dev Internal function to add an address as a miner of the specified node type.
+     * @param minerAddress The address to add as a miner.
+     * @param nodeType The type of miner node to add.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function _addMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
@@ -58,6 +90,12 @@ contract MinerList is Context, Initializable, RolesHandler {
         return (true);
     }
 
+    /**
+     * @dev Internal function to delete an address from the list of miners of the specified node type.
+     * @param minerAddress The address to delete from the list of miners.
+     * @param nodeType The type of miner node to delete from.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function _deleteMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType

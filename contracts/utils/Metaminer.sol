@@ -10,6 +10,10 @@ import "../interfaces/IMinerList.sol";
 import "../interfaces/IMinerFormulas.sol";
 import "../helpers/RolesHandler.sol";
 
+/**
+ * @title Metaminer
+ * @dev A smart contract representing a Metaminer, allowing users to stake and participate in block validation.
+ */
 contract Metaminer is Context, Initializable, RolesHandler {
     IBlockValidator public blockValidator;
     IMinerList public minerList;
@@ -37,6 +41,10 @@ contract Metaminer is Context, Initializable, RolesHandler {
     event MinerSubscribe(address indexed miner, uint256 indexed newValidDate);
     event MinerUnsubscribe(address indexed miner);
 
+    /**
+     * @dev Modifier to check if an address is a Metaminer.
+     * @param _miner The address to check.
+     */
     modifier isMiner(address _miner) {
         require(
             minerList.isMiner(_miner, MinerTypes.NodeType.Meta),
@@ -45,6 +53,10 @@ contract Metaminer is Context, Initializable, RolesHandler {
         _;
     }
 
+    /**
+     * @dev Modifier to check if a Metaminer's subscription is valid.
+     * @param _miner The address of the Metaminer to check.
+     */
     modifier validMinerSubscription(address _miner) {
         require(
             minerSubscription[_miner] > block.timestamp,
@@ -55,6 +67,13 @@ contract Metaminer is Context, Initializable, RolesHandler {
 
     receive() external payable {}
 
+    /**
+     * @dev Initializes the Metaminer contract with the addresses of the BlockValidator, MinerList, MinerFormulas, and MinerPool contracts.
+     * @param blockValidatorAddress The address of the BlockValidator contract.
+     * @param minerListAddress The address of the MinerList contract.
+     * @param minerFormulasAddress The address of the MinerFormulas contract.
+     * @param minerPoolAddress The address of the MinerPool contract.
+     */
     function initialize(
         address blockValidatorAddress,
         address minerListAddress,
@@ -67,6 +86,10 @@ contract Metaminer is Context, Initializable, RolesHandler {
         MINER_POOL_ADDRESS = minerPoolAddress;
     }
 
+    /**
+     * @dev Allows a user to become a Metaminer by staking the required amount of MTC.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function setMiner() external payable returns (bool) {
         require(
             msg.value == (ANNUAL_AMOUNT + STAKE_AMOUNT),
@@ -84,6 +107,10 @@ contract Metaminer is Context, Initializable, RolesHandler {
         return (true);
     }
 
+    /**
+     * @dev Allows a Metaminer to renew their subscription for another year by sending the required amount of MTC.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function subscribe() external payable isMiner(_msgSender()) returns (bool) {
         require(msg.value == ANNUAL_AMOUNT, "Required MTC is not sended.");
         minerSubscription[_msgSender()] = _nextYear(_msgSender());
@@ -91,12 +118,20 @@ contract Metaminer is Context, Initializable, RolesHandler {
         return (true);
     }
 
+    /**
+     * @dev Allows a Metaminer to unsubscribe by unstaking their funds.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function unstake() external isMiner(_msgSender()) returns (bool) {
         _unstake(_msgSender());
         emit MinerUnsubscribe(_msgSender());
         return (true);
     }
 
+    /**
+     * @dev Allows the contract owner to set a Metaminer by address.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function setValidator(
         address _miner
     ) external onlyOwnerRole(_msgSender()) returns (bool) {
@@ -112,6 +147,10 @@ contract Metaminer is Context, Initializable, RolesHandler {
         return (true);
     }
 
+    /**
+     * @dev Allows the contract owner to refresh the subscription of a Metaminer.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function refreshValidator(
         address _miner
     ) external onlyOwnerRole(_msgSender()) returns (bool) {
@@ -119,6 +158,14 @@ contract Metaminer is Context, Initializable, RolesHandler {
         return (true);
     }
 
+    /**
+     * @dev Allows the contract owner to set the percentage share for Metaminer's shareholders.
+     * @param _miner The address of the Metaminer.
+     * @param _shareHolders The addresses of the shareholders.
+     * @param _percents The corresponding percentages for the shareholders.
+     * @param _shareHoldersLength The number of shareholders.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function setPercent(
         address _miner,
         address[] memory _shareHolders,
@@ -139,6 +186,11 @@ contract Metaminer is Context, Initializable, RolesHandler {
         return (true);
     }
 
+    /**
+     * @dev Allows a Metaminer to finalize a block and distribute rewards.
+     * @param blockNumber The block number to finalize.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function finalizeBlock(
         uint256 blockNumber
     ) external payable returns (bool) {
@@ -163,6 +215,11 @@ contract Metaminer is Context, Initializable, RolesHandler {
         return true;
     }
 
+    /**
+     * @dev Calculates the timestamp for the start of the next year.
+     * @param _miner The address of the Metaminer.
+     * @return The timestamp for the start of the next year.
+     */
     function _nextYear(address _miner) internal view returns (uint256) {
         return (
             minerSubscription[_miner] > block.timestamp
@@ -171,6 +228,13 @@ contract Metaminer is Context, Initializable, RolesHandler {
         );
     }
 
+    /**
+     * @dev Adds a shareholder to a Metaminer's list of shareholders.
+     * @param _miner The address of the Metaminer.
+     * @param _addr The address of the shareholder to add.
+     * @param _percent The percentage share of the shareholder.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function _addShareHolder(
         address _miner,
         address _addr,
@@ -185,6 +249,12 @@ contract Metaminer is Context, Initializable, RolesHandler {
         return (true);
     }
 
+    /**
+     * @dev Distributes the income to the Metaminer's shareholders.
+     * @param _miner The address of the Metaminer.
+     * @param _balance The total balance to distribute.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function _shareIncome(
         address _miner,
         uint256 _balance
@@ -201,6 +271,11 @@ contract Metaminer is Context, Initializable, RolesHandler {
         return (true);
     }
 
+    /**
+     * @dev Unstakes a Metaminer by transferring their staked amount back to them.
+     * @param _miner The address of the Metaminer to unstake.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function _unstake(address _miner) internal returns (bool) {
         (bool sent, ) = address(_miner).call{value: STAKE_AMOUNT}("");
         require(sent, "unstake failed.");
@@ -210,6 +285,11 @@ contract Metaminer is Context, Initializable, RolesHandler {
         return (true);
     }
 
+    /**
+     * @dev Checks if a Metaminer's subscription is valid and unstakes them if it's not.
+     * @param _miner The address of the Metaminer to check.
+     * @return A boolean indicating whether the Metaminer's subscription is valid.
+     */
     function _minerCheck(
         address _miner
     ) internal isMiner(_miner) returns (bool) {

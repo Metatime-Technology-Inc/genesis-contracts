@@ -4,6 +4,10 @@ pragma solidity 0.8.16;
 import "../helpers/Blacklistable.sol";
 import "../helpers/Freezeable.sol";
 
+/**
+ * @title MainnetBridge
+ * @dev A smart contract for bridging transactions to Mainnet chain.
+ */
 contract MainnetBridge is Blacklistable, Freezeable {
     struct Transaction {
         address receiver;
@@ -18,11 +22,21 @@ contract MainnetBridge is Blacklistable, Freezeable {
         uint256 indexed amount
     );
 
+    /**
+     * @dev Modifier that checks if a transaction with the given hash does not exist in the history.
+     * @param txHash The hash of the transaction.
+     */
     modifier notExist(bytes32 txHash) {
         require(history[txHash].amount == 0, "Transaction is already setted.");
         _;
     }
 
+    /**
+     * @dev Bridges a transaction to mainnet chain.
+     * @param txHash The hash of the transaction.
+     * @param receiver The address of the receiver on mainnet chain.
+     * @param amount The amount to be bridged.
+     */
     function bridge(
         bytes32 txHash,
         address receiver,
@@ -40,6 +54,11 @@ contract MainnetBridge is Blacklistable, Freezeable {
         emit Bridge(txHash, receiver, amount);
     }
 
+    /**
+     * @dev Transfers funds to a specified receiver.
+     * @param receiver The address of the receiver.
+     * @param amount The amount to be transferred.
+     */
     function transfer(
         address receiver,
         uint256 amount
@@ -53,6 +72,11 @@ contract MainnetBridge is Blacklistable, Freezeable {
         _transfer(receiver, amount);
     }
 
+    /**
+     * @dev Internal function to perform the actual transfer.
+     * @param receiver The address of the receiver.
+     * @param amount The amount to be transferred.
+     */
     function _transfer(address receiver, uint256 amount) internal {
         require(amount > 0, "Amount must be higher than 0.");
         require(receiver != address(0), "Receiver cannot be zero address.");
