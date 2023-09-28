@@ -6,6 +6,8 @@ interface IContracts {
   },
   helpers: {
     RolesHandler: string;
+    Blacklistable: string;
+    Freezeable: string;
   },
   libs: {
     MinerFormulas: string;
@@ -13,7 +15,9 @@ interface IContracts {
   },
   utils: {
     BlockValidator: string;
+    Bridge: string;
     Macrominer: string;
+    MainnetBridge: string;
     Metaminer: string;
     MetaPoints: string;
     Microminer: string;
@@ -22,6 +26,7 @@ interface IContracts {
     MulticallV3: string;
     MultiSigWallet: string;
     Roles: string;
+    TxValidator: string;
     WMTC: string;
   };
 }
@@ -33,6 +38,8 @@ const CONTRACTS: IContracts = {
   },
   helpers: {
     RolesHandler: "RolesHandler",
+    Blacklistable: "Blacklistable",
+    Freezeable: "Freezeable",
   },
   libs: {
     MinerFormulas: "MinerFormulas",
@@ -40,7 +47,9 @@ const CONTRACTS: IContracts = {
   },
   utils: {
     BlockValidator: "BlockValidator",
+    Bridge: "Bridge",
     Macrominer: "Macrominer",
+    MainnetBridge: "Macrominer",
     Metaminer: "Metaminer",
     MetaPoints: "MetaPoints",
     Microminer: "Microminer",
@@ -49,6 +58,7 @@ const CONTRACTS: IContracts = {
     MulticallV3: "MulticallV3",
     MultiSigWallet: "MultiSigWallet",
     Roles: "Roles",
+    TxValidator: "TxValidator",
     WMTC: "WMTC",
   }
 };
