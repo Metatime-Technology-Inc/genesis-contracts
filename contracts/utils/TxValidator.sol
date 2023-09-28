@@ -84,7 +84,10 @@ contract TxValidator is Initializable, RolesHandler {
         bool isAlive = minerHealthCheck.status(handler, nodeType);
         require(isAlive, "TxValidator: Miner is not active");
         TxPayload storage txPayload = txPayloads[txHash];
-        require(txPayload.handler == address(0), "TxValidator: Tx is already exist");
+        require(
+            txPayload.handler == address(0),
+            "TxValidator: Tx is already exist"
+        );
         txPayloads[txHash] = TxPayload(
             handler,
             reward,
@@ -109,10 +112,22 @@ contract TxValidator is Initializable, RolesHandler {
         address voter = msg.sender;
         TransactionState txState = _checkTransactionState(txHash);
 
-        require(txState == TransactionState.Pending, "TxValidator: Tx is closed");
-        require(txPayload.handler != address(0), "TxValidator: Tx doesn't exist");
-        require(previousVotes[txHash][voter] != true, "TxValidator: Already voted");
-        require(voter != txPayload.handler, "TxValidator: Handler cannot vote for tx");
+        require(
+            txState == TransactionState.Pending,
+            "TxValidator: Tx is closed"
+        );
+        require(
+            txPayload.handler != address(0),
+            "TxValidator: Tx doesn't exist"
+        );
+        require(
+            previousVotes[txHash][voter] != true,
+            "TxValidator: Already voted"
+        );
+        require(
+            voter != txPayload.handler,
+            "TxValidator: Handler cannot vote for tx"
+        );
         require(
             minerList.list(voter, nodeType) == true &&
                 nodeType != MinerTypes.NodeType.Meta,

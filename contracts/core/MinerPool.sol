@@ -109,11 +109,13 @@ contract MinerPool is Initializable, RolesHandler {
 
         require(
             (totalRewardsFromFirstFormula[currentDateIndex][nodeType] +
-                firstFormulaAmount) <= firstFormulaHardCap, "MinerPool: Addition exceeds hardcap for first formula"
+                firstFormulaAmount) <= firstFormulaHardCap,
+            "MinerPool: Addition exceeds hardcap for first formula"
         );
         require(
             (totalRewardsFromSecondFormula[currentDateIndex][nodeType] +
-                secondFormulaAmount) <= secondFormulaHardCap, "MinerPool: Addition exceeds hardcap for second formula"
+                secondFormulaAmount) <= secondFormulaHardCap,
+            "MinerPool: Addition exceeds hardcap for second formula"
         );
 
         totalRewardsFromFirstFormula[currentDateIndex][

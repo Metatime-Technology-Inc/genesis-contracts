@@ -31,7 +31,10 @@ contract MinerHealthCheck is Initializable {
      * @param nodeType The type of miner node to check.
      */
     modifier isMiner(address miner, MinerTypes.NodeType nodeType) {
-        require(minerList.isMiner(miner, nodeType), "MinerHealthCheck: Address is not miner");
+        require(
+            minerList.isMiner(miner, nodeType),
+            "MinerHealthCheck: Address is not miner"
+        );
         _;
     }
 

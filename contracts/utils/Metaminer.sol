@@ -92,7 +92,7 @@ contract Metaminer is Initializable, RolesHandler {
     function setMiner() external payable returns (bool) {
         require(
             msg.value == (ANNUAL_AMOUNT + STAKE_AMOUNT),
-            "Metaminer: Required MTC is not sended"
+            "Metaminer: Required MTC is not sent"
         );
         shares[msg.sender] = Share(0, 0);
         minerSubscription[msg.sender] = _nextYear(msg.sender);
@@ -111,7 +111,10 @@ contract Metaminer is Initializable, RolesHandler {
      * @return A boolean indicating whether the operation was successful.
      */
     function subscribe() external payable isMiner(msg.sender) returns (bool) {
-        require(msg.value == ANNUAL_AMOUNT, "Metaminer: Required MTC was not sent");
+        require(
+            msg.value == ANNUAL_AMOUNT,
+            "Metaminer: Required MTC was not sent"
+        );
         minerSubscription[msg.sender] = _nextYear(msg.sender);
         emit MinerSubscribe(msg.sender, minerSubscription[msg.sender]);
         return (true);
