@@ -9,7 +9,11 @@ import "../interfaces/IRewardsPool.sol";
 import "../interfaces/IMinerList.sol";
 import "../libs/MinerTypes.sol";
 
-contract BlockValidator is Context, Initializable, RolesHandler {
+/**
+ * @title BlockValidator
+ * @dev A smart contract for validating and finalizing blocks.
+ */
+contract BlockValidator is Initializable, RolesHandler {
     uint256[32] public lastVerifiedBlocknumbers;
     uint8 public constant DELAY_LIMIT = 32;
     mapping(uint256 => BlockPayload) public blockPayloads;
@@ -17,7 +21,6 @@ contract BlockValidator is Context, Initializable, RolesHandler {
     IRewardsPool public rewardsPool;
     uint8 private _verifiedBlockId = 0;
 
-    // Validation queue struct
     struct BlockPayload {
         address coinbase;
         bytes32 blockHash;
@@ -25,15 +28,18 @@ contract BlockValidator is Context, Initializable, RolesHandler {
         bool isFinalized;
     }
 
+    /**
+     * @dev Modifier to check if an address is a Metaminer.
+     * @param _miner The address to check.
+     */
     modifier isMiner(address _miner) {
         require(
             minerList.isMiner(_miner, MinerTypes.NodeType.Meta),
-            "Address is not metaminer."
+            "BlockValidator: Address is not metaminer"
         );
         _;
     }
 
-    // Event that emitted after payload set
     event SetPayload(uint256 blockNumber);
     event FinalizeBlock(uint256 blockNumber);
     event Claim(
@@ -43,6 +49,11 @@ contract BlockValidator is Context, Initializable, RolesHandler {
         uint256 blockReward
     );
 
+    /**
+     * @dev Initializes the BlockValidator contract with the addresses of the MinerList and RewardsPool contracts.
+     * @param minerListAddress The address of the MinerList contract.
+     * @param rewardsPoolAddress The address of the RewardsPool contract.
+     */
     function initialize(
         address minerListAddress,
         address rewardsPoolAddress
@@ -51,14 +62,19 @@ contract BlockValidator is Context, Initializable, RolesHandler {
         rewardsPool = IRewardsPool(rewardsPoolAddress);
     }
 
-    // Adds payload to queue
+    /**
+     * @dev Adds a payload to the queue for a specific block.
+     * @param blockNumber The block number for which to set the payload.
+     * @param blockPayload The block payload to set.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function setBlockPayload(
         uint256 blockNumber,
         BlockPayload memory blockPayload
-    ) external isMiner(_msgSender()) returns (bool) {
+    ) external isMiner(msg.sender) returns (bool) {
         require(
             blockPayloads[blockNumber].coinbase == address(0),
-            "setBlockPayload: Unable to set block payload."
+            "BlockValidator: Unable to set block payload"
         );
         blockPayloads[blockNumber] = blockPayload;
 
@@ -67,14 +83,18 @@ contract BlockValidator is Context, Initializable, RolesHandler {
         return true;
     }
 
-    // Finalizes block
+    /**
+     * @dev Finalizes a block by marking it as finalized.
+     * @param blockNumber The block number to finalize.
+     * @return A boolean indicating whether the operation was successful.
+     */
     function finalizeBlock(
         uint256 blockNumber
-    ) external onlyManagerRole(_msgSender()) returns (bool) {
+    ) external onlyManagerRole(msg.sender) returns (bool) {
         BlockPayload storage payload = blockPayloads[blockNumber];
         require(
             payload.coinbase != address(0),
-            "finalizeBlock: Unable to finalize block."
+            "BlockValidator: Unable to finalize block"
         );
 
         payload.isFinalized = true;

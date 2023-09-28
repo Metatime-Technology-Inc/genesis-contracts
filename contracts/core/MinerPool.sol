@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 
-import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
 import "../helpers/RolesHandler.sol";
@@ -13,7 +12,7 @@ import "../interfaces/IMinerList.sol";
  * @notice Holds tokens for miners to claim.
  * @dev A contract for distributing tokens over a specified period of time for mining purposes.
  */
-contract MinerPool is Context, Initializable, RolesHandler {
+contract MinerPool is Initializable, RolesHandler {
     IMinerFormulas public minerFormulas;
     mapping(address => uint256) public claimedAmounts; // Total amount of tokens claimed so far
     mapping(uint256 => mapping(MinerTypes.NodeType => uint256))
@@ -21,11 +20,15 @@ contract MinerPool is Context, Initializable, RolesHandler {
     mapping(uint256 => mapping(MinerTypes.NodeType => uint256))
         public totalRewardsFromSecondFormula;
 
-    event HasClaimed(address indexed beneficiary, uint256 amount); // Event emitted when a beneficiary has claimed tokens
+    event HasClaimed(
+        address indexed beneficiary,
+        uint256 amount,
+        string indexed claimType
+    ); // Event emitted when a beneficiary has claimed tokens
     event Deposit(address indexed sender, uint amount, uint balance); // Event emitted when pool received mtc
 
     receive() external payable {
-        emit Deposit(_msgSender(), msg.value, address(this).balance);
+        emit Deposit(msg.sender, msg.value, address(this).balance);
     }
 
     /**
@@ -40,11 +43,11 @@ contract MinerPool is Context, Initializable, RolesHandler {
      * @dev Claim tokens for the sender.
      * @return A boolean indicating whether the claim was successful.
      */
-    function claim(
+    function claimMacroDailyReward(
         address receiver,
         MinerTypes.NodeType nodeType,
         uint256 activityTime
-    ) external onlyManagerRole(_msgSender()) returns (uint256, uint256) {
+    ) external onlyManagerRole(msg.sender) returns (uint256, uint256) {
         (uint256 firstAmount, uint256 secondAmount) = _calculateClaimableAmount(
             receiver,
             nodeType,
@@ -52,16 +55,25 @@ contract MinerPool is Context, Initializable, RolesHandler {
         );
 
         (bool isFirstAmountSent, ) = receiver.call{value: firstAmount}("");
-        require(isFirstAmountSent, "RewardsPool: unable to claim");
+        require(isFirstAmountSent, "MinerPool: Unable to claim");
 
-        emit HasClaimed(receiver, firstAmount);
+        emit HasClaimed(receiver, firstAmount, "MACRO_DAILY_REWARD");
 
         (bool isSecondAmountSent, ) = receiver.call{value: secondAmount}("");
-        require(isSecondAmountSent, "RewardsPool: unable to claim");
+        require(isSecondAmountSent, "MinerPool: Unable to claim");
 
-        emit HasClaimed(receiver, secondAmount);
+        emit HasClaimed(receiver, secondAmount, "MACRO_DAILY_REWARD");
 
         return (firstAmount, secondAmount);
+    }
+
+    function claimTxReward(
+        address receiver,
+        uint256 amount
+    ) external onlyManagerRole(msg.sender) {
+        (bool sent, ) = receiver.call{value: amount}("");
+        emit HasClaimed(receiver, amount, "TX_REWARD");
+        require(sent, "MinerPool: Unable to send");
     }
 
     function _calculateClaimableAmount(
@@ -97,11 +109,11 @@ contract MinerPool is Context, Initializable, RolesHandler {
 
         require(
             (totalRewardsFromFirstFormula[currentDateIndex][nodeType] +
-                firstFormulaAmount) <= firstFormulaHardCap
+                firstFormulaAmount) <= firstFormulaHardCap, "MinerPool: Addition exceeds hardcap for first formula"
         );
         require(
             (totalRewardsFromSecondFormula[currentDateIndex][nodeType] +
-                secondFormulaAmount) <= secondFormulaHardCap
+                secondFormulaAmount) <= secondFormulaHardCap, "MinerPool: Addition exceeds hardcap for second formula"
         );
 
         totalRewardsFromFirstFormula[currentDateIndex][

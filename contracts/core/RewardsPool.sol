@@ -13,7 +13,7 @@ import "../interfaces/IMinerList.sol";
  * @notice Holds tokens for miners to claim.
  * @dev A contract for distributing tokens over a specified period of time for mining purposes.
  */
-contract RewardsPool is Context, Initializable, RolesHandler {
+contract RewardsPool is Initializable, RolesHandler {
     uint256 currentBlock = 0;
     IMinerFormulas public minerFormulas;
     mapping(address => uint256) public claimedAmounts; // Total amount of tokens claimed so far
@@ -22,7 +22,7 @@ contract RewardsPool is Context, Initializable, RolesHandler {
     event Deposit(address indexed sender, uint amount, uint balance); // Event emitted when pool received mtc
 
     receive() external payable {
-        emit Deposit(_msgSender(), msg.value, address(this).balance);
+        emit Deposit(msg.sender, msg.value, address(this).balance);
     }
 
     /**
@@ -39,14 +39,14 @@ contract RewardsPool is Context, Initializable, RolesHandler {
      */
     function claim(
         address receiver
-    ) external onlyManagerRole(_msgSender()) returns (uint256) {
+    ) external onlyManagerRole(msg.sender) returns (uint256) {
         // external call blok yapısını al
         uint256 amount = calculateClaimableAmount();
 
         claimedAmounts[receiver] += amount;
 
         (bool sent, ) = receiver.call{value: amount}("");
-        require(sent, "RewardsPool: unable to claim");
+        require(sent, "RewardsPool: Unable to claim");
 
         emit HasClaimed(receiver, amount);
 
