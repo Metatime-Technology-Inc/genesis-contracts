@@ -1,6 +1,7 @@
 interface IContracts {
   [key: string]: Object;
   core: {
+    MTC: string;
     MinerPool: string;
     RewardsPool: string;
   },
@@ -33,6 +34,7 @@ interface IContracts {
 
 const CONTRACTS: IContracts = {
   core: {
+    MTC: "MTC",
     MinerPool: "MinerPool",
     RewardsPool: "RewardsPool"
   },
