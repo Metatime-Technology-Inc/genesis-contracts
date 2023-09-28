@@ -204,7 +204,7 @@ contract Metaminer is Initializable, RolesHandler {
             IBlockValidator.BlockPayload memory blockPayload = blockValidator
                 .blockPayloads(blockNumber);
             bool finalized = blockPayload.isFinalized;
-            require(finalized == false, "Already finalized.");
+            require(finalized == false, "Metaminer: Already finalized");
             address coinbase = blockPayload.coinbase;
             uint256 blockReward = blockPayload.blockReward;
 
@@ -272,7 +272,7 @@ contract Metaminer is Initializable, RolesHandler {
             (bool sent, ) = address(shareHolder.addr).call{
                 value: holderPercent
             }("");
-            require(sent, "MetaMiner: Income sharing failed");
+            require(sent, "Metaminer: Income sharing failed");
         }
         return (true);
     }
