@@ -34,7 +34,7 @@ contract MainnetBridge is Blacklistable, Freezeable {
         _;
     }
 
-    receive() external payable { }
+    receive() external payable {}
 
     /**
      * @dev Bridges a transaction to mainnet chain.

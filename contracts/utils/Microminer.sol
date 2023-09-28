@@ -20,7 +20,6 @@ contract MicroMiner is Initializable {
     IMetaPoints public metapoints;
     IMinerList public minerList;
 
-    // REMINDER: Use with kickMiner if needed
     /**
      * @dev Modifier to check if an address is a MicroMiner.
      * @param miner The address to check.
@@ -28,7 +27,7 @@ contract MicroMiner is Initializable {
     modifier isMiner(address miner) {
         require(
             minerList.isMiner(miner, MinerTypes.NodeType.Micro),
-            "MicroMiner: Address is not macrominer"
+            "MicroMiner: Address is not microminer"
         );
         _;
     }
@@ -40,7 +39,7 @@ contract MicroMiner is Initializable {
     modifier notMiner(address miner) {
         require(
             !minerList.isMiner(miner, MinerTypes.NodeType.Micro),
-            "MicroMiner: Address is already macrominer"
+            "MicroMiner: Address is already microminer"
         );
         _;
     }
@@ -74,6 +73,22 @@ contract MicroMiner is Initializable {
         );
         minerList.addMiner(msg.sender, MinerTypes.NodeType.Micro);
         return (true);
+    }
+
+    /**
+     * @dev Allows a manager to kick a MicroMiner and refund the staked amount.
+     * @param minerAddress The address of the MicroMiner to kick.
+     * @return A boolean indicating whether the operation was successful.
+     */
+    function kickMiner(
+        address minerAddress
+    )
+        external
+        isMiner(minerAddress)
+        onlyManagerRole(msg.sender)
+        returns (bool)
+    {
+        _kickMiner(minerAddress);
     }
 
     /**

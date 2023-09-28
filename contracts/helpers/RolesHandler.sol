@@ -59,7 +59,10 @@ abstract contract RolesHandler {
     }
 
     function initRoles(address rolesAddress) external {
-        require(address(roles) == address(0), "RolesHandler: roles already initialiazed");
+        require(
+            address(roles) == address(0),
+            "RolesHandler: roles already initialiazed"
+        );
         roles = IRoles(rolesAddress);
     }
 }
