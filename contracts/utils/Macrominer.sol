@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 
-import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
 import "../libs/MinerTypes.sol";
@@ -10,7 +9,7 @@ import "../interfaces/IMinerHealthCheck.sol";
 import "../interfaces/IMetaPoints.sol";
 import "../interfaces/IMinerList.sol";
 
-contract Macrominer is Context, Initializable {
+contract Macrominer is Initializable {
     uint256 public constant STAKE_AMOUNT = 100 ether;
     uint256 public constant VOTE_POINT_LIMIT = 100;
 
@@ -86,14 +85,14 @@ contract Macrominer is Context, Initializable {
         external
         payable
         isNodeTypeValid(nodeType)
-        notMiner(_msgSender(), nodeType)
+        notMiner(msg.sender, nodeType)
         returns (bool)
     {
         require(
             msg.value == STAKE_AMOUNT,
             "Macrominer: You have to stake as required STAKE_AMOUNT"
         );
-        minerList.addMiner(_msgSender(), nodeType);
+        minerList.addMiner(msg.sender, nodeType);
         return (true);
     }
 
@@ -109,7 +108,7 @@ contract Macrominer is Context, Initializable {
         isNodeTypeValid(votedMinerNodeType)
         isNodeTypeValid(nodeType)
         isMiner(votedMinerAddress, votedMinerNodeType)
-        isMiner(_msgSender(), nodeType)
+        isMiner(msg.sender, nodeType)
     {
         // check status
         bool isAlive = minerHealthCheck.status(
@@ -122,7 +121,7 @@ contract Macrominer is Context, Initializable {
         // -- false status
         if (isAlive == false) {
             // --- get checkers mp points
-            uint256 mpBalance = metapoints.balanceOf(_msgSender());
+            uint256 mpBalance = metapoints.balanceOf(msg.sender);
 
             if (vote.point == 0) {
                 vote.voteId = voteId;
