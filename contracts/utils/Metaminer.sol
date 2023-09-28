@@ -178,7 +178,7 @@ contract Metaminer is Context, Initializable, RolesHandler {
             uint256 percent = _percents[i];
             uint256 nextPercent = share.sharedPercent + percent;
 
-            require(nextPercent <= 100, "Total percent cannot exceed 100.");
+            require(nextPercent <= minerFormulas.BASE_DIVIDER(), "Total percent cannot exceed 100.");
 
             _addShareHolder(_miner, addr, percent);
             share.sharedPercent = nextPercent;
@@ -262,7 +262,7 @@ contract Metaminer is Context, Initializable, RolesHandler {
         uint256 _shareholderCount = shares[_miner].shareHolderCount;
         for (uint256 i = 0; i < _shareholderCount; i++) {
             Shareholder memory shareHolder = shareholders[_miner][i];
-            uint256 holderPercent = (_balance * shareHolder.percent) / 100;
+            uint256 holderPercent = (_balance * shareHolder.percent) / minerFormulas.BASE_DIVIDER();
             (bool sent, ) = address(shareHolder.addr).call{
                 value: holderPercent
             }("");
