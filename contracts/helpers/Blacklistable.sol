@@ -32,7 +32,7 @@ abstract contract Blacklistable is RolesHandler {
     function setBlacklist(
         address wallet,
         bool status
-    ) public virtual onlyOwnerRole(msg.sender) {
+    ) external onlyOwnerRole(msg.sender) {
         blacklist[wallet] = status;
         emit Blacklist(wallet, status);
     }
