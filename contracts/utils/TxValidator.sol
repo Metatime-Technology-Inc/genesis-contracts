@@ -8,6 +8,7 @@ import "../interfaces/IMinerList.sol";
 import "../interfaces/IMinerPool.sol";
 import "../interfaces/IMetaPoints.sol";
 import "../interfaces/IMinerFormulas.sol";
+import "../interfaces/IMinerHealthCheck.sol";
 import "../libs/MinerTypes.sol";
 
 // A long time ago in a galaxy far, far away! :D
@@ -21,6 +22,7 @@ contract TxValidator is Initializable, RolesHandler {
     IMinerPool public minerPool;
     IMetaPoints public metaPoints;
     IMinerFormulas public minerFormulas;
+    IMinerHealthCheck public minerHealthCheck;
 
     mapping(bytes32 => TxPayload) public txPayloads;
     mapping(bytes32 => Vote[]) public txVotes;
@@ -55,20 +57,26 @@ contract TxValidator is Initializable, RolesHandler {
     function initialize(
         address minerListAddress,
         address minerPointsAddress,
-        address minerFormulasAddress
+        address minerFormulasAddress,
+        address minerHealthCheckAddress
     ) external {
         minerList = IMinerList(minerListAddress);
         metaPoints = IMetaPoints(minerPointsAddress);
         minerFormulas = IMinerFormulas(minerFormulasAddress);
+        minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
     }
 
     function addTransaction(
         bytes32 txHash,
         address handler,
-        uint256 reward
+        uint256 reward,
+        MinerTypes.NodeType nodeType
     ) external onlyManagerRole(msg.sender) returns (bool) {
-        // check activity of macrominer
-        // is it actually macrominer
+        bool isAlive = minerHealthCheck.status(
+            handler,
+            nodeType
+        );
+        require(isAlive, "Miner is not active");
         // timeout ?
         TxPayload storage txPayload = txPayloads[txHash];
         require(txPayload.handler == address(0), "Tx is already exist");
@@ -82,7 +90,11 @@ contract TxValidator is Initializable, RolesHandler {
         bool decision,
         MinerTypes.NodeType nodeType
     ) external returns (bool) {
-        // check activity of voter
+        bool isAlive = minerHealthCheck.status(
+            msg.sender,
+            nodeType
+        );
+        require(isAlive, "Activity is not as expected");
         TxPayload storage txPayload = txPayloads[txHash];
         address voter = msg.sender;
         bool txState = _checkTransactionState(txHash);
