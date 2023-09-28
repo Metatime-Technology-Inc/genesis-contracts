@@ -2,17 +2,15 @@ import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
-import { incrementBlocktimestamp, toWei, getBlockTimestamp, calculateClaimableAmount } from "../scripts/helpers";
+import { toWei } from "../scripts/helpers";
 import { BigNumber } from "ethers";
 import { Bridge, MTC, Roles } from "../typechain-types";
 
 const METATIME_TOKEN_SUPPLY = 10_000_000_000;
-const SECONDS_IN_A_DAY = 60 * 24 * 60;
-const TWO_DAYS_IN_SECONDS = 2 * SECONDS_IN_A_DAY;
 
 describe("Bridge", function () {
     async function initiateVariables() {
-        const [owner, manager_1, manager_2, validator_1, validator_2, user] =
+        const [owner, user] =
             await ethers.getSigners();
 
         const MTC_ = await ethers.getContractFactory(
@@ -38,10 +36,6 @@ describe("Bridge", function () {
             bridge,
             roles,
             owner,
-            manager_1,
-            manager_2,
-            validator_1,
-            validator_2,
             user,
         };
     }
@@ -56,15 +50,15 @@ describe("Bridge", function () {
             await bridge.connect(owner).initRoles(roles.address);
         }
 
-        // try bridge when contract is frezeed and expect revert
-        it("try bridge when contract is frezeed and expect revert", async () => {
+        // try bridge function when contract is frezeed and expect revert
+        it("try bridge function when contract is frezeed and expect revert", async () => {
             const { user, bridge } = await loadFixture(initiateVariables);
 
             await expect(bridge.connect(user).bridge()).to.be.revertedWith("Freezeable: Contract is freezed");
         });
 
-        // try bridge when caller is blacklisted and expect revert
-        it("try bridge when caller is blacklisted and expect revert", async () => {
+        // try bridge function when caller is blacklisted and expect revert
+        it("try bridge function when caller is blacklisted and expect revert", async () => {
             const { owner, user, bridge } = await loadFixture(initiateVariables);
 
             // init roles
@@ -77,8 +71,8 @@ describe("Bridge", function () {
             await expect(bridge.connect(user).bridge()).to.be.revertedWith("Blacklistable: Wallet is blacklisted");
         });
 
-        // try bridge when caller is dont have token balance and expect revert
-        it("try bridge when caller is dont have token balance and expect revert", async () => {
+        // try bridge function when caller is dont have token balance and expect revert
+        it("try bridge function when caller is dont have token balance and expect revert", async () => {
             const { owner, user, bridge } = await loadFixture(initiateVariables);
 
             // init roles
@@ -89,8 +83,8 @@ describe("Bridge", function () {
             await expect(bridge.connect(user).bridge()).to.be.revertedWith("Bridge: Address dont have balance");
         });
 
-        // try bridge when caller is didnt give required allowance and expect revert
-        it("try bridge when caller is didnt give required allowance and expect revert", async () => {
+        // try bridge function when caller is didnt give required allowance and expect revert
+        it("try bridge function when caller is didnt give required allowance and expect revert", async () => {
             const { owner, user, bridge, mtc } = await loadFixture(initiateVariables);
 
             // init roles
@@ -103,8 +97,8 @@ describe("Bridge", function () {
             await expect(bridge.connect(user).bridge()).to.be.revertedWith("Bridge: Allowance is not as required");
         });
 
-        // try bridge when everything is ok
-        it("try bridge when everything is ok", async () => {
+        // try bridge function when everything is ok
+        it("try bridge function when everything is ok", async () => {
             const { owner, user, bridge, mtc } = await loadFixture(initiateVariables);
 
             // init roles
