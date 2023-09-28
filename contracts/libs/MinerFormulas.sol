@@ -14,7 +14,10 @@ library MinerFormulas {
     IMinerHealthCheck public constant METAHEALTHCHECK =
         IMinerHealthCheck(0xDAFEA492D9c6733ae3d56b7Ed1ADB60692c98Bc5);
 
-    uint256 public constant METAMINER_MINER_POOL_SHARE_PERCENT = 50;
+    // Divider for percentage calculatations %100 => %10_000
+    uint256 public constant BASE_DIVIDER = 10_000;
+
+    uint256 public constant METAMINER_MINER_POOL_SHARE_PERCENT = 5_000;
 
     uint256 public constant METAMINER_DAILY_BLOCK_COUNT = 17_280;
     uint256 public constant METAMINER_DAILY_PRIZE_POOL = 166_666;

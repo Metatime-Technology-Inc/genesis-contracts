@@ -22,7 +22,7 @@ contract TxValidator is Initializable, RolesHandler {
     uint256 public voteCountLimit = 32;
     uint256 public defaultVotePoint = 2 ether;
     uint256 public defaultExpireTime = 5 minutes;
-    uint256 public constant HANDLER_PERCENT = 50;
+    uint256 public constant HANDLER_PERCENT = 5_000;
 
     IMinerList public minerList;
     IMinerPool public minerPool;
@@ -200,22 +200,22 @@ contract TxValidator is Initializable, RolesHandler {
 
         if (!tie) {
             uint256 txReward = txPayload.reward;
-            uint256 minerPoolPercent = (100 /
+            uint256 minerPoolPercent = (minerFormulas.BASE_DIVIDER() /
                 minerFormulas.METAMINER_MINER_POOL_SHARE_PERCENT());
             txReward /= minerPoolPercent;
 
-            uint256 handlerReward = txReward / (100 / HANDLER_PERCENT);
+            uint256 handlerReward = txReward / (minerFormulas.BASE_DIVIDER() / HANDLER_PERCENT);
             uint256 voteReward = (txReward - handlerReward) / txVote.length;
             if (decision) {
                 // send handler reward
-                for (uint256 i2 = 0; i2 < trueVoters.length; i2++) {
-                    address trueVoter = trueVoters[i2];
+                for (uint256 i = 0; i < trueVoters.length; i++) {
+                    address trueVoter = trueVoters[i];
                     // send voter reward
                 }
             } else {
                 voteReward = txReward / txVote.length;
-                for (uint256 i2 = 0; i2 < falseVoters.length; i2++) {
-                    address falseVoter = falseVoters[i2];
+                for (uint256 i = 0; i < falseVoters.length; i++) {
+                    address falseVoter = falseVoters[i];
                     // send voter reward
                 }
             }
