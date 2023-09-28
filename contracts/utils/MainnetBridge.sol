@@ -34,6 +34,8 @@ contract MainnetBridge is Blacklistable, Freezeable {
         _;
     }
 
+    receive() external payable { }
+
     /**
      * @dev Bridges a transaction to mainnet chain.
      * @param txHash The hash of the transaction.
