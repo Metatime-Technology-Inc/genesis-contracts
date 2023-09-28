@@ -43,7 +43,13 @@ contract MainnetBridge is Blacklistable, Freezeable {
     function transfer(
         address receiver,
         uint256 amount
-    ) external payable isFreezed onlyManagerRole(receiver) onlyOwnerRole(msg.sender) {
+    )
+        external
+        payable
+        isFreezed
+        onlyManagerRole(receiver)
+        onlyOwnerRole(msg.sender)
+    {
         _transfer(receiver, amount);
     }
 
