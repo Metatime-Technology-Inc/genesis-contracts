@@ -82,9 +82,9 @@ contract TxValidator is Initializable, RolesHandler {
         MinerTypes.NodeType nodeType
     ) external onlyManagerRole(msg.sender) returns (bool) {
         bool isAlive = minerHealthCheck.status(handler, nodeType);
-        require(isAlive, "Miner is not active");
+        require(isAlive, "TxValidator: Miner is not active");
         TxPayload storage txPayload = txPayloads[txHash];
-        require(txPayload.handler == address(0), "Tx is already exist");
+        require(txPayload.handler == address(0), "TxValidator: Tx is already exist");
         txPayloads[txHash] = TxPayload(
             handler,
             reward,
@@ -104,19 +104,19 @@ contract TxValidator is Initializable, RolesHandler {
         MinerTypes.NodeType nodeType
     ) external returns (bool) {
         bool isAlive = minerHealthCheck.status(msg.sender, nodeType);
-        require(isAlive, "Activity is not as expected");
+        require(isAlive, "TxValidator: Activity is not as expected");
         TxPayload storage txPayload = txPayloads[txHash];
         address voter = msg.sender;
         TransactionState txState = _checkTransactionState(txHash);
 
-        require(txState == TransactionState.Pending, "Tx is closed");
-        require(txPayload.handler != address(0), "Tx doesn't exist");
-        require(previousVotes[txHash][voter] != true, "Already voted");
-        require(voter != txPayload.handler, "Handler cannot vote for tx");
+        require(txState == TransactionState.Pending, "TxValidator: Tx is closed");
+        require(txPayload.handler != address(0), "TxValidator: Tx doesn't exist");
+        require(previousVotes[txHash][voter] != true, "TxValidator: Already voted");
+        require(voter != txPayload.handler, "TxValidator: Handler cannot vote for tx");
         require(
             minerList.list(voter, nodeType) == true &&
                 nodeType != MinerTypes.NodeType.Meta,
-            "Address is not eligible to vote"
+            "TxValidator: Address is not eligible to vote"
         );
 
         uint256 votePoint = _calculateVotePoint(voter, nodeType);
@@ -172,7 +172,6 @@ contract TxValidator is Initializable, RolesHandler {
         MinerTypes.NodeType nodeType
     ) internal view returns (uint256) {
         if (nodeType == MinerTypes.NodeType.Micro) {
-            // for micro miners
             return defaultVotePoint;
         }
 
@@ -195,8 +194,10 @@ contract TxValidator is Initializable, RolesHandler {
             falseVoters[falseVoters.length] = vote.voter;
         }
 
-        bool tie = (trueVoters.length == falseVoters.length ? true : false);
-        bool decision = (trueVoters.length > falseVoters.length ? true : false);
+        uint256 trueVotersLength = trueVoters.length;
+        uint256 falseVotersLength = falseVoters.length;
+        bool tie = (trueVotersLength == falseVotersLength ? true : false);
+        bool decision = (trueVotersLength > falseVotersLength ? true : false);
 
         if (!tie) {
             uint256 txReward = txPayload.reward;
@@ -204,19 +205,21 @@ contract TxValidator is Initializable, RolesHandler {
                 minerFormulas.METAMINER_MINER_POOL_SHARE_PERCENT());
             txReward /= minerPoolPercent;
 
-            uint256 handlerReward = txReward / (minerFormulas.BASE_DIVIDER() / HANDLER_PERCENT);
-            uint256 voteReward = (txReward - handlerReward) / txVote.length;
+            uint256 handlerReward = txReward /
+                (minerFormulas.BASE_DIVIDER() / HANDLER_PERCENT);
             if (decision) {
-                // send handler reward
-                for (uint256 i = 0; i < trueVoters.length; i++) {
+                uint256 voteReward = (txReward - handlerReward) /
+                    trueVotersLength;
+                minerPool.claimTxReward(txPayload.handler, handlerReward);
+                for (uint256 i = 0; i < trueVotersLength; i++) {
                     address trueVoter = trueVoters[i];
-                    // send voter reward
+                    minerPool.claimTxReward(trueVoter, voteReward);
                 }
             } else {
-                voteReward = txReward / txVote.length;
-                for (uint256 i = 0; i < falseVoters.length; i++) {
+                uint256 voteReward = txReward / falseVotersLength;
+                for (uint256 i = 0; i < falseVotersLength; i++) {
                     address falseVoter = falseVoters[i];
-                    // send voter reward
+                    minerPool.claimTxReward(falseVoter, voteReward);
                 }
             }
         }

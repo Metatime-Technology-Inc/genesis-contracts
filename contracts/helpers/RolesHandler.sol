@@ -17,7 +17,7 @@ abstract contract RolesHandler {
     modifier onlyOwnerRole(address account) {
         require(
             roles.hasRole(roles.OWNER_ROLE(), account),
-            "Owner role is needed for this action."
+            "RolesHandler: Owner role is needed for this action"
         );
         _;
     }
@@ -29,7 +29,7 @@ abstract contract RolesHandler {
     modifier onlyManagerRole(address account) {
         require(
             roles.hasRole(roles.MANAGER_ROLE(), account),
-            "Manager role is needed for this action."
+            "RolesHandler: Manager role is needed for this action"
         );
         _;
     }
@@ -41,7 +41,7 @@ abstract contract RolesHandler {
     modifier onlyValidatorRole(address account) {
         require(
             roles.hasRole(roles.VALIDATOR_ROLE(), account),
-            "Validator role is needed for this action."
+            "RolesHandler: Validator role is needed for this action"
         );
         _;
     }
@@ -53,7 +53,7 @@ abstract contract RolesHandler {
     modifier onlyDeveloperRole(address account) {
         require(
             roles.hasRole(roles.DEVELOPER_ROLE(), account),
-            "Developer role is needed for this action."
+            "RolesHandler: Developer role is needed for this action"
         );
         _;
     }

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 
-import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
 import "../libs/MinerTypes.sol";
@@ -14,7 +13,7 @@ import "../interfaces/IMinerList.sol";
  * @title MicroMiner
  * @dev A smart contract for managing MicroMiners.
  */
-contract MicroMiner is Context, Initializable {
+contract MicroMiner is Initializable {
     uint256 public constant STAKE_AMOUNT = 100 ether;
 
     IMinerHealthCheck public minerHealthCheck;
@@ -29,7 +28,7 @@ contract MicroMiner is Context, Initializable {
     modifier isMiner(address miner) {
         require(
             minerList.isMiner(miner, MinerTypes.NodeType.Micro),
-            "Address is not macrominer."
+            "MicroMiner: Address is not macrominer"
         );
         _;
     }
@@ -41,7 +40,7 @@ contract MicroMiner is Context, Initializable {
     modifier notMiner(address miner) {
         require(
             !minerList.isMiner(miner, MinerTypes.NodeType.Micro),
-            "Address is already macrominer."
+            "MicroMiner: Address is already macrominer"
         );
         _;
     }
@@ -68,12 +67,12 @@ contract MicroMiner is Context, Initializable {
      * @dev Sets an address as a MicroMiner.
      * @return A boolean indicating whether the operation was successful.
      */
-    function setMiner() external payable notMiner(_msgSender()) returns (bool) {
+    function setMiner() external payable notMiner(msg.sender) returns (bool) {
         require(
             msg.value == STAKE_AMOUNT,
-            "You have to stake as required STAKE_AMOUNT."
+            "MicroMiner: You have to stake as required STAKE_AMOUNT"
         );
-        minerList.addMiner(_msgSender(), MinerTypes.NodeType.Micro);
+        minerList.addMiner(msg.sender, MinerTypes.NodeType.Micro);
         return (true);
     }
 
@@ -86,7 +85,7 @@ contract MicroMiner is Context, Initializable {
         minerList.deleteMiner(minerAddress, MinerTypes.NodeType.Micro);
         (bool sent, ) = payable(minerAddress).call{value: STAKE_AMOUNT}("");
 
-        require(sent, "Unstake failed.");
+        require(sent, "MicroMiner: Unstake failed");
         return (true);
     }
 }

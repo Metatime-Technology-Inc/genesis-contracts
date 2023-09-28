@@ -13,7 +13,7 @@ import "../libs/MinerTypes.sol";
  * @title BlockValidator
  * @dev A smart contract for validating and finalizing blocks.
  */
-contract BlockValidator is Context, Initializable, RolesHandler {
+contract BlockValidator is Initializable, RolesHandler {
     uint256[32] public lastVerifiedBlocknumbers;
     uint8 public constant DELAY_LIMIT = 32;
     mapping(uint256 => BlockPayload) public blockPayloads;
@@ -35,7 +35,7 @@ contract BlockValidator is Context, Initializable, RolesHandler {
     modifier isMiner(address _miner) {
         require(
             minerList.isMiner(_miner, MinerTypes.NodeType.Meta),
-            "Address is not metaminer."
+            "BlockValidator: Address is not metaminer"
         );
         _;
     }
@@ -71,10 +71,10 @@ contract BlockValidator is Context, Initializable, RolesHandler {
     function setBlockPayload(
         uint256 blockNumber,
         BlockPayload memory blockPayload
-    ) external isMiner(_msgSender()) returns (bool) {
+    ) external isMiner(msg.sender) returns (bool) {
         require(
             blockPayloads[blockNumber].coinbase == address(0),
-            "setBlockPayload: Unable to set block payload."
+            "BlockValidator: Unable to set block payload"
         );
         blockPayloads[blockNumber] = blockPayload;
 
@@ -90,11 +90,11 @@ contract BlockValidator is Context, Initializable, RolesHandler {
      */
     function finalizeBlock(
         uint256 blockNumber
-    ) external onlyManagerRole(_msgSender()) returns (bool) {
+    ) external onlyManagerRole(msg.sender) returns (bool) {
         BlockPayload storage payload = blockPayloads[blockNumber];
         require(
             payload.coinbase != address(0),
-            "finalizeBlock: Unable to finalize block."
+            "BlockValidator: Unable to finalize block"
         );
 
         payload.isFinalized = true;

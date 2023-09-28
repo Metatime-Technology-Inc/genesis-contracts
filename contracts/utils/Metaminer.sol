@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 
-import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
 import "../libs/MinerTypes.sol";
@@ -14,7 +13,7 @@ import "../helpers/RolesHandler.sol";
  * @title Metaminer
  * @dev A smart contract representing a Metaminer, allowing users to stake and participate in block validation.
  */
-contract Metaminer is Context, Initializable, RolesHandler {
+contract Metaminer is Initializable, RolesHandler {
     IBlockValidator public blockValidator;
     IMinerList public minerList;
     IMinerFormulas public minerFormulas;
@@ -48,7 +47,7 @@ contract Metaminer is Context, Initializable, RolesHandler {
     modifier isMiner(address _miner) {
         require(
             minerList.isMiner(_miner, MinerTypes.NodeType.Meta),
-            "Address is not metaminer."
+            "Metaminer: Address is not metaminer"
         );
         _;
     }
@@ -60,7 +59,7 @@ contract Metaminer is Context, Initializable, RolesHandler {
     modifier validMinerSubscription(address _miner) {
         require(
             minerSubscription[_miner] > block.timestamp,
-            "Miner subscription is not as required."
+            "Metaminer: Miner subscription is not as required"
         );
         _;
     }
@@ -93,17 +92,17 @@ contract Metaminer is Context, Initializable, RolesHandler {
     function setMiner() external payable returns (bool) {
         require(
             msg.value == (ANNUAL_AMOUNT + STAKE_AMOUNT),
-            "Required MTC is not sended."
+            "Metaminer: Required MTC is not sended"
         );
-        shares[_msgSender()] = Share(0, 0);
-        minerSubscription[_msgSender()] = _nextYear(_msgSender());
-        minerList.addMiner(_msgSender(), MinerTypes.NodeType.Meta);
+        shares[msg.sender] = Share(0, 0);
+        minerSubscription[msg.sender] = _nextYear(msg.sender);
+        minerList.addMiner(msg.sender, MinerTypes.NodeType.Meta);
         _addShareHolder(
-            _msgSender(),
+            msg.sender,
             MINER_POOL_ADDRESS,
             minerFormulas.METAMINER_MINER_POOL_SHARE_PERCENT()
         );
-        emit MinerAdded(_msgSender(), minerSubscription[_msgSender()]);
+        emit MinerAdded(msg.sender, minerSubscription[msg.sender]);
         return (true);
     }
 
@@ -111,10 +110,10 @@ contract Metaminer is Context, Initializable, RolesHandler {
      * @dev Allows a Metaminer to renew their subscription for another year by sending the required amount of MTC.
      * @return A boolean indicating whether the operation was successful.
      */
-    function subscribe() external payable isMiner(_msgSender()) returns (bool) {
-        require(msg.value == ANNUAL_AMOUNT, "Required MTC is not sended.");
-        minerSubscription[_msgSender()] = _nextYear(_msgSender());
-        emit MinerSubscribe(_msgSender(), minerSubscription[_msgSender()]);
+    function subscribe() external payable isMiner(msg.sender) returns (bool) {
+        require(msg.value == ANNUAL_AMOUNT, "Metaminer: Required MTC was not sent");
+        minerSubscription[msg.sender] = _nextYear(msg.sender);
+        emit MinerSubscribe(msg.sender, minerSubscription[msg.sender]);
         return (true);
     }
 
@@ -122,9 +121,9 @@ contract Metaminer is Context, Initializable, RolesHandler {
      * @dev Allows a Metaminer to unsubscribe by unstaking their funds.
      * @return A boolean indicating whether the operation was successful.
      */
-    function unstake() external isMiner(_msgSender()) returns (bool) {
-        _unstake(_msgSender());
-        emit MinerUnsubscribe(_msgSender());
+    function unstake() external isMiner(msg.sender) returns (bool) {
+        _unstake(msg.sender);
+        emit MinerUnsubscribe(msg.sender);
         return (true);
     }
 
@@ -134,7 +133,7 @@ contract Metaminer is Context, Initializable, RolesHandler {
      */
     function setValidator(
         address _miner
-    ) external onlyOwnerRole(_msgSender()) returns (bool) {
+    ) external onlyOwnerRole(msg.sender) returns (bool) {
         shares[_miner] = Share(0, 0);
         minerSubscription[_miner] = _nextYear(_miner);
         minerList.addMiner(_miner, MinerTypes.NodeType.Meta);
@@ -153,7 +152,7 @@ contract Metaminer is Context, Initializable, RolesHandler {
      */
     function refreshValidator(
         address _miner
-    ) external onlyOwnerRole(_msgSender()) returns (bool) {
+    ) external onlyOwnerRole(msg.sender) returns (bool) {
         minerSubscription[_miner] = _nextYear(_miner);
         return (true);
     }
@@ -171,14 +170,17 @@ contract Metaminer is Context, Initializable, RolesHandler {
         address[] memory _shareHolders,
         uint256[] memory _percents,
         uint256 _shareHoldersLength
-    ) external onlyOwnerRole(_msgSender()) returns (bool) {
+    ) external onlyOwnerRole(msg.sender) returns (bool) {
         Share storage share = shares[_miner];
         for (uint256 i = 0; i < _shareHoldersLength; i++) {
             address addr = _shareHolders[i];
             uint256 percent = _percents[i];
             uint256 nextPercent = share.sharedPercent + percent;
 
-            require(nextPercent <= minerFormulas.BASE_DIVIDER(), "Total percent cannot exceed 100.");
+            require(
+                nextPercent <= minerFormulas.BASE_DIVIDER(),
+                "Metaminer: Total percent cannot exceed 100"
+            );
 
             _addShareHolder(_miner, addr, percent);
             share.sharedPercent = nextPercent;
@@ -194,7 +196,7 @@ contract Metaminer is Context, Initializable, RolesHandler {
     function finalizeBlock(
         uint256 blockNumber
     ) external payable returns (bool) {
-        bool status = _minerCheck(_msgSender());
+        bool status = _minerCheck(msg.sender);
         if (status == true) {
             IBlockValidator.BlockPayload memory blockPayload = blockValidator
                 .blockPayloads(blockNumber);
@@ -203,13 +205,13 @@ contract Metaminer is Context, Initializable, RolesHandler {
             address coinbase = blockPayload.coinbase;
             uint256 blockReward = blockPayload.blockReward;
 
-            require(_msgSender() == coinbase, "Wrong sender address.");
-            require(msg.value >= blockReward, "Insufficient amount.");
+            require(msg.sender == coinbase, "Metaminer: Wrong sender address");
+            require(msg.value >= blockReward, "Metaminer: Insufficient amount");
 
-            _shareIncome(_msgSender(), msg.value);
+            _shareIncome(msg.sender, msg.value);
 
             bool result = blockValidator.finalizeBlock(blockNumber);
-            require(result == true, "Unable to finalize block.");
+            require(result == true, "Metaminer: Unable to finalize block");
         }
 
         return true;
@@ -262,11 +264,12 @@ contract Metaminer is Context, Initializable, RolesHandler {
         uint256 _shareholderCount = shares[_miner].shareHolderCount;
         for (uint256 i = 0; i < _shareholderCount; i++) {
             Shareholder memory shareHolder = shareholders[_miner][i];
-            uint256 holderPercent = (_balance * shareHolder.percent) / minerFormulas.BASE_DIVIDER();
+            uint256 holderPercent = (_balance * shareHolder.percent) /
+                minerFormulas.BASE_DIVIDER();
             (bool sent, ) = address(shareHolder.addr).call{
                 value: holderPercent
             }("");
-            require(sent, "_shareIncome failed.");
+            require(sent, "MetaMiner: Income sharing failed");
         }
         return (true);
     }
@@ -278,7 +281,7 @@ contract Metaminer is Context, Initializable, RolesHandler {
      */
     function _unstake(address _miner) internal returns (bool) {
         (bool sent, ) = address(_miner).call{value: STAKE_AMOUNT}("");
-        require(sent, "unstake failed.");
+        require(sent, "Metaminer: Unstake failed");
         minerList.deleteMiner(_miner, MinerTypes.NodeType.Meta);
         minerSubscription[_miner] = 0;
         // must be delete old shareholders

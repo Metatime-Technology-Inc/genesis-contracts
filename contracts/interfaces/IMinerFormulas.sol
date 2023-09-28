@@ -4,11 +4,8 @@ pragma solidity 0.8.16;
 import "../libs/MinerTypes.sol";
 
 interface IMinerFormulas {
-    function BASE_DIVIDER()
-        external
-        view
-        returns (uint256);
-    
+    function BASE_DIVIDER() external view returns (uint256);
+
     function METAMINER_MINER_POOL_SHARE_PERCENT()
         external
         view

@@ -31,7 +31,7 @@ contract MinerHealthCheck is Initializable {
      * @param nodeType The type of miner node to check.
      */
     modifier isMiner(address miner, MinerTypes.NodeType nodeType) {
-        require(minerList.isMiner(miner, nodeType), "Address is not miner.");
+        require(minerList.isMiner(miner, nodeType), "MinerHealthCheck: Address is not miner");
         _;
     }
 
@@ -72,7 +72,7 @@ contract MinerHealthCheck is Initializable {
             uint256 activityTime = block.timestamp - lastSeen;
             _incrementDailyActiveTimes(msg.sender, nodeType, activityTime);
             _incrementDailyTotalActiveTimes(nodeType, activityTime);
-            minerPool.claim(msg.sender, nodeType, activityTime);
+            minerPool.claimMacroDailyReward(msg.sender, nodeType, activityTime);
             uint256 metaPointsReward = minerFormulas
                 .calculateMetaPointsReward();
             metaPoints.mint(msg.sender, metaPointsReward * activityTime);

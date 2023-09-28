@@ -17,7 +17,7 @@ abstract contract Blacklistable is RolesHandler {
      * @param wallet The address to check.
      */
     modifier isBlacklisted(address wallet) {
-        require(blacklist[wallet] == false, "Wallet is blacklisted.");
+        require(blacklist[wallet] == false, "Blacklistable: Wallet is blacklisted.");
         _;
     }
 

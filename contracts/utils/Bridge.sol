@@ -10,18 +10,16 @@ import "../helpers/Freezeable.sol";
  * @dev A smart contract for bridging tokens to another chain.
  */
 contract Bridge is Blacklistable, Freezeable {
-    address public immutable bridgeToken;
-    IERC20 private immutable _bridgeTokenInterface;
+    IERC20 public immutable bridgeToken;
 
     event BridgeTransfer(address indexed sender, uint256 indexed amount);
 
     /**
      * @dev Constructor to initialize the Bridge contract with the specified token address.
-     * @param _token The address of the token to be bridged.
+     * @param tokenAddress The address of the token to be bridged.
      */
-    constructor(address _token) {
-        bridgeToken = _token;
-        _bridgeTokenInterface = IERC20(bridgeToken);
+    constructor(address tokenAddress) {
+        bridgeToken = IERC20(tokenAddress);
     }
 
     /**
@@ -34,16 +32,16 @@ contract Bridge is Blacklistable, Freezeable {
         isBlacklisted(msg.sender)
         returns (bool)
     {
-        uint256 balance = _bridgeTokenInterface.balanceOf(msg.sender);
-        require(balance > 0, "Address dont have balance.");
+        uint256 balance = bridgeToken.balanceOf(msg.sender);
+        require(balance > 0, "Bridge: Address dont have balance");
 
-        uint256 senderAllowance = _bridgeTokenInterface.allowance(
+        uint256 senderAllowance = bridgeToken.allowance(
             msg.sender,
             address(this)
         );
-        require(senderAllowance == balance, "Allowance is not as required.");
+        require(senderAllowance == balance, "Bridge: Allowance is not as required");
 
-        _bridgeTokenInterface.burnFrom(msg.sender, balance);
+        bridgeToken.burnFrom(msg.sender, balance);
         emit BridgeTransfer(msg.sender, balance);
 
         return (true);

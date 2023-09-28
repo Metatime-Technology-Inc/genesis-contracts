@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 
-import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
 import "../helpers/RolesHandler.sol";
@@ -11,7 +10,7 @@ import "../libs/MinerTypes.sol";
  * @title MinerList
  * @dev A smart contract for managing a list of miners.
  */
-contract MinerList is Context, Initializable, RolesHandler {
+contract MinerList is Initializable, RolesHandler {
     mapping(address => mapping(MinerTypes.NodeType => bool)) public list;
     mapping(MinerTypes.NodeType => uint256) public count;
 
@@ -54,7 +53,7 @@ contract MinerList is Context, Initializable, RolesHandler {
     function addMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
-    ) external onlyManagerRole(_msgSender()) returns (bool) {
+    ) external onlyManagerRole(msg.sender) returns (bool) {
         _addMiner(minerAddress, nodeType);
         return (true);
     }
@@ -68,7 +67,7 @@ contract MinerList is Context, Initializable, RolesHandler {
     function deleteMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
-    ) external onlyManagerRole(_msgSender()) returns (bool) {
+    ) external onlyManagerRole(msg.sender) returns (bool) {
         _deleteMiner(minerAddress, nodeType);
         return (true);
     }

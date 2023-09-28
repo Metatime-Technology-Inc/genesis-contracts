@@ -46,7 +46,7 @@ contract Macrominer is Context, Initializable {
     modifier isMiner(address miner, MinerTypes.NodeType nodeType) {
         require(
             minerList.isMiner(miner, nodeType),
-            "Address is not macrominer."
+            "Macrominer: Address is not macrominer"
         );
         _;
     }
@@ -54,7 +54,7 @@ contract Macrominer is Context, Initializable {
     modifier notMiner(address miner, MinerTypes.NodeType nodeType) {
         require(
             !minerList.isMiner(miner, nodeType),
-            "Address is already macrominer."
+            "Macrominer: Address is already macrominer"
         );
         _;
     }
@@ -63,7 +63,7 @@ contract Macrominer is Context, Initializable {
         require(
             nodeType != MinerTypes.NodeType.Meta ||
                 nodeType != MinerTypes.NodeType.Micro,
-            "Wrong node type."
+            "Macrominer: Wrong node type"
         );
         _;
     }
@@ -91,7 +91,7 @@ contract Macrominer is Context, Initializable {
     {
         require(
             msg.value == STAKE_AMOUNT,
-            "You have to stake as required STAKE_AMOUNT."
+            "Macrominer: You have to stake as required STAKE_AMOUNT"
         );
         minerList.addMiner(_msgSender(), nodeType);
         return (true);
@@ -170,7 +170,7 @@ contract Macrominer is Context, Initializable {
         minerList.deleteMiner(minerAddress, nodeType);
         (bool sent, ) = payable(minerAddress).call{value: STAKE_AMOUNT}("");
 
-        require(sent, "Unstake failed.");
+        require(sent, "Macrominer: Unstake failed");
         return (true);
     }
 }
