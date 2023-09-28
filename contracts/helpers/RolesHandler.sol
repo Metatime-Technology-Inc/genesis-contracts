@@ -8,7 +8,7 @@ import "../interfaces/IRoles.sol";
  * @dev An abstract contract for handling roles and permissions.
  */
 abstract contract RolesHandler {
-    IRoles public roles = IRoles(0xDAFEA492D9c6733ae3d56b7Ed1ADB60692c98Bc5);
+    IRoles public roles;
 
     /**
      * @dev Modifier to check if an address has the owner role.
@@ -56,5 +56,10 @@ abstract contract RolesHandler {
             "RolesHandler: Developer role is needed for this action"
         );
         _;
+    }
+
+    function initRoles(address rolesAddress) external {
+        require(address(roles) != address(0), "RolesHandler: roles already initialiazed");
+        roles = IRoles(rolesAddress);
     }
 }
