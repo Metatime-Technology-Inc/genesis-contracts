@@ -51,7 +51,7 @@ const CONTRACTS: IContracts = {
     BlockValidator: "BlockValidator",
     Bridge: "Bridge",
     Macrominer: "Macrominer",
-    MainnetBridge: "Macrominer",
+    MainnetBridge: "MainnetBridge",
     Metaminer: "Metaminer",
     MetaPoints: "MetaPoints",
     Microminer: "Microminer",
