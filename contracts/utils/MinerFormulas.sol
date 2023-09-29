@@ -1,18 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 
+import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import "../libs/MinerTypes.sol";
 import "../interfaces/IMetaPoints.sol";
 import "../interfaces/IMinerHealthCheck.sol";
 import "../interfaces/IMinerList.sol";
 
-library MinerFormulas {
-    IMetaPoints public constant METAPOINTS =
-        IMetaPoints(0xDAFEA492D9c6733ae3d56b7Ed1ADB60692c98Bc5);
-    IMinerList public constant METALIST =
-        IMinerList(0xDAFEA492D9c6733ae3d56b7Ed1ADB60692c98Bc5);
-    IMinerHealthCheck public constant METAHEALTHCHECK =
-        IMinerHealthCheck(0xDAFEA492D9c6733ae3d56b7Ed1ADB60692c98Bc5);
+// This contract after unit tests & audit will be library 
+contract MinerFormulas is Initializable {
+    IMetaPoints public metaPoints;
+    IMinerList public minerList;
+    IMinerHealthCheck public minerHealthCheck;
 
     // Divider for percentage calculatations %100 => %10_000
     uint256 public constant BASE_DIVIDER = 10_000;
@@ -44,15 +43,28 @@ library MinerFormulas {
 
     uint256 public constant SECONDS_IN_A_DAY = 86_400;
 
+    function initialize(
+        address metaPointsAddress,
+        address minerListAddress,
+        address minerHealthCheckAddress
+    ) external initializer {
+        metaPoints =
+            IMetaPoints(metaPointsAddress);
+        minerList =
+            IMinerList(minerListAddress);
+        minerHealthCheck =
+            IMinerHealthCheck(minerHealthCheckAddress);
+    }
+
     function calculateMetaminerReward() external view returns (uint256) {
         uint256 calculatedAmount = ((METAMINER_DAILY_PRIZE_POOL * 10 ** 18) /
-            METALIST.count(MinerTypes.NodeType.Meta));
+            minerList.count(MinerTypes.NodeType.Meta));
         return
             calculatedAmount > METAMINER_DAILY_PRIZE_LIMIT
                 ? METAMINER_DAILY_PRIZE_LIMIT / METAMINER_DAILY_BLOCK_COUNT
                 : calculatedAmount /
                     (METAMINER_DAILY_BLOCK_COUNT /
-                        METALIST.count(MinerTypes.NodeType.Meta));
+                        minerList.count(MinerTypes.NodeType.Meta));
     }
 
     function calculateMetaPointsReward() external pure returns (uint256) {
@@ -66,15 +78,15 @@ library MinerFormulas {
         uint256 DAILY_CALC_POOL_REWARD = 0;
 
         if (nodeType == MinerTypes.NodeType.MacroArchive) {
-            TOTAL_NODE_COUNT = METALIST.count(MinerTypes.NodeType.MacroArchive);
+            TOTAL_NODE_COUNT = minerList.count(MinerTypes.NodeType.MacroArchive);
             DAILY_CALC_POOL_REWARD = MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA;
         } else if (nodeType == MinerTypes.NodeType.MacroFullnode) {
-            TOTAL_NODE_COUNT = METALIST.count(
+            TOTAL_NODE_COUNT = minerList.count(
                 MinerTypes.NodeType.MacroFullnode
             );
             DAILY_CALC_POOL_REWARD = MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA;
         } else if (nodeType == MinerTypes.NodeType.MacroLight) {
-            TOTAL_NODE_COUNT = METALIST.count(MinerTypes.NodeType.MacroLight);
+            TOTAL_NODE_COUNT = minerList.count(MinerTypes.NodeType.MacroLight);
             DAILY_CALC_POOL_REWARD = MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA;
         }
         uint256 formula = ((DAILY_CALC_POOL_REWARD / (24 * TOTAL_NODE_COUNT)) /
@@ -90,26 +102,26 @@ library MinerFormulas {
         uint256 REST_POOL_AMOUNT = 0;
         uint256 MINER_META_POINT = _balaceOfMP(minerAddress);
         uint256 TOTAL_SUPPLY_META_POINTS = _totalSupplyMP();
-        uint256 MINERS_TOTAL_ACTIVITIES = METAHEALTHCHECK.dailyNodesActivities(
+        uint256 MINERS_TOTAL_ACTIVITIES = minerHealthCheck.dailyNodesActivities(
             _getDate(),
             nodeType
         );
-        uint256 MINER_ACTIVITY = METAHEALTHCHECK.dailyNodeActivity(
+        uint256 MINER_ACTIVITY = minerHealthCheck.dailyNodeActivity(
             _getDate(),
             minerAddress,
             nodeType
         );
 
         if (nodeType == MinerTypes.NodeType.MacroArchive) {
-            TOTAL_NODE_COUNT = METALIST.count(MinerTypes.NodeType.MacroArchive);
+            TOTAL_NODE_COUNT = minerList.count(MinerTypes.NodeType.MacroArchive);
             REST_POOL_AMOUNT = MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA;
         } else if (nodeType == MinerTypes.NodeType.MacroFullnode) {
-            TOTAL_NODE_COUNT = METALIST.count(
+            TOTAL_NODE_COUNT = minerList.count(
                 MinerTypes.NodeType.MacroFullnode
             );
             REST_POOL_AMOUNT = MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA;
         } else if (nodeType == MinerTypes.NodeType.MacroLight) {
-            TOTAL_NODE_COUNT = METALIST.count(MinerTypes.NodeType.MacroLight);
+            TOTAL_NODE_COUNT = minerList.count(MinerTypes.NodeType.MacroLight);
             REST_POOL_AMOUNT = MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA;
         }
         uint256 formula = (((REST_POOL_AMOUNT /
@@ -130,10 +142,10 @@ library MinerFormulas {
     }
 
     function _balaceOfMP(address miner) internal view returns (uint256) {
-        return (METAPOINTS.balanceOf(miner));
+        return (metaPoints.balanceOf(miner));
     }
 
     function _totalSupplyMP() internal view returns (uint256) {
-        return (METAPOINTS.totalSupply());
+        return (metaPoints.totalSupply());
     }
 }
