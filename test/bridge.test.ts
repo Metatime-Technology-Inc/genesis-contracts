@@ -4,7 +4,7 @@ import { ethers } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { toWei } from "../scripts/helpers";
 import { BigNumber } from "ethers";
-import { Bridge, MTC, Roles } from "../typechain-types";
+import { Bridge, MockToken, Roles } from "../typechain-types";
 
 const METATIME_TOKEN_SUPPLY = 10_000_000_000;
 
@@ -14,9 +14,9 @@ describe("Bridge", function () {
             await ethers.getSigners();
 
         const MTC_ = await ethers.getContractFactory(
-            CONTRACTS.core.MTC
+            CONTRACTS.tokens.MockToken
         );
-        const mtc = await MTC_.connect(owner).deploy(toWei(String(METATIME_TOKEN_SUPPLY))) as MTC;
+        const mtc = await MTC_.connect(owner).deploy(toWei(String(METATIME_TOKEN_SUPPLY))) as MockToken;
         await mtc.deployed();
 
         const Bridge_ = await ethers.getContractFactory(

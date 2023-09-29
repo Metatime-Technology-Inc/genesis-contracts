@@ -1,7 +1,6 @@
 interface IContracts {
   [key: string]: Object;
   core: {
-    MTC: string;
     MinerPool: string;
     RewardsPool: string;
   },
@@ -14,6 +13,10 @@ interface IContracts {
     MinerFormulas: string;
     MinerTypes: string;
   },
+  tokens: {
+    MockToken: string;
+    WMTC: string;
+  }
   utils: {
     BlockValidator: string;
     Bridge: string;
@@ -28,13 +31,11 @@ interface IContracts {
     MultiSigWallet: string;
     Roles: string;
     TxValidator: string;
-    WMTC: string;
   };
 }
 
 const CONTRACTS: IContracts = {
   core: {
-    MTC: "MTC",
     MinerPool: "MinerPool",
     RewardsPool: "RewardsPool"
   },
@@ -46,6 +47,10 @@ const CONTRACTS: IContracts = {
   libs: {
     MinerFormulas: "MinerFormulas",
     MinerTypes: "MinerTypes",
+  },
+  tokens: {
+    MockToken: "MockToken",
+    WMTC: "WMTC"
   },
   utils: {
     BlockValidator: "BlockValidator",
@@ -61,7 +66,6 @@ const CONTRACTS: IContracts = {
     MultiSigWallet: "MultiSigWallet",
     Roles: "Roles",
     TxValidator: "TxValidator",
-    WMTC: "WMTC",
   }
 };
 
