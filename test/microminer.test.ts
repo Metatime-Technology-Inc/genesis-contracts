@@ -3,10 +3,10 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { toWei } from "../scripts/helpers";
-import { BigNumber, BytesLike } from "ethers";
+import { BigNumber } from "ethers";
 import { Microminer, MinerHealthCheck, MinerFormulas, MinerPool, MetaPoints, MinerList, Roles } from "../typechain-types";
 
-describe("MainnetBridge", function () {
+describe("Microminer", function () {
     async function initiateVariables() {
         const [owner, manager, user] =
             await ethers.getSigners();
