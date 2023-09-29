@@ -7,7 +7,7 @@ import "../interfaces/IMetaPoints.sol";
 import "../interfaces/IMinerHealthCheck.sol";
 import "../interfaces/IMinerList.sol";
 
-// This contract after unit tests & audit will be library 
+// This contract after unit tests & audit will be library
 contract MinerFormulas is Initializable {
     IMetaPoints public metaPoints;
     IMinerList public minerList;
@@ -48,12 +48,9 @@ contract MinerFormulas is Initializable {
         address minerListAddress,
         address minerHealthCheckAddress
     ) external initializer {
-        metaPoints =
-            IMetaPoints(metaPointsAddress);
-        minerList =
-            IMinerList(minerListAddress);
-        minerHealthCheck =
-            IMinerHealthCheck(minerHealthCheckAddress);
+        metaPoints = IMetaPoints(metaPointsAddress);
+        minerList = IMinerList(minerListAddress);
+        minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
     }
 
     function calculateMetaminerReward() external view returns (uint256) {
@@ -78,7 +75,9 @@ contract MinerFormulas is Initializable {
         uint256 DAILY_CALC_POOL_REWARD = 0;
 
         if (nodeType == MinerTypes.NodeType.MacroArchive) {
-            TOTAL_NODE_COUNT = minerList.count(MinerTypes.NodeType.MacroArchive);
+            TOTAL_NODE_COUNT = minerList.count(
+                MinerTypes.NodeType.MacroArchive
+            );
             DAILY_CALC_POOL_REWARD = MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA;
         } else if (nodeType == MinerTypes.NodeType.MacroFullnode) {
             TOTAL_NODE_COUNT = minerList.count(
@@ -113,7 +112,9 @@ contract MinerFormulas is Initializable {
         );
 
         if (nodeType == MinerTypes.NodeType.MacroArchive) {
-            TOTAL_NODE_COUNT = minerList.count(MinerTypes.NodeType.MacroArchive);
+            TOTAL_NODE_COUNT = minerList.count(
+                MinerTypes.NodeType.MacroArchive
+            );
             REST_POOL_AMOUNT = MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA;
         } else if (nodeType == MinerTypes.NodeType.MacroFullnode) {
             TOTAL_NODE_COUNT = minerList.count(

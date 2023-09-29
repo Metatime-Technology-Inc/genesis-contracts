@@ -21,6 +21,7 @@ contract Macrominer is Initializable {
     struct Vote {
         uint256 voteId;
         uint256 point;
+        bool exist;
     }
 
     mapping(address => mapping(MinerTypes.NodeType => Vote)) public votes;
@@ -125,6 +126,7 @@ contract Macrominer is Initializable {
 
             if (vote.point == 0) {
                 vote.voteId = voteId;
+                vote.exist = true;
                 voteId++;
 
                 emit BeginVote(
@@ -154,7 +156,7 @@ contract Macrominer is Initializable {
                     mpBalance
                 );
             }
-        } else {
+        } else if (vote.exist == true) {
             delete votes[votedMinerAddress][votedMinerNodeType];
 
             emit EndVote(vote.voteId, votedMinerAddress, votedMinerNodeType);

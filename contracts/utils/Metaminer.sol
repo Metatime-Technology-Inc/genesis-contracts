@@ -20,7 +20,7 @@ contract Metaminer is Initializable, RolesHandler {
     uint256 public STAKE_AMOUNT = 1_000_000 ether;
     uint256 public ANNUAL_AMOUNT = 100_000 ether;
     uint256 private constant YEAR = 31536000;
-    address private minerPoolAddress; // should be constant
+    address private minerPool; // should be constant
 
     struct Share {
         uint256 sharedPercent;
@@ -82,7 +82,7 @@ contract Metaminer is Initializable, RolesHandler {
         blockValidator = IBlockValidator(blockValidatorAddress);
         minerList = IMinerList(minerListAddress);
         minerFormulas = IMinerFormulas(minerFormulasAddress);
-        minerPoolAddress = minerPoolAddress;
+        minerPool = minerPoolAddress;
     }
 
     /**
@@ -99,7 +99,7 @@ contract Metaminer is Initializable, RolesHandler {
         minerList.addMiner(msg.sender, MinerTypes.NodeType.Meta);
         _addShareHolder(
             msg.sender,
-            minerPoolAddress,
+            minerPool,
             minerFormulas.METAMINER_MINER_POOL_SHARE_PERCENT()
         );
         emit MinerAdded(msg.sender, minerSubscription[msg.sender]);
@@ -142,7 +142,7 @@ contract Metaminer is Initializable, RolesHandler {
         minerList.addMiner(_miner, MinerTypes.NodeType.Meta);
         _addShareHolder(
             _miner,
-            minerPoolAddress,
+            minerPool,
             minerFormulas.METAMINER_MINER_POOL_SHARE_PERCENT()
         );
         emit MinerAdded(_miner, minerSubscription[_miner]);
