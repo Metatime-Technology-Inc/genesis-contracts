@@ -8,12 +8,13 @@ import "../libs/MinerTypes.sol";
 import "../interfaces/IMinerHealthCheck.sol";
 import "../interfaces/IMetaPoints.sol";
 import "../interfaces/IMinerList.sol";
+import "../helpers/RolesHandler.sol";
 
 /**
  * @title MicroMiner
  * @dev A smart contract for managing MicroMiners.
  */
-contract MicroMiner is Initializable {
+contract MicroMiner is Initializable, RolesHandler {
     uint256 public constant STAKE_AMOUNT = 100 ether;
 
     IMinerHealthCheck public minerHealthCheck;
@@ -89,6 +90,7 @@ contract MicroMiner is Initializable {
         returns (bool)
     {
         _kickMiner(minerAddress);
+        return (true);
     }
 
     /**
