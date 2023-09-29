@@ -10,7 +10,6 @@ interface IContracts {
     Freezeable: string;
   },
   libs: {
-    MinerFormulas: string;
     MinerTypes: string;
   },
   tokens: {
@@ -25,6 +24,7 @@ interface IContracts {
     Metaminer: string;
     MetaPoints: string;
     Microminer: string;
+    MinerFormulas: string;
     MinerHealthCheck: string;
     MinerList: string;
     MulticallV3: string;
@@ -45,7 +45,6 @@ const CONTRACTS: IContracts = {
     Freezeable: "Freezeable",
   },
   libs: {
-    MinerFormulas: "MinerFormulas",
     MinerTypes: "MinerTypes",
   },
   tokens: {
@@ -60,6 +59,7 @@ const CONTRACTS: IContracts = {
     Metaminer: "Metaminer",
     MetaPoints: "MetaPoints",
     Microminer: "Microminer",
+    MinerFormulas: "MinerFormulas",
     MinerHealthCheck: "MinerHealthCheck",
     MinerList: "MinerList",
     MulticallV3: "MulticallV3",

@@ -11,10 +11,10 @@ import "../interfaces/IMinerList.sol";
 import "../helpers/RolesHandler.sol";
 
 /**
- * @title MicroMiner
+ * @title Microminer
  * @dev A smart contract for managing MicroMiners.
  */
-contract MicroMiner is Initializable, RolesHandler {
+contract Microminer is Initializable, RolesHandler {
     uint256 public constant STAKE_AMOUNT = 100 ether;
 
     IMinerHealthCheck public minerHealthCheck;
