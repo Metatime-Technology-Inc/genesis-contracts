@@ -74,6 +74,8 @@ describe("MacroMiner", function () {
         const minerHealthCheckTimeout = BigNumber.from(String(minerHealthCheckTimeoutNumber));
         const metaminerType = BigNumber.from(String(0));
         const macrominerArchiveType = BigNumber.from(String(1));
+        const macrominerFullnodeType = BigNumber.from(String(2));
+        const macrominerLightType = BigNumber.from(String(3));
         const STAKE_AMOUNT = toWei(String(100));
 
         const initContracts = async () => {
@@ -461,6 +463,134 @@ describe("MacroMiner", function () {
             expect(
                 voteResult[2]
             ).to.be.equal(false);
+        });
+
+        // try checkMinerStatus function when voted miner is expired -- fullnode test
+        it("try checkMinerStatus function when voted miner is expired -- fullnode test", async () => {
+            const { owner, miner_1, miner_2, macroMiner, minerHealthCheck, metaPoints, minerPool } = await loadFixture(initiateVariables);
+
+            // init contracts
+            await initContracts();
+
+            // sent funds to miner pool
+            const fundsTX = await owner.sendTransaction({
+                to: minerPool.address,
+                value: toWei(String(8_000))
+            });
+            await fundsTX.wait();
+
+            // setMiner with STAKE_AMOUNT
+            const preparedContractTranscation = await macroMiner.connect(miner_1).populateTransaction.setMiner(macrominerFullnodeType);
+            const transaction = await miner_1.sendTransaction({
+                ...preparedContractTranscation,
+                value: STAKE_AMOUNT
+            });
+            await transaction.wait();
+
+            // setMiner with STAKE_AMOUNT
+            const preparedContractTranscation2 = await macroMiner.connect(miner_2).populateTransaction.setMiner(macrominerFullnodeType);
+            const transaction2 = await miner_2.sendTransaction({
+                ...preparedContractTranscation2,
+                value: STAKE_AMOUNT
+            });
+            await transaction2.wait();
+
+            // increment
+            await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
+
+            // ping with miner_2
+            const pingTX2 = await minerHealthCheck.connect(miner_2).ping(macrominerFullnodeType);
+            await pingTX2.wait();
+
+            // increment
+            await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
+
+            // ping with miner_2
+            const pingTX3 = await minerHealthCheck.connect(miner_2).ping(macrominerFullnodeType);
+            await pingTX3.wait();
+
+            // increment
+            await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
+
+            // ping with miner_2
+            const pingTX4 = await minerHealthCheck.connect(miner_2).ping(macrominerFullnodeType);
+            await pingTX4.wait();
+
+            const voterMetaPointsBalance = await metaPoints.balanceOf(miner_2.address);
+
+            // vote miner_1
+            const vote1 = await macroMiner.connect(miner_2).checkMinerStatus(miner_1.address, macrominerFullnodeType, macrominerFullnodeType);
+            await vote1.wait();
+
+            const voteResult = await macroMiner.votes(miner_1.address, macrominerFullnodeType);
+
+            expect(
+                voteResult[1]
+            ).to.be.equal(voterMetaPointsBalance);
+        });
+
+        // try checkMinerStatus function when voted miner is expired -- light test
+        it("try checkMinerStatus function when voted miner is expired -- light test", async () => {
+            const { owner, miner_1, miner_2, macroMiner, minerHealthCheck, metaPoints, minerPool } = await loadFixture(initiateVariables);
+
+            // init contracts
+            await initContracts();
+
+            // sent funds to miner pool
+            const fundsTX = await owner.sendTransaction({
+                to: minerPool.address,
+                value: toWei(String(8_000))
+            });
+            await fundsTX.wait();
+
+            // setMiner with STAKE_AMOUNT
+            const preparedContractTranscation = await macroMiner.connect(miner_1).populateTransaction.setMiner(macrominerLightType);
+            const transaction = await miner_1.sendTransaction({
+                ...preparedContractTranscation,
+                value: STAKE_AMOUNT
+            });
+            await transaction.wait();
+
+            // setMiner with STAKE_AMOUNT
+            const preparedContractTranscation2 = await macroMiner.connect(miner_2).populateTransaction.setMiner(macrominerLightType);
+            const transaction2 = await miner_2.sendTransaction({
+                ...preparedContractTranscation2,
+                value: STAKE_AMOUNT
+            });
+            await transaction2.wait();
+
+            // increment
+            await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
+
+            // ping with miner_2
+            const pingTX2 = await minerHealthCheck.connect(miner_2).ping(macrominerLightType);
+            await pingTX2.wait();
+
+            // increment
+            await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
+
+            // ping with miner_2
+            const pingTX3 = await minerHealthCheck.connect(miner_2).ping(macrominerLightType);
+            await pingTX3.wait();
+
+            // increment
+            await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
+
+            // ping with miner_2
+            const pingTX4 = await minerHealthCheck.connect(miner_2).ping(macrominerLightType);
+            await pingTX4.wait();
+
+            const voterMetaPointsBalance = await metaPoints.balanceOf(miner_2.address);
+
+            // vote miner_1
+            const vote1 = await macroMiner.connect(miner_2).checkMinerStatus(miner_1.address, macrominerLightType, macrominerLightType);
+            await vote1.wait();
+
+            const voteResult = await macroMiner.votes(miner_1.address, macrominerLightType);
+
+            expect(
+                voteResult[1]
+            ).to.be.equal(voterMetaPointsBalance);
         });
     });
 });
