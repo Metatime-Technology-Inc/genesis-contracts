@@ -3,6 +3,7 @@ pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
+import "../interfaces/IMinerHealthCheck.sol";
 import "../helpers/RolesHandler.sol";
 import "../libs/MinerTypes.sol";
 
@@ -11,6 +12,7 @@ import "../libs/MinerTypes.sol";
  * @dev A smart contract for managing a list of miners.
  */
 contract MinerList is Initializable, RolesHandler {
+    IMinerHealthCheck public minerHealthCheck;
     mapping(address => mapping(MinerTypes.NodeType => bool)) public list;
     mapping(MinerTypes.NodeType => uint256) public count;
 
@@ -27,8 +29,9 @@ contract MinerList is Initializable, RolesHandler {
      * @dev Initializes the MinerList contract with the address of the RolesHandler contract.
      * @param rolesAddress The address of the RolesHandler contract.
      */
-    function initialize(address rolesAddress) external initializer {
+    function initialize(address rolesAddress, address minerHealthCheckAddress) external initializer {
         roles = IRoles(rolesAddress);
+        minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
     }
 
     /**
@@ -84,6 +87,7 @@ contract MinerList is Initializable, RolesHandler {
     ) internal returns (bool) {
         list[minerAddress][nodeType] = true;
         count[nodeType]++;
+        minerHealthCheck.manuelPing(minerAddress, nodeType);
 
         emit AddMiner(minerAddress, nodeType);
         return (true);

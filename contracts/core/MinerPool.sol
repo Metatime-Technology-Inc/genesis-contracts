@@ -2,7 +2,6 @@
 pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
 
 import "../helpers/RolesHandler.sol";
 import "../interfaces/IMinerFormulas.sol";

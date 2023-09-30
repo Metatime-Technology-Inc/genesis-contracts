@@ -7,12 +7,13 @@ import "../interfaces/IMinerList.sol";
 import "../interfaces/IMinerPool.sol";
 import "../interfaces/IMetaPoints.sol";
 import "../interfaces/IMinerFormulas.sol";
+import "../helpers/RolesHandler.sol";
 
 /**
  * @title MinerHealthCheck
  * @dev A smart contract for checking and managing miner health status.
  */
-contract MinerHealthCheck is Initializable {
+contract MinerHealthCheck is Initializable, RolesHandler {
     IMinerList public minerList;
     IMinerFormulas public minerFormulas;
     IMinerPool public minerPool;
@@ -109,6 +110,14 @@ contract MinerHealthCheck is Initializable {
      */
     function setTimeout(uint256 newTimeout) external returns (bool) {
         timeout = newTimeout;
+        return (true);
+    }
+
+    function manuelPing(
+        address minerAddress,
+        MinerTypes.NodeType nodeType
+    ) external isMiner(minerAddress, nodeType) onlyManagerRole(msg.sender) returns (bool) {
+        lastUptime[minerAddress][nodeType] = block.timestamp;
         return (true);
     }
 
