@@ -5,7 +5,6 @@ import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
 import "../helpers/RolesHandler.sol";
 import "../interfaces/IRewardsPool.sol";
-import "../interfaces/IMinerList.sol";
 import "../libs/MinerTypes.sol";
 
 /**
@@ -16,7 +15,6 @@ contract BlockValidator is Initializable, RolesHandler {
     uint256[32] public lastVerifiedBlocknumbers;
     uint8 public constant DELAY_LIMIT = 32;
     mapping(uint256 => BlockPayload) public blockPayloads;
-    IMinerList public minerList;
     IRewardsPool public rewardsPool;
     uint8 private _verifiedBlockId = 0;
 
@@ -25,18 +23,6 @@ contract BlockValidator is Initializable, RolesHandler {
         bytes32 blockHash;
         uint256 blockReward;
         bool isFinalized;
-    }
-
-    /**
-     * @dev Modifier to check if an address is a Metaminer.
-     * @param _miner The address to check.
-     */
-    modifier isMiner(address _miner) {
-        require(
-            minerList.isMiner(_miner, MinerTypes.NodeType.Meta),
-            "BlockValidator: Address is not metaminer"
-        );
-        _;
     }
 
     event SetPayload(uint256 blockNumber);
@@ -54,10 +40,8 @@ contract BlockValidator is Initializable, RolesHandler {
      * @param rewardsPoolAddress The address of the RewardsPool contract.
      */
     function initialize(
-        address minerListAddress,
         address rewardsPoolAddress
     ) external initializer {
-        minerList = IMinerList(minerListAddress);
         rewardsPool = IRewardsPool(rewardsPoolAddress);
     }
 
@@ -70,7 +54,7 @@ contract BlockValidator is Initializable, RolesHandler {
     function setBlockPayload(
         uint256 blockNumber,
         BlockPayload memory blockPayload
-    ) external isMiner(msg.sender) returns (bool) {
+    ) external onlyValidatorRole(msg.sender) returns (bool) {
         require(
             blockPayloads[blockNumber].coinbase == address(0),
             "BlockValidator: Unable to set block payload"
