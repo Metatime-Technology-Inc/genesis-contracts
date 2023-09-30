@@ -73,12 +73,12 @@ contract MinerHealthCheck is Initializable {
 
         if (maxLimit >= block.timestamp) {
             uint256 activityTime = block.timestamp - lastSeen;
-            _incrementDailyActiveTimes(msg.sender, nodeType, activityTime);
-            _incrementDailyTotalActiveTimes(nodeType, activityTime);
-            minerPool.claimMacroDailyReward(msg.sender, nodeType, activityTime);
             uint256 metaPointsReward = minerFormulas
                 .calculateMetaPointsReward();
             metaPoints.mint(msg.sender, metaPointsReward * activityTime);
+            _incrementDailyActiveTimes(msg.sender, nodeType, activityTime);
+            _incrementDailyTotalActiveTimes(nodeType, activityTime);
+            minerPool.claimMacroDailyReward(msg.sender, nodeType, activityTime);
         }
 
         lastUptime[msg.sender][nodeType] = block.timestamp;
