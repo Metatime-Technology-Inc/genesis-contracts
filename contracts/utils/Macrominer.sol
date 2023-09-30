@@ -61,7 +61,7 @@ contract Macrominer is Initializable {
 
     modifier isNodeTypeValid(MinerTypes.NodeType nodeType) {
         require(
-            nodeType != MinerTypes.NodeType.Meta ||
+            nodeType != MinerTypes.NodeType.Meta &&
                 nodeType != MinerTypes.NodeType.Micro,
             "Macrominer: Wrong node type"
         );
