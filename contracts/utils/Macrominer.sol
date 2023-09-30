@@ -11,7 +11,7 @@ import "../interfaces/IMinerList.sol";
 
 contract Macrominer is Initializable {
     uint256 public constant STAKE_AMOUNT = 100 ether;
-    uint256 public constant VOTE_POINT_LIMIT = 100;
+    uint256 public constant VOTE_POINT_LIMIT = 100 ether;
 
     uint256 public voteId;
     IMinerHealthCheck public minerHealthCheck;
