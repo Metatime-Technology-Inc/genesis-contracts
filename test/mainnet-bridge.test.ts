@@ -142,6 +142,18 @@ describe("MainnetBridge", function () {
             await expect(mainnetBridge.connect(owner).transfer(user.address, funds)).to.be.revertedWith("RolesHandler: Manager role is needed for this action");
         });
 
+        // try transfer function when contract is not freezed
+        it("try transfer function when contract is not freezed", async () => {
+            const { owner, user, mainnetBridge } = await loadFixture(initiateVariables);
+
+            // init roles
+            await initRoles();
+            // set freeze
+            await mainnetBridge.connect(owner).setFreeze(false);
+
+            await expect(mainnetBridge.connect(owner).transfer(user.address, funds)).to.be.revertedWith("Freezeable: Contract is not freezed");
+        });
+
         // try transfer function when contract dont have enough funds
         it("try transfer function when contract dont have enough funds", async () => {
             const { owner, manager, mainnetBridge } = await loadFixture(initiateVariables);
