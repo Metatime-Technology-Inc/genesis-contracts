@@ -2,6 +2,7 @@
 pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 import "../helpers/RolesHandler.sol";
 import "../interfaces/IMinerFormulas.sol";
@@ -82,6 +83,7 @@ contract MinerPool is Initializable, RolesHandler {
         uint256 activityTime
     ) internal returns (uint256, uint256) {
         uint256 firstFormulaHardCap = 0;
+        uint256 firstFormulaMinerHardCap = 0;
         uint256 secondFormulaHardCap = 0;
 
         if (nodeType == MinerTypes.NodeType.MacroArchive) {
@@ -89,16 +91,25 @@ contract MinerPool is Initializable, RolesHandler {
                 .MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA();
             secondFormulaHardCap = minerFormulas
                 .MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA();
+
+            firstFormulaMinerHardCap = (minerFormulas
+                .MACROMINER_ARCHIVE_DAILY_MAX_REWARD() / minerFormulas.SECONDS_IN_A_DAY());
         } else if (nodeType == MinerTypes.NodeType.MacroFullnode) {
             firstFormulaHardCap = minerFormulas
                 .MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA();
             secondFormulaHardCap = minerFormulas
                 .MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA();
+
+            firstFormulaMinerHardCap = (minerFormulas
+                .MACROMINER_FULLNODE_DAILY_MAX_REWARD() / minerFormulas.SECONDS_IN_A_DAY());
         } else if (nodeType == MinerTypes.NodeType.MacroLight) {
             firstFormulaHardCap = minerFormulas
                 .MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA();
             secondFormulaHardCap = minerFormulas
                 .MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA();
+
+            firstFormulaMinerHardCap = (minerFormulas
+                .MACROMINER_LIGHT_DAILY_MAX_REWARD() / minerFormulas.SECONDS_IN_A_DAY());
         }
 
         uint256 firstFormulaAmount = minerFormulas
@@ -106,6 +117,14 @@ contract MinerPool is Initializable, RolesHandler {
         uint256 secondFormulaAmount = minerFormulas
             .calculateDailyPoolRewardsFromSecondFormula(minerAddress, nodeType);
         uint256 currentDateIndex = minerFormulas.getDate();
+
+        firstFormulaAmount *= activityTime;
+        secondFormulaAmount *= activityTime;
+        firstFormulaMinerHardCap *= activityTime;
+
+        if(firstFormulaAmount > firstFormulaMinerHardCap){
+            firstFormulaAmount = firstFormulaMinerHardCap;
+        }
 
         require(
             (totalRewardsFromFirstFormula[currentDateIndex][nodeType] +
@@ -124,9 +143,6 @@ contract MinerPool is Initializable, RolesHandler {
         totalRewardsFromSecondFormula[currentDateIndex][
             nodeType
         ] += secondFormulaAmount;
-
-        firstFormulaAmount *= activityTime;
-        secondFormulaAmount *= activityTime;
 
         return (firstFormulaAmount, secondFormulaAmount);
     }

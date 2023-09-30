@@ -19,12 +19,12 @@ contract MinerFormulas is Initializable {
     uint256 public constant METAMINER_MINER_POOL_SHARE_PERCENT = 5_000;
 
     uint256 public constant METAMINER_DAILY_BLOCK_COUNT = 17_280;
-    uint256 public constant METAMINER_DAILY_PRIZE_POOL = 166_666;
+    uint256 public constant METAMINER_DAILY_PRIZE_POOL = 166_666 * 10 ** 18;
     uint256 public constant METAMINER_DAILY_PRIZE_LIMIT = 450 * 10 ** 18;
 
-    uint256 public constant MACROMINER_ARCHIVE_DAILY_MAX_REWARD = 150;
-    uint256 public constant MACROMINER_FULLNODE_DAILY_MAX_REWARD = 100;
-    uint256 public constant MACROMINER_LIGHT_DAILY_MAX_REWARD = 50;
+    uint256 public constant MACROMINER_ARCHIVE_DAILY_MAX_REWARD = 150 * 10 ** 18;
+    uint256 public constant MACROMINER_FULLNODE_DAILY_MAX_REWARD = 100 * 10 ** 18;
+    uint256 public constant MACROMINER_LIGHT_DAILY_MAX_REWARD = 50 * 10 ** 18;
 
     uint256 public constant MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA =
         135_000 * 10 ** 18;
@@ -54,7 +54,7 @@ contract MinerFormulas is Initializable {
     }
 
     function calculateMetaminerReward() external view returns (uint256) {
-        uint256 calculatedAmount = ((METAMINER_DAILY_PRIZE_POOL * 10 ** 18) /
+        uint256 calculatedAmount = (METAMINER_DAILY_PRIZE_POOL /
             minerList.count(MinerTypes.NodeType.Meta));
         return
             calculatedAmount > METAMINER_DAILY_PRIZE_LIMIT
@@ -65,7 +65,7 @@ contract MinerFormulas is Initializable {
     }
 
     function calculateMetaPointsReward() external pure returns (uint256) {
-        return (1 ether / uint256(86400));
+        return (1 ether / SECONDS_IN_A_DAY);
     }
 
     function calculateDailyPoolRewardsFromFirstFormula(
@@ -89,7 +89,7 @@ contract MinerFormulas is Initializable {
             DAILY_CALC_POOL_REWARD = MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA;
         }
         uint256 formula = ((DAILY_CALC_POOL_REWARD / (24 * TOTAL_NODE_COUNT)) /
-            1 hours);
+            SECONDS_IN_A_DAY);
         return (formula);
     }
 
@@ -129,7 +129,7 @@ contract MinerFormulas is Initializable {
             (TOTAL_SUPPLY_META_POINTS *
                 (MINERS_TOTAL_ACTIVITIES / (TOTAL_NODE_COUNT * 24)))) *
             MINER_META_POINT *
-            (MINER_ACTIVITY / 24)) / 1 hours);
+            (MINER_ACTIVITY / 24)) / SECONDS_IN_A_DAY);
         return (formula);
     }
 
