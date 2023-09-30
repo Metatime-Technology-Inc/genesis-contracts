@@ -86,6 +86,23 @@ describe("Microminer", function () {
                 minerList,
             } = await loadFixture(initiateVariables);
 
+            await microMiner.initRoles(roles.address);
+            await minerHealthCheck.initRoles(roles.address);
+            await minerPool.initRoles(roles.address);
+            await minerList.initRoles(roles.address);
+
+            await roles.connect(owner).initialize(owner.address);
+            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), manager.address);
+
+            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), microMiner.address);
+            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), minerHealthCheck.address);
+            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), minerFormulas.address);
+            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), minerPool.address);
+            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), metaPoints.address);
+            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), minerList.address);
+
+            await roles.connect(owner).grantRole(await roles.DEVELOPER_ROLE(), user.address);
+
             await minerHealthCheck.connect(owner).initialize(
                 minerList.address,
                 minerFormulas.address,
@@ -107,7 +124,8 @@ describe("Microminer", function () {
             await metaPoints.connect(owner).initialize();
 
             await minerList.connect(owner).initialize(
-                roles.address
+                roles.address,
+                minerHealthCheck.address
             );
 
             await microMiner.connect(owner).initialize(
@@ -115,20 +133,6 @@ describe("Microminer", function () {
                 metaPoints.address,
                 minerList.address
             );
-
-            await microMiner.initRoles(roles.address);
-
-            await roles.connect(owner).initialize(owner.address);
-            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), manager.address);
-
-            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), microMiner.address);
-            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), minerHealthCheck.address);
-            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), minerFormulas.address);
-            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), minerPool.address);
-            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), metaPoints.address);
-            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), minerList.address);
-
-            await roles.connect(owner).grantRole(await roles.DEVELOPER_ROLE(), user.address);
         }
 
         // try setMiner function when caller dont have enough funds
