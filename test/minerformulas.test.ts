@@ -121,9 +121,9 @@ describe("MinerFormulas", function () {
             // init contracts
             await initContracts();
 
-            await expect(
-                minerFormulas.calculateDailyPoolRewardsFromFirstFormula(metaminerType)
-            ).to.be.revertedWith("MinerFormulas: nodeType is must be Macrominer types");
+            expect(
+                await minerFormulas.calculateDailyPoolRewardsFromFirstFormula(metaminerType)
+            ).to.be.equal(BigNumber.from(String("0")));
         });
 
         // try calculateDailyPoolRewardsFromSecondFormula function with wrong nodeType
@@ -133,9 +133,9 @@ describe("MinerFormulas", function () {
             // init contracts
             await initContracts();
 
-            await expect(
-                minerFormulas.calculateDailyPoolRewardsFromSecondFormula(minerFormulas.address, metaminerType)
-            ).to.be.revertedWith("MinerFormulas: nodeType is must be Macrominer types");
+            expect(
+                await minerFormulas.calculateDailyPoolRewardsFromSecondFormula(minerFormulas.address, metaminerType)
+            ).to.be.equal(BigNumber.from(String("0")));
         });
     });
 });
