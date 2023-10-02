@@ -87,6 +87,8 @@ contract MinerFormulas is Initializable {
         } else if (nodeType == MinerTypes.NodeType.MacroLight) {
             TOTAL_NODE_COUNT = minerList.count(MinerTypes.NodeType.MacroLight);
             DAILY_CALC_POOL_REWARD = MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA;
+        } else {
+            revert("MinerFormulas: nodeType is must be Macrominer types");
         }
         uint256 formula = ((DAILY_CALC_POOL_REWARD / (24 * TOTAL_NODE_COUNT)) /
             SECONDS_IN_A_DAY);
@@ -124,6 +126,8 @@ contract MinerFormulas is Initializable {
         } else if (nodeType == MinerTypes.NodeType.MacroLight) {
             TOTAL_NODE_COUNT = minerList.count(MinerTypes.NodeType.MacroLight);
             REST_POOL_AMOUNT = MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA;
+        } else {
+            revert("MinerFormulas: nodeType is must be Macrominer types");
         }
         uint256 formula = (((REST_POOL_AMOUNT /
             (TOTAL_SUPPLY_META_POINTS *
