@@ -36,7 +36,6 @@ contract BlockValidator is Initializable, RolesHandler {
 
     /**
      * @dev Initializes the BlockValidator contract with the addresses of the MinerList and RewardsPool contracts.
-     * @param minerListAddress The address of the MinerList contract.
      * @param rewardsPoolAddress The address of the RewardsPool contract.
      */
     function initialize(
