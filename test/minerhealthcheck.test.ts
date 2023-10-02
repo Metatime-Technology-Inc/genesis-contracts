@@ -4,10 +4,11 @@ import { ethers } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { MinerHealthCheck, MetaPoints, MinerFormulas, MinerPool, MinerList, Roles } from "../typechain-types";
 import { BigNumber, BigNumberish } from "ethers";
+import { incrementBlocktimestamp, toWei } from "../scripts/helpers";
 
 describe("MinerHealthCheck", function () {
     async function initiateVariables() {
-        const [owner] =
+        const [owner, manager, miner_1] =
             await ethers.getSigners();
 
         const MinerHealthCheck_ = await ethers.getContractFactory(
@@ -48,6 +49,8 @@ describe("MinerHealthCheck", function () {
 
         return {
             owner,
+            manager,
+            miner_1,
             minerHealthCheck,
             metaPoints,
             minerFormulas,
@@ -62,10 +65,12 @@ describe("MinerHealthCheck", function () {
         const minerHealthCheckTimeoutNumber:number = 14_400; // 4 hours
         const minerHealthCheckTimeout:BigNumberish = BigNumber.from(String(minerHealthCheckTimeoutNumber));
         const metaminerType:BigNumberish = BigNumber.from(String(0));
+        const macrominerArchiveType:BigNumberish = BigNumber.from(String(1));
 
         const initContracts = async () => {
             const {
                 owner,
+                manager,
                 roles,
                 minerHealthCheck,
                 metaPoints,
@@ -86,6 +91,7 @@ describe("MinerHealthCheck", function () {
             await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), minerPool.address);
             await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), metaPoints.address);
             await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), minerList.address);
+            await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), manager.address);
 
 
             await minerHealthCheck.connect(owner).initialize(
@@ -126,6 +132,22 @@ describe("MinerHealthCheck", function () {
             ).to.be.revertedWith("MinerHealthCheck: Address is not miner");
         });
 
+        // try ping function when caller is metaminer
+        it("try ping function when caller is metaminer", async () => {
+            const { owner, manager, miner_1, minerHealthCheck, minerList } = await loadFixture(initiateVariables);
+
+            // init contracts
+            await initContracts();
+
+            // addMiner
+            const addMiner = await minerList.connect(manager).addMiner(miner_1.address, metaminerType);
+            await addMiner.wait();
+
+            expect(
+                await minerHealthCheck.connect(miner_1).ping(metaminerType)
+            ).to.be.ok;
+        });
+
         // try setTimeout function
         it("try setTimeout function", async () => {
             const { owner, minerHealthCheck } = await loadFixture(initiateVariables);
@@ -136,6 +158,51 @@ describe("MinerHealthCheck", function () {
             expect(
                 await minerHealthCheck.connect(owner).setTimeout(minerHealthCheckTimeout)
             ).to.be.ok;
+        });
+
+        // try ping function when minerpool dont have enough funds for formula 1
+        it("try ping function when minerpool dont have enough funds for formula 1", async () => {
+            const { owner, manager, miner_1, minerHealthCheck, minerList } = await loadFixture(initiateVariables);
+
+            // init contracts
+            await initContracts();
+
+            // addMiner
+            const addMiner = await minerList.connect(manager).addMiner(miner_1.address, macrominerArchiveType);
+            await addMiner.wait();
+
+            // increment
+            await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
+
+            await expect(
+                minerHealthCheck.connect(miner_1).ping(macrominerArchiveType)
+            ).to.be.revertedWith("MinerPool: Unable to claim");
+        });
+
+        // try ping function when minerpool dont have enough funds for formula 2
+        it("try ping function when minerpool dont have enough funds for formula 2", async () => {
+            const { owner, manager, miner_1, minerHealthCheck, minerList, minerPool } = await loadFixture(initiateVariables);
+
+            // init contracts
+            await initContracts();
+
+            // sent funds to miner pool
+            const fundsTX = await owner.sendTransaction({
+                to: minerPool.address,
+                value: toWei(String(150))
+            });
+            await fundsTX.wait();
+
+            // addMiner
+            const addMiner = await minerList.connect(manager).addMiner(miner_1.address, macrominerArchiveType);
+            await addMiner.wait();
+
+            // increment
+            await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
+
+            await expect(
+                minerHealthCheck.connect(miner_1).ping(macrominerArchiveType)
+            ).to.be.revertedWith("MinerPool: Unable to claim");
         });
     });
 });
