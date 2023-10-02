@@ -1,6 +1,6 @@
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
-import { ethers } from "hardhat";
+import { ethers, network } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { toWei } from "../scripts/helpers";
 import { BigNumber } from "ethers";
@@ -221,6 +221,31 @@ describe("Microminer", function () {
             expect(
                 await microMiner.connect(manager).kickMiner(user.address)
             ).to.be.ok;
+        });
+
+        // try kickMiner function when contract dont have required balance
+        it("try kickMiner function when contract dont have required balance", async () => {
+            const { user, manager, microMiner } = await loadFixture(initiateVariables);
+    
+            // init contracts
+            await initContracts();
+
+            // setMiner with STAKE_AMOUNT
+            const preparedContractTranscation = await microMiner.connect(user).populateTransaction.setMiner();
+            const transaction = await user.sendTransaction({
+                ...preparedContractTranscation,
+                value: STAKE_AMOUNT
+            });
+            await transaction.wait();
+
+            await network.provider.send("hardhat_setBalance", [
+                microMiner.address,
+                "0x0"
+            ]);
+    
+            await expect(
+                microMiner.connect(manager).kickMiner(user.address)
+            ).to.be.revertedWith("MicroMiner: Unstake failed");
         });
 
         // try kickMiner function when caller dont have required role

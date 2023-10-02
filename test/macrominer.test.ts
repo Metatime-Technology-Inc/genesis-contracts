@@ -1,6 +1,6 @@
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
-import { ethers } from "hardhat";
+import { ethers, network } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { toWei, incrementBlocktimestamp } from "../scripts/helpers";
 import { BigNumber } from "ethers";
@@ -393,6 +393,71 @@ describe("MacroMiner", function () {
             expect(
                 minerStatus
             ).to.be.equal(false);
+        });
+
+        // try checkMinerStatus function when vote expired miner and kick but contract dont have required balance
+        it("try checkMinerStatus function when vote expired miner and kick but contract dont have required balance", async () => {
+            const { owner, manager, miner_1, miner_2, macroMiner, minerHealthCheck, metaPoints, minerPool, minerList } = await loadFixture(initiateVariables);
+
+            // init contracts
+            await initContracts();
+
+            // sent funds to miner pool
+            const fundsTX = await owner.sendTransaction({
+                to: minerPool.address,
+                value: toWei(String(8_000))
+            });
+            await fundsTX.wait();
+
+            // setMiner with STAKE_AMOUNT
+            const preparedContractTranscation = await macroMiner.connect(miner_1).populateTransaction.setMiner(macrominerArchiveType);
+            const transaction = await miner_1.sendTransaction({
+                ...preparedContractTranscation,
+                value: STAKE_AMOUNT
+            });
+            await transaction.wait();
+
+            // setMiner with STAKE_AMOUNT
+            const preparedContractTranscation2 = await macroMiner.connect(miner_2).populateTransaction.setMiner(macrominerArchiveType);
+            const transaction2 = await miner_2.sendTransaction({
+                ...preparedContractTranscation2,
+                value: STAKE_AMOUNT
+            });
+            await transaction2.wait();
+
+            // increment
+            await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
+
+            // ping with miner_2
+            const pingTX2 = await minerHealthCheck.connect(miner_2).ping(macrominerArchiveType);
+            await pingTX2.wait();
+
+            // increment
+            await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
+
+            // ping with miner_2
+            const pingTX3 = await minerHealthCheck.connect(miner_2).ping(macrominerArchiveType);
+            await pingTX3.wait();
+
+            // increment
+            await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
+
+            // ping with miner_2
+            const pingTX4 = await minerHealthCheck.connect(miner_2).ping(macrominerArchiveType);
+            await pingTX4.wait();
+
+            // add extra metapoint to miner_2
+            const extraMP = await metaPoints.connect(manager).mint(miner_2.address, toWei(String(100)));
+            extraMP.wait();
+
+            await network.provider.send("hardhat_setBalance", [
+                macroMiner.address,
+                "0x0"
+            ]);
+
+            await expect(
+                macroMiner.connect(miner_2).checkMinerStatus(miner_1.address, macrominerArchiveType, macrominerArchiveType)
+            ).to.be.revertedWith("Macrominer: Unstake failed");
         });
 
         // try checkMinerStatus function when voted miner being active again and close vote
