@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { MinerFormulas, MetaPoints, MinerList, MinerHealthCheck, MinerPool, Roles } from "../typechain-types";
-import { BigNumber } from "ethers";
+import { BigNumber, BigNumberish } from "ethers";
 
 describe("MinerFormulas", function () {
     async function initiateVariables() {
@@ -59,9 +59,9 @@ describe("MinerFormulas", function () {
 
     // test MinerFormulas
     describe("test minerformulas contract", async () => {
-        const minerHealthCheckTimeoutNumber = 14_400; // 4 hours
-        const minerHealthCheckTimeout = BigNumber.from(String(minerHealthCheckTimeoutNumber));
-        const metaminerType = BigNumber.from(String(0));
+        const minerHealthCheckTimeoutNumber:number = 14_400; // 4 hours
+        const minerHealthCheckTimeout:BigNumberish = BigNumber.from(String(minerHealthCheckTimeoutNumber));
+        const metaminerType:BigNumberish = BigNumber.from(String(0));
 
         const initContracts = async () => {
             const {

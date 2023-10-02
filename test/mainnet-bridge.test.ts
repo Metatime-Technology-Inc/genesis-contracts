@@ -34,8 +34,8 @@ describe("MainnetBridge", function () {
 
     // test MainnetBridge
     describe("test mainnet-bridge contract", async () => {
-        const funds: BigNumber = toWei(String(100));
-        const txHash: BytesLike = "0xdf724b377b528ec9a766713fe7a0eee17485dff3ea3114dc255f04a2fadf1e06";
+        const funds:BigNumber = toWei(String(100));
+        const txHash:BytesLike = "0xdf724b377b528ec9a766713fe7a0eee17485dff3ea3114dc255f04a2fadf1e06";
 
         const initRoles = async () => {
             const { owner, manager, roles, mainnetBridge } = await loadFixture(initiateVariables);

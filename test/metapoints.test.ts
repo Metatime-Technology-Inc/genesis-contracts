@@ -4,6 +4,7 @@ import { ethers } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { toWei } from "../scripts/helpers";
 import { MetaPoints, Roles } from "../typechain-types";
+import { BigNumberish } from "ethers";
 
 describe("MetaPoints", function () {
     async function initiateVariables() {
@@ -32,7 +33,7 @@ describe("MetaPoints", function () {
 
     // test MetaPoints
     describe("test metapoints contract", async () => {
-        const funds = toWei(String(100));
+        const funds:BigNumberish = toWei(String(100));
 
         const initContracts = async () => {
             const {

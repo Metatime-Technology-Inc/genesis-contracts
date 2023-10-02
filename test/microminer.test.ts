@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { ethers, network } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { toWei } from "../scripts/helpers";
-import { BigNumber } from "ethers";
+import { BigNumber, BigNumberish } from "ethers";
 import { Microminer, MinerHealthCheck, MinerFormulas, MinerPool, MetaPoints, MinerList, Roles } from "../typechain-types";
 
 describe("Microminer", function () {
@@ -69,8 +69,8 @@ describe("Microminer", function () {
 
     // test MicroMiner
     describe("test microminer contract", async () => {
-        const minerHealthCheckTimeout = BigNumber.from(String(14_400)); // 4 hours
-        const STAKE_AMOUNT = toWei(String(100));
+        const minerHealthCheckTimeout:BigNumberish = BigNumber.from(String(14_400)); // 4 hours
+        const STAKE_AMOUNT:BigNumberish = toWei(String(100));
 
         const initContracts = async () => {
             const {

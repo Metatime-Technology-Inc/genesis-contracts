@@ -71,13 +71,13 @@ describe("MacroMiner", function () {
 
     // test Macrominer
     describe("test macrominer contract", async () => {
-        const minerHealthCheckTimeoutNumber = 14_400; // 4 hours
-        const minerHealthCheckTimeout = BigNumber.from(String(minerHealthCheckTimeoutNumber));
-        const metaminerType = BigNumber.from(String(0));
-        const macrominerArchiveType = BigNumber.from(String(1));
-        const macrominerFullnodeType = BigNumber.from(String(2));
-        const macrominerLightType = BigNumber.from(String(3));
-        const STAKE_AMOUNT = toWei(String(100));
+        const minerHealthCheckTimeoutNumber:number = 14_400; // 4 hours
+        const minerHealthCheckTimeout:BigNumber = BigNumber.from(String(minerHealthCheckTimeoutNumber));
+        const metaminerType:BigNumber = BigNumber.from(String(0));
+        const macrominerArchiveType:BigNumber = BigNumber.from(String(1));
+        const macrominerFullnodeType:BigNumber = BigNumber.from(String(2));
+        const macrominerLightType:BigNumber = BigNumber.from(String(3));
+        const STAKE_AMOUNT:BigNumber = toWei(String(100));
 
         const initContracts = async () => {
             const {

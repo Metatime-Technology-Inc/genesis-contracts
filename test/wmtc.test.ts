@@ -4,7 +4,7 @@ import { ethers } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { toWei } from "../scripts/helpers";
 import { WMTC } from "../typechain-types";
-import { BigNumber } from "ethers";
+import { BigNumber, BigNumberish } from "ethers";
 
 describe("WMTC", function () {
     async function initiateVariables() {
@@ -26,7 +26,7 @@ describe("WMTC", function () {
 
     // test WMTC
     describe("test wmtc contract", async () => {
-        const funds = toWei(String(100));
+        const funds:BigNumberish = toWei(String(100));
 
         // try deposit function
         it("try deposit function", async () => {
