@@ -54,15 +54,19 @@ contract MinerPool is Initializable, RolesHandler {
             activityTime
         );
 
-        (bool isFirstAmountSent, ) = receiver.call{value: firstAmount}("");
-        require(isFirstAmountSent, "MinerPool: Unable to claim");
+        if(firstAmount > 0){
+            (bool isFirstAmountSent, ) = receiver.call{value: firstAmount}("");
+            require(isFirstAmountSent, "MinerPool: Unable to claim");
 
-        emit HasClaimed(receiver, firstAmount, "MACRO_DAILY_REWARD");
+            emit HasClaimed(receiver, firstAmount, "MACRO_DAILY_REWARD");
+        }
 
-        (bool isSecondAmountSent, ) = receiver.call{value: secondAmount}("");
-        require(isSecondAmountSent, "MinerPool: Unable to claim");
+        if(secondAmount > 0){
+            (bool isSecondAmountSent, ) = receiver.call{value: secondAmount}("");
+            require(isSecondAmountSent, "MinerPool: Unable to claim");
 
-        emit HasClaimed(receiver, secondAmount, "MACRO_DAILY_REWARD");
+            emit HasClaimed(receiver, secondAmount, "MACRO_DAILY_REWARD");
+        }
 
         return (firstAmount, secondAmount);
     }
@@ -109,6 +113,8 @@ contract MinerPool is Initializable, RolesHandler {
 
             firstFormulaMinerHardCap = (minerFormulas
                 .MACROMINER_LIGHT_DAILY_MAX_REWARD() / minerFormulas.SECONDS_IN_A_DAY());
+        } else {
+            return (uint256(0), uint256(0));
         }
 
         uint256 firstFormulaAmount = minerFormulas
