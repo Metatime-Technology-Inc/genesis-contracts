@@ -8,7 +8,7 @@ import { Macrominer, MinerHealthCheck, MinerFormulas, MinerPool, MetaPoints, Min
 
 describe("MacroMiner", function () {
     async function initiateVariables() {
-        const [owner, manager, miner_1, miner_2] =
+        const [owner, manager, miner_1, miner_2, miner_3] =
             await ethers.getSigners();
 
         const Macrominer_ = await ethers.getContractFactory(
@@ -64,7 +64,8 @@ describe("MacroMiner", function () {
             owner,
             manager,
             miner_1,
-            miner_2
+            miner_2,
+            miner_3
         };
     }
 
@@ -267,7 +268,7 @@ describe("MacroMiner", function () {
 
         // try checkMinerStatus function when voted miner is expired
         it("try checkMinerStatus function when voted miner is expired", async () => {
-            const { owner, miner_1, miner_2, macroMiner, minerHealthCheck, metaPoints, minerPool } = await loadFixture(initiateVariables);
+            const { owner, miner_1, miner_2, miner_3, macroMiner, minerHealthCheck, metaPoints, minerPool } = await loadFixture(initiateVariables);
 
             // init contracts
             await initContracts();
@@ -275,7 +276,7 @@ describe("MacroMiner", function () {
             // sent funds to miner pool
             const fundsTX = await owner.sendTransaction({
                 to: minerPool.address,
-                value: toWei(String(8_000))
+                value: toWei(String(9_000))
             });
             await fundsTX.wait();
 
@@ -316,17 +317,35 @@ describe("MacroMiner", function () {
             const pingTX4 = await minerHealthCheck.connect(miner_2).ping(macrominerArchiveType);
             await pingTX4.wait();
 
+            // setMiner with STAKE_AMOUNT
+            const preparedContractTranscation3 = await macroMiner.connect(miner_3).populateTransaction.setMiner(macrominerArchiveType);
+            const transaction3 = await miner_3.sendTransaction({
+                ...preparedContractTranscation3,
+                value: STAKE_AMOUNT
+            });
+            await transaction3.wait();
+
+            // ping with miner_3
+            const pingTX5 = await minerHealthCheck.connect(miner_3).ping(macrominerArchiveType);
+            await pingTX5.wait();
+
             const voterMetaPointsBalance = await metaPoints.balanceOf(miner_2.address);
 
-            // vote miner_1
+            const voterMetaPointsBalance2 = await metaPoints.balanceOf(miner_3.address);
+
+            // vote miner_1 with miner_2
             const vote1 = await macroMiner.connect(miner_2).checkMinerStatus(miner_1.address, macrominerArchiveType, macrominerArchiveType);
             await vote1.wait();
+
+            // vote miner_1 with miner_3
+            const vote2 = await macroMiner.connect(miner_3).checkMinerStatus(miner_1.address, macrominerArchiveType, macrominerArchiveType);
+            await vote2.wait();
 
             const voteResult = await macroMiner.votes(miner_1.address, macrominerArchiveType);
 
             expect(
                 voteResult[1]
-            ).to.be.equal(voterMetaPointsBalance);
+            ).to.be.equal(voterMetaPointsBalance.add(voterMetaPointsBalance2));
         });
 
         // try checkMinerStatus function when vote expired miner and kick

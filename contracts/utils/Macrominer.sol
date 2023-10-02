@@ -123,19 +123,6 @@ contract Macrominer is Initializable {
         if (isAlive == false) {
             // --- get checkers mp points
             uint256 mpBalance = metapoints.balanceOf(msg.sender);
-
-            if (vote.point == 0) {
-                vote.voteId = voteId;
-                vote.exist = true;
-                voteId++;
-
-                emit BeginVote(
-                    vote.voteId,
-                    votedMinerAddress,
-                    votedMinerNodeType
-                );
-            }
-
             if (mpBalance + vote.point >= VOTE_POINT_LIMIT) {
                 // --- check if its bigger than limit after adding voting points, then decrement miner count and suspand miner
                 _kickMiner(votedMinerAddress, votedMinerNodeType);
@@ -146,15 +133,28 @@ contract Macrominer is Initializable {
                     votedMinerNodeType
                 );
             } else {
-                // --- check if its lower than limit after adding voting points, then increment voting points
-                vote.point += mpBalance;
+                if (vote.point == 0) {
+                    vote.voteId = voteId;
+                    vote.point = mpBalance;
+                    vote.exist = true;
+                    voteId++;
 
-                emit Voted(
-                    vote.voteId,
-                    votedMinerAddress,
-                    votedMinerNodeType,
-                    mpBalance
-                );
+                    emit BeginVote(
+                        vote.voteId,
+                        votedMinerAddress,
+                        votedMinerNodeType
+                    );
+                }else{
+                    // --- check if its lower than limit after adding voting points, then increment voting points
+                    vote.point += mpBalance;
+
+                    emit Voted(
+                        vote.voteId,
+                        votedMinerAddress,
+                        votedMinerNodeType,
+                        mpBalance
+                    );
+                }
             }
         } else if (vote.exist == true) {
             delete votes[votedMinerAddress][votedMinerNodeType];
