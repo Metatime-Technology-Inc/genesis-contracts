@@ -60,7 +60,9 @@ describe("Metaminer", function () {
         await metaminer.connect(owner).initRoles(roles.address);
 
         return {
-
+            owner,
+            metaminer_1,
+            metaminer_2,
         };
     }
 
