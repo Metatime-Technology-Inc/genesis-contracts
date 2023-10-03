@@ -7,6 +7,8 @@ import "../interfaces/IMetaPoints.sol";
 import "../interfaces/IMinerHealthCheck.sol";
 import "../interfaces/IMinerList.sol";
 
+import "hardhat/console.sol";
+
 // This contract after unit tests & audit will be library
 contract MinerFormulas is Initializable {
     IMetaPoints public metaPoints;
@@ -92,6 +94,7 @@ contract MinerFormulas is Initializable {
         } else {
             return (0);
         }
+
         uint256 formula = ((DAILY_CALC_POOL_REWARD / (24 * TOTAL_NODE_COUNT)) /
             SECONDS_IN_A_DAY);
         return (formula);
@@ -105,10 +108,12 @@ contract MinerFormulas is Initializable {
         uint256 REST_POOL_AMOUNT = 0;
         uint256 MINER_META_POINT = _balaceOfMP(minerAddress);
         uint256 TOTAL_SUPPLY_META_POINTS = _totalSupplyMP();
+
         uint256 MINERS_TOTAL_ACTIVITIES = minerHealthCheck.dailyNodesActivities(
             _getDate(),
             nodeType
         );
+
         uint256 MINER_ACTIVITY = minerHealthCheck.dailyNodeActivity(
             _getDate(),
             minerAddress,
@@ -131,11 +136,15 @@ contract MinerFormulas is Initializable {
         } else {
             return (0);
         }
-        uint256 formula = (((REST_POOL_AMOUNT /
+
+        uint256 formula = (((REST_POOL_AMOUNT * 1e18 /
             (TOTAL_SUPPLY_META_POINTS *
-                (MINERS_TOTAL_ACTIVITIES / (TOTAL_NODE_COUNT * 24)))) *
+                (MINERS_TOTAL_ACTIVITIES * 1e18 / (TOTAL_NODE_COUNT * 24)))) *
             MINER_META_POINT *
             (MINER_ACTIVITY / 24)) / SECONDS_IN_A_DAY);
+
+        console.log("formula", formula);
+
         return (formula);
     }
 
