@@ -56,10 +56,7 @@ interface IMinerFormulas {
         view
         returns (uint256);
 
-    function SECONDS_IN_A_DAY()
-        external
-        view
-        returns (uint256);
+    function SECONDS_IN_A_DAY() external view returns (uint256);
 
     function calculateMetaminerReward() external view returns (uint256);
 

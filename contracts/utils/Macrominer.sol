@@ -144,7 +144,7 @@ contract Macrominer is Initializable {
                         votedMinerAddress,
                         votedMinerNodeType
                     );
-                }else{
+                } else {
                     // --- check if its lower than limit after adding voting points, then increment voting points
                     vote.point += mpBalance;
 

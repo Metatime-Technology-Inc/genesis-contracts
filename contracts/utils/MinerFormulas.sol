@@ -22,8 +22,10 @@ contract MinerFormulas is Initializable {
     uint256 public constant METAMINER_DAILY_PRIZE_POOL = 166_666 * 10 ** 18;
     uint256 public constant METAMINER_DAILY_PRIZE_LIMIT = 450 * 10 ** 18;
 
-    uint256 public constant MACROMINER_ARCHIVE_DAILY_MAX_REWARD = 150 * 10 ** 18;
-    uint256 public constant MACROMINER_FULLNODE_DAILY_MAX_REWARD = 100 * 10 ** 18;
+    uint256 public constant MACROMINER_ARCHIVE_DAILY_MAX_REWARD =
+        150 * 10 ** 18;
+    uint256 public constant MACROMINER_FULLNODE_DAILY_MAX_REWARD =
+        100 * 10 ** 18;
     uint256 public constant MACROMINER_LIGHT_DAILY_MAX_REWARD = 50 * 10 ** 18;
 
     uint256 public constant MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA =
@@ -88,7 +90,7 @@ contract MinerFormulas is Initializable {
             TOTAL_NODE_COUNT = minerList.count(MinerTypes.NodeType.MacroLight);
             DAILY_CALC_POOL_REWARD = MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA;
         } else {
-            return(0);
+            return (0);
         }
         uint256 formula = ((DAILY_CALC_POOL_REWARD / (24 * TOTAL_NODE_COUNT)) /
             SECONDS_IN_A_DAY);
@@ -127,7 +129,7 @@ contract MinerFormulas is Initializable {
             TOTAL_NODE_COUNT = minerList.count(MinerTypes.NodeType.MacroLight);
             REST_POOL_AMOUNT = MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA;
         } else {
-            return(0);
+            return (0);
         }
         uint256 formula = (((REST_POOL_AMOUNT /
             (TOTAL_SUPPLY_META_POINTS *

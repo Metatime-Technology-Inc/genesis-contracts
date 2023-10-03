@@ -108,7 +108,9 @@ contract MinerHealthCheck is Initializable, RolesHandler {
      * @param newTimeout The new timeout duration to set.
      * @return A boolean indicating whether the operation was successful.
      */
-    function setTimeout(uint256 newTimeout) onlyOwnerRole(msg.sender) external returns (bool) {
+    function setTimeout(
+        uint256 newTimeout
+    ) external onlyOwnerRole(msg.sender) returns (bool) {
         timeout = newTimeout;
         return (true);
     }
@@ -122,7 +124,12 @@ contract MinerHealthCheck is Initializable, RolesHandler {
     function manuelPing(
         address minerAddress,
         MinerTypes.NodeType nodeType
-    ) external isMiner(minerAddress, nodeType) onlyManagerRole(msg.sender) returns (bool) {
+    )
+        external
+        isMiner(minerAddress, nodeType)
+        onlyManagerRole(msg.sender)
+        returns (bool)
+    {
         lastUptime[minerAddress][nodeType] = block.timestamp;
         return (true);
     }

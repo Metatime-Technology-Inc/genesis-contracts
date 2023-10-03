@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { ethers, network } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { toWei, incrementBlocktimestamp } from "../scripts/helpers";
-import { BigNumber } from "ethers";
+import { BigNumber, BigNumberish } from "ethers";
 import { Macrominer, MinerHealthCheck, MinerFormulas, MinerPool, MetaPoints, MinerList, Roles } from "../typechain-types";
 
 describe("MacroMiner", function () {
@@ -676,5 +676,87 @@ describe("MacroMiner", function () {
                 voteResult[1]
             ).to.be.equal(voterMetaPointsBalance);
         });
+
+        // try MinerHealthCheck:ping function when exceeds hardcap for formula 2
+        // it("try MinerHealthCheck:ping function when exceeds hardcap for formula 2", async () => {
+        //     const {
+        //         manager,
+        //         miner_1,
+        //         miner_2,
+        //         miner_3,
+        //         minerHealthCheck,
+        //         minerPool,
+        //         minerList,
+        //         minerFormulas
+        //     } = await loadFixture(initiateVariables);
+
+        //     // init contracts
+        //     await initContracts();
+
+        //     // set funds to miner pool
+        //     await network.provider.send("hardhat_setBalance", [
+        //         minerPool.address,
+        //         "0x200000000000000000000000000000000000000000000000000000000000000"
+        //     ]);
+
+        //     // set funds to manager
+        //     await network.provider.send("hardhat_setBalance", [
+        //         manager.address,
+        //         "0x200000000000000000000000000000000000000000000000000000000000000"
+        //     ]);
+
+        //     const wallets = [];
+        //     const spawnCount = 920;
+        //     for (let i = 0; i < spawnCount; i++) {
+        //         const wallet = ethers.Wallet.createRandom();
+        //         wallets.push(wallet);
+
+        //         // set funds to manager
+        //         await network.provider.send("hardhat_setBalance", [
+        //             wallet.address,
+        //             "0x200000000000000000000000000000000000000000000000000000000000000"
+        //         ]);
+        //     }
+
+        //     // addMiners
+        //     const addMiner = await minerList.connect(manager).addMiner(miner_1.address, macrominerLightType);
+        //     await addMiner.wait();
+        //     const addMiner2 = await minerList.connect(manager).addMiner(miner_2.address, macrominerLightType);
+        //     await addMiner2.wait();
+        //     const addMiner3 = await minerList.connect(manager).addMiner(miner_3.address, macrominerLightType);
+        //     await addMiner3.wait();
+
+        //     for (let i = 0; i < spawnCount; i++) {
+        //         const wallet = wallets[i];                
+        //         const addMinerLoop = await minerList.connect(manager).addMiner(wallet.address, macrominerLightType);
+        //         await addMinerLoop.wait();
+        //     }
+
+        //     // tried 350 for formulas 1, it didnt work
+        //     for (let i = 0; i < 10; i++) {
+        //         // increment
+        //         await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
+    
+        //         // ping with miner_1
+        //         const pingTX = await minerHealthCheck.connect(miner_1).ping(macrominerLightType);
+        //         await pingTX.wait();
+        //         // ping with miner_2
+        //         const pingTX2 = await minerHealthCheck.connect(miner_2).ping(macrominerLightType);
+        //         await pingTX2.wait();
+        //         // ping with miner_3
+        //         const pingTX3 = await minerHealthCheck.connect(miner_3).ping(macrominerLightType);
+        //         await pingTX3.wait();
+        //         // ping with spawned wallets
+        //         for (let i = 0; i < spawnCount; i++) {
+        //             const wallet = wallets[i];
+        //             const pingTX = await minerHealthCheck.connect(wallet).ping(macrominerLightType);
+        //             await pingTX.wait();
+        //         }
+        //     }
+
+        //     expect(
+        //         await minerHealthCheck.connect(miner_1).ping(macrominerLightType)
+        //     ).to.be.ok;
+        // });
     });
 });

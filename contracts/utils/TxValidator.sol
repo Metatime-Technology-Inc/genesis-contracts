@@ -223,7 +223,6 @@ contract TxValidator is Initializable, RolesHandler {
             falseVotersLength++;
         }
 
-        
         bool tie = (trueVotersLength == falseVotersLength ? true : false);
         bool decision = (trueVotersLength > falseVotersLength ? true : false);
 
