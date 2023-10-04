@@ -123,7 +123,6 @@ describe("MinerPool", function () {
             await metaPoints.connect(owner).initialize();
 
             await minerList.connect(owner).initialize(
-                roles.address,
                 minerHealthCheck.address
             );
         }

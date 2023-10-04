@@ -7,8 +7,6 @@ import "../interfaces/IMetaPoints.sol";
 import "../interfaces/IMinerHealthCheck.sol";
 import "../interfaces/IMinerList.sol";
 
-import "hardhat/console.sol";
-
 // This contract after unit tests & audit will be library
 contract MinerFormulas is Initializable {
     IMetaPoints public metaPoints;
@@ -142,9 +140,6 @@ contract MinerFormulas is Initializable {
                 (MINERS_TOTAL_ACTIVITIES * 1e18 / (TOTAL_NODE_COUNT * 24)))) *
             MINER_META_POINT *
             (MINER_ACTIVITY / 24)) / SECONDS_IN_A_DAY);
-
-        console.log("formula", formula);
-
         return (formula);
     }
 

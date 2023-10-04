@@ -26,14 +26,12 @@ contract MinerList is Initializable, RolesHandler {
     );
 
     /**
-     * @dev Initializes the MinerList contract with the address of the RolesHandler contract.
-     * @param rolesAddress The address of the RolesHandler contract.
+     * @dev Initializes the MinerList contract with the address of the MinerHealthCheck contract.
+     * @param minerHealthCheckAddress The address of the MinerHealthCheck contract.
      */
     function initialize(
-        address rolesAddress,
         address minerHealthCheckAddress
     ) external initializer {
-        roles = IRoles(rolesAddress);
         minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
     }
 

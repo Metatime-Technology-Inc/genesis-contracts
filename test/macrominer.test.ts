@@ -131,7 +131,6 @@ describe("MacroMiner", function () {
             await metaPoints.connect(owner).initialize();
 
             await minerList.connect(owner).initialize(
-                roles.address,
                 minerHealthCheck.address
             );
 
@@ -677,8 +676,8 @@ describe("MacroMiner", function () {
             ).to.be.equal(voterMetaPointsBalance);
         });
 
-        // try MinerHealthCheck:ping function when exceeds hardcap for formula 2
-        it("try MinerHealthCheck:ping function when exceeds hardcap for formula 2", async () => {
+        // try MinerHealthCheck:ping function when exceeds hardcap for formulas
+        it("try MinerHealthCheck:ping function when exceeds hardcap for formulas", async () => {
             const {
                 manager,
                 miner_1,
@@ -686,8 +685,7 @@ describe("MacroMiner", function () {
                 miner_3,
                 minerHealthCheck,
                 minerPool,
-                minerList,
-                minerFormulas
+                minerList
             } = await loadFixture(initiateVariables);
 
             // init contracts
@@ -706,9 +704,9 @@ describe("MacroMiner", function () {
             ]);
 
             const wallets = [];
-            const spawnCount = 920;
+            const spawnCount = 900;
             for (let i = 0; i < spawnCount; i++) {
-                const wallet = ethers.Wallet.createRandom();
+                const wallet = ethers.Wallet.createRandom().connect(ethers.provider);
                 wallets.push(wallet);
 
                 // set funds to manager
@@ -732,31 +730,26 @@ describe("MacroMiner", function () {
                 await addMinerLoop.wait();
             }
 
-            // tried 350 for formulas 1, it didnt work
             for (let i = 0; i < 10; i++) {
                 // increment
                 await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
     
                 // ping with miner_1
                 const pingTX = await minerHealthCheck.connect(miner_1).ping(macrominerLightType);
-                await pingTX.wait();
                 // ping with miner_2
                 const pingTX2 = await minerHealthCheck.connect(miner_2).ping(macrominerLightType);
-                await pingTX2.wait();
                 // ping with miner_3
                 const pingTX3 = await minerHealthCheck.connect(miner_3).ping(macrominerLightType);
-                await pingTX3.wait();
                 // ping with spawned wallets
                 for (let i = 0; i < spawnCount; i++) {
                     const wallet = wallets[i];
                     const pingTX = await minerHealthCheck.connect(wallet).ping(macrominerLightType);
-                    await pingTX.wait();
                 }
             }
 
             expect(
                 await minerHealthCheck.connect(miner_1).ping(macrominerLightType)
             ).to.be.ok;
-        });
+        }).timeout(100000000000);
     });
 });

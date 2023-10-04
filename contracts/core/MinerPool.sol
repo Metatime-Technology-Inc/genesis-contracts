@@ -8,7 +8,7 @@ import "../interfaces/IMinerFormulas.sol";
 import "../interfaces/IMinerList.sol";
 
 /**
- * @title RewardsPool
+ * @title MinerPool
  * @notice Holds tokens for miners to claim.
  * @dev A contract for distributing tokens over a specified period of time for mining purposes.
  */
