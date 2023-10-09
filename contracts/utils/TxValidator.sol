@@ -70,7 +70,7 @@ contract TxValidator is Initializable, RolesHandler {
         address minerFormulasAddress,
         address minerHealthCheckAddress,
         address minerPoolAddress
-    ) external {
+    ) external initializer {
         minerList = IMinerList(minerListAddress);
         metaPoints = IMetaPoints(metaPointsAddress);
         minerFormulas = IMinerFormulas(minerFormulasAddress);
