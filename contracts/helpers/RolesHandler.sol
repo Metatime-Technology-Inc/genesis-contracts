@@ -46,18 +46,6 @@ abstract contract RolesHandler {
         _;
     }
 
-    /**
-     * @dev Modifier to check if an address has the developer role.
-     * @param account The address to check.
-     */
-    modifier onlyDeveloperRole(address account) {
-        require(
-            roles.hasRole(roles.DEVELOPER_ROLE(), account),
-            "RolesHandler: Developer role is needed for this action"
-        );
-        _;
-    }
-
     function initRoles(address rolesAddress) external {
         require(
             address(roles) == address(0),

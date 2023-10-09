@@ -101,8 +101,6 @@ describe("Microminer", function () {
             await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), metaPoints.address);
             await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), minerList.address);
 
-            await roles.connect(owner).grantRole(await roles.DEVELOPER_ROLE(), user.address);
-
             await minerHealthCheck.connect(owner).initialize(
                 minerList.address,
                 minerFormulas.address,

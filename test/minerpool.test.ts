@@ -100,8 +100,6 @@ describe("MinerPool", function () {
             await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), metaPoints.address);
             await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), minerList.address);
 
-            await roles.connect(owner).grantRole(await roles.DEVELOPER_ROLE(), miner_1.address);
-
             await minerHealthCheck.connect(owner).initialize(
                 minerList.address,
                 minerFormulas.address,
