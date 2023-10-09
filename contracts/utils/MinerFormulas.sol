@@ -60,7 +60,8 @@ contract MinerFormulas is Initializable {
             minerList.count(MinerTypes.NodeType.Meta));
         return
             calculatedAmount > METAMINER_DAILY_PRIZE_LIMIT
-                ? METAMINER_DAILY_PRIZE_LIMIT / METAMINER_DAILY_BLOCK_COUNT
+                ? METAMINER_DAILY_PRIZE_LIMIT / (METAMINER_DAILY_BLOCK_COUNT /
+                        minerList.count(MinerTypes.NodeType.Meta))
                 : calculatedAmount /
                     (METAMINER_DAILY_BLOCK_COUNT /
                         minerList.count(MinerTypes.NodeType.Meta));
