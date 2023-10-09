@@ -21,10 +21,10 @@ interface IMinerList {
     function addMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
-    ) external returns (bool);
+    ) external;
 
     function deleteMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
-    ) external returns (bool);
+    ) external;
 }

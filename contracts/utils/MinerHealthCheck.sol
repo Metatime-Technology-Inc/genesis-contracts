@@ -119,7 +119,6 @@ contract MinerHealthCheck is Initializable, RolesHandler {
      * @dev Allows a manager to manually ping a miner node.
      * @param minerAddress The address of the miner node to ping.
      * @param nodeType The type of miner node to ping.
-     * @return A boolean indicating whether the ping was successful.
      */
     function manuelPing(
         address minerAddress,
@@ -128,10 +127,8 @@ contract MinerHealthCheck is Initializable, RolesHandler {
         external
         isMiner(minerAddress, nodeType)
         onlyManagerRole(msg.sender)
-        returns (bool)
     {
         lastUptime[minerAddress][nodeType] = block.timestamp;
-        return (true);
     }
 
     /**

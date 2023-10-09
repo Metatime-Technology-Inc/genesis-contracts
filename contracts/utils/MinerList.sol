@@ -50,62 +50,54 @@ contract MinerList is Initializable, RolesHandler {
      * @dev Adds an address as a miner of the specified node type.
      * @param minerAddress The address to add as a miner.
      * @param nodeType The type of miner node to add.
-     * @return A boolean indicating whether the operation was successful.
      */
     function addMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
-    ) external onlyManagerRole(msg.sender) returns (bool) {
+    ) external onlyManagerRole(msg.sender) {
         _addMiner(minerAddress, nodeType);
-        return (true);
     }
 
     /**
      * @dev Deletes an address from the list of miners of the specified node type.
      * @param minerAddress The address to delete from the list of miners.
      * @param nodeType The type of miner node to delete from.
-     * @return A boolean indicating whether the operation was successful.
      */
     function deleteMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
-    ) external onlyManagerRole(msg.sender) returns (bool) {
+    ) external onlyManagerRole(msg.sender) {
         _deleteMiner(minerAddress, nodeType);
-        return (true);
     }
 
     /**
      * @dev Internal function to add an address as a miner of the specified node type.
      * @param minerAddress The address to add as a miner.
      * @param nodeType The type of miner node to add.
-     * @return A boolean indicating whether the operation was successful.
      */
     function _addMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
-    ) internal returns (bool) {
+    ) internal {
         list[minerAddress][nodeType] = true;
         count[nodeType]++;
         minerHealthCheck.manuelPing(minerAddress, nodeType);
 
         emit AddMiner(minerAddress, nodeType);
-        return (true);
     }
 
     /**
      * @dev Internal function to delete an address from the list of miners of the specified node type.
      * @param minerAddress The address to delete from the list of miners.
      * @param nodeType The type of miner node to delete from.
-     * @return A boolean indicating whether the operation was successful.
      */
     function _deleteMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
-    ) internal returns (bool) {
+    ) internal {
         delete list[minerAddress][nodeType];
         count[nodeType]--;
 
         emit DeleteMiner(minerAddress, nodeType);
-        return (true);
     }
 }

@@ -22,5 +22,5 @@ interface IMinerHealthCheck {
     function manuelPing(
         address minerAddress,
         MinerTypes.NodeType nodeType
-    ) external returns (bool);
+    ) external;
 }

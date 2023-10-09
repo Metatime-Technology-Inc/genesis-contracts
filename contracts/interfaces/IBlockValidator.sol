@@ -13,5 +13,5 @@ interface IBlockValidator {
         uint256 blockNumber
     ) external returns (BlockPayload memory);
 
-    function finalizeBlock(uint256 blockNumber) external returns (bool);
+    function finalizeBlock(uint256 blockNumber) external;
 }

@@ -66,11 +66,10 @@ contract BlockValidator is Initializable, RolesHandler {
     /**
      * @dev Finalizes a block by marking it as finalized.
      * @param blockNumber The block number to finalize.
-     * @return A boolean indicating whether the operation was successful.
      */
     function finalizeBlock(
         uint256 blockNumber
-    ) external onlyManagerRole(msg.sender) returns (bool) {
+    ) external onlyManagerRole(msg.sender) {
         BlockPayload storage payload = blockPayloads[blockNumber];
         require(
             payload.coinbase != address(0),
@@ -98,7 +97,5 @@ contract BlockValidator is Initializable, RolesHandler {
         _verifiedBlockId++;
 
         emit FinalizeBlock(blockNumber);
-
-        return true;
     }
 }
