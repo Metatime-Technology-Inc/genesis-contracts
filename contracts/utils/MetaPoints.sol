@@ -19,6 +19,10 @@ contract MetaPoints is
     bytes32 public constant OWNER_ROLE = keccak256("OWNER_ROLE");
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
 
+    error BurnDisabled(uint256 amount);
+    error TransferDisabled(address to, uint256 amount);
+    error TransferFromDisabled(address from, address to, uint256 amount);
+
     function initialize() public initializer {
         __ERC20_init("Meta Points", "MP");
         __ERC20Burnable_init();
@@ -40,7 +44,9 @@ contract MetaPoints is
         _mint(to, amount);
     }
 
-    function burn(uint256 amount) public virtual override {}
+    function burn(uint256 amount) public virtual override {
+        revert BurnDisabled(amount);
+    }
 
     function burnFrom(
         address account,
@@ -52,28 +58,24 @@ contract MetaPoints is
     function transfer(
         address to,
         uint256 amount
-    ) public virtual override returns (bool) {}
+    ) public virtual override returns (bool) {
+        revert TransferDisabled(to, amount);
+    }
 
     function approve(
         address spender,
         uint256 amount
-    ) public virtual override returns (bool) {}
+    ) public virtual override whenNotPaused returns (bool) {
+        return super.approve(spender, amount);
+    }
 
     function transferFrom(
         address from,
         address to,
         uint256 amount
-    ) public virtual override returns (bool) {}
-
-    function increaseAllowance(
-        address spender,
-        uint256 addedValue
-    ) public virtual override returns (bool) {}
-
-    function decreaseAllowance(
-        address spender,
-        uint256 subtractedValue
-    ) public virtual override returns (bool) {}
+    ) public virtual override returns (bool) {
+        revert TransferFromDisabled(from, to, amount);
+    }
 
     function _beforeTokenTransfer(
         address from,
