@@ -37,13 +37,16 @@ contract Roles is AccessControl, Initializable {
         returns (address)
     {
         uint256 currentId = currentValidatorId;
+        uint256 queueNumber = validatorQueueNumber;
+        require(currentId > 0, "Roles: Unable to pick validator");
 
-        if (currentId - 1 > validatorQueueNumber) {
+        if (currentId - 1 == validatorQueueNumber) {
             validatorQueueNumber = 0;
+        } else {
+            validatorQueueNumber++;
         }
 
-        currentValidatorId++;
-        address pickedValidator = validatorList[currentId];
+        address pickedValidator = validatorList[queueNumber];
 
         emit PickValidator(pickedValidator);
 
@@ -54,10 +57,12 @@ contract Roles is AccessControl, Initializable {
         bytes32 role,
         address account
     ) public virtual override onlyRole(getRoleAdmin(role)) {
-        validatorList[currentValidatorId] = account;
+        if (role == VALIDATOR_ROLE) {
+            validatorList[currentValidatorId] = account;
+
+            currentValidatorId++;
+        }
 
         super.grantRole(role, account);
-
-        currentValidatorId++;
     }
 }
