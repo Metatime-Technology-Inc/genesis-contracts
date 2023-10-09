@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 
-import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
 import "../libs/MinerTypes.sol";
@@ -10,9 +9,9 @@ import "../interfaces/IMinerHealthCheck.sol";
 import "../interfaces/IMetaPoints.sol";
 import "../interfaces/IMinerList.sol";
 
-contract Macrominer is Context, Initializable {
+contract Macrominer is Initializable {
     uint256 public constant STAKE_AMOUNT = 100 ether;
-    uint256 public constant VOTE_POINT_LIMIT = 100;
+    uint256 public constant VOTE_POINT_LIMIT = 100 ether;
 
     uint256 public voteId;
     IMinerHealthCheck public minerHealthCheck;
@@ -22,6 +21,7 @@ contract Macrominer is Context, Initializable {
     struct Vote {
         uint256 voteId;
         uint256 point;
+        bool exist;
     }
 
     mapping(address => mapping(MinerTypes.NodeType => Vote)) public votes;
@@ -61,7 +61,7 @@ contract Macrominer is Context, Initializable {
 
     modifier isNodeTypeValid(MinerTypes.NodeType nodeType) {
         require(
-            nodeType != MinerTypes.NodeType.Meta ||
+            nodeType != MinerTypes.NodeType.Meta &&
                 nodeType != MinerTypes.NodeType.Micro,
             "Macrominer: Wrong node type"
         );
@@ -86,14 +86,14 @@ contract Macrominer is Context, Initializable {
         external
         payable
         isNodeTypeValid(nodeType)
-        notMiner(_msgSender(), nodeType)
+        notMiner(msg.sender, nodeType)
         returns (bool)
     {
         require(
             msg.value == STAKE_AMOUNT,
             "Macrominer: You have to stake as required STAKE_AMOUNT"
         );
-        minerList.addMiner(_msgSender(), nodeType);
+        minerList.addMiner(msg.sender, nodeType);
         return (true);
     }
 
@@ -109,7 +109,7 @@ contract Macrominer is Context, Initializable {
         isNodeTypeValid(votedMinerNodeType)
         isNodeTypeValid(nodeType)
         isMiner(votedMinerAddress, votedMinerNodeType)
-        isMiner(_msgSender(), nodeType)
+        isMiner(msg.sender, nodeType)
     {
         // check status
         bool isAlive = minerHealthCheck.status(
@@ -122,19 +122,7 @@ contract Macrominer is Context, Initializable {
         // -- false status
         if (isAlive == false) {
             // --- get checkers mp points
-            uint256 mpBalance = metapoints.balanceOf(_msgSender());
-
-            if (vote.point == 0) {
-                vote.voteId = voteId;
-                voteId++;
-
-                emit BeginVote(
-                    vote.voteId,
-                    votedMinerAddress,
-                    votedMinerNodeType
-                );
-            }
-
+            uint256 mpBalance = metapoints.balanceOf(msg.sender);
             if (mpBalance + vote.point >= VOTE_POINT_LIMIT) {
                 // --- check if its bigger than limit after adding voting points, then decrement miner count and suspand miner
                 _kickMiner(votedMinerAddress, votedMinerNodeType);
@@ -145,17 +133,30 @@ contract Macrominer is Context, Initializable {
                     votedMinerNodeType
                 );
             } else {
-                // --- check if its lower than limit after adding voting points, then increment voting points
-                vote.point += mpBalance;
+                if (vote.point == 0) {
+                    vote.voteId = voteId;
+                    vote.point = mpBalance;
+                    vote.exist = true;
+                    voteId++;
 
-                emit Voted(
-                    vote.voteId,
-                    votedMinerAddress,
-                    votedMinerNodeType,
-                    mpBalance
-                );
+                    emit BeginVote(
+                        vote.voteId,
+                        votedMinerAddress,
+                        votedMinerNodeType
+                    );
+                } else {
+                    // --- check if its lower than limit after adding voting points, then increment voting points
+                    vote.point += mpBalance;
+
+                    emit Voted(
+                        vote.voteId,
+                        votedMinerAddress,
+                        votedMinerNodeType,
+                        mpBalance
+                    );
+                }
             }
-        } else {
+        } else if (vote.exist == true) {
             delete votes[votedMinerAddress][votedMinerNodeType];
 
             emit EndVote(vote.voteId, votedMinerAddress, votedMinerNodeType);

@@ -21,12 +21,22 @@ interface IMinerFormulas {
         view
         returns (uint256);
 
+    function MACROMINER_ARCHIVE_DAILY_MAX_REWARD()
+        external
+        view
+        returns (uint256);
+
     function MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA()
         external
         view
         returns (uint256);
 
     function MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA()
+        external
+        view
+        returns (uint256);
+
+    function MACROMINER_FULLNODE_DAILY_MAX_REWARD()
         external
         view
         returns (uint256);
@@ -40,6 +50,13 @@ interface IMinerFormulas {
         external
         view
         returns (uint256);
+
+    function MACROMINER_LIGHT_DAILY_MAX_REWARD()
+        external
+        view
+        returns (uint256);
+
+    function SECONDS_IN_A_DAY() external view returns (uint256);
 
     function calculateMetaminerReward() external view returns (uint256);
 

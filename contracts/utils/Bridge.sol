@@ -39,7 +39,10 @@ contract Bridge is Blacklistable, Freezeable {
             msg.sender,
             address(this)
         );
-        require(senderAllowance == balance, "Bridge: Allowance is not as required");
+        require(
+            senderAllowance == balance,
+            "Bridge: Allowance is not as required"
+        );
 
         bridgeToken.burnFrom(msg.sender, balance);
         emit BridgeTransfer(msg.sender, balance);

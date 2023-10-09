@@ -7,12 +7,13 @@ import "../interfaces/IMinerList.sol";
 import "../interfaces/IMinerPool.sol";
 import "../interfaces/IMetaPoints.sol";
 import "../interfaces/IMinerFormulas.sol";
+import "../helpers/RolesHandler.sol";
 
 /**
  * @title MinerHealthCheck
  * @dev A smart contract for checking and managing miner health status.
  */
-contract MinerHealthCheck is Initializable {
+contract MinerHealthCheck is Initializable, RolesHandler {
     IMinerList public minerList;
     IMinerFormulas public minerFormulas;
     IMinerPool public minerPool;
@@ -31,7 +32,10 @@ contract MinerHealthCheck is Initializable {
      * @param nodeType The type of miner node to check.
      */
     modifier isMiner(address miner, MinerTypes.NodeType nodeType) {
-        require(minerList.isMiner(miner, nodeType), "MinerHealthCheck: Address is not miner");
+        require(
+            minerList.isMiner(miner, nodeType),
+            "MinerHealthCheck: Address is not miner"
+        );
         _;
     }
 
@@ -70,12 +74,12 @@ contract MinerHealthCheck is Initializable {
 
         if (maxLimit >= block.timestamp) {
             uint256 activityTime = block.timestamp - lastSeen;
-            _incrementDailyActiveTimes(msg.sender, nodeType, activityTime);
-            _incrementDailyTotalActiveTimes(nodeType, activityTime);
-            minerPool.claimMacroDailyReward(msg.sender, nodeType, activityTime);
             uint256 metaPointsReward = minerFormulas
                 .calculateMetaPointsReward();
             metaPoints.mint(msg.sender, metaPointsReward * activityTime);
+            _incrementDailyActiveTimes(msg.sender, nodeType, activityTime);
+            _incrementDailyTotalActiveTimes(nodeType, activityTime);
+            minerPool.claimMacroDailyReward(msg.sender, nodeType, activityTime);
         }
 
         lastUptime[msg.sender][nodeType] = block.timestamp;
@@ -104,9 +108,27 @@ contract MinerHealthCheck is Initializable {
      * @param newTimeout The new timeout duration to set.
      * @return A boolean indicating whether the operation was successful.
      */
-    function setTimeout(uint256 newTimeout) external returns (bool) {
+    function setTimeout(
+        uint256 newTimeout
+    ) external onlyOwnerRole(msg.sender) returns (bool) {
         timeout = newTimeout;
         return (true);
+    }
+
+    /**
+     * @dev Allows a manager to manually ping a miner node.
+     * @param minerAddress The address of the miner node to ping.
+     * @param nodeType The type of miner node to ping.
+     */
+    function manuelPing(
+        address minerAddress,
+        MinerTypes.NodeType nodeType
+    )
+        external
+        isMiner(minerAddress, nodeType)
+        onlyManagerRole(msg.sender)
+    {
+        lastUptime[minerAddress][nodeType] = block.timestamp;
     }
 
     /**

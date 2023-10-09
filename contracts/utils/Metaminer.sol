@@ -20,7 +20,7 @@ contract Metaminer is Initializable, RolesHandler {
     uint256 public STAKE_AMOUNT = 1_000_000 ether;
     uint256 public ANNUAL_AMOUNT = 100_000 ether;
     uint256 private constant YEAR = 31536000;
-    address private MINER_POOL_ADDRESS; // should be constant
+    address private minerPool; // should be constant
 
     struct Share {
         uint256 sharedPercent;
@@ -42,11 +42,11 @@ contract Metaminer is Initializable, RolesHandler {
 
     /**
      * @dev Modifier to check if an address is a Metaminer.
-     * @param _miner The address to check.
+     * @param miner The address to check.
      */
-    modifier isMiner(address _miner) {
+    modifier isMiner(address miner) {
         require(
-            minerList.isMiner(_miner, MinerTypes.NodeType.Meta),
+            minerList.isMiner(miner, MinerTypes.NodeType.Meta),
             "Metaminer: Address is not metaminer"
         );
         _;
@@ -54,11 +54,11 @@ contract Metaminer is Initializable, RolesHandler {
 
     /**
      * @dev Modifier to check if a Metaminer's subscription is valid.
-     * @param _miner The address of the Metaminer to check.
+     * @param miner The address of the Metaminer to check.
      */
-    modifier validMinerSubscription(address _miner) {
+    modifier validMinerSubscription(address miner) {
         require(
-            minerSubscription[_miner] > block.timestamp,
+            minerSubscription[miner] > block.timestamp,
             "Metaminer: Miner subscription is not as required"
         );
         _;
@@ -82,7 +82,7 @@ contract Metaminer is Initializable, RolesHandler {
         blockValidator = IBlockValidator(blockValidatorAddress);
         minerList = IMinerList(minerListAddress);
         minerFormulas = IMinerFormulas(minerFormulasAddress);
-        MINER_POOL_ADDRESS = minerPoolAddress;
+        minerPool = minerPoolAddress;
     }
 
     /**
@@ -92,14 +92,14 @@ contract Metaminer is Initializable, RolesHandler {
     function setMiner() external payable returns (bool) {
         require(
             msg.value == (ANNUAL_AMOUNT + STAKE_AMOUNT),
-            "Metaminer: Required MTC is not sended"
+            "Metaminer: Required MTC is not sent"
         );
         shares[msg.sender] = Share(0, 0);
         minerSubscription[msg.sender] = _nextYear(msg.sender);
         minerList.addMiner(msg.sender, MinerTypes.NodeType.Meta);
         _addShareHolder(
             msg.sender,
-            MINER_POOL_ADDRESS,
+            minerPool,
             minerFormulas.METAMINER_MINER_POOL_SHARE_PERCENT()
         );
         emit MinerAdded(msg.sender, minerSubscription[msg.sender]);
@@ -111,7 +111,10 @@ contract Metaminer is Initializable, RolesHandler {
      * @return A boolean indicating whether the operation was successful.
      */
     function subscribe() external payable isMiner(msg.sender) returns (bool) {
-        require(msg.value == ANNUAL_AMOUNT, "Metaminer: Required MTC was not sent");
+        require(
+            msg.value == ANNUAL_AMOUNT,
+            "Metaminer: Required MTC was not sent"
+        );
         minerSubscription[msg.sender] = _nextYear(msg.sender);
         emit MinerSubscribe(msg.sender, minerSubscription[msg.sender]);
         return (true);
@@ -121,8 +124,8 @@ contract Metaminer is Initializable, RolesHandler {
      * @dev Allows a Metaminer to unsubscribe by unstaking their funds.
      * @return A boolean indicating whether the operation was successful.
      */
-    function unstake() external isMiner(msg.sender) returns (bool) {
-        _unstake(msg.sender);
+    function unsubscribe() external isMiner(msg.sender) returns (bool) {
+        _unsubscribe(msg.sender);
         emit MinerUnsubscribe(msg.sender);
         return (true);
     }
@@ -132,17 +135,17 @@ contract Metaminer is Initializable, RolesHandler {
      * @return A boolean indicating whether the operation was successful.
      */
     function setValidator(
-        address _miner
+        address validator
     ) external onlyOwnerRole(msg.sender) returns (bool) {
-        shares[_miner] = Share(0, 0);
-        minerSubscription[_miner] = _nextYear(_miner);
-        minerList.addMiner(_miner, MinerTypes.NodeType.Meta);
+        shares[validator] = Share(0, 0);
+        minerSubscription[validator] = _nextYear(validator);
+        minerList.addMiner(validator, MinerTypes.NodeType.Meta);
         _addShareHolder(
-            _miner,
-            MINER_POOL_ADDRESS,
+            validator,
+            minerPool,
             minerFormulas.METAMINER_MINER_POOL_SHARE_PERCENT()
         );
-        emit MinerAdded(_miner, minerSubscription[_miner]);
+        emit MinerAdded(validator, minerSubscription[validator]);
         return (true);
     }
 
@@ -151,38 +154,37 @@ contract Metaminer is Initializable, RolesHandler {
      * @return A boolean indicating whether the operation was successful.
      */
     function refreshValidator(
-        address _miner
+        address validator
     ) external onlyOwnerRole(msg.sender) returns (bool) {
-        minerSubscription[_miner] = _nextYear(_miner);
+        minerSubscription[validator] = _nextYear(validator);
         return (true);
     }
 
     /**
      * @dev Allows the contract owner to set the percentage share for Metaminer's shareholders.
-     * @param _miner The address of the Metaminer.
-     * @param _shareHolders The addresses of the shareholders.
-     * @param _percents The corresponding percentages for the shareholders.
-     * @param _shareHoldersLength The number of shareholders.
+     * @param miner The address of the Metaminer.
+     * @param shareHolders_ The addresses of the shareholders.
+     * @param percentages The corresponding percentages for the shareholders.
      * @return A boolean indicating whether the operation was successful.
      */
-    function setPercent(
-        address _miner,
-        address[] memory _shareHolders,
-        uint256[] memory _percents,
-        uint256 _shareHoldersLength
+    function setPercentages(
+        address miner,
+        address[] memory shareHolders_,
+        uint256[] memory percentages
     ) external onlyOwnerRole(msg.sender) returns (bool) {
-        Share storage share = shares[_miner];
-        for (uint256 i = 0; i < _shareHoldersLength; i++) {
-            address addr = _shareHolders[i];
-            uint256 percent = _percents[i];
-            uint256 nextPercent = share.sharedPercent + percent;
+        Share storage share = shares[miner];
+        uint256 shareHoldersLength = shareHolders_.length;
+        for (uint256 i = 0; i < shareHoldersLength; i++) {
+            address addr = shareHolders_[i];
+            uint256 percentage = percentages[i];
+            uint256 nextPercent = share.sharedPercent + percentage;
 
             require(
                 nextPercent <= minerFormulas.BASE_DIVIDER(),
                 "Metaminer: Total percent cannot exceed 100"
             );
 
-            _addShareHolder(_miner, addr, percent);
+            _addShareHolder(miner, addr, percentage);
             share.sharedPercent = nextPercent;
         }
         return (true);
@@ -197,107 +199,107 @@ contract Metaminer is Initializable, RolesHandler {
         uint256 blockNumber
     ) external payable returns (bool) {
         bool status = _minerCheck(msg.sender);
-        if (status == true) {
-            IBlockValidator.BlockPayload memory blockPayload = blockValidator
-                .blockPayloads(blockNumber);
-            bool finalized = blockPayload.isFinalized;
-            require(finalized == false, "Already finalized.");
-            address coinbase = blockPayload.coinbase;
-            uint256 blockReward = blockPayload.blockReward;
 
-            require(msg.sender == coinbase, "Metaminer: Wrong sender address");
-            require(msg.value >= blockReward, "Metaminer: Insufficient amount");
-
-            _shareIncome(msg.sender, msg.value);
-
-            bool result = blockValidator.finalizeBlock(blockNumber);
-            require(result == true, "Metaminer: Unable to finalize block");
+        if (!status) {
+            return false;
         }
+
+        IBlockValidator.BlockPayload memory blockPayload = blockValidator
+            .blockPayloads(blockNumber);
+        bool finalized = blockPayload.isFinalized;
+        require(finalized == false, "Metaminer: Already finalized");
+        address coinbase = blockPayload.coinbase;
+        uint256 blockReward = blockPayload.blockReward;
+
+        require(msg.sender == coinbase, "Metaminer: Wrong coinbase");
+        require(msg.value >= blockReward, "Metaminer: Insufficient amount");
+
+        _shareIncome(msg.sender, msg.value);
+
+        blockValidator.finalizeBlock(blockNumber);
 
         return true;
     }
 
     /**
      * @dev Calculates the timestamp for the start of the next year.
-     * @param _miner The address of the Metaminer.
+     * @param miner The address of the Metaminer.
      * @return The timestamp for the start of the next year.
      */
-    function _nextYear(address _miner) internal view returns (uint256) {
+    function _nextYear(address miner) internal view returns (uint256) {
         return (
-            minerSubscription[_miner] > block.timestamp
-                ? (minerSubscription[_miner] + YEAR)
+            minerSubscription[miner] > block.timestamp
+                ? (minerSubscription[miner] + YEAR)
                 : (block.timestamp + YEAR)
         );
     }
 
     /**
      * @dev Adds a shareholder to a Metaminer's list of shareholders.
-     * @param _miner The address of the Metaminer.
-     * @param _addr The address of the shareholder to add.
-     * @param _percent The percentage share of the shareholder.
-     * @return A boolean indicating whether the operation was successful.
+     * @param miner The address of the Metaminer.
+     * @param shareholder The address of the shareholder to add.
+     * @param percentage The percentage share of the shareholder.
      */
     function _addShareHolder(
-        address _miner,
-        address _addr,
-        uint256 _percent
-    ) internal isMiner(_miner) returns (bool) {
-        Share storage share = shares[_miner];
-        shareholders[_miner][share.shareHolderCount] = Shareholder(
-            _addr,
-            _percent
+        address miner,
+        address shareholder,
+        uint256 percentage
+    ) internal isMiner(miner) {
+        Share storage share = shares[miner];
+        shareholders[miner][share.shareHolderCount] = Shareholder(
+            shareholder,
+            percentage
         );
         share.shareHolderCount++;
-        return (true);
     }
 
     /**
      * @dev Distributes the income to the Metaminer's shareholders.
-     * @param _miner The address of the Metaminer.
-     * @param _balance The total balance to distribute.
+     * @param miner The address of the Metaminer.
+     * @param balance The total balance to distribute.
      * @return A boolean indicating whether the operation was successful.
      */
     function _shareIncome(
-        address _miner,
-        uint256 _balance
-    ) internal isMiner(_miner) validMinerSubscription(_miner) returns (bool) {
-        uint256 _shareholderCount = shares[_miner].shareHolderCount;
+        address miner,
+        uint256 balance
+    ) internal isMiner(miner) validMinerSubscription(miner) returns (bool) {
+        uint256 _shareholderCount = shares[miner].shareHolderCount;
         for (uint256 i = 0; i < _shareholderCount; i++) {
-            Shareholder memory shareHolder = shareholders[_miner][i];
-            uint256 holderPercent = (_balance * shareHolder.percent) /
+            Shareholder memory shareHolder = shareholders[miner][i];
+            uint256 holderPercent = (balance * shareHolder.percent) /
                 minerFormulas.BASE_DIVIDER();
             (bool sent, ) = address(shareHolder.addr).call{
                 value: holderPercent
             }("");
-            require(sent, "MetaMiner: Income sharing failed");
+            require(sent, "Metaminer: Income sharing failed");
         }
         return (true);
     }
 
     /**
-     * @dev Unstakes a Metaminer by transferring their staked amount back to them.
-     * @param _miner The address of the Metaminer to unstake.
+     * @dev Unsubscribes a Metaminer by transferring their staked amount back to them.
+     * @param miner The address of the Metaminer to unsubscribe.
      * @return A boolean indicating whether the operation was successful.
      */
-    function _unstake(address _miner) internal returns (bool) {
-        (bool sent, ) = address(_miner).call{value: STAKE_AMOUNT}("");
-        require(sent, "Metaminer: Unstake failed");
-        minerList.deleteMiner(_miner, MinerTypes.NodeType.Meta);
-        minerSubscription[_miner] = 0;
+    function _unsubscribe(address miner) internal returns (bool) {
+        (bool sent, ) = address(miner).call{value: STAKE_AMOUNT}("");
+        require(sent, "Metaminer: Unsubsribe failed");
+        minerList.deleteMiner(miner, MinerTypes.NodeType.Meta);
+        minerSubscription[miner] = 0;
         // must be delete old shareholders
         return (true);
     }
 
     /**
-     * @dev Checks if a Metaminer's subscription is valid and unstakes them if it's not.
-     * @param _miner The address of the Metaminer to check.
+     * @dev Checks if a Metaminer's subscription is valid and unsubscribe them if it's not.
+     * @param miner The address of the Metaminer to check.
      * @return A boolean indicating whether the Metaminer's subscription is valid.
      */
     function _minerCheck(
-        address _miner
-    ) internal isMiner(_miner) returns (bool) {
-        if (minerSubscription[_miner] < block.timestamp) {
-            _unstake(_miner);
+        address miner
+    ) internal isMiner(miner) returns (bool) {
+        if (minerSubscription[miner] < block.timestamp) {
+            _unsubscribe(miner);
             return (false);
         } else {
             return (true);

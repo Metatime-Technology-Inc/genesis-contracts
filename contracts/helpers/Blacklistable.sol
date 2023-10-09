@@ -17,7 +17,10 @@ abstract contract Blacklistable is RolesHandler {
      * @param wallet The address to check.
      */
     modifier isBlacklisted(address wallet) {
-        require(blacklist[wallet] == false, "Blacklistable: Wallet is blacklisted.");
+        require(
+            blacklist[wallet] == false,
+            "Blacklistable: Wallet is blacklisted"
+        );
         _;
     }
 
@@ -29,7 +32,7 @@ abstract contract Blacklistable is RolesHandler {
     function setBlacklist(
         address wallet,
         bool status
-    ) public virtual onlyOwnerRole(msg.sender) {
+    ) external onlyOwnerRole(msg.sender) {
         blacklist[wallet] = status;
         emit Blacklist(wallet, status);
     }

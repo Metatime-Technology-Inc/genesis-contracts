@@ -8,8 +8,6 @@ interface IRoles {
 
     function VALIDATOR_ROLE() external view returns (bytes32);
 
-    function DEVELOPER_ROLE() external view returns (bytes32);
-
     function hasRole(
         bytes32 role,
         address account

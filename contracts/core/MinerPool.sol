@@ -8,7 +8,7 @@ import "../interfaces/IMinerFormulas.sol";
 import "../interfaces/IMinerList.sol";
 
 /**
- * @title RewardsPool
+ * @title MinerPool
  * @notice Holds tokens for miners to claim.
  * @dev A contract for distributing tokens over a specified period of time for mining purposes.
  */
@@ -54,15 +54,21 @@ contract MinerPool is Initializable, RolesHandler {
             activityTime
         );
 
-        (bool isFirstAmountSent, ) = receiver.call{value: firstAmount}("");
-        require(isFirstAmountSent, "MinerPool: Unable to claim");
+        if (firstAmount > 0) {
+            (bool isFirstAmountSent, ) = receiver.call{value: firstAmount}("");
+            require(isFirstAmountSent, "MinerPool: Unable to claim");
 
-        emit HasClaimed(receiver, firstAmount, "MACRO_DAILY_REWARD");
+            emit HasClaimed(receiver, firstAmount, "MACRO_DAILY_REWARD");
+        }
 
-        (bool isSecondAmountSent, ) = receiver.call{value: secondAmount}("");
-        require(isSecondAmountSent, "MinerPool: Unable to claim");
+        if (secondAmount > 0) {
+            (bool isSecondAmountSent, ) = receiver.call{value: secondAmount}(
+                ""
+            );
+            require(isSecondAmountSent, "MinerPool: Unable to claim");
 
-        emit HasClaimed(receiver, secondAmount, "MACRO_DAILY_REWARD");
+            emit HasClaimed(receiver, secondAmount, "MACRO_DAILY_REWARD");
+        }
 
         return (firstAmount, secondAmount);
     }
@@ -82,6 +88,7 @@ contract MinerPool is Initializable, RolesHandler {
         uint256 activityTime
     ) internal returns (uint256, uint256) {
         uint256 firstFormulaHardCap = 0;
+        uint256 firstFormulaMinerHardCap = 0;
         uint256 secondFormulaHardCap = 0;
 
         if (nodeType == MinerTypes.NodeType.MacroArchive) {
@@ -89,16 +96,30 @@ contract MinerPool is Initializable, RolesHandler {
                 .MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA();
             secondFormulaHardCap = minerFormulas
                 .MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA();
+
+            firstFormulaMinerHardCap = (minerFormulas
+                .MACROMINER_ARCHIVE_DAILY_MAX_REWARD() /
+                minerFormulas.SECONDS_IN_A_DAY());
         } else if (nodeType == MinerTypes.NodeType.MacroFullnode) {
             firstFormulaHardCap = minerFormulas
                 .MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA();
             secondFormulaHardCap = minerFormulas
                 .MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA();
+
+            firstFormulaMinerHardCap = (minerFormulas
+                .MACROMINER_FULLNODE_DAILY_MAX_REWARD() /
+                minerFormulas.SECONDS_IN_A_DAY());
         } else if (nodeType == MinerTypes.NodeType.MacroLight) {
             firstFormulaHardCap = minerFormulas
                 .MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA();
             secondFormulaHardCap = minerFormulas
                 .MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA();
+
+            firstFormulaMinerHardCap = (minerFormulas
+                .MACROMINER_LIGHT_DAILY_MAX_REWARD() /
+                minerFormulas.SECONDS_IN_A_DAY());
+        } else {
+            return (uint256(0), uint256(0));
         }
 
         uint256 firstFormulaAmount = minerFormulas
@@ -107,14 +128,26 @@ contract MinerPool is Initializable, RolesHandler {
             .calculateDailyPoolRewardsFromSecondFormula(minerAddress, nodeType);
         uint256 currentDateIndex = minerFormulas.getDate();
 
-        require(
+        firstFormulaAmount *= activityTime;
+        secondFormulaAmount *= activityTime;
+        firstFormulaMinerHardCap *= activityTime;
+
+        if (firstFormulaAmount > firstFormulaMinerHardCap) {
+            firstFormulaAmount = firstFormulaMinerHardCap;
+        }
+
+        if (
             (totalRewardsFromFirstFormula[currentDateIndex][nodeType] +
-                firstFormulaAmount) <= firstFormulaHardCap, "MinerPool: Addition exceeds hardcap for first formula"
-        );
-        require(
+                firstFormulaAmount) > firstFormulaHardCap
+        ) {
+            firstFormulaAmount = 0;
+        }
+        if (
             (totalRewardsFromSecondFormula[currentDateIndex][nodeType] +
-                secondFormulaAmount) <= secondFormulaHardCap, "MinerPool: Addition exceeds hardcap for second formula"
-        );
+                secondFormulaAmount) > secondFormulaHardCap
+        ) {
+            secondFormulaAmount = 0;
+        }
 
         totalRewardsFromFirstFormula[currentDateIndex][
             nodeType
@@ -122,9 +155,6 @@ contract MinerPool is Initializable, RolesHandler {
         totalRewardsFromSecondFormula[currentDateIndex][
             nodeType
         ] += secondFormulaAmount;
-
-        firstFormulaAmount *= activityTime;
-        secondFormulaAmount *= activityTime;
 
         return (firstFormulaAmount, secondFormulaAmount);
     }

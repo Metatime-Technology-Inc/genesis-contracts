@@ -31,7 +31,8 @@ contract TxValidator is Initializable, RolesHandler {
     IMinerHealthCheck public minerHealthCheck;
 
     mapping(bytes32 => TxPayload) public txPayloads;
-    mapping(bytes32 => Vote[]) public txVotes;
+    mapping(bytes32 => mapping(uint256 => Vote)) public txVotes;
+    mapping(bytes32 => uint256) public txVotesCount;
     mapping(bytes32 => mapping(address => bool)) public previousVotes;
 
     struct Vote {
@@ -65,14 +66,16 @@ contract TxValidator is Initializable, RolesHandler {
 
     function initialize(
         address minerListAddress,
-        address minerPointsAddress,
+        address metaPointsAddress,
         address minerFormulasAddress,
-        address minerHealthCheckAddress
-    ) external {
+        address minerHealthCheckAddress,
+        address minerPoolAddress
+    ) external initializer {
         minerList = IMinerList(minerListAddress);
-        metaPoints = IMetaPoints(minerPointsAddress);
+        metaPoints = IMetaPoints(metaPointsAddress);
         minerFormulas = IMinerFormulas(minerFormulasAddress);
         minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
+        minerPool = IMinerPool(minerPoolAddress);
     }
 
     function addTransaction(
@@ -84,7 +87,10 @@ contract TxValidator is Initializable, RolesHandler {
         bool isAlive = minerHealthCheck.status(handler, nodeType);
         require(isAlive, "TxValidator: Miner is not active");
         TxPayload storage txPayload = txPayloads[txHash];
-        require(txPayload.handler == address(0), "TxValidator: Tx is already exist");
+        require(
+            txPayload.handler == address(0),
+            "TxValidator: Tx is already exist"
+        );
         txPayloads[txHash] = TxPayload(
             handler,
             reward,
@@ -109,10 +115,22 @@ contract TxValidator is Initializable, RolesHandler {
         address voter = msg.sender;
         TransactionState txState = _checkTransactionState(txHash);
 
-        require(txState == TransactionState.Pending, "TxValidator: Tx is closed");
-        require(txPayload.handler != address(0), "TxValidator: Tx doesn't exist");
-        require(previousVotes[txHash][voter] != true, "TxValidator: Already voted");
-        require(voter != txPayload.handler, "TxValidator: Handler cannot vote for tx");
+        require(
+            txPayload.handler != address(0),
+            "TxValidator: Tx doesn't exist"
+        );
+        require(
+            txState == TransactionState.Pending,
+            "TxValidator: Tx is closed"
+        );
+        require(
+            previousVotes[txHash][voter] != true,
+            "TxValidator: Already voted"
+        );
+        require(
+            voter != txPayload.handler,
+            "TxValidator: Handler cannot vote for tx"
+        );
         require(
             minerList.list(voter, nodeType) == true &&
                 nodeType != MinerTypes.NodeType.Meta,
@@ -120,9 +138,12 @@ contract TxValidator is Initializable, RolesHandler {
         );
 
         uint256 votePoint = _calculateVotePoint(voter, nodeType);
+        uint256 txVoteCount = txVotesCount[txHash];
 
         txPayload.votePoint += votePoint;
-        txVotes[txHash].push(Vote(nodeType, voter, decision));
+        txVotes[txHash][txVoteCount] = Vote(nodeType, voter, decision);
+        previousVotes[txHash][voter] = true;
+        txVotesCount[txHash]++;
 
         emit VoteTransaction(txHash, voter, decision);
         _checkTransactionState(txHash);
@@ -140,13 +161,13 @@ contract TxValidator is Initializable, RolesHandler {
         bytes32 txHash
     ) internal returns (TransactionState) {
         TxPayload storage txPayload = txPayloads[txHash];
-        Vote[] storage txVote = txVotes[txHash];
+        uint256 txVoteCount = txVotesCount[txHash];
 
         TransactionState state = TransactionState.Pending;
 
         if (
             (txPayload.votePoint >= votePointLimit ||
-                txVote.length == voteCountLimit) && txPayload.done == false
+                txVoteCount == voteCountLimit) && txPayload.done == false
         ) {
             txPayload.done = true;
             _shareRewards(txHash);
@@ -171,31 +192,37 @@ contract TxValidator is Initializable, RolesHandler {
         address voter,
         MinerTypes.NodeType nodeType
     ) internal view returns (uint256) {
+        uint256 votePoint = defaultVotePoint;
         if (nodeType == MinerTypes.NodeType.Micro) {
-            return defaultVotePoint;
+            return votePoint;
         }
 
         uint256 metaPointsBalance = metaPoints.balanceOf(voter);
-        return (defaultVotePoint * metaPointsBalance);
+        votePoint *= (metaPointsBalance > 0 ? metaPointsBalance / 1 ether : 1);
+
+        return votePoint;
     }
 
     function _shareRewards(bytes32 txHash) internal returns (bool) {
         TxPayload storage txPayload = txPayloads[txHash];
-        Vote[] storage txVote = txVotes[txHash];
+        uint256 txVoteCount = txVotesCount[txHash];
 
-        address[] memory trueVoters;
-        address[] memory falseVoters;
-        for (uint256 i = 0; i < txVote.length; i++) {
-            Vote memory vote = txVote[i];
+        address[32] memory trueVoters;
+        address[32] memory falseVoters;
+        uint256 trueVotersLength = 0;
+        uint256 falseVotersLength = 0;
+
+        for (uint256 i = 0; i < txVoteCount; i++) {
+            Vote memory vote = txVotes[txHash][i];
             if (vote.decision) {
-                trueVoters[trueVoters.length] = vote.voter;
+                trueVoters[trueVotersLength] = vote.voter;
+                trueVotersLength++;
                 continue;
             }
-            falseVoters[falseVoters.length] = vote.voter;
+            falseVoters[falseVotersLength] = vote.voter;
+            falseVotersLength++;
         }
 
-        uint256 trueVotersLength = trueVoters.length;
-        uint256 falseVotersLength = falseVoters.length;
         bool tie = (trueVotersLength == falseVotersLength ? true : false);
         bool decision = (trueVotersLength > falseVotersLength ? true : false);
 
