@@ -118,8 +118,11 @@ describe("MinerFormulas", function () {
             );
         }
 
-        const multiplier = toWei("1");
+        const multiplier = toWei("0.00000001");
+        const multiplier2 = toWei("0.0001");
+        const multiplier3 = toWei("1000000");
         const secondsInADay = BigNumber.from("86400");
+        const secondsInADay2 = BigNumber.from("86400").mul(multiplier2);
 
         const calculateMetaPoint = (activity:BigNumber) => {
             return toWei("1").div(secondsInADay).mul(activity);
@@ -135,8 +138,8 @@ describe("MinerFormulas", function () {
         const calculateFormulas2 = (poolAmount:BigNumber, nodeCount:BigNumber, activity:BigNumber) => {
             // return (((REST_POOL_AMOUNT * 1e18 / (TOTAL_SUPPLY_META_POINTS * (MINERS_TOTAL_ACTIVITIES * 1e18 / (TOTAL_NODE_COUNT * 24)))) * MINER_META_POINT * (MINER_ACTIVITY / 24)) / SECONDS_IN_A_DAY);
             const step1 = (activity.mul(multiplier)).div((nodeCount.mul(BigNumber.from(String(24)))));
-            const step2 = poolAmount.mul(multiplier).div((calculateMetaPoint(activity).mul(step1)));
-            const step3 = step2.mul(calculateMetaPoint(activity)).mul((activity.div(BigNumber.from(String(24))))).div(secondsInADay);
+            const step2 = poolAmount.mul(multiplier3).div((calculateMetaPoint(activity).mul(step1)));
+            const step3 = step2.mul(calculateMetaPoint(activity)).mul((activity.div(BigNumber.from(String(24))))).div(secondsInADay2);
 
             return step3;
         }
