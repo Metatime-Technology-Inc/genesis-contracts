@@ -15,7 +15,6 @@ contract Roles is AccessControl, Initializable {
 
     mapping(uint256 => address) public validatorList;
     uint256 public currentValidatorId;
-    uint256 public validatorQueueNumber;
 
     /**
      * @dev Initializes the Roles contract with the initial owner's address.
