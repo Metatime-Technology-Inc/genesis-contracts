@@ -28,7 +28,7 @@ interface IContracts {
     MinerHealthCheck: string;
     MinerList: string;
     MockMetaminer: string;
-    MulticallV3: string;
+    Multicall3: string;
     MultiSigWallet: string;
     Roles: string;
     TxValidator: string;
@@ -64,7 +64,7 @@ const CONTRACTS: IContracts = {
     MinerHealthCheck: "MinerHealthCheck",
     MinerList: "MinerList",
     MockMetaminer: "MockMetaminer",
-    MulticallV3: "MulticallV3",
+    Multicall3: "Multicall3",
     MultiSigWallet: "MultiSigWallet",
     Roles: "Roles",
     TxValidator: "TxValidator",

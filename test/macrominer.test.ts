@@ -71,13 +71,13 @@ describe("MacroMiner", function () {
 
     // test Macrominer
     describe("test macrominer contract", async () => {
-        const minerHealthCheckTimeoutNumber:number = 14_400; // 4 hours
-        const minerHealthCheckTimeout:BigNumber = BigNumber.from(String(minerHealthCheckTimeoutNumber));
-        const metaminerType:BigNumber = BigNumber.from(String(0));
-        const macrominerArchiveType:BigNumber = BigNumber.from(String(1));
-        const macrominerFullnodeType:BigNumber = BigNumber.from(String(2));
-        const macrominerLightType:BigNumber = BigNumber.from(String(3));
-        const STAKE_AMOUNT:BigNumber = toWei(String(100));
+        const minerHealthCheckTimeoutNumber: number = 14_400; // 4 hours
+        const minerHealthCheckTimeout: BigNumber = BigNumber.from(String(minerHealthCheckTimeoutNumber));
+        const metaminerType: BigNumber = BigNumber.from(String(0));
+        const macrominerArchiveType: BigNumber = BigNumber.from(String(1));
+        const macrominerFullnodeType: BigNumber = BigNumber.from(String(2));
+        const macrominerLightType: BigNumber = BigNumber.from(String(3));
+        const STAKE_AMOUNT: BigNumber = toWei(String(100));
 
         const initContracts = async () => {
             const {
@@ -234,7 +234,7 @@ describe("MacroMiner", function () {
             const { miner_1, miner_2, macroMiner, minerHealthCheck } = await loadFixture(initiateVariables);
 
             // init contracts
-            await initContracts();            
+            await initContracts();
 
             // setMiner with STAKE_AMOUNT
             const preparedContractTranscation = await macroMiner.connect(miner_1).populateTransaction.setMiner(macrominerArchiveType);
@@ -257,7 +257,7 @@ describe("MacroMiner", function () {
             await vote1.wait();
 
             const voteResult = await macroMiner.votes(miner_1.address, macrominerArchiveType);
-            
+
             expect(
                 voteResult[1]
             ).to.be.equal(BigNumber.from(String(0)));
@@ -675,79 +675,80 @@ describe("MacroMiner", function () {
         });
 
         // try MinerHealthCheck:ping function when exceeds hardcap for formulas
-        // it("try MinerHealthCheck:ping function when exceeds hardcap for formulas", async () => {
-        //     const {
-        //         manager,
-        //         miner_1,
-        //         miner_2,
-        //         miner_3,
-        //         minerHealthCheck,
-        //         minerPool,
-        //         minerList
-        //     } = await loadFixture(initiateVariables);
+        it("try MinerHealthCheck:ping function when exceeds hardcap for formulas", async () => {
+            const {
+                manager,
+                miner_1,
+                miner_2,
+                miner_3,
+                minerHealthCheck,
+                minerPool,
+                minerList,
+                metaPoints,
+                minerFormulas
+            } = await loadFixture(initiateVariables);
 
-        //     // init contracts
-        //     await initContracts();
+            // init contracts
+            await initContracts();
 
-        //     // set funds to miner pool
-        //     await network.provider.send("hardhat_setBalance", [
-        //         minerPool.address,
-        //         "0x200000000000000000000000000000000000000000000000000000000000000"
-        //     ]);
+            // set funds to miner pool
+            await network.provider.send("hardhat_setBalance", [
+                minerPool.address,
+                "0x200000000000000000000000000000000000000000000000000000000000000"
+            ]);
 
-        //     // set funds to manager
-        //     await network.provider.send("hardhat_setBalance", [
-        //         manager.address,
-        //         "0x200000000000000000000000000000000000000000000000000000000000000"
-        //     ]);
+            // set funds to manager
+            await network.provider.send("hardhat_setBalance", [
+                manager.address,
+                "0x200000000000000000000000000000000000000000000000000000000000000"
+            ]);
 
-        //     const wallets = [];
-        //     const spawnCount = 900;
-        //     for (let i = 0; i < spawnCount; i++) {
-        //         const wallet = ethers.Wallet.createRandom().connect(ethers.provider);
-        //         wallets.push(wallet);
+            const wallets = [];
+            const spawnCount = 37;
+            for (let i = 0; i < spawnCount; i++) {
+                const wallet = ethers.Wallet.createRandom().connect(ethers.provider);
+                wallets.push(wallet);
 
-        //         // set funds to manager
-        //         await network.provider.send("hardhat_setBalance", [
-        //             wallet.address,
-        //             "0x200000000000000000000000000000000000000000000000000000000000000"
-        //         ]);
-        //     }
+                // set funds to manager
+                await network.provider.send("hardhat_setBalance", [
+                    wallet.address,
+                    "0x200000000000000000000000000000000000000000000000000000000000000"
+                ]);
+            }
 
-        //     // addMiners
-        //     const addMiner = await minerList.connect(manager).addMiner(miner_1.address, macrominerLightType);
-        //     await addMiner.wait();
-        //     const addMiner2 = await minerList.connect(manager).addMiner(miner_2.address, macrominerLightType);
-        //     await addMiner2.wait();
-        //     const addMiner3 = await minerList.connect(manager).addMiner(miner_3.address, macrominerLightType);
-        //     await addMiner3.wait();
+            // addMiners
+            await minerList.connect(manager).addMiner(miner_1.address, macrominerFullnodeType);
+            await minerList.connect(manager).addMiner(miner_2.address, macrominerFullnodeType);
+            await minerList.connect(manager).addMiner(miner_3.address, macrominerFullnodeType);
 
-        //     for (let i = 0; i < spawnCount; i++) {
-        //         const wallet = wallets[i];                
-        //         const addMinerLoop = await minerList.connect(manager).addMiner(wallet.address, macrominerLightType);
-        //         await addMinerLoop.wait();
-        //     }
+            for (let i = 0; i < spawnCount; i++) {
+                const wallet = wallets[i];
+                await minerList.connect(manager).addMiner(wallet.address, macrominerFullnodeType);
+            }
 
-        //     for (let i = 0; i < 10; i++) {
-        //         // increment
-        //         await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
-    
-        //         // ping with miner_1
-        //         const pingTX = await minerHealthCheck.connect(miner_1).ping(macrominerLightType);
-        //         // ping with miner_2
-        //         const pingTX2 = await minerHealthCheck.connect(miner_2).ping(macrominerLightType);
-        //         // ping with miner_3
-        //         const pingTX3 = await minerHealthCheck.connect(miner_3).ping(macrominerLightType);
-        //         // ping with spawned wallets
-        //         for (let i = 0; i < spawnCount; i++) {
-        //             const wallet = wallets[i];
-        //             const pingTX = await minerHealthCheck.connect(wallet).ping(macrominerLightType);
-        //         }
-        //     }
 
-        //     expect(
-        //         await minerHealthCheck.connect(miner_1).ping(macrominerLightType)
-        //     ).to.be.ok;
-        // }).timeout(100000000000);
+            await metaPoints.connect(manager).mint(miner_1.address, toWei(String(100)));
+
+            for (let i = 0; i < 20; i++) {
+                // increment
+                await incrementBlocktimestamp(ethers, (minerHealthCheckTimeoutNumber / 2));
+
+                // ping with miner_1
+                await minerHealthCheck.connect(miner_1).ping(macrominerFullnodeType);
+                // ping with miner_2
+                await minerHealthCheck.connect(miner_2).ping(macrominerFullnodeType);
+                // ping with miner_3
+                await minerHealthCheck.connect(miner_3).ping(macrominerFullnodeType);
+                // ping with spawned wallets
+                for (let i = 0; i < spawnCount; i++) {
+                    const wallet = wallets[i];
+                    await minerHealthCheck.connect(wallet).ping(macrominerFullnodeType);
+                }
+            }
+
+            expect(
+                await minerHealthCheck.connect(miner_1).ping(macrominerFullnodeType)
+            ).to.be.ok;
+        }).timeout(100000000000);
     });
 });

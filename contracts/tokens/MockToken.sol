@@ -10,12 +10,6 @@ import "@openzeppelin/contracts/access/Ownable2Step.sol";
  * @dev An ERC20 standard contract that mints Metatime Token and distributes it to each pool based on Metatime Tokenomics.
  */
 contract MockToken is ERC20, ERC20Burnable, Ownable2Step {
-    struct Pool {
-        string name; // Name of the pool
-        address addr; // Address of the pool
-        uint256 lockedAmount; // Locked amount in the pool
-    }
-
     /**
      * @dev Initializes the MTC contract with initial pools and total supply.
      * @param _totalSupply The total supply of the MTC token.

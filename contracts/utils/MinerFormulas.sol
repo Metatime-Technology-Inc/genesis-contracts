@@ -135,12 +135,11 @@ contract MinerFormulas is Initializable {
         } else {
             return (0);
         }
-
-        uint256 formula = ((((REST_POOL_AMOUNT * 1e18) /
+        uint256 formula = ((((REST_POOL_AMOUNT * 1e24) /
             (TOTAL_SUPPLY_META_POINTS *
-                ((MINERS_TOTAL_ACTIVITIES * 1e18) / (TOTAL_NODE_COUNT * 24)))) *
+                ((MINERS_TOTAL_ACTIVITIES * 1e10) / (TOTAL_NODE_COUNT * 24)))) *
             MINER_META_POINT *
-            (MINER_ACTIVITY / 24)) / SECONDS_IN_A_DAY);
+            (MINER_ACTIVITY / 24)) / (SECONDS_IN_A_DAY * 1e14));
         return (formula);
     }
 

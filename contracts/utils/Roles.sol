@@ -15,9 +15,6 @@ contract Roles is AccessControl, Initializable {
 
     mapping(uint256 => address) public validatorList;
     uint256 public currentValidatorId;
-    uint256 public validatorQueueNumber;
-
-    event PickValidator(address indexed validatorAddress);
 
     /**
      * @dev Initializes the Roles contract with the initial owner's address.
@@ -31,22 +28,11 @@ contract Roles is AccessControl, Initializable {
 
     function pickValidator()
         external
-        onlyRole(VALIDATOR_ROLE)
+        view
         returns (address)
     {
-        uint256 currentId = currentValidatorId;
-        uint256 queueNumber = validatorQueueNumber;
-
-        if (currentId - 1 == validatorQueueNumber) {
-            validatorQueueNumber = 0;
-        } else {
-            validatorQueueNumber++;
-        }
-
+        uint256 queueNumber = block.number % currentValidatorId;
         address pickedValidator = validatorList[queueNumber];
-
-        emit PickValidator(pickedValidator);
-
         return pickedValidator;
     }
 
