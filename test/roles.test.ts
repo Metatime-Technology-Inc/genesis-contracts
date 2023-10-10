@@ -2,7 +2,7 @@ import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
-import { toWei } from "../scripts/helpers";
+import { getBlock, getBlockTimestamp, mineBlock, toWei } from "../scripts/helpers";
 import { BigNumber } from "ethers";
 import { Roles } from "../typechain-types";
 
@@ -46,19 +46,15 @@ describe("Roles", function () {
       await roles.connect(owner).grantRole(VALIDATOR_ROLE, validatorArr[2]);
       await roles.connect(owner).grantRole(VALIDATOR_ROLE, validatorArr[3]);
 
-      let latestValidatorIndex = 0;
+      expect(await roles.validatorList(0)).to.be.equal(validatorArr[0]);
+
       for (let i = 0; i < 7; i++) {
-        const validatorQueuenumber = await roles
-          .connect(owner)
-          .validatorQueueNumber();
-        const pickedValidator = await roles.validatorList(validatorQueuenumber);
-        expect(pickedValidator).to.be.equal(validatorArr[latestValidatorIndex]);
-        await roles.connect(owner).pickValidator();
-        if (latestValidatorIndex + 1 === validatorArr.length) {
-          latestValidatorIndex = 0;
-        } else {
-          latestValidatorIndex++;
-        }
+        const block = await getBlock(ethers);
+        const currentValidatorId = await roles.currentValidatorId();
+        const queueNumber = Number(block.number) % Number(currentValidatorId);
+        const pickedValidator = await roles.pickValidator();
+        expect(pickedValidator).to.be.equal(await roles.validatorList(queueNumber));
+        await mineBlock(ethers);
       }
     });
   });

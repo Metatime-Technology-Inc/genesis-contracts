@@ -53,6 +53,19 @@ const incrementBlocktimestamp = async (
   await ethers.provider.send("evm_mine", []);
 };
 
+const mineBlock = async (ethers: HardhatEthersHelpers): Promise<void> => {
+  await ethers.provider.send("evm_mine", []);
+};
+
+const getBlock = async (
+  ethers: HardhatEthersHelpers,
+  blockHashOrBlockTag:
+    | ethers.providers.BlockTag
+    | Promise<ethers.providers.BlockTag> = "latest"
+) => {
+  return await ethers.provider.getBlock(blockHashOrBlockTag);
+};
+
 const calculateExchangeFee = (amount: number, percentage: number) => {
   return (amount * percentage) / 100;
 };
@@ -120,6 +133,8 @@ export {
   callMethod,
   calculateExchangeFee,
   incrementBlocktimestamp,
+  getBlock,
+  mineBlock,
   filterObject,
   calculateClaimableAmount,
   calculateBurnAmount,
