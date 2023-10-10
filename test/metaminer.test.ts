@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { ethers, network } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { incrementBlocktimestamp, setBalance, toWei } from "../scripts/helpers";
-import { BigNumber, BytesLike } from "ethers";
+import { BigNumber } from "ethers";
 import {
   BlockValidator,
   MinerList,

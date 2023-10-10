@@ -123,11 +123,7 @@ contract MinerHealthCheck is Initializable, RolesHandler {
     function manuelPing(
         address minerAddress,
         MinerTypes.NodeType nodeType
-    )
-        external
-        isMiner(minerAddress, nodeType)
-        onlyManagerRole(msg.sender)
-    {
+    ) external isMiner(minerAddress, nodeType) onlyManagerRole(msg.sender) {
         lastUptime[minerAddress][nodeType] = block.timestamp;
     }
 

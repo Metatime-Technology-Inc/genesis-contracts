@@ -26,11 +26,7 @@ contract Roles is AccessControl, Initializable {
         _setRoleAdmin(VALIDATOR_ROLE, OWNER_ROLE);
     }
 
-    function pickValidator()
-        external
-        view
-        returns (address)
-    {
+    function pickValidator() external view returns (address) {
         uint256 queueNumber = block.number % currentValidatorId;
         address pickedValidator = validatorList[queueNumber];
         return pickedValidator;

@@ -3,8 +3,7 @@ import { expect } from "chai";
 import { ethers, network } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { getBlock, mineBlock, toWei } from "../scripts/helpers";
-import { BigNumber } from "ethers";
-import { Bridge, MockToken, Multicall3, Roles, WMTC } from "../typechain-types";
+import { Multicall3, WMTC } from "../typechain-types";
 import { Address } from "hardhat-deploy/types";
 
 describe("Multicall", function () {

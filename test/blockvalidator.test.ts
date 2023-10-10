@@ -2,7 +2,7 @@ import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers, network } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
-import { toWei, incrementBlocktimestamp } from "../scripts/helpers";
+import { toWei } from "../scripts/helpers";
 import { BigNumber, BigNumberish } from "ethers";
 import { BlockValidator, RewardsPool, MinerHealthCheck, MinerFormulas, MinerPool, MetaPoints, MinerList, Roles } from "../typechain-types";
 

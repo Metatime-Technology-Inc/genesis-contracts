@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { ethers, network } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { toWei, incrementBlocktimestamp } from "../scripts/helpers";
-import { BigNumber, BigNumberish } from "ethers";
+import { BigNumber } from "ethers";
 import { Macrominer, MinerHealthCheck, MinerFormulas, MinerPool, MetaPoints, MinerList, Roles } from "../typechain-types";
 
 describe("MacroMiner", function () {

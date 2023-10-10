@@ -2,8 +2,7 @@ import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
-import { getBlock, getBlockTimestamp, mineBlock, toWei } from "../scripts/helpers";
-import { BigNumber } from "ethers";
+import { getBlock, mineBlock } from "../scripts/helpers";
 import { Roles } from "../typechain-types";
 
 describe("Roles", function () {
