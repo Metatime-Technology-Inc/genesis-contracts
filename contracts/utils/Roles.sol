@@ -28,8 +28,7 @@ contract Roles is AccessControl, Initializable {
 
     function pickValidator()
         external
-        view 
-        onlyRole(VALIDATOR_ROLE)
+        view
         returns (address)
     {
         uint256 queueNumber = block.number % currentValidatorId;
