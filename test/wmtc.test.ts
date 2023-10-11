@@ -41,6 +41,11 @@ describe("WMTC", function () {
                     value: funds
                 })
             ).to.be.ok;
+
+            await expect(owner.sendTransaction({
+                to: wmtc.address,
+                value: toWei("1"),
+            })).to.emit(wmtc, "Deposit").withArgs(owner.address, toWei("1"));
         });
 
         // try withdraw function

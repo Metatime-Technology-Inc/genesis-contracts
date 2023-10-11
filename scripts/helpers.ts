@@ -1,4 +1,4 @@
-import { BigNumber, ethers } from "ethers";
+import { BigNumber, BigNumberish, ethers } from "ethers";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { HardhatEthersHelpers } from "@nomiclabs/hardhat-ethers/types";
 import { cos, unit } from "mathjs";
@@ -127,6 +127,28 @@ const setBalance = async (
   await network.provider.send("hardhat_setBalance", [address, amountInHex]);
 };
 
+const getSlotOfTotalRewardsFromFirstFormula = (
+  mappingSlot: BigNumber,
+  dayTime: BigNumber,
+  nodeType: BigNumber
+): string => {
+  const abiCoder = new ethers.utils.AbiCoder();
+
+  const firstLevelEncoded = abiCoder.encode(
+    ["uint256", "uint256"],
+    [dayTime, mappingSlot]
+  );
+
+  const secondLevelEncoded = abiCoder.encode(["uint256"], [nodeType]);
+
+  return ethers.utils.keccak256(
+    ethers.utils.concat([
+      secondLevelEncoded,
+      ethers.utils.keccak256(firstLevelEncoded),
+    ])
+  ).replace(/0x0+/, "0x");
+};
+
 export {
   getBlockTimestamp,
   toWei,
@@ -140,4 +162,5 @@ export {
   calculateBurnAmount,
   findMarginOfDeviation,
   setBalance,
+  getSlotOfTotalRewardsFromFirstFormula,
 };

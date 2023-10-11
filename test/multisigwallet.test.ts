@@ -3,7 +3,6 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { toWei } from "../scripts/helpers";
-import { BigNumber } from "ethers";
 import {
   Bridge,
   MockToken,
@@ -98,6 +97,26 @@ describe("MultiSigWallet", function () {
         owner_2.address,
         owner_3.address,
       ]);
+    });
+
+    it("try to send ether to multisigwallet", async () => {
+      const { owner_1, owner_2, owner_3, multisigwallet } = await loadFixture(initiateVariables);
+
+      const SENT_AMOUNT = toWei("10");
+
+      await multisigwallet
+        .connect(owner_1)
+        .initialize(
+          [owner_1.address, owner_2.address, owner_3.address],
+          NUM_OF_CONF
+        );
+      
+        await owner_1.sendTransaction({
+          to: multisigwallet.address,
+          value: SENT_AMOUNT
+        });
+
+        expect(await multisigwallet.provider.getBalance(multisigwallet.address)).to.be.equal(SENT_AMOUNT);
     });
 
     it("try to send tx with wallet", async () => {

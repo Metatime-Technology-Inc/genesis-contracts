@@ -295,9 +295,7 @@ contract Metaminer is Initializable, RolesHandler {
      * @param miner The address of the Metaminer to check.
      * @return A boolean indicating whether the Metaminer's subscription is valid.
      */
-    function _minerCheck(
-        address miner
-    ) internal isMiner(miner) returns (bool) {
+    function _minerCheck(address miner) internal isMiner(miner) returns (bool) {
         if (minerSubscription[miner] < block.timestamp) {
             _unsubscribe(miner);
             return (false);
