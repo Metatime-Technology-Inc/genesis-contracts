@@ -202,6 +202,7 @@ describe("Metaminer", function () {
       totalCharge,
       blockValidator,
       mockMetaminer,
+      rewardsPool,
     };
   }
 
@@ -503,6 +504,19 @@ describe("Metaminer", function () {
           value: toWei("100"),
         })
       ).revertedWith("Metaminer: Miner subscription is not as required");
+    });
+
+    it("try to send eth to rewards pool", async () => {
+      const { owner, rewardsPool } = await loadFixture(initiateVariables);
+
+      await expect(
+        owner.sendTransaction({
+          to: rewardsPool.address,
+          value: toWei("1"),
+        })
+      )
+        .to.emit(rewardsPool, "Deposit")
+        .withArgs(owner.address, toWei("1"), toWei("1"));
     });
   });
 });
