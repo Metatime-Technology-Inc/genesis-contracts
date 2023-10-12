@@ -11,6 +11,10 @@ import "../interfaces/IMinerFormulas.sol";
 import "../interfaces/IMinerHealthCheck.sol";
 import "../libs/MinerTypes.sol";
 
+/**
+ * @title TxValidator
+ * @dev Contract for validating transactions and managing votes on transactions.
+ */
 // A long time ago in a galaxy far, far away! :D
 contract TxValidator is Initializable, RolesHandler {
     enum TransactionState {
@@ -64,6 +68,14 @@ contract TxValidator is Initializable, RolesHandler {
     event DoneTransaction(bytes32 indexed txHash, uint256 reward);
     event ExpireTransaction(bytes32 indexed txHash);
 
+    /**
+     * @dev Initializes the contract with required addresses and parameters.
+     * @param minerListAddress Address of the MinerList contract.
+     * @param metaPointsAddress Address of the MetaPoints contract.
+     * @param minerFormulasAddress Address of the MinerFormulas contract.
+     * @param minerHealthCheckAddress Address of the MinerHealthCheck contract.
+     * @param minerPoolAddress Address of the MinerPool contract.
+     */
     function initialize(
         address minerListAddress,
         address metaPointsAddress,
@@ -78,6 +90,14 @@ contract TxValidator is Initializable, RolesHandler {
         minerPool = IMinerPool(minerPoolAddress);
     }
 
+    /**
+     * @dev Allows a manager to add a new transaction for validation.
+     * @param txHash The hash of the transaction.
+     * @param handler The handler of the transaction.
+     * @param reward The reward associated with the transaction.
+     * @param nodeType The type of miner node associated with the transaction.
+     * @return A boolean indicating the success of the operation.
+     */
     function addTransaction(
         bytes32 txHash,
         address handler,
@@ -104,6 +124,13 @@ contract TxValidator is Initializable, RolesHandler {
         return (true);
     }
 
+    /**
+     * @dev Allows a user to vote on a transaction.
+     * @param txHash The hash of the transaction.
+     * @param decision The decision of the voter (true or false).
+     * @param nodeType The type of miner node associated with the voter.
+     * @return A boolean indicating the success of the operation.
+     */
     function voteTransaction(
         bytes32 txHash,
         bool decision,
@@ -151,12 +178,22 @@ contract TxValidator is Initializable, RolesHandler {
         return (true);
     }
 
+    /**
+     * @dev Checks the current state of a transaction and handles the state transitions.
+     * @param txHash The hash of the transaction.
+     * @return The state of the transaction (Pending, Completed, or Expired).
+     */
     function checkTransactionState(
         bytes32 txHash
     ) external returns (TransactionState) {
         return (_checkTransactionState(txHash));
     }
 
+    /**
+     * @dev Internal function to check the state of a transaction and handle state transitions.
+     * @param txHash The hash of the transaction.
+     * @return The state of the transaction (Pending, Completed, or Expired).
+     */
     function _checkTransactionState(
         bytes32 txHash
     ) internal returns (TransactionState) {
@@ -188,6 +225,12 @@ contract TxValidator is Initializable, RolesHandler {
         return state;
     }
 
+    /**
+     * @dev Internal function to calculate the vote point for a voter.
+     * @param voter The address of the voter.
+     * @param nodeType The type of miner node associated with the voter.
+     * @return The calculated vote point.
+     */
     function _calculateVotePoint(
         address voter,
         MinerTypes.NodeType nodeType
@@ -203,6 +246,11 @@ contract TxValidator is Initializable, RolesHandler {
         return votePoint;
     }
 
+    /**
+     * @dev Internal function to distribute rewards for a completed transaction.
+     * @param txHash The hash of the completed transaction.
+     * @return A boolean indicating the success of the operation.
+     */
     function _shareRewards(bytes32 txHash) internal returns (bool) {
         TxPayload storage txPayload = txPayloads[txHash];
         uint256 txVoteCount = txVotesCount[txHash];

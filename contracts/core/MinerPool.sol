@@ -9,12 +9,12 @@ import "../interfaces/IMinerList.sol";
 
 /**
  * @title MinerPool
- * @notice Holds tokens for miners to claim.
- * @dev A contract for distributing tokens over a specified period of time for mining purposes.
+ * @notice Manages the distribution of tokens to miners based on their activity.
+ * @dev This contract facilitates the reward distribution to miners for their participation in different miner node types.
  */
 contract MinerPool is Initializable, RolesHandler {
     IMinerFormulas public minerFormulas;
-    mapping(address => uint256) public claimedAmounts; // Total amount of tokens claimed so far
+    mapping(address => uint256) public claimedAmounts;
     mapping(uint256 => mapping(MinerTypes.NodeType => uint256))
         public totalRewardsFromFirstFormula;
     mapping(uint256 => mapping(MinerTypes.NodeType => uint256))
@@ -24,8 +24,8 @@ contract MinerPool is Initializable, RolesHandler {
         address indexed beneficiary,
         uint256 amount,
         string indexed claimType
-    ); // Event emitted when a beneficiary has claimed tokens
-    event Deposit(address indexed sender, uint amount, uint balance); // Event emitted when pool received mtc
+    );
+    event Deposit(address indexed sender, uint amount, uint balance);
 
     receive() external payable {
         emit Deposit(msg.sender, msg.value, address(this).balance);
@@ -40,8 +40,11 @@ contract MinerPool is Initializable, RolesHandler {
     }
 
     /**
-     * @dev Claim tokens for the sender.
-     * @return A boolean indicating whether the claim was successful.
+     * @dev Claim tokens for the sender. Called by a manager.
+     * @param receiver Address of the receiver.
+     * @param nodeType Type of miner node.
+     * @param activityTime The time duration for which the miner has been active.
+     * @return A tuple containing the claimed amounts from the first and second formulas.
      */
     function claimMacroDailyReward(
         address receiver,
@@ -73,6 +76,11 @@ contract MinerPool is Initializable, RolesHandler {
         return (firstAmount, secondAmount);
     }
 
+    /**
+     * @dev Claim a transaction reward for the sender. Called by a manager.
+     * @param receiver Address of the receiver.
+     * @param amount The amount to claim.
+     */
     function claimTxReward(
         address receiver,
         uint256 amount
@@ -82,6 +90,13 @@ contract MinerPool is Initializable, RolesHandler {
         require(sent, "MinerPool: Unable to send");
     }
 
+    /**
+     * @dev Calculate the claimable amounts for the sender based on the mining activity.
+     * @param minerAddress Address of the miner.
+     * @param nodeType Type of miner node.
+     * @param activityTime The time duration for which the miner has been active.
+     * @return A tuple containing the claimable amounts from the first and second formulas.
+     */
     function _calculateClaimableAmount(
         address minerAddress,
         MinerTypes.NodeType nodeType,

@@ -45,6 +45,12 @@ contract MinerFormulas is Initializable {
 
     uint256 public constant SECONDS_IN_A_DAY = 86_400;
 
+    /**
+     * @dev Initializes the MinerFormulas contract with the provided addresses of dependencies.
+     * @param metaPointsAddress The address of the MetaPoints contract.
+     * @param minerListAddress The address of the MinerList contract.
+     * @param minerHealthCheckAddress The address of the MinerHealthCheck contract.
+     */
     function initialize(
         address metaPointsAddress,
         address minerListAddress,
@@ -55,6 +61,10 @@ contract MinerFormulas is Initializable {
         minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
     }
 
+    /**
+     * @dev Calculate the Metaminer reward.
+     * @return The calculated reward amount.
+     */
     function calculateMetaminerReward() external view returns (uint256) {
         uint256 calculatedAmount = (METAMINER_DAILY_PRIZE_POOL /
             minerList.count(MinerTypes.NodeType.Meta));
@@ -68,10 +78,19 @@ contract MinerFormulas is Initializable {
                         minerList.count(MinerTypes.NodeType.Meta));
     }
 
+    /**
+     * @dev Calculate the MetaPoints reward.
+     * @return The calculated reward amount.
+     */
     function calculateMetaPointsReward() external pure returns (uint256) {
         return (1 ether / SECONDS_IN_A_DAY);
     }
 
+    /**
+     * @dev Calculate the daily pool rewards from the first formula for macro miners.
+     * @param nodeType The type of macro miner.
+     * @return The calculated reward amount.
+     */
     function calculateDailyPoolRewardsFromFirstFormula(
         MinerTypes.NodeType nodeType
     ) external view returns (uint256) {
@@ -100,6 +119,12 @@ contract MinerFormulas is Initializable {
         return (formula);
     }
 
+    /**
+     * @dev Calculate the daily pool rewards from the second formula for macro miners.
+     * @param minerAddress The address of the miner.
+     * @param nodeType The type of macro miner.
+     * @return The calculated reward amount.
+     */
     function calculateDailyPoolRewardsFromSecondFormula(
         address minerAddress,
         MinerTypes.NodeType nodeType
@@ -144,19 +169,36 @@ contract MinerFormulas is Initializable {
         return (formula);
     }
 
+    /**
+     * @dev Get the current date in terms of the number of days since the Unix epoch.
+     * @return The current date.
+     */
     function getDate() external view returns (uint256) {
         return _getDate();
     }
 
+    /**
+     * @dev Internal function to calculate the current date in terms of the number of days since the Unix epoch.
+     * @return The current date.
+     */
     function _getDate() internal view returns (uint256) {
         // calculate today date from block.timestamp and return
         return uint256(block.timestamp) / SECONDS_IN_A_DAY;
     }
 
+    /**
+     * @dev Internal function to get the Meta Points balance of a miner.
+     * @param miner The address of the miner.
+     * @return The Meta Points balance of the miner.
+     */
     function _balaceOfMP(address miner) internal view returns (uint256) {
         return (metaPoints.balanceOf(miner));
     }
 
+    /**
+     * @dev Internal function to get the total supply of Meta Points.
+     * @return The total supply of Meta Points.
+     */
     function _totalSupplyMP() internal view returns (uint256) {
         return (metaPoints.totalSupply());
     }

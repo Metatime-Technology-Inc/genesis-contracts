@@ -46,6 +46,10 @@ abstract contract RolesHandler {
         _;
     }
 
+    /**
+     * @dev Initializes the roles contract.
+     * @param rolesAddress The address of the roles contract to be initialized.
+     */
     function initRoles(address rolesAddress) external {
         require(
             address(roles) == address(0),

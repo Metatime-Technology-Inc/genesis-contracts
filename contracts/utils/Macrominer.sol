@@ -9,6 +9,10 @@ import "../interfaces/IMinerHealthCheck.sol";
 import "../interfaces/IMetaPoints.sol";
 import "../interfaces/IMinerList.sol";
 
+/**
+ * @title Macrominer
+ * @dev A contract for managing and voting on the status of macrominers.
+ */
 contract Macrominer is Initializable {
     uint256 public constant STAKE_AMOUNT = 100 ether;
     uint256 public constant VOTE_POINT_LIMIT = 100 ether;
@@ -43,6 +47,9 @@ contract Macrominer is Initializable {
         MinerTypes.NodeType indexed nodeType
     );
 
+    /**
+     * Modifier to check if an address is a macrominer of a specific node type.
+     */
     modifier isMiner(address miner, MinerTypes.NodeType nodeType) {
         require(
             minerList.isMiner(miner, nodeType),
@@ -51,6 +58,9 @@ contract Macrominer is Initializable {
         _;
     }
 
+    /**
+     * Modifier to check if an address is not a macrominer of a specific node type.
+     */
     modifier notMiner(address miner, MinerTypes.NodeType nodeType) {
         require(
             !minerList.isMiner(miner, nodeType),
@@ -59,6 +69,9 @@ contract Macrominer is Initializable {
         _;
     }
 
+    /**
+     * Modifier to check if the node type is valid.
+     */
     modifier isNodeTypeValid(MinerTypes.NodeType nodeType) {
         require(
             nodeType != MinerTypes.NodeType.Meta &&
@@ -70,6 +83,12 @@ contract Macrominer is Initializable {
 
     receive() external payable {}
 
+    /**
+     * @dev Initializes the contract with the specified addresses.
+     * @param minerHealthCheckAddress Address of the MinerHealthCheck contract.
+     * @param metapointsAddress Address of the MetaPoints contract.
+     * @param minerListAddress Address of the MinerList contract.
+     */
     function initialize(
         address minerHealthCheckAddress,
         address metapointsAddress,
@@ -80,6 +99,11 @@ contract Macrominer is Initializable {
         minerList = IMinerList(minerListAddress);
     }
 
+    /**
+     * @dev Set a miner as a macrominer of a specific node type.
+     * @param nodeType The type of miner node to set as a macrominer.
+     * @return true if the setting was successful.
+     */
     function setMiner(
         MinerTypes.NodeType nodeType
     )
@@ -97,9 +121,12 @@ contract Macrominer is Initializable {
         return (true);
     }
 
-    // metapoint hard cap for each address
-    // vote mech for kick miner from pool, auto unstake for miner, for 100 vote point -> unstake
-    // to be miner miners have to stake
+    /**
+     * @dev Check the status of a miner and vote on it.
+     * @param votedMinerAddress Address of the miner to check.
+     * @param votedMinerNodeType Type of the miner node to check.
+     * @param nodeType Type of the miner node making the vote.
+     */
     function checkMinerStatus(
         address votedMinerAddress,
         MinerTypes.NodeType votedMinerNodeType,
@@ -111,7 +138,7 @@ contract Macrominer is Initializable {
         isMiner(votedMinerAddress, votedMinerNodeType)
         isMiner(msg.sender, nodeType)
     {
-        // check status
+        // Check the health status of the voted miner.
         bool isAlive = minerHealthCheck.status(
             votedMinerAddress,
             votedMinerNodeType
@@ -119,12 +146,10 @@ contract Macrominer is Initializable {
 
         Vote storage vote = votes[votedMinerAddress][votedMinerNodeType];
 
-        // -- false status
         if (isAlive == false) {
-            // --- get checkers mp points
             uint256 mpBalance = metapoints.balanceOf(msg.sender);
             if (mpBalance + vote.point >= VOTE_POINT_LIMIT) {
-                // --- check if its bigger than limit after adding voting points, then decrement miner count and suspand miner
+                // If enough votes have been collected, kick the miner.
                 _kickMiner(votedMinerAddress, votedMinerNodeType);
 
                 emit EndVote(
@@ -134,6 +159,7 @@ contract Macrominer is Initializable {
                 );
             } else {
                 if (vote.point == 0) {
+                    // Initialize the vote.
                     vote.voteId = voteId;
                     vote.point = mpBalance;
                     vote.exist = true;
@@ -145,7 +171,7 @@ contract Macrominer is Initializable {
                         votedMinerNodeType
                     );
                 } else {
-                    // --- check if its lower than limit after adding voting points, then increment voting points
+                    // Add to an existing vote.
                     vote.point += mpBalance;
 
                     emit Voted(
@@ -157,12 +183,19 @@ contract Macrominer is Initializable {
                 }
             }
         } else if (vote.exist == true) {
+            // Remove the vote if the miner is healthy.
             delete votes[votedMinerAddress][votedMinerNodeType];
 
             emit EndVote(vote.voteId, votedMinerAddress, votedMinerNodeType);
         }
     }
 
+    /**
+     * @dev Internal function to kick a miner and return their stake.
+     * @param minerAddress Address of the miner to be kicked.
+     * @param nodeType Type of the miner node.
+     * @return true if the miner was successfully kicked.
+     */
     function _kickMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
