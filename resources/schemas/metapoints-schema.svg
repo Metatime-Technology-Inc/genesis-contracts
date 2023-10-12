@@ -1,0 +1,287 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="476pt" height="917pt" viewBox="0.00 0.00 476.27 917.00">
+<g id="graph0" class="graph" transform="translate(4,913) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-913 472.27,-913 472.27,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterMetaPoints">
+
+<path fill="#445773" stroke="#445773" d="M20,-147C20,-147 448.27,-147 448.27,-147 454.27,-147 460.27,-153 460.27,-159 460.27,-159 460.27,-752 460.27,-752 460.27,-758 454.27,-764 448.27,-764 448.27,-764 20,-764 20,-764 14,-764 8,-758 8,-752 8,-752 8,-159 8,-159 8,-153 14,-147 20,-147" style=""/>
+<text text-anchor="middle" x="234.14" y="-747.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">MetaPoints</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterRolesHandler">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M256.14,-8C256.14,-8 443.94,-8 443.94,-8 449.94,-8 455.94,-14 455.94,-20 455.94,-20 455.94,-127 455.94,-127 455.94,-133 449.94,-139 443.94,-139 443.94,-139 256.14,-139 256.14,-139 250.14,-139 244.14,-133 244.14,-127 244.14,-127 244.14,-20 244.14,-20 244.14,-14 250.14,-8 256.14,-8" style=""/>
+<text text-anchor="middle" x="350.04" y="-122.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">RolesHandler</text>
+</g>
+<g id="clust3" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="40.9,-772 40.9,-901 385.04,-901 385.04,-772 40.9,-772" style=""/>
+<text text-anchor="middle" x="212.97" y="-884.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- MetaPoints.initialize -->
+<g id="node1" class="node" pointer-events="visible" data-name="MetaPoints.initialize">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="113.9" cy="-659" rx="44.64" ry="18" style=""/>
+<text text-anchor="middle" x="113.9" y="-654.8" font-family="Times,serif" font-size="14.00" style="">initialize</text>
+</g>
+<!-- MetaPoints.__ERC20_init -->
+<g id="node11" class="node" pointer-events="visible" data-name="MetaPoints.__ERC20_init">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="350.04" cy="-713" rx="66.68" ry="18" style=""/>
+<text text-anchor="middle" x="350.04" y="-708.8" font-family="Times,serif" font-size="14.00" style="">__ERC20_init</text>
+</g>
+<!-- MetaPoints.initialize&#45;&gt;MetaPoints.__ERC20_init -->
+<g id="edge1" class="edge" data-name="MetaPoints.initialize-&gt;MetaPoints.__ERC20_init">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M154.62,-668.16C190.09,-676.34 242.71,-688.48 284.27,-698.06" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="283.3,-701.43 293.83,-700.27 284.87,-694.61 283.3,-701.43" style=""/>
+</g>
+<!-- MetaPoints.__ERC20Burnable_init -->
+<g id="node12" class="node" pointer-events="visible" data-name="MetaPoints.__ERC20Burnable_init">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="350.04" cy="-605" rx="102.47" ry="18" style=""/>
+<text text-anchor="middle" x="350.04" y="-600.8" font-family="Times,serif" font-size="14.00" style="">__ERC20Burnable_init</text>
+</g>
+<!-- MetaPoints.initialize&#45;&gt;MetaPoints.__ERC20Burnable_init -->
+<g id="edge2" class="edge" data-name="MetaPoints.initialize-&gt;MetaPoints.__ERC20Burnable_init">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M154.62,-649.84C186.52,-642.48 232.3,-631.92 271.42,-622.9" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="271.96,-626.37 280.92,-620.71 270.38,-619.55 271.96,-626.37" style=""/>
+</g>
+<!-- MetaPoints.__Pausable_init -->
+<g id="node13" class="node" pointer-events="visible" data-name="MetaPoints.__Pausable_init">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="350.04" cy="-659" rx="72.95" ry="18" style=""/>
+<text text-anchor="middle" x="350.04" y="-654.8" font-family="Times,serif" font-size="14.00" style="">__Pausable_init</text>
+</g>
+<!-- MetaPoints.initialize&#45;&gt;MetaPoints.__Pausable_init -->
+<g id="edge3" class="edge" data-name="MetaPoints.initialize-&gt;MetaPoints.__Pausable_init">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M159.77,-659C188.98,-659 228.03,-659 263.07,-659" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="262.75,-662.5 272.75,-659 262.75,-655.5 262.75,-662.5" style=""/>
+</g>
+<!-- MetaPoints.pause -->
+<g id="node2" class="node" pointer-events="visible" data-name="MetaPoints.pause">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="113.9" cy="-605" rx="33.05" ry="18" style=""/>
+<text text-anchor="middle" x="113.9" y="-600.8" font-family="Times,serif" font-size="14.00" style="">pause</text>
+</g>
+<!-- MetaPoints._pause -->
+<g id="node14" class="node" pointer-events="visible" data-name="MetaPoints._pause">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="350.04" cy="-551" rx="37.71" ry="18" style=""/>
+<text text-anchor="middle" x="350.04" y="-546.8" font-family="Times,serif" font-size="14.00" style="">_pause</text>
+</g>
+<!-- MetaPoints.pause&#45;&gt;MetaPoints._pause -->
+<g id="edge4" class="edge" data-name="MetaPoints.pause-&gt;MetaPoints._pause">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M145.99,-597.83C185.9,-588.62 255.53,-572.57 301.95,-561.86" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="302.48,-565.33 311.44,-559.67 300.91,-558.51 302.48,-565.33" style=""/>
+</g>
+<!-- MetaPoints._msgSender -->
+<g id="node15" class="node" pointer-events="visible" data-name="MetaPoints._msgSender">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="350.04" cy="-443" rx="58.56" ry="18" style=""/>
+<text text-anchor="middle" x="350.04" y="-438.8" font-family="Times,serif" font-size="14.00" style="">_msgSender</text>
+</g>
+<!-- MetaPoints.pause&#45;&gt;MetaPoints._msgSender -->
+<g id="edge5" class="edge" data-name="MetaPoints.pause-&gt;MetaPoints._msgSender">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M148.1,-603.67C168.95,-601.12 194.97,-594.51 211.8,-578 247.57,-542.91 208.02,-504.73 244.14,-470 253.79,-460.71 266.2,-454.51 279.07,-450.38" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="279.82,-453.8 288.56,-447.82 278,-447.04 279.82,-453.8" style=""/>
+</g>
+<!-- MetaPoints.unpause -->
+<g id="node3" class="node" pointer-events="visible" data-name="MetaPoints.unpause">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="113.9" cy="-551" rx="42.86" ry="18" style=""/>
+<text text-anchor="middle" x="113.9" y="-546.8" font-family="Times,serif" font-size="14.00" style="">unpause</text>
+</g>
+<!-- MetaPoints.unpause&#45;&gt;MetaPoints._msgSender -->
+<g id="edge7" class="edge" data-name="MetaPoints.unpause-&gt;MetaPoints._msgSender">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M156.66,-546.44C175.03,-542.75 195.97,-536.07 211.8,-524 234.05,-507.04 221.73,-486.74 244.14,-470 254.87,-461.98 267.75,-456.34 280.76,-452.36" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="281.51,-455.78 290.27,-449.82 279.71,-449.02 281.51,-455.78" style=""/>
+</g>
+<!-- MetaPoints._unpause -->
+<g id="node16" class="node" pointer-events="visible" data-name="MetaPoints._unpause">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="350.04" cy="-497" rx="47.52" ry="18" style=""/>
+<text text-anchor="middle" x="350.04" y="-492.8" font-family="Times,serif" font-size="14.00" style="">_unpause</text>
+</g>
+<!-- MetaPoints.unpause&#45;&gt;MetaPoints._unpause -->
+<g id="edge6" class="edge" data-name="MetaPoints.unpause-&gt;MetaPoints._unpause">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M153.3,-542.14C191.83,-533.26 251.52,-519.49 294.86,-509.5" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="295.55,-512.93 304.51,-507.27 293.98,-506.11 295.55,-512.93" style=""/>
+</g>
+<!-- MetaPoints.mint -->
+<g id="node4" class="node" pointer-events="visible" data-name="MetaPoints.mint">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="113.9" cy="-497" rx="28.99" ry="18" style=""/>
+<text text-anchor="middle" x="113.9" y="-492.8" font-family="Times,serif" font-size="14.00" style="">mint</text>
+</g>
+<!-- MetaPoints.mint&#45;&gt;MetaPoints._msgSender -->
+<g id="edge9" class="edge" data-name="MetaPoints.mint-&gt;MetaPoints._msgSender">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M142.68,-490.59C178.41,-482.35 241.46,-467.81 288.49,-456.96" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="289.08,-460.42 298.04,-454.76 287.51,-453.6 289.08,-460.42" style=""/>
+</g>
+<!-- MetaPoints._mint -->
+<g id="node17" class="node" pointer-events="visible" data-name="MetaPoints._mint">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="350.04" cy="-389" rx="33.64" ry="18" style=""/>
+<text text-anchor="middle" x="350.04" y="-384.8" font-family="Times,serif" font-size="14.00" style="">_mint</text>
+</g>
+<!-- MetaPoints.mint&#45;&gt;MetaPoints._mint -->
+<g id="edge8" class="edge" data-name="MetaPoints.mint-&gt;MetaPoints._mint">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M144.14,-494.59C164.82,-491.61 192.22,-484.93 211.8,-470 234.05,-453.04 221.73,-432.74 244.14,-416 260.99,-403.41 283.14,-396.67 302.74,-393.07" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="303.16,-396.55 312.5,-391.55 302.08,-389.63 303.16,-396.55" style=""/>
+</g>
+<!-- MetaPoints.burn -->
+<g id="node5" class="node" pointer-events="visible" data-name="MetaPoints.burn">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="113.9" cy="-389" rx="28.98" ry="18" style=""/>
+<text text-anchor="middle" x="113.9" y="-384.8" font-family="Times,serif" font-size="14.00" style="">burn</text>
+</g>
+<!-- MetaPoints.BurnDisabled -->
+<g id="node18" class="node" pointer-events="visible" data-name="MetaPoints.BurnDisabled">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="350.04" cy="-281" rx="64.86" ry="18" style=""/>
+<text text-anchor="middle" x="350.04" y="-276.8" font-family="Times,serif" font-size="14.00" style="">BurnDisabled</text>
+</g>
+<!-- MetaPoints.burn&#45;&gt;MetaPoints.BurnDisabled -->
+<g id="edge10" class="edge" data-name="MetaPoints.burn-&gt;MetaPoints.BurnDisabled">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M144.14,-386.59C164.82,-383.61 192.22,-376.93 211.8,-362 234.05,-345.04 221.73,-324.74 244.14,-308 253.6,-300.93 264.73,-295.71 276.14,-291.85" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="277.07,-295.22 285.66,-289.03 275.08,-288.51 277.07,-295.22" style=""/>
+</g>
+<!-- MetaPoints.burnFrom -->
+<g id="node6" class="node" pointer-events="visible" data-name="MetaPoints.burnFrom">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="113.9" cy="-443" rx="49.83" ry="18" style=""/>
+<text text-anchor="middle" x="113.9" y="-438.8" font-family="Times,serif" font-size="14.00" style="">burnFrom</text>
+</g>
+<!-- MetaPoints.burnFrom&#45;&gt;MetaPoints._msgSender -->
+<g id="edge12" class="edge" data-name="MetaPoints.burnFrom-&gt;MetaPoints._msgSender">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M165.13,-443C197.8,-443 240.92,-443 277.19,-443" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="277.18,-446.5 287.18,-443 277.18,-439.5 277.18,-446.5" style=""/>
+</g>
+<!-- MetaPoints._burn -->
+<g id="node19" class="node" pointer-events="visible" data-name="MetaPoints._burn">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="350.04" cy="-335" rx="33.63" ry="18" style=""/>
+<text text-anchor="middle" x="350.04" y="-330.8" font-family="Times,serif" font-size="14.00" style="">_burn</text>
+</g>
+<!-- MetaPoints.burnFrom&#45;&gt;MetaPoints._burn -->
+<g id="edge11" class="edge" data-name="MetaPoints.burnFrom-&gt;MetaPoints._burn">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M162.53,-437.17C179.38,-433.28 197.64,-426.8 211.8,-416 234.05,-399.04 221.73,-378.74 244.14,-362 260.99,-349.41 283.14,-342.67 302.74,-339.07" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="303.16,-342.55 312.5,-337.55 302.08,-335.63 303.16,-342.55" style=""/>
+</g>
+<!-- MetaPoints.transfer -->
+<g id="node7" class="node" pointer-events="visible" data-name="MetaPoints.transfer">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="113.9" cy="-335" rx="40.55" ry="18" style=""/>
+<text text-anchor="middle" x="113.9" y="-330.8" font-family="Times,serif" font-size="14.00" style="">transfer</text>
+</g>
+<!-- MetaPoints.TransferDisabled -->
+<g id="node20" class="node" pointer-events="visible" data-name="MetaPoints.TransferDisabled">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="350.04" cy="-227" rx="78.14" ry="18" style=""/>
+<text text-anchor="middle" x="350.04" y="-222.8" font-family="Times,serif" font-size="14.00" style="">TransferDisabled</text>
+</g>
+<!-- MetaPoints.transfer&#45;&gt;MetaPoints.TransferDisabled -->
+<g id="edge13" class="edge" data-name="MetaPoints.transfer-&gt;MetaPoints.TransferDisabled">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M154.73,-330.81C173.55,-327.21 195.42,-320.5 211.8,-308 234.05,-291.04 221.73,-270.74 244.14,-254 251.49,-248.51 259.85,-244.13 268.58,-240.63" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="269.5,-244.02 277.77,-237.41 267.18,-237.42 269.5,-244.02" style=""/>
+</g>
+<!-- MetaPoints.approve -->
+<g id="node8" class="node" pointer-events="visible" data-name="MetaPoints.approve">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="113.9" cy="-227" rx="42.28" ry="18" style=""/>
+<text text-anchor="middle" x="113.9" y="-222.8" font-family="Times,serif" font-size="14.00" style="">approve</text>
+</g>
+<!-- RolesHandler.approve -->
+<g id="node22" class="node" pointer-events="visible" data-name="RolesHandler.approve">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="350.04" cy="-88" rx="42.28" ry="18" style=""/>
+<text text-anchor="middle" x="350.04" y="-83.8" font-family="Times,serif" font-size="14.00" style="">approve</text>
+</g>
+<!-- MetaPoints.approve&#45;&gt;RolesHandler.approve -->
+<g id="edge14" class="edge" data-name="MetaPoints.approve-&gt;RolesHandler.approve">
+
+<path fill="none" stroke="white" stroke-width="2" d="M156.31,-222.7C174.82,-219.07 195.98,-212.37 211.8,-200 234.75,-182.07 223.2,-163.25 244.14,-143 261.11,-126.58 283.96,-113.83 304,-104.75" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="305.14,-108.07 312.94,-100.9 302.37,-101.64 305.14,-108.07" style=""/>
+</g>
+<!-- MetaPoints.transferFrom -->
+<g id="node9" class="node" pointer-events="visible" data-name="MetaPoints.transferFrom">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="113.9" cy="-281" rx="61.41" ry="18" style=""/>
+<text text-anchor="middle" x="113.9" y="-276.8" font-family="Times,serif" font-size="14.00" style="">transferFrom</text>
+</g>
+<!-- MetaPoints.TransferFromDisabled -->
+<g id="node21" class="node" pointer-events="visible" data-name="MetaPoints.TransferFromDisabled">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="350.04" cy="-173" rx="98.99" ry="18" style=""/>
+<text text-anchor="middle" x="350.04" y="-168.8" font-family="Times,serif" font-size="14.00" style="">TransferFromDisabled</text>
+</g>
+<!-- MetaPoints.transferFrom&#45;&gt;MetaPoints.TransferFromDisabled -->
+<g id="edge15" class="edge" data-name="MetaPoints.transferFrom-&gt;MetaPoints.TransferFromDisabled">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M171.05,-273C185.35,-269 200,-263 211.8,-254 234.05,-237.04 221.73,-216.74 244.14,-200 249.1,-196.29 254.53,-193.09 260.21,-190.33" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="261.55,-193.56 269.39,-186.43 258.82,-187.12 261.55,-193.56" style=""/>
+</g>
+<!-- MetaPoints._beforeTokenTransfer -->
+<g id="node10" class="node" pointer-events="visible" data-name="MetaPoints._beforeTokenTransfer">
+
+<ellipse fill="#f2c383" stroke="#f2c383" stroke-width="3" cx="113.9" cy="-173" rx="97.8" ry="18" style=""/>
+<text text-anchor="middle" x="113.9" y="-168.8" font-family="Times,serif" font-size="14.00" style="">_beforeTokenTransfer</text>
+</g>
+<!-- RolesHandler._beforeTokenTransfer -->
+<g id="node23" class="node" pointer-events="visible" data-name="RolesHandler._beforeTokenTransfer">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="350.04" cy="-34" rx="97.8" ry="18" style=""/>
+<text text-anchor="middle" x="350.04" y="-29.8" font-family="Times,serif" font-size="14.00" style="">_beforeTokenTransfer</text>
+</g>
+<!-- MetaPoints._beforeTokenTransfer&#45;&gt;RolesHandler._beforeTokenTransfer -->
+<g id="edge16" class="edge" data-name="MetaPoints._beforeTokenTransfer-&gt;RolesHandler._beforeTokenTransfer">
+
+<path fill="none" stroke="white" stroke-width="2" d="M131.32,-154.13C154.13,-129.11 197.86,-85.27 244.14,-61 250.99,-57.4 258.36,-54.27 265.89,-51.53" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="266.98,-54.86 275.36,-48.39 264.77,-48.22 266.98,-54.86" style=""/>
+</g>
+<!-- key -->
+<g id="node24" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="178.9,-868 48.9,-868 48.9,-780 178.9,-780 178.9,-868" style=""/>
+<text text-anchor="start" x="98.54" y="-849.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="94.65" y="-829.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="72.1" y="-809.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="58.5" y="-789.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node25" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="377.04,-868 323.04,-868 323.04,-780 377.04,-780 377.04,-868" style=""/>
+<text text-anchor="start" x="340.04" y="-849.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="340.04" y="-829.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="338.04,-804 338.04,-824 363.04,-824 363.04,-804 338.04,-804" style=""/>
+<text text-anchor="start" x="340.04" y="-809.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="340.04,-786 340.04,-802 361.04,-802 361.04,-786 340.04,-786" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge17" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M171.9,-854C240.85,-854 261.22,-854 324.29,-854" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="324.01,-857.5 334.01,-854 324.01,-850.5 324.01,-857.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge18" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M171.9,-834C240.85,-834 261.22,-834 324.29,-834" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="324.01,-837.5 334.01,-834 324.01,-830.5 324.01,-837.5" style=""/>
+</g>
+</g>
+</svg>

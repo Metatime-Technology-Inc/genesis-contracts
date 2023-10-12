@@ -1,0 +1,125 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="533pt" height="400pt" viewBox="0.00 0.00 532.87 400.00">
+<g id="graph0" class="graph" transform="translate(4,396) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-396 528.87,-396 528.87,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterMinerList">
+
+<path fill="#445773" stroke="#445773" d="M27.31,-8C27.31,-8 354.53,-8 354.53,-8 360.53,-8 366.53,-14 366.53,-20 366.53,-20 366.53,-235 366.53,-235 366.53,-241 360.53,-247 354.53,-247 354.53,-247 27.31,-247 27.31,-247 21.31,-247 15.31,-241 15.31,-235 15.31,-235 15.31,-20 15.31,-20 15.31,-14 21.31,-8 27.31,-8" style=""/>
+<text text-anchor="middle" x="190.92" y="-230.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">MinerList</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterIMinerHealthCheck">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M398.53,-62C398.53,-62 504.87,-62 504.87,-62 510.87,-62 516.87,-68 516.87,-74 516.87,-74 516.87,-127 516.87,-127 516.87,-133 510.87,-139 504.87,-139 504.87,-139 398.53,-139 398.53,-139 392.53,-139 386.53,-133 386.53,-127 386.53,-127 386.53,-74 386.53,-74 386.53,-68 392.53,-62 398.53,-62" style=""/>
+<text text-anchor="middle" x="451.7" y="-122.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMinerHealthCheck</text>
+</g>
+<g id="clust3" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="8,-255 8,-384 305.26,-384 305.26,-255 8,-255" style=""/>
+<text text-anchor="middle" x="156.63" y="-367.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- MinerList.initialize -->
+<g id="node1" class="node" pointer-events="visible" data-name="MinerList.initialize">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="81" cy="-196" rx="44.64" ry="18" style=""/>
+<text text-anchor="middle" x="81" y="-191.8" font-family="Times,serif" font-size="14.00" style="">initialize</text>
+</g>
+<!-- MinerList.IMinerHealthCheck -->
+<g id="node7" class="node" pointer-events="visible" data-name="MinerList.IMinerHealthCheck">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="270.26" cy="-196" rx="88.03" ry="18" style=""/>
+<text text-anchor="middle" x="270.26" y="-191.8" font-family="Times,serif" font-size="14.00" style="">IMinerHealthCheck</text>
+</g>
+<!-- MinerList.initialize&#45;&gt;MinerList.IMinerHealthCheck -->
+<g id="edge1" class="edge" data-name="MinerList.initialize-&gt;MinerList.IMinerHealthCheck">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M126.85,-196C139.49,-196 153.77,-196 168.29,-196" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="168.05,-199.5 178.05,-196 168.05,-192.5 168.05,-199.5" style=""/>
+</g>
+<!-- MinerList.isMiner -->
+<g id="node2" class="node" pointer-events="visible" data-name="MinerList.isMiner">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="81" cy="-142" rx="41.16" ry="18" style=""/>
+<text text-anchor="middle" x="81" y="-137.8" font-family="Times,serif" font-size="14.00" style="">isMiner</text>
+</g>
+<!-- MinerList.addMiner -->
+<g id="node3" class="node" pointer-events="visible" data-name="MinerList.addMiner">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="81" cy="-88" rx="48.66" ry="18" style=""/>
+<text text-anchor="middle" x="81" y="-83.8" font-family="Times,serif" font-size="14.00" style="">addMiner</text>
+</g>
+<!-- MinerList._addMiner -->
+<g id="node5" class="node" pointer-events="visible" data-name="MinerList._addMiner">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="270.26" cy="-88" rx="53.32" ry="18" style=""/>
+<text text-anchor="middle" x="270.26" y="-83.8" font-family="Times,serif" font-size="14.00" style="">_addMiner</text>
+</g>
+<!-- MinerList.addMiner&#45;&gt;MinerList._addMiner -->
+<g id="edge2" class="edge" data-name="MinerList.addMiner-&gt;MinerList._addMiner">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M130.71,-88C152.66,-88 178.92,-88 202.64,-88" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="202.5,-91.5 212.5,-88 202.5,-84.5 202.5,-91.5" style=""/>
+</g>
+<!-- MinerList.deleteMiner -->
+<g id="node4" class="node" pointer-events="visible" data-name="MinerList.deleteMiner">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="81" cy="-34" rx="57.88" ry="18" style=""/>
+<text text-anchor="middle" x="81" y="-29.8" font-family="Times,serif" font-size="14.00" style="">deleteMiner</text>
+</g>
+<!-- MinerList._deleteMiner -->
+<g id="node6" class="node" pointer-events="visible" data-name="MinerList._deleteMiner">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="270.26" cy="-34" rx="62.54" ry="18" style=""/>
+<text text-anchor="middle" x="270.26" y="-29.8" font-family="Times,serif" font-size="14.00" style="">_deleteMiner</text>
+</g>
+<!-- MinerList.deleteMiner&#45;&gt;MinerList._deleteMiner -->
+<g id="edge3" class="edge" data-name="MinerList.deleteMiner-&gt;MinerList._deleteMiner">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M140.22,-34C157.16,-34 175.9,-34 193.74,-34" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="193.5,-37.5 203.5,-34 193.5,-30.5 193.5,-37.5" style=""/>
+</g>
+<!-- IMinerHealthCheck.manuelPing -->
+<g id="node8" class="node" pointer-events="visible" data-name="IMinerHealthCheck.manuelPing">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="451.7" cy="-88" rx="57.34" ry="18" style=""/>
+<text text-anchor="middle" x="451.7" y="-83.8" font-family="Times,serif" font-size="14.00" style="">manuelPing</text>
+</g>
+<!-- MinerList._addMiner&#45;&gt;IMinerHealthCheck.manuelPing -->
+<g id="edge4" class="edge" data-name="MinerList._addMiner-&gt;IMinerHealthCheck.manuelPing">
+
+<path fill="none" stroke="white" stroke-width="2" d="M324.61,-88C341.99,-88 361.55,-88 380,-88" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="379.83,-91.5 389.83,-88 379.83,-84.5 379.83,-91.5" style=""/>
+</g>
+<!-- key -->
+<g id="node9" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="146,-351 16,-351 16,-263 146,-263 146,-351" style=""/>
+<text text-anchor="start" x="65.64" y="-332.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="61.75" y="-312.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="39.2" y="-292.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="25.6" y="-272.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node10" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="297.26,-351 243.26,-351 243.26,-263 297.26,-263 297.26,-351" style=""/>
+<text text-anchor="start" x="260.26" y="-332.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="260.26" y="-312.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="258.26,-287 258.26,-307 283.26,-307 283.26,-287 258.26,-287" style=""/>
+<text text-anchor="start" x="260.26" y="-292.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="260.26,-269 260.26,-285 281.26,-285 281.26,-269 260.26,-269" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge5" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M139,-337C186.94,-337 202.09,-337 244.26,-337" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="244.24,-340.5 254.24,-337 244.24,-333.5 244.24,-340.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge6" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M139,-317C186.94,-317 202.09,-317 244.26,-317" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="244.24,-320.5 254.24,-317 244.24,-313.5 244.24,-320.5" style=""/>
+</g>
+</g>
+</svg>

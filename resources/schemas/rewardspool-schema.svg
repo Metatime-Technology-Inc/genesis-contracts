@@ -1,0 +1,119 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="734pt" height="346pt" viewBox="0.00 0.00 733.57 346.00">
+<g id="graph0" class="graph" transform="translate(4,342) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-342 729.57,-342 729.57,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterRewardsPool">
+
+<path fill="#445773" stroke="#445773" d="M20,-8C20,-8 434.08,-8 434.08,-8 440.08,-8 446.08,-14 446.08,-20 446.08,-20 446.08,-181 446.08,-181 446.08,-187 440.08,-193 434.08,-193 434.08,-193 20,-193 20,-193 14,-193 8,-187 8,-181 8,-181 8,-20 8,-20 8,-14 14,-8 20,-8" style=""/>
+<text text-anchor="middle" x="227.04" y="-176.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">RewardsPool</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterIMinerFormulas">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M478.08,-8C478.08,-8 705.57,-8 705.57,-8 711.57,-8 717.57,-14 717.57,-20 717.57,-20 717.57,-73 717.57,-73 717.57,-79 711.57,-85 705.57,-85 705.57,-85 478.08,-85 478.08,-85 472.08,-85 466.08,-79 466.08,-73 466.08,-73 466.08,-20 466.08,-20 466.08,-14 472.08,-8 478.08,-8" style=""/>
+<text text-anchor="middle" x="591.82" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMinerFormulas</text>
+</g>
+<g id="clust3" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="19.35,-201 19.35,-330 356.39,-330 356.39,-201 19.35,-201" style=""/>
+<text text-anchor="middle" x="187.87" y="-313.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- RewardsPool.&lt;Receive Ether&gt; -->
+<g id="node1" class="node" pointer-events="visible" data-name="RewardsPool.&lt;Receive Ether&gt;">
+
+<ellipse fill="#ffbdb9" stroke="brown" stroke-width="3" cx="92.35" cy="-142" rx="76.21" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-137.8" font-family="Times,serif" font-size="14.00" style="">&lt;Receive Ether&gt;</text>
+</g>
+<!-- RewardsPool.address -->
+<g id="node5" class="node" pointer-events="visible" data-name="RewardsPool.address">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="321.39" cy="-142" rx="40" ry="18" style=""/>
+<text text-anchor="middle" x="321.39" y="-137.8" font-family="Times,serif" font-size="14.00" style="">address</text>
+</g>
+<!-- RewardsPool.&lt;Receive Ether&gt;&#45;&gt;RewardsPool.address -->
+<g id="edge1" class="edge" data-name="RewardsPool.&lt;Receive Ether&gt;-&gt;RewardsPool.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M169.9,-142C201.94,-142 238.39,-142 267.4,-142" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="267.13,-145.5 277.13,-142 267.13,-138.5 267.13,-145.5" style=""/>
+</g>
+<!-- RewardsPool.initialize -->
+<g id="node2" class="node" pointer-events="visible" data-name="RewardsPool.initialize">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="92.35" cy="-88" rx="44.64" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-83.8" font-family="Times,serif" font-size="14.00" style="">initialize</text>
+</g>
+<!-- RewardsPool.IMinerFormulas -->
+<g id="node6" class="node" pointer-events="visible" data-name="RewardsPool.IMinerFormulas">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="321.39" cy="-88" rx="74.17" ry="18" style=""/>
+<text text-anchor="middle" x="321.39" y="-83.8" font-family="Times,serif" font-size="14.00" style="">IMinerFormulas</text>
+</g>
+<!-- RewardsPool.initialize&#45;&gt;RewardsPool.IMinerFormulas -->
+<g id="edge2" class="edge" data-name="RewardsPool.initialize-&gt;RewardsPool.IMinerFormulas">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M138.48,-88C165.54,-88 200.86,-88 233.17,-88" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="232.83,-91.5 242.83,-88 232.83,-84.5 232.83,-91.5" style=""/>
+</g>
+<!-- RewardsPool.claim -->
+<g id="node3" class="node" pointer-events="visible" data-name="RewardsPool.claim">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="92.35" cy="-34" rx="32.47" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-29.8" font-family="Times,serif" font-size="14.00" style="">claim</text>
+</g>
+<!-- RewardsPool.calculateClaimableAmount -->
+<g id="node4" class="node" pointer-events="visible" data-name="RewardsPool.calculateClaimableAmount">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="321.39" cy="-34" rx="116.88" ry="18" style=""/>
+<text text-anchor="middle" x="321.39" y="-29.8" font-family="Times,serif" font-size="14.00" style="">calculateClaimableAmount</text>
+</g>
+<!-- RewardsPool.claim&#45;&gt;RewardsPool.calculateClaimableAmount -->
+<g id="edge3" class="edge" data-name="RewardsPool.claim-&gt;RewardsPool.calculateClaimableAmount">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M125.88,-34C143.4,-34 166.27,-34 190.16,-34" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="190.09,-37.5 200.09,-34 190.09,-30.5 190.09,-37.5" style=""/>
+</g>
+<!-- IMinerFormulas.calculateMetaminerReward -->
+<g id="node7" class="node" pointer-events="visible" data-name="IMinerFormulas.calculateMetaminerReward">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="591.82" cy="-34" rx="117.99" ry="18" style=""/>
+<text text-anchor="middle" x="591.82" y="-29.8" font-family="Times,serif" font-size="14.00" style="">calculateMetaminerReward</text>
+</g>
+<!-- RewardsPool.calculateClaimableAmount&#45;&gt;IMinerFormulas.calculateMetaminerReward -->
+<g id="edge4" class="edge" data-name="RewardsPool.calculateClaimableAmount-&gt;IMinerFormulas.calculateMetaminerReward">
+
+<path fill="none" stroke="white" stroke-width="2" d="M439.74,-34C446.36,-34 453.04,-34 459.7,-34" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="459.46,-37.5 469.46,-34 459.46,-30.5 459.46,-37.5" style=""/>
+</g>
+<!-- key -->
+<g id="node8" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="157.35,-297 27.35,-297 27.35,-209 157.35,-209 157.35,-297" style=""/>
+<text text-anchor="start" x="76.99" y="-278.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="73.1" y="-258.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="50.56" y="-238.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="36.95" y="-218.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node9" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="348.39,-297 294.39,-297 294.39,-209 348.39,-209 348.39,-297" style=""/>
+<text text-anchor="start" x="311.39" y="-278.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="311.39" y="-258.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="309.39,-233 309.39,-253 334.39,-253 334.39,-233 309.39,-233" style=""/>
+<text text-anchor="start" x="311.39" y="-238.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="311.39,-215 311.39,-231 332.39,-231 332.39,-215 311.39,-215" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge5" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M150.35,-283C216.07,-283 235.67,-283 295.44,-283" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="295.37,-286.5 305.37,-283 295.37,-279.5 295.37,-286.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge6" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M150.35,-263C216.07,-263 235.67,-263 295.44,-263" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="295.37,-266.5 305.37,-263 295.37,-259.5 295.37,-266.5" style=""/>
+</g>
+</g>
+</svg>

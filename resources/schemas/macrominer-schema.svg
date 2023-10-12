@@ -1,0 +1,234 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="584pt" height="821pt" viewBox="0.00 0.00 584.42 821.00">
+<g id="graph0" class="graph" transform="translate(4,817) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-817 580.42,-817 580.42,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterMacrominer">
+
+<path fill="#445773" stroke="#445773" d="M20,-243C20,-243 539.8,-243 539.8,-243 545.8,-243 551.8,-249 551.8,-255 551.8,-255 551.8,-656 551.8,-656 551.8,-662 545.8,-668 539.8,-668 539.8,-668 20,-668 20,-668 14,-668 8,-662 8,-656 8,-656 8,-255 8,-255 8,-249 14,-243 20,-243" style=""/>
+<text text-anchor="middle" x="279.9" y="-651.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">Macrominer</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterIMinerList">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M449.04,-50C449.04,-50 556.42,-50 556.42,-50 562.42,-50 568.42,-56 568.42,-62 568.42,-62 568.42,-223 568.42,-223 568.42,-229 562.42,-235 556.42,-235 556.42,-235 449.04,-235 449.04,-235 443.04,-235 437.04,-229 437.04,-223 437.04,-223 437.04,-62 437.04,-62 437.04,-56 443.04,-50 449.04,-50" style=""/>
+<text text-anchor="middle" x="502.73" y="-218.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMinerList</text>
+</g>
+<g id="clust3" class="cluster" data-name="clusterIMinerHealthCheck">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M269.74,-93C269.74,-93 372.81,-93 372.81,-93 378.81,-93 384.81,-99 384.81,-105 384.81,-105 384.81,-158 384.81,-158 384.81,-164 378.81,-170 372.81,-170 372.81,-170 269.74,-170 269.74,-170 263.74,-170 257.74,-164 257.74,-158 257.74,-158 257.74,-105 257.74,-105 257.74,-99 263.74,-93 269.74,-93" style=""/>
+<text text-anchor="middle" x="321.28" y="-153.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMinerHealthCheck</text>
+</g>
+<g id="clust4" class="cluster" data-name="clusterIMetaPoints">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M274.07,-8C274.07,-8 367.49,-8 367.49,-8 373.49,-8 379.49,-14 379.49,-20 379.49,-20 379.49,-73 379.49,-73 379.49,-79 373.49,-85 367.49,-85 367.49,-85 274.07,-85 274.07,-85 268.07,-85 262.07,-79 262.07,-73 262.07,-73 262.07,-20 262.07,-20 262.07,-14 268.07,-8 274.07,-8" style=""/>
+<text text-anchor="middle" x="320.78" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMetaPoints</text>
+</g>
+<g id="clust5" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="33.26,-676 33.26,-805 355.78,-805 355.78,-676 33.26,-676" style=""/>
+<text text-anchor="middle" x="194.52" y="-788.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- Macrominer.isMiner -->
+<g id="node1" class="node" pointer-events="visible" data-name="Macrominer.isMiner">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="150.68,-551.54 150.68,-566.46 124.66,-577 87.85,-577 61.83,-566.46 61.83,-551.54 87.85,-541 124.66,-541 150.68,-551.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="154.68,-548.85 154.68,-569.15 125.44,-581 87.08,-581 57.83,-569.15 57.83,-548.85 87.08,-537 125.44,-537 154.68,-548.85" style=""/>
+<text text-anchor="middle" x="106.26" y="-554.8" font-family="Times,serif" font-size="14.00" style="">isMiner</text>
+</g>
+<!-- IMinerList.isMiner -->
+<g id="node13" class="node" pointer-events="visible" data-name="IMinerList.isMiner">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="502.73" cy="-130" rx="41.16" ry="18" style=""/>
+<text text-anchor="middle" x="502.73" y="-125.8" font-family="Times,serif" font-size="14.00" style="">isMiner</text>
+</g>
+<!-- Macrominer.isMiner&#45;&gt;IMinerList.isMiner -->
+<g id="edge1" class="edge" data-name="Macrominer.isMiner-&gt;IMinerList.isMiner">
+
+<path fill="none" stroke="white" stroke-width="2" d="M156.04,-552.17C171.1,-547.68 186.37,-540.26 196.51,-528 266.67,-443.2 157.96,-363.96 232.51,-283 287.08,-223.75 349.58,-296.33 409.04,-242 438.4,-215.17 410.02,-186.19 437.04,-157 441.74,-151.92 447.55,-147.77 453.74,-144.37" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="454.8,-147.74 462.39,-140.34 451.84,-141.4 454.8,-147.74" style=""/>
+</g>
+<!-- Macrominer.notMiner -->
+<g id="node2" class="node" pointer-events="visible" data-name="Macrominer.notMiner">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="156.96,-373.54 156.96,-388.46 127.26,-399 85.25,-399 55.55,-388.46 55.55,-373.54 85.25,-363 127.26,-363 156.96,-373.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="160.95,-370.72 160.95,-391.28 127.95,-403 84.57,-403 51.56,-391.28 51.56,-370.72 84.57,-359 127.95,-359 160.95,-370.72" style=""/>
+<text text-anchor="middle" x="106.26" y="-376.8" font-family="Times,serif" font-size="14.00" style="">notMiner</text>
+</g>
+<!-- Macrominer.notMiner&#45;&gt;IMinerList.isMiner -->
+<g id="edge2" class="edge" data-name="Macrominer.notMiner-&gt;IMinerList.isMiner">
+
+<path fill="none" stroke="white" stroke-width="2" d="M162.12,-370.44C174.66,-365.88 187.07,-359.34 196.51,-350 230.1,-316.79 197.38,-281.57 232.51,-250 292.58,-196.02 344.74,-255.84 409.04,-207 429.32,-191.59 418.03,-173.94 437.04,-157 442.27,-152.34 448.41,-148.42 454.79,-145.13" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="455.97,-148.44 463.64,-141.12 453.08,-142.06 455.97,-148.44" style=""/>
+</g>
+<!-- Macrominer.isNodeTypeValid -->
+<g id="node3" class="node" pointer-events="visible" data-name="Macrominer.isNodeTypeValid">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="192.28,-489.54 192.28,-504.46 141.89,-515 70.62,-515 20.23,-504.46 20.23,-489.54 70.62,-479 141.89,-479 192.28,-489.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="196.27,-486.29 196.27,-507.71 142.3,-519 70.21,-519 16.24,-507.71 16.24,-486.29 70.21,-475 142.3,-475 196.27,-486.29" style=""/>
+<text text-anchor="middle" x="106.26" y="-492.8" font-family="Times,serif" font-size="14.00" style="">isNodeTypeValid</text>
+</g>
+<!-- Macrominer.&lt;Receive Ether&gt; -->
+<g id="node4" class="node" pointer-events="visible" data-name="Macrominer.&lt;Receive Ether&gt;">
+
+<ellipse fill="#ffbdb9" stroke="brown" stroke-width="3" cx="106.26" cy="-439" rx="76.21" ry="18" style=""/>
+<text text-anchor="middle" x="106.26" y="-434.8" font-family="Times,serif" font-size="14.00" style="">&lt;Receive Ether&gt;</text>
+</g>
+<!-- Macrominer.initialize -->
+<g id="node5" class="node" pointer-events="visible" data-name="Macrominer.initialize">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="106.26" cy="-617" rx="44.64" ry="18" style=""/>
+<text text-anchor="middle" x="106.26" y="-612.8" font-family="Times,serif" font-size="14.00" style="">initialize</text>
+</g>
+<!-- Macrominer.IMinerHealthCheck -->
+<g id="node9" class="node" pointer-events="visible" data-name="Macrominer.IMinerHealthCheck">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="320.78" cy="-563" rx="88.03" ry="18" style=""/>
+<text text-anchor="middle" x="320.78" y="-558.8" font-family="Times,serif" font-size="14.00" style="">IMinerHealthCheck</text>
+</g>
+<!-- Macrominer.initialize&#45;&gt;Macrominer.IMinerHealthCheck -->
+<g id="edge3" class="edge" data-name="Macrominer.initialize-&gt;Macrominer.IMinerHealthCheck">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M145.74,-607.22C174.61,-599.89 214.94,-589.64 249.5,-580.86" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="250.18,-584.3 259.01,-578.44 248.46,-577.51 250.18,-584.3" style=""/>
+</g>
+<!-- Macrominer.IMetaPoints -->
+<g id="node10" class="node" pointer-events="visible" data-name="Macrominer.IMetaPoints">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="320.78" cy="-617" rx="58.49" ry="18" style=""/>
+<text text-anchor="middle" x="320.78" y="-612.8" font-family="Times,serif" font-size="14.00" style="">IMetaPoints</text>
+</g>
+<!-- Macrominer.initialize&#45;&gt;Macrominer.IMetaPoints -->
+<g id="edge4" class="edge" data-name="Macrominer.initialize-&gt;Macrominer.IMetaPoints">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M152.33,-617C180.17,-617 216.52,-617 248.23,-617" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="248.01,-620.5 258.01,-617 248.01,-613.5 248.01,-620.5" style=""/>
+</g>
+<!-- Macrominer.IMinerList -->
+<g id="node11" class="node" pointer-events="visible" data-name="Macrominer.IMinerList">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="320.78" cy="-509" rx="52.75" ry="18" style=""/>
+<text text-anchor="middle" x="320.78" y="-504.8" font-family="Times,serif" font-size="14.00" style="">IMinerList</text>
+</g>
+<!-- Macrominer.initialize&#45;&gt;Macrominer.IMinerList -->
+<g id="edge5" class="edge" data-name="Macrominer.initialize-&gt;Macrominer.IMinerList">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M149.54,-610.47C165.39,-606.49 182.86,-600.13 196.51,-590 219.68,-572.81 209.4,-553.26 232.51,-536 240.64,-529.93 250.16,-525.21 259.87,-521.54" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="260.92,-524.87 269.29,-518.39 258.7,-518.24 260.92,-524.87" style=""/>
+</g>
+<!-- Macrominer.setMiner -->
+<g id="node6" class="node" pointer-events="visible" data-name="Macrominer.setMiner">
+
+<ellipse fill="#ffbdb9" stroke="brown" stroke-width="3" cx="106.26" cy="-323" rx="45.23" ry="18" style=""/>
+<text text-anchor="middle" x="106.26" y="-318.8" font-family="Times,serif" font-size="14.00" style="">setMiner</text>
+</g>
+<!-- IMinerList.addMiner -->
+<g id="node14" class="node" pointer-events="visible" data-name="IMinerList.addMiner">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="502.73" cy="-76" rx="48.66" ry="18" style=""/>
+<text text-anchor="middle" x="502.73" y="-71.8" font-family="Times,serif" font-size="14.00" style="">addMiner</text>
+</g>
+<!-- Macrominer.setMiner&#45;&gt;IMinerList.addMiner -->
+<g id="edge6" class="edge" data-name="Macrominer.setMiner-&gt;IMinerList.addMiner">
+
+<path fill="none" stroke="white" stroke-width="2" d="M151.02,-317.62C166.88,-313.79 183.97,-307.23 196.51,-296 226.79,-268.92 201.16,-237.82 232.51,-212 294.46,-160.98 347.85,-225.92 409.04,-174 434.91,-152.05 413.29,-127.22 437.04,-103 440.83,-99.14 445.25,-95.8 449.97,-92.93" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="451.41,-96.12 458.69,-88.42 448.2,-89.91 451.41,-96.12" style=""/>
+</g>
+<!-- Macrominer.checkMinerStatus -->
+<g id="node7" class="node" pointer-events="visible" data-name="Macrominer.checkMinerStatus">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="106.26" cy="-269" rx="80.52" ry="18" style=""/>
+<text text-anchor="middle" x="106.26" y="-264.8" font-family="Times,serif" font-size="14.00" style="">checkMinerStatus</text>
+</g>
+<!-- Macrominer._kickMiner -->
+<g id="node8" class="node" pointer-events="visible" data-name="Macrominer._kickMiner">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="320.78" cy="-310" rx="56.18" ry="18" style=""/>
+<text text-anchor="middle" x="320.78" y="-305.8" font-family="Times,serif" font-size="14.00" style="">_kickMiner</text>
+</g>
+<!-- Macrominer.checkMinerStatus&#45;&gt;Macrominer._kickMiner -->
+<g id="edge9" class="edge" data-name="Macrominer.checkMinerStatus-&gt;Macrominer._kickMiner">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M170.16,-281.13C197.84,-286.48 230.26,-292.73 257.84,-298.05" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="257.08,-301.47 267.56,-299.93 258.41,-294.6 257.08,-301.47" style=""/>
+</g>
+<!-- IMinerHealthCheck.status -->
+<g id="node16" class="node" pointer-events="visible" data-name="IMinerHealthCheck.status">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="320.78" cy="-119" rx="33.07" ry="18" style=""/>
+<text text-anchor="middle" x="320.78" y="-114.8" font-family="Times,serif" font-size="14.00" style="">status</text>
+</g>
+<!-- Macrominer.checkMinerStatus&#45;&gt;IMinerHealthCheck.status -->
+<g id="edge7" class="edge" data-name="Macrominer.checkMinerStatus-&gt;IMinerHealthCheck.status">
+
+<path fill="none" stroke="white" stroke-width="2" d="M130.36,-250.52C155.16,-230.91 195.94,-199.33 232.51,-174 249.86,-161.99 269.72,-149.39 286.11,-139.28" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="287.55,-142.5 294.25,-134.3 283.89,-136.53 287.55,-142.5" style=""/>
+</g>
+<!-- IMetaPoints.balanceOf -->
+<g id="node17" class="node" pointer-events="visible" data-name="IMetaPoints.balanceOf">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="320.78" cy="-34" rx="50.92" ry="18" style=""/>
+<text text-anchor="middle" x="320.78" y="-29.8" font-family="Times,serif" font-size="14.00" style="">balanceOf</text>
+</g>
+<!-- Macrominer.checkMinerStatus&#45;&gt;IMetaPoints.balanceOf -->
+<g id="edge8" class="edge" data-name="Macrominer.checkMinerStatus-&gt;IMetaPoints.balanceOf">
+
+<path fill="none" stroke="white" stroke-width="2" d="M117.21,-249.8C136.09,-214.71 179.94,-139.23 232.51,-89 245.82,-76.28 262.52,-64.91 277.73,-55.85" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="279.43,-58.91 286.36,-50.9 275.95,-52.84 279.43,-58.91" style=""/>
+</g>
+<!-- Macrominer.payable -->
+<g id="node12" class="node" pointer-events="visible" data-name="Macrominer.payable">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="502.73" cy="-310" rx="41.13" ry="18" style=""/>
+<text text-anchor="middle" x="502.73" y="-305.8" font-family="Times,serif" font-size="14.00" style="">payable</text>
+</g>
+<!-- Macrominer._kickMiner&#45;&gt;Macrominer.payable -->
+<g id="edge11" class="edge" data-name="Macrominer._kickMiner-&gt;Macrominer.payable">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M378.22,-310C400.35,-310 425.63,-310 447.54,-310" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="447.31,-313.5 457.31,-310 447.31,-306.5 447.31,-313.5" style=""/>
+</g>
+<!-- IMinerList.deleteMiner -->
+<g id="node15" class="node" pointer-events="visible" data-name="IMinerList.deleteMiner">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="502.73" cy="-184" rx="57.88" ry="18" style=""/>
+<text text-anchor="middle" x="502.73" y="-179.8" font-family="Times,serif" font-size="14.00" style="">deleteMiner</text>
+</g>
+<!-- Macrominer._kickMiner&#45;&gt;IMinerList.deleteMiner -->
+<g id="edge10" class="edge" data-name="Macrominer._kickMiner-&gt;IMinerList.deleteMiner">
+
+<path fill="none" stroke="white" stroke-width="2" d="M367.88,-298.8C381.99,-293.93 396.97,-287.18 409.04,-278 426.03,-265.09 422.58,-254.69 437.04,-239 446.58,-228.65 458,-218.37 468.58,-209.54" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="470.47,-212.51 476.02,-203.49 466.05,-207.08 470.47,-212.51" style=""/>
+</g>
+<!-- key -->
+<g id="node18" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="171.26,-772 41.26,-772 41.26,-684 171.26,-684 171.26,-772" style=""/>
+<text text-anchor="start" x="90.89" y="-753.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="87.01" y="-733.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="64.46" y="-713.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="50.86" y="-693.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node19" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="347.78,-772 293.78,-772 293.78,-684 347.78,-684 347.78,-772" style=""/>
+<text text-anchor="start" x="310.78" y="-753.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="310.78" y="-733.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="308.78,-708 308.78,-728 333.78,-728 333.78,-708 308.78,-708" style=""/>
+<text text-anchor="start" x="310.78" y="-713.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="310.78,-690 310.78,-706 331.78,-706 331.78,-690 310.78,-690" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge12" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M164.26,-758C223.56,-758 241.51,-758 295,-758" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="294.75,-761.5 304.75,-758 294.75,-754.5 294.75,-761.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge13" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M164.26,-738C223.56,-738 241.51,-738 295,-738" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="294.75,-741.5 304.75,-738 294.75,-734.5 294.75,-741.5" style=""/>
+</g>
+</g>
+</svg>

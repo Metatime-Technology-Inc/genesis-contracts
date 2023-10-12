@@ -1,0 +1,243 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="773pt" height="801pt" viewBox="0.00 0.00 773.11 801.00">
+<g id="graph0" class="graph" transform="translate(4,797) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-797 769.11,-797 769.11,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterMinerHealthCheck">
+
+<path fill="#445773" stroke="#445773" d="M27.83,-293C27.83,-293 470.37,-293 470.37,-293 476.37,-293 482.37,-299 482.37,-305 482.37,-305 482.37,-636 482.37,-636 482.37,-642 476.37,-648 470.37,-648 470.37,-648 27.83,-648 27.83,-648 21.83,-648 15.83,-642 15.83,-636 15.83,-636 15.83,-305 15.83,-305 15.83,-299 21.83,-293 27.83,-293" style=""/>
+<text text-anchor="middle" x="249.1" y="-631.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">MinerHealthCheck</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterIMinerList">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M291.11,-208C291.11,-208 365.26,-208 365.26,-208 371.26,-208 377.26,-214 377.26,-220 377.26,-220 377.26,-273 377.26,-273 377.26,-279 371.26,-285 365.26,-285 365.26,-285 291.11,-285 291.11,-285 285.11,-285 279.11,-279 279.11,-273 279.11,-273 279.11,-220 279.11,-220 279.11,-214 285.11,-208 291.11,-208" style=""/>
+<text text-anchor="middle" x="328.19" y="-268.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMinerList</text>
+</g>
+<g id="clust3" class="cluster" data-name="clusterIMinerFormulas">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M514.37,-247C514.37,-247 745.11,-247 745.11,-247 751.11,-247 757.11,-253 757.11,-259 757.11,-259 757.11,-366 757.11,-366 757.11,-372 751.11,-378 745.11,-378 745.11,-378 514.37,-378 514.37,-378 508.37,-378 502.37,-372 502.37,-366 502.37,-366 502.37,-259 502.37,-259 502.37,-253 508.37,-247 514.37,-247" style=""/>
+<text text-anchor="middle" x="629.74" y="-361.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMinerFormulas</text>
+</g>
+<g id="clust4" class="cluster" data-name="clusterIMetaPoints">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M298.44,-93C298.44,-93 357.93,-93 357.93,-93 363.93,-93 369.93,-99 369.93,-105 369.93,-105 369.93,-158 369.93,-158 369.93,-164 363.93,-170 357.93,-170 357.93,-170 298.44,-170 298.44,-170 292.44,-170 286.44,-164 286.44,-158 286.44,-158 286.44,-105 286.44,-105 286.44,-99 292.44,-93 298.44,-93" style=""/>
+<text text-anchor="middle" x="328.19" y="-153.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMetaPoints</text>
+</g>
+<g id="clust5" class="cluster" data-name="clusterIMinerPool">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M223.01,-8C223.01,-8 433.36,-8 433.36,-8 439.36,-8 445.36,-14 445.36,-20 445.36,-20 445.36,-73 445.36,-73 445.36,-79 439.36,-85 433.36,-85 433.36,-85 223.01,-85 223.01,-85 217.01,-85 211.01,-79 211.01,-73 211.01,-73 211.01,-20 211.01,-20 211.01,-14 217.01,-8 223.01,-8" style=""/>
+<text text-anchor="middle" x="328.19" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMinerPool</text>
+</g>
+<g id="clust6" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="8,-656 8,-785 363.19,-785 363.19,-656 8,-656" style=""/>
+<text text-anchor="middle" x="185.59" y="-768.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- MinerHealthCheck.isMiner -->
+<g id="node1" class="node" pointer-events="visible" data-name="MinerHealthCheck.isMiner">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="125.43,-531.54 125.43,-546.46 99.4,-557 62.6,-557 36.57,-546.46 36.57,-531.54 62.6,-521 99.4,-521 125.43,-531.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="129.42,-528.85 129.42,-549.15 100.18,-561 61.82,-561 32.58,-549.15 32.58,-528.85 61.82,-517 100.18,-517 129.42,-528.85" style=""/>
+<text text-anchor="middle" x="81" y="-534.8" font-family="Times,serif" font-size="14.00" style="">isMiner</text>
+</g>
+<!-- IMinerList.isMiner -->
+<g id="node13" class="node" pointer-events="visible" data-name="IMinerList.isMiner">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="328.19" cy="-234" rx="41.16" ry="18" style=""/>
+<text text-anchor="middle" x="328.19" y="-229.8" font-family="Times,serif" font-size="14.00" style="">isMiner</text>
+</g>
+<!-- MinerHealthCheck.isMiner&#45;&gt;IMinerList.isMiner -->
+<g id="edge1" class="edge" data-name="MinerHealthCheck.isMiner-&gt;IMinerList.isMiner">
+
+<path fill="none" stroke="white" stroke-width="2" d="M124.76,-525.37C132.88,-521 140.53,-515.32 146,-508 205.01,-428.96 119.53,-365.34 182,-289 204.58,-261.41 242.59,-247.65 274.05,-240.79" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="274.51,-244.26 283.66,-238.91 273.17,-237.39 274.51,-244.26" style=""/>
+</g>
+<!-- MinerHealthCheck.initialize -->
+<g id="node2" class="node" pointer-events="visible" data-name="MinerHealthCheck.initialize">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="81" cy="-597" rx="44.64" ry="18" style=""/>
+<text text-anchor="middle" x="81" y="-592.8" font-family="Times,serif" font-size="14.00" style="">initialize</text>
+</g>
+<!-- MinerHealthCheck.IMinerList -->
+<g id="node9" class="node" pointer-events="visible" data-name="MinerHealthCheck.IMinerList">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="328.19" cy="-435" rx="52.75" ry="18" style=""/>
+<text text-anchor="middle" x="328.19" y="-430.8" font-family="Times,serif" font-size="14.00" style="">IMinerList</text>
+</g>
+<!-- MinerHealthCheck.initialize&#45;&gt;MinerHealthCheck.IMinerList -->
+<g id="edge2" class="edge" data-name="MinerHealthCheck.initialize-&gt;MinerHealthCheck.IMinerList">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M120.2,-587.02C129.64,-583.03 139.04,-577.52 146,-570 180.36,-532.86 143.84,-495.23 182,-462 203.7,-443.1 234.27,-435.59 261.77,-433.1" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="261.79,-436.61 271.54,-432.47 261.34,-429.62 261.79,-436.61" style=""/>
+</g>
+<!-- MinerHealthCheck.IMinerFormulas -->
+<g id="node10" class="node" pointer-events="visible" data-name="MinerHealthCheck.IMinerFormulas">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="328.19" cy="-489" rx="74.17" ry="18" style=""/>
+<text text-anchor="middle" x="328.19" y="-484.8" font-family="Times,serif" font-size="14.00" style="">IMinerFormulas</text>
+</g>
+<!-- MinerHealthCheck.initialize&#45;&gt;MinerHealthCheck.IMinerFormulas -->
+<g id="edge3" class="edge" data-name="MinerHealthCheck.initialize-&gt;MinerHealthCheck.IMinerFormulas">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M118.61,-585.84C128.16,-581.83 138.01,-576.61 146,-570 168.23,-551.62 157.93,-531.89 182,-516 199.28,-504.6 220.1,-497.7 240.51,-493.6" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="240.9,-497.09 250.15,-491.92 239.7,-490.19 240.9,-497.09" style=""/>
+</g>
+<!-- MinerHealthCheck.IMinerPool -->
+<g id="node11" class="node" pointer-events="visible" data-name="MinerHealthCheck.IMinerPool">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="328.19" cy="-543" rx="55.63" ry="18" style=""/>
+<text text-anchor="middle" x="328.19" y="-538.8" font-family="Times,serif" font-size="14.00" style="">IMinerPool</text>
+</g>
+<!-- MinerHealthCheck.initialize&#45;&gt;MinerHealthCheck.IMinerPool -->
+<g id="edge4" class="edge" data-name="MinerHealthCheck.initialize-&gt;MinerHealthCheck.IMinerPool">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M119.34,-586.16C138.06,-580.92 161.13,-574.75 182,-570 208.84,-563.89 238.7,-558.16 264.33,-553.56" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="264.71,-557.05 273.94,-551.86 263.49,-550.15 264.71,-557.05" style=""/>
+</g>
+<!-- MinerHealthCheck.IMetaPoints -->
+<g id="node12" class="node" pointer-events="visible" data-name="MinerHealthCheck.IMetaPoints">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="328.19" cy="-597" rx="58.49" ry="18" style=""/>
+<text text-anchor="middle" x="328.19" y="-592.8" font-family="Times,serif" font-size="14.00" style="">IMetaPoints</text>
+</g>
+<!-- MinerHealthCheck.initialize&#45;&gt;MinerHealthCheck.IMetaPoints -->
+<g id="edge5" class="edge" data-name="MinerHealthCheck.initialize-&gt;MinerHealthCheck.IMetaPoints">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M126.97,-597C162.98,-597 214.16,-597 255.76,-597" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="255.59,-600.5 265.59,-597 255.59,-593.5 255.59,-600.5" style=""/>
+</g>
+<!-- MinerHealthCheck.ping -->
+<g id="node3" class="node" pointer-events="visible" data-name="MinerHealthCheck.ping">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="81" cy="-481" rx="28.41" ry="18" style=""/>
+<text text-anchor="middle" x="81" y="-476.8" font-family="Times,serif" font-size="14.00" style="">ping</text>
+</g>
+<!-- MinerHealthCheck._incrementDailyTotalActiveTimes -->
+<g id="node7" class="node" pointer-events="visible" data-name="MinerHealthCheck._incrementDailyTotalActiveTimes">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="328.19" cy="-327" rx="146.37" ry="18" style=""/>
+<text text-anchor="middle" x="328.19" y="-322.8" font-family="Times,serif" font-size="14.00" style="">_incrementDailyTotalActiveTimes</text>
+</g>
+<!-- MinerHealthCheck.ping&#45;&gt;MinerHealthCheck._incrementDailyTotalActiveTimes -->
+<g id="edge9" class="edge" data-name="MinerHealthCheck.ping-&gt;MinerHealthCheck._incrementDailyTotalActiveTimes">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M109.21,-474.93C121.85,-470.87 136.21,-464.33 146,-454 178.49,-419.71 146.01,-384.59 182,-354 186.46,-350.21 191.28,-346.88 196.36,-343.96" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="197.78,-347.16 205.15,-339.55 194.64,-340.9 197.78,-347.16" style=""/>
+</g>
+<!-- MinerHealthCheck._incrementDailyActiveTimes -->
+<g id="node8" class="node" pointer-events="visible" data-name="MinerHealthCheck._incrementDailyActiveTimes">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="328.19" cy="-381" rx="125.61" ry="18" style=""/>
+<text text-anchor="middle" x="328.19" y="-376.8" font-family="Times,serif" font-size="14.00" style="">_incrementDailyActiveTimes</text>
+</g>
+<!-- MinerHealthCheck.ping&#45;&gt;MinerHealthCheck._incrementDailyActiveTimes -->
+<g id="edge8" class="edge" data-name="MinerHealthCheck.ping-&gt;MinerHealthCheck._incrementDailyActiveTimes">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M108.2,-473.35C120.46,-468.95 134.79,-462.57 146,-454 166.62,-438.23 159.8,-421.47 182,-408 190.4,-402.9 199.54,-398.73 209.01,-395.31" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="209.83,-398.73 218.26,-392.31 207.67,-392.07 209.83,-398.73" style=""/>
+</g>
+<!-- IMinerFormulas.calculateMetaPointsReward -->
+<g id="node14" class="node" pointer-events="visible" data-name="IMinerFormulas.calculateMetaPointsReward">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="629.74" cy="-273" rx="119.24" ry="18" style=""/>
+<text text-anchor="middle" x="629.74" y="-268.8" font-family="Times,serif" font-size="14.00" style="">calculateMetaPointsReward</text>
+</g>
+<!-- MinerHealthCheck.ping&#45;&gt;IMinerFormulas.calculateMetaPointsReward -->
+<g id="edge6" class="edge" data-name="MinerHealthCheck.ping-&gt;IMinerFormulas.calculateMetaPointsReward">
+
+<path fill="none" stroke="white" stroke-width="2" d="M109.84,-475.84C122.79,-471.99 137.23,-465.36 146,-454 214.59,-365.13 97.15,-277.5 182,-204 232.45,-160.29 417.24,-189.42 482.37,-204 520.08,-212.44 559.52,-231.73 587.95,-247.78" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="586.01,-250.7 596.42,-252.67 589.51,-244.64 586.01,-250.7" style=""/>
+</g>
+<!-- IMetaPoints.mint -->
+<g id="node16" class="node" pointer-events="visible" data-name="IMetaPoints.mint">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="328.19" cy="-119" rx="28.99" ry="18" style=""/>
+<text text-anchor="middle" x="328.19" y="-114.8" font-family="Times,serif" font-size="14.00" style="">mint</text>
+</g>
+<!-- MinerHealthCheck.ping&#45;&gt;IMetaPoints.mint -->
+<g id="edge7" class="edge" data-name="MinerHealthCheck.ping-&gt;IMetaPoints.mint">
+
+<path fill="none" stroke="white" stroke-width="2" d="M109.58,-475.99C122.64,-472.18 137.25,-465.52 146,-454 221.9,-354.1 104.26,-272.48 182,-174 206.92,-142.44 252.1,-128.98 285.47,-123.25" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="285.7,-126.76 295.07,-121.8 284.66,-119.83 285.7,-126.76" style=""/>
+</g>
+<!-- IMinerPool.claimMacroDailyReward -->
+<g id="node17" class="node" pointer-events="visible" data-name="IMinerPool.claimMacroDailyReward">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="328.19" cy="-34" rx="109.35" ry="18" style=""/>
+<text text-anchor="middle" x="328.19" y="-29.8" font-family="Times,serif" font-size="14.00" style="">claimMacroDailyReward</text>
+</g>
+<!-- MinerHealthCheck.ping&#45;&gt;IMinerPool.claimMacroDailyReward -->
+<g id="edge10" class="edge" data-name="MinerHealthCheck.ping-&gt;IMinerPool.claimMacroDailyReward">
+
+<path fill="none" stroke="white" stroke-width="2" d="M109.73,-476.1C122.82,-472.31 137.42,-465.65 146,-454 242.69,-322.76 82.9,-218.42 182,-89 195.29,-71.65 214.72,-59.77 235.08,-51.64" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="236.08,-55 244.29,-48.3 233.69,-48.42 236.08,-55" style=""/>
+</g>
+<!-- MinerHealthCheck.status -->
+<g id="node4" class="node" pointer-events="visible" data-name="MinerHealthCheck.status">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="81" cy="-427" rx="33.07" ry="18" style=""/>
+<text text-anchor="middle" x="81" y="-422.8" font-family="Times,serif" font-size="14.00" style="">status</text>
+</g>
+<!-- MinerHealthCheck.setTimeout -->
+<g id="node5" class="node" pointer-events="visible" data-name="MinerHealthCheck.setTimeout">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="81" cy="-373" rx="54.47" ry="18" style=""/>
+<text text-anchor="middle" x="81" y="-368.8" font-family="Times,serif" font-size="14.00" style="">setTimeout</text>
+</g>
+<!-- MinerHealthCheck.manuelPing -->
+<g id="node6" class="node" pointer-events="visible" data-name="MinerHealthCheck.manuelPing">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="81" cy="-319" rx="57.34" ry="18" style=""/>
+<text text-anchor="middle" x="81" y="-314.8" font-family="Times,serif" font-size="14.00" style="">manuelPing</text>
+</g>
+<!-- IMinerFormulas.getDate -->
+<g id="node15" class="node" pointer-events="visible" data-name="IMinerFormulas.getDate">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="629.74" cy="-327" rx="41.13" ry="18" style=""/>
+<text text-anchor="middle" x="629.74" y="-322.8" font-family="Times,serif" font-size="14.00" style="">getDate</text>
+</g>
+<!-- MinerHealthCheck._incrementDailyTotalActiveTimes&#45;&gt;IMinerFormulas.getDate -->
+<g id="edge11" class="edge" data-name="MinerHealthCheck._incrementDailyTotalActiveTimes-&gt;IMinerFormulas.getDate">
+
+<path fill="none" stroke="white" stroke-width="2" d="M475.89,-327C511.21,-327 546.76,-327 574.68,-327" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="574.31,-330.5 584.31,-327 574.31,-323.5 574.31,-330.5" style=""/>
+</g>
+<!-- MinerHealthCheck._incrementDailyActiveTimes&#45;&gt;IMinerFormulas.getDate -->
+<g id="edge12" class="edge" data-name="MinerHealthCheck._incrementDailyActiveTimes-&gt;IMinerFormulas.getDate">
+
+<path fill="none" stroke="white" stroke-width="2" d="M412.29,-366.48C435.02,-362.47 459.65,-358.1 482.37,-354 513.99,-348.3 549.41,-341.77 577.49,-336.56" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="578.07,-340.01 587.26,-334.74 576.79,-333.13 578.07,-340.01" style=""/>
+</g>
+<!-- key -->
+<g id="node18" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="146,-752 16,-752 16,-664 146,-664 146,-752" style=""/>
+<text text-anchor="start" x="65.64" y="-733.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="61.75" y="-713.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="39.2" y="-693.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="25.6" y="-673.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node19" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="355.19,-752 301.19,-752 301.19,-664 355.19,-664 355.19,-752" style=""/>
+<text text-anchor="start" x="318.19" y="-733.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="318.19" y="-713.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="316.19,-688 316.19,-708 341.19,-708 341.19,-688 316.19,-688" style=""/>
+<text text-anchor="start" x="318.19" y="-693.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="318.19,-670 318.19,-686 339.19,-686 339.19,-670 318.19,-670" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge13" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M139,-738C212.87,-738 234.48,-738 302.42,-738" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="302.16,-741.5 312.16,-738 302.16,-734.5 302.16,-741.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge14" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M139,-718C212.87,-718 234.48,-718 302.42,-718" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="302.16,-721.5 312.16,-718 302.16,-714.5 302.16,-721.5" style=""/>
+</g>
+</g>
+</svg>

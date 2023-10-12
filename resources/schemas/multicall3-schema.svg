@@ -1,0 +1,180 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="677pt" height="832pt" viewBox="0.00 0.00 677.01 832.00">
+<g id="graph0" class="graph" transform="translate(4,828) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-828 673.01,-828 673.01,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterMulticall3">
+
+<path fill="#445773" stroke="#445773" d="M20,-8C20,-8 649.01,-8 649.01,-8 655.01,-8 661.01,-14 661.01,-20 661.01,-20 661.01,-667 661.01,-667 661.01,-673 655.01,-679 649.01,-679 649.01,-679 20,-679 20,-679 14,-679 8,-673 8,-667 8,-667 8,-20 8,-20 8,-14 14,-8 20,-8" style=""/>
+<text text-anchor="middle" x="334.51" y="-662.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">Multicall3</text>
+</g>
+<g id="clust2" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="61.85,-687 61.85,-816 426.37,-816 426.37,-687 61.85,-687" style=""/>
+<text text-anchor="middle" x="244.11" y="-799.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- Multicall3.aggregate -->
+<g id="node1" class="node" pointer-events="visible" data-name="Multicall3.aggregate">
+
+<ellipse fill="#ff9797" stroke="brown" stroke-width="3" cx="134.85" cy="-628" rx="48.63" ry="18" style=""/>
+<text text-anchor="middle" x="134.85" y="-623.8" font-family="Times,serif" font-size="14.00" style="">aggregate</text>
+</g>
+<!-- Multicall3.tryAggregate -->
+<g id="node2" class="node" pointer-events="visible" data-name="Multicall3.tryAggregate">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="591.03" cy="-574" rx="61.96" ry="18" style=""/>
+<text text-anchor="middle" x="591.03" y="-569.8" font-family="Times,serif" font-size="14.00" style="">tryAggregate</text>
+</g>
+<!-- Multicall3.tryBlockAndAggregate -->
+<g id="node3" class="node" pointer-events="visible" data-name="Multicall3.tryBlockAndAggregate">
+
+<ellipse fill="#ff9797" stroke="brown" stroke-width="3" cx="391.37" cy="-574" rx="101.86" ry="18" style=""/>
+<text text-anchor="middle" x="391.37" y="-569.8" font-family="Times,serif" font-size="14.00" style="">tryBlockAndAggregate</text>
+</g>
+<!-- Multicall3.tryBlockAndAggregate&#45;&gt;Multicall3.tryAggregate -->
+<g id="edge2" class="edge" data-name="Multicall3.tryBlockAndAggregate-&gt;Multicall3.tryAggregate">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M494.68,-574C501.48,-574 508.25,-574 514.88,-574" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="514.79,-577.5 524.79,-574 514.79,-570.5 514.79,-577.5" style=""/>
+</g>
+<!-- Multicall3.blockhash -->
+<g id="node17" class="node" pointer-events="visible" data-name="Multicall3.blockhash">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="591.03" cy="-520" rx="50.39" ry="18" style=""/>
+<text text-anchor="middle" x="591.03" y="-515.8" font-family="Times,serif" font-size="14.00" style="">blockhash</text>
+</g>
+<!-- Multicall3.tryBlockAndAggregate&#45;&gt;Multicall3.blockhash -->
+<g id="edge1" class="edge" data-name="Multicall3.tryBlockAndAggregate-&gt;Multicall3.blockhash">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M451.76,-558.17C465.33,-554.53 479.7,-550.65 493.05,-547 507.4,-543.08 522.92,-538.78 537.25,-534.79" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="537.87,-538.25 546.56,-532.2 535.99,-531.51 537.87,-538.25" style=""/>
+</g>
+<!-- Multicall3.blockAndAggregate -->
+<g id="node4" class="node" pointer-events="visible" data-name="Multicall3.blockAndAggregate">
+
+<ellipse fill="#ff9797" stroke="brown" stroke-width="3" cx="134.85" cy="-574" rx="89.18" ry="18" style=""/>
+<text text-anchor="middle" x="134.85" y="-569.8" font-family="Times,serif" font-size="14.00" style="">blockAndAggregate</text>
+</g>
+<!-- Multicall3.blockAndAggregate&#45;&gt;Multicall3.tryBlockAndAggregate -->
+<g id="edge3" class="edge" data-name="Multicall3.blockAndAggregate-&gt;Multicall3.tryBlockAndAggregate">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M225.23,-574C241.43,-574 258.54,-574 275.37,-574" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="275.13,-577.5 285.13,-574 275.13,-570.5 275.13,-577.5" style=""/>
+</g>
+<!-- Multicall3.aggregate3 -->
+<g id="node5" class="node" pointer-events="visible" data-name="Multicall3.aggregate3">
+
+<ellipse fill="#ff9797" stroke="brown" stroke-width="3" cx="134.85" cy="-520" rx="53.29" ry="18" style=""/>
+<text text-anchor="middle" x="134.85" y="-515.8" font-family="Times,serif" font-size="14.00" style="">aggregate3</text>
+</g>
+<!-- Multicall3.aggregate3Value -->
+<g id="node6" class="node" pointer-events="visible" data-name="Multicall3.aggregate3Value">
+
+<ellipse fill="#ff9797" stroke="brown" stroke-width="3" cx="134.85" cy="-466" rx="76.4" ry="18" style=""/>
+<text text-anchor="middle" x="134.85" y="-461.8" font-family="Times,serif" font-size="14.00" style="">aggregate3Value</text>
+</g>
+<!-- Multicall3.getBlockHash -->
+<g id="node7" class="node" pointer-events="visible" data-name="Multicall3.getBlockHash">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="391.37" cy="-520" rx="66" ry="18" style=""/>
+<text text-anchor="middle" x="391.37" y="-515.8" font-family="Times,serif" font-size="14.00" style="">getBlockHash</text>
+</g>
+<!-- Multicall3.getBlockHash&#45;&gt;Multicall3.blockhash -->
+<g id="edge4" class="edge" data-name="Multicall3.getBlockHash-&gt;Multicall3.blockhash">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M458.74,-520C480.58,-520 504.79,-520 526.42,-520" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="526.13,-523.5 536.13,-520 526.13,-516.5 526.13,-523.5" style=""/>
+</g>
+<!-- Multicall3.getBlockNumber -->
+<g id="node8" class="node" pointer-events="visible" data-name="Multicall3.getBlockNumber">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="134.85" cy="-412" rx="77.59" ry="18" style=""/>
+<text text-anchor="middle" x="134.85" y="-407.8" font-family="Times,serif" font-size="14.00" style="">getBlockNumber</text>
+</g>
+<!-- Multicall3.getCurrentBlockCoinbase -->
+<g id="node9" class="node" pointer-events="visible" data-name="Multicall3.getCurrentBlockCoinbase">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="134.85" cy="-358" rx="111.18" ry="18" style=""/>
+<text text-anchor="middle" x="134.85" y="-353.8" font-family="Times,serif" font-size="14.00" style="">getCurrentBlockCoinbase</text>
+</g>
+<!-- Multicall3.getCurrentBlockDifficulty -->
+<g id="node10" class="node" pointer-events="visible" data-name="Multicall3.getCurrentBlockDifficulty">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="134.85" cy="-304" rx="113.46" ry="18" style=""/>
+<text text-anchor="middle" x="134.85" y="-299.8" font-family="Times,serif" font-size="14.00" style="">getCurrentBlockDifficulty</text>
+</g>
+<!-- Multicall3.getCurrentBlockGasLimit -->
+<g id="node11" class="node" pointer-events="visible" data-name="Multicall3.getCurrentBlockGasLimit">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="134.85" cy="-250" rx="111.76" ry="18" style=""/>
+<text text-anchor="middle" x="134.85" y="-245.8" font-family="Times,serif" font-size="14.00" style="">getCurrentBlockGasLimit</text>
+</g>
+<!-- Multicall3.getCurrentBlockTimestamp -->
+<g id="node12" class="node" pointer-events="visible" data-name="Multicall3.getCurrentBlockTimestamp">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="134.85" cy="-196" rx="118.69" ry="18" style=""/>
+<text text-anchor="middle" x="134.85" y="-191.8" font-family="Times,serif" font-size="14.00" style="">getCurrentBlockTimestamp</text>
+</g>
+<!-- Multicall3.getEthBalance -->
+<g id="node13" class="node" pointer-events="visible" data-name="Multicall3.getEthBalance">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="134.85" cy="-142" rx="67.18" ry="18" style=""/>
+<text text-anchor="middle" x="134.85" y="-137.8" font-family="Times,serif" font-size="14.00" style="">getEthBalance</text>
+</g>
+<!-- Multicall3.getLastBlockHash -->
+<g id="node14" class="node" pointer-events="visible" data-name="Multicall3.getLastBlockHash">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="391.37" cy="-466" rx="82.25" ry="18" style=""/>
+<text text-anchor="middle" x="391.37" y="-461.8" font-family="Times,serif" font-size="14.00" style="">getLastBlockHash</text>
+</g>
+<!-- Multicall3.getLastBlockHash&#45;&gt;Multicall3.blockhash -->
+<g id="edge5" class="edge" data-name="Multicall3.getLastBlockHash-&gt;Multicall3.blockhash">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M447,-480.55C461.94,-484.56 478.13,-488.92 493.05,-493 507.4,-496.92 522.92,-501.22 537.25,-505.21" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="535.99,-508.49 546.56,-507.8 537.87,-501.75 535.99,-508.49" style=""/>
+</g>
+<!-- Multicall3.getBasefee -->
+<g id="node15" class="node" pointer-events="visible" data-name="Multicall3.getBasefee">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="134.85" cy="-88" rx="53.29" ry="18" style=""/>
+<text text-anchor="middle" x="134.85" y="-83.8" font-family="Times,serif" font-size="14.00" style="">getBasefee</text>
+</g>
+<!-- Multicall3.getChainId -->
+<g id="node16" class="node" pointer-events="visible" data-name="Multicall3.getChainId">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="134.85" cy="-34" rx="53.89" ry="18" style=""/>
+<text text-anchor="middle" x="134.85" y="-29.8" font-family="Times,serif" font-size="14.00" style="">getChainId</text>
+</g>
+<!-- key -->
+<g id="node18" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="199.85,-783 69.85,-783 69.85,-695 199.85,-695 199.85,-783" style=""/>
+<text text-anchor="start" x="119.48" y="-764.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="115.6" y="-744.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="93.05" y="-724.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="79.45" y="-704.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node19" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="418.37,-783 364.37,-783 364.37,-695 418.37,-695 418.37,-783" style=""/>
+<text text-anchor="start" x="381.37" y="-764.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="381.37" y="-744.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="379.37,-719 379.37,-739 404.37,-739 404.37,-719 379.37,-719" style=""/>
+<text text-anchor="start" x="381.37" y="-724.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="381.37,-701 381.37,-717 402.37,-717 402.37,-701 381.37,-701" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge6" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M192.85,-769C270.79,-769 293.48,-769 365.38,-769" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="365.35,-772.5 375.35,-769 365.35,-765.5 365.35,-772.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge7" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M192.85,-749C270.79,-749 293.48,-749 365.38,-749" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="365.35,-752.5 375.35,-749 365.35,-745.5 365.35,-752.5" style=""/>
+</g>
+</g>
+</svg>

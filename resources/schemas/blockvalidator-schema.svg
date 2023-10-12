@@ -1,0 +1,113 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="359pt" height="431pt" viewBox="0.00 0.00 359.39 431.00">
+<g id="graph0" class="graph" transform="translate(4,427) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-427 355.39,-427 355.39,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterBlockValidator">
+
+<path fill="#445773" stroke="#445773" d="M20,-93C20,-93 331.39,-93 331.39,-93 337.39,-93 343.39,-99 343.39,-105 343.39,-105 343.39,-266 343.39,-266 343.39,-272 337.39,-278 331.39,-278 331.39,-278 20,-278 20,-278 14,-278 8,-272 8,-266 8,-266 8,-105 8,-105 8,-99 14,-93 20,-93" style=""/>
+<text text-anchor="middle" x="175.7" y="-261.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">BlockValidator</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterIRewardsPool">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M234.15,-8C234.15,-8 305.12,-8 305.12,-8 311.12,-8 317.12,-14 317.12,-20 317.12,-20 317.12,-73 317.12,-73 317.12,-79 311.12,-85 305.12,-85 305.12,-85 234.15,-85 234.15,-85 228.15,-85 222.15,-79 222.15,-73 222.15,-73 222.15,-20 222.15,-20 222.15,-14 228.15,-8 234.15,-8" style=""/>
+<text text-anchor="middle" x="269.64" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IRewardsPool</text>
+</g>
+<g id="clust3" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="18.94,-286 18.94,-415 304.64,-415 304.64,-286 18.94,-286" style=""/>
+<text text-anchor="middle" x="161.79" y="-398.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- BlockValidator.initialize -->
+<g id="node1" class="node" pointer-events="visible" data-name="BlockValidator.initialize">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="91.94" cy="-227" rx="44.64" ry="18" style=""/>
+<text text-anchor="middle" x="91.94" y="-222.8" font-family="Times,serif" font-size="14.00" style="">initialize</text>
+</g>
+<!-- BlockValidator.IRewardsPool -->
+<g id="node4" class="node" pointer-events="visible" data-name="BlockValidator.IRewardsPool">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="269.64" cy="-227" rx="65.51" ry="18" style=""/>
+<text text-anchor="middle" x="269.64" y="-222.8" font-family="Times,serif" font-size="14.00" style="">IRewardsPool</text>
+</g>
+<!-- BlockValidator.initialize&#45;&gt;BlockValidator.IRewardsPool -->
+<g id="edge1" class="edge" data-name="BlockValidator.initialize-&gt;BlockValidator.IRewardsPool">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M137.73,-227C153.6,-227 171.97,-227 189.83,-227" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="189.67,-230.5 199.67,-227 189.67,-223.5 189.67,-230.5" style=""/>
+</g>
+<!-- BlockValidator.setBlockPayload -->
+<g id="node2" class="node" pointer-events="visible" data-name="BlockValidator.setBlockPayload">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="91.94" cy="-173" rx="75.89" ry="18" style=""/>
+<text text-anchor="middle" x="91.94" y="-168.8" font-family="Times,serif" font-size="14.00" style="">setBlockPayload</text>
+</g>
+<!-- BlockValidator.address -->
+<g id="node5" class="node" pointer-events="visible" data-name="BlockValidator.address">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="269.64" cy="-146" rx="40" ry="18" style=""/>
+<text text-anchor="middle" x="269.64" y="-141.8" font-family="Times,serif" font-size="14.00" style="">address</text>
+</g>
+<!-- BlockValidator.setBlockPayload&#45;&gt;BlockValidator.address -->
+<g id="edge2" class="edge" data-name="BlockValidator.setBlockPayload-&gt;BlockValidator.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M157.87,-163.02C177.55,-160 198.88,-156.72 217.52,-153.86" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="217.9,-157.34 227.26,-152.36 216.84,-150.42 217.9,-157.34" style=""/>
+</g>
+<!-- BlockValidator.finalizeBlock -->
+<g id="node3" class="node" pointer-events="visible" data-name="BlockValidator.finalizeBlock">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="91.94" cy="-119" rx="63.11" ry="18" style=""/>
+<text text-anchor="middle" x="91.94" y="-114.8" font-family="Times,serif" font-size="14.00" style="">finalizeBlock</text>
+</g>
+<!-- BlockValidator.finalizeBlock&#45;&gt;BlockValidator.address -->
+<g id="edge3" class="edge" data-name="BlockValidator.finalizeBlock-&gt;BlockValidator.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M149.5,-127.69C171.35,-131.05 196.17,-134.86 217.48,-138.14" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="216.82,-141.58 227.24,-139.64 217.89,-134.66 216.82,-141.58" style=""/>
+</g>
+<!-- IRewardsPool.claim -->
+<g id="node6" class="node" pointer-events="visible" data-name="IRewardsPool.claim">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="269.64" cy="-34" rx="32.47" ry="18" style=""/>
+<text text-anchor="middle" x="269.64" y="-29.8" font-family="Times,serif" font-size="14.00" style="">claim</text>
+</g>
+<!-- BlockValidator.finalizeBlock&#45;&gt;IRewardsPool.claim -->
+<g id="edge4" class="edge" data-name="BlockValidator.finalizeBlock-&gt;IRewardsPool.claim">
+
+<path fill="none" stroke="white" stroke-width="2" d="M126.82,-102.61C156.93,-88.05 200.84,-66.8 231.81,-51.82" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="233.19,-55.04 240.67,-47.53 230.14,-48.74 233.19,-55.04" style=""/>
+</g>
+<!-- key -->
+<g id="node7" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="156.94,-382 26.94,-382 26.94,-294 156.94,-294 156.94,-382" style=""/>
+<text text-anchor="start" x="76.58" y="-363.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="72.69" y="-343.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="50.15" y="-323.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="36.54" y="-303.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node8" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="296.64,-382 242.64,-382 242.64,-294 296.64,-294 296.64,-382" style=""/>
+<text text-anchor="start" x="259.64" y="-363.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="259.64" y="-343.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="257.64,-318 257.64,-338 282.64,-338 282.64,-318 257.64,-318" style=""/>
+<text text-anchor="start" x="259.64" y="-323.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="259.64,-300 259.64,-316 280.64,-316 280.64,-300 259.64,-300" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge5" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M149.94,-368C192.73,-368 206.56,-368 243.7,-368" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="243.61,-371.5 253.61,-368 243.61,-364.5 243.61,-371.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge6" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M149.94,-348C192.73,-348 206.56,-348 243.7,-348" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="243.61,-351.5 253.61,-348 243.61,-344.5 243.61,-351.5" style=""/>
+</g>
+</g>
+</svg>
