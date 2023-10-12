@@ -20,9 +20,6 @@ contract MetaPoints is
     PausableUpgradeable,
     RolesHandler
 {
-    bytes32 public constant OWNER_ROLE = keccak256("OWNER_ROLE");
-    bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
-
     error BurnDisabled(uint256 amount);
     error TransferDisabled(address to, uint256 amount);
     error TransferFromDisabled(address from, address to, uint256 amount);
