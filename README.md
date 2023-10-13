@@ -1217,6 +1217,9 @@ The `Blacklistable` contract introduces the following key components:
 - Transaction Blacklist: A mapping that associates addresses with a boolean value to indicate whether they are blacklisted.
 - Event Emission: Events are emitted when the blacklist status of an address is updated.
 
+### Architecture Overview
+![Blacklistable Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/edbbae45637182d93f27ca1ee83bbbad6ea3f8b0/resources/schemas/blacklistable-schema.svg)
+
 ### Contract Details
 
 #### State Variables
@@ -1251,6 +1254,9 @@ The `Freezeable` contract introduces the following key components:
 
 - Freeze Status: A boolean variable `freezeStatus` that indicates whether the contract is frozen or not.
 - Event Emission: An event is emitted when the freeze status of the contract is updated.
+
+### Architecture Overview
+![Freezeable Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/edbbae45637182d93f27ca1ee83bbbad6ea3f8b0/resources/schemas/freezeable-schema.svg)
 
 ### Contract Details
 
@@ -1289,6 +1295,9 @@ The `RolesHandler` contract introduces the following key components:
 - Role Modifiers: Modifiers are provided to check if an address has a specific role, including `onlyOwnerRole`, `onlyManagerRole`, and `onlyValidatorRole`.
 
 - Initialization: The contract allows for the initialization of the roles contract, connecting it to an external contract that defines the roles.
+
+### Architecture Overview
+![RolesHandler Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/edbbae45637182d93f27ca1ee83bbbad6ea3f8b0/resources/schemas/roleshandler-schema.svg)
 
 ### Contract Details
 
