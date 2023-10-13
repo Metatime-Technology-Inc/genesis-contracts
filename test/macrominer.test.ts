@@ -175,6 +175,20 @@ describe("MacroMiner", function () {
         );
     };
 
+    it("try to initialize with zero address", async () => {
+      const { macroMiner, owner } = await loadFixture(initiateVariables);
+
+      await expect(
+        macroMiner
+          .connect(owner)
+          .initialize(
+            ethers.constants.AddressZero,
+            ethers.constants.AddressZero,
+            ethers.constants.AddressZero
+          )
+      ).revertedWith("Macrominer: cannot set zero address");
+    });
+
     // try setMiner function when caller dont have enough funds
     it("try setMiner function when caller dont have enough funds", async () => {
       const { miner_1, macroMiner } = await loadFixture(initiateVariables);
@@ -974,7 +988,7 @@ describe("MacroMiner", function () {
           "0x200000000000000000000000000000000000000000000000000000000000000",
         ]);
       }
-      
+
       // addMiners
       await minerList
         .connect(manager)
@@ -1012,12 +1026,30 @@ describe("MacroMiner", function () {
           date,
           BigNumber.from(2)
         );
- 
-      const value = ethers.utils.hexlify(ethers.utils.zeroPad(toWei("89999").toHexString(), 32));
+
+      const value = ethers.utils.hexlify(
+        ethers.utils.zeroPad(toWei("89999").toHexString(), 32)
+      );
       await network.provider.send("hardhat_setStorageAt", [
         minerPool.address,
         slotOfTotalRewardsFromFirstFormula,
         value,
+      ]);
+
+      const slotOfTotalRewardsFromFirstFormula2 =
+        getSlotOfTotalRewardsFromFirstFormula(
+          BigNumber.from(3),
+          date.add(1),
+          BigNumber.from(2)
+        );
+
+      const value2 = ethers.utils.hexlify(
+        ethers.utils.zeroPad(toWei("89999").toHexString(), 32)
+      );
+      await network.provider.send("hardhat_setStorageAt", [
+        minerPool.address,
+        slotOfTotalRewardsFromFirstFormula2,
+        value2,
       ]);
 
       for (let i = 0; i < 20; i++) {

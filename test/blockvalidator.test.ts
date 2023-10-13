@@ -2,7 +2,7 @@ import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers, network } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
-import { toWei } from "../scripts/helpers";
+import { toWei, mineBlock } from "../scripts/helpers";
 import { BigNumber, BigNumberish } from "ethers";
 import { BlockValidator, RewardsPool, MinerHealthCheck, MinerFormulas, MinerPool, MetaPoints, MinerList, Roles } from "../typechain-types";
 
@@ -154,17 +154,55 @@ describe("BlockValidator", function () {
             );
         }
 
+        it("try to initialize with zero address", async () => {
+            const { blockValidator, owner, rewardsPool } = await loadFixture(initiateVariables);
+
+            await expect(blockValidator.connect(owner).initialize(
+                ethers.constants.AddressZero
+            )).revertedWith("BlockValidator: cannot set zero address");
+        }); 
+
+        it("try to setBlockPayload with wrong payloads", async () => {
+            const { validator_1, blockValidator } = await loadFixture(initiateVariables);
+
+            // init contracts
+            await initContracts();
+            
+            const latestBlock = await blockValidator.provider.getBlock("latest");
+
+            const blockNumber = latestBlock.number;
+
+            await expect(
+                blockValidator.connect(validator_1).setBlockPayload(blockNumber, {
+                    coinbase: validator_1.address,
+                    blockHash: "0xd502da602f23acd49758f8f2d4c1266808635890ba001835112204404c7d06d8",
+                    blockReward: toWei("1"),
+                    isFinalized: false
+                })
+            ).to.be.revertedWith("BlockValidator: Mismatched block hash");
+            await expect(
+                blockValidator.connect(validator_1).setBlockPayload(blockNumber, {
+                    coinbase: validator_1.address,
+                    blockHash: latestBlock.hash,
+                    blockReward: toWei("1"),
+                    isFinalized: true
+                })
+            ).to.be.revertedWith("BlockValidator: Block finalized before");
+        }); 
+
         // try setBlockPayload with wallet which is dont have Validator role
         it("try setBlockPayload with wallet which is dont have Validator role", async () => {
             const { manager, blockValidator } = await loadFixture(initiateVariables);
 
             // init contracts
             await initContracts();
+            
+            const latestBlock = await blockValidator.provider.getBlock("latest");
 
-            const blockNumber = BigNumber.from(String(1));
+            const blockNumber = latestBlock.number;
             const blockPayload:BlockValidator.BlockPayloadStruct = {
                 coinbase: manager.address,
-                blockHash: "0x0558d0e333d665da01c66a3cf8434c31be07b4a29556d56a6311839132fc24ed",
+                blockHash: latestBlock.hash,
                 blockReward: toWei("1"),
                 isFinalized: false
             };
@@ -181,10 +219,12 @@ describe("BlockValidator", function () {
             // init contracts
             await initContracts();
 
-            const blockNumber = BigNumber.from(String(1));
+            const latestBlock = await blockValidator.provider.getBlock("latest");
+
+            const blockNumber = latestBlock.number;
             const blockPayload:BlockValidator.BlockPayloadStruct = {
                 coinbase: validator_1.address,
-                blockHash: "0x0558d0e333d665da01c66a3cf8434c31be07b4a29556d56a6311839132fc24ed",
+                blockHash: latestBlock.hash,
                 blockReward: toWei("1"),
                 isFinalized: false
             };
@@ -230,6 +270,8 @@ describe("BlockValidator", function () {
             // init contracts
             await initContracts();
 
+            await mineBlock(ethers, 100);
+
             const validators = [validator_1.address, validator_2.address, validator_3.address];
 
             // set validator as metaminer
@@ -259,11 +301,12 @@ describe("BlockValidator", function () {
 
             // prepare payloads
             for (let i = 0; i < blockCount; i++) { 
+                const block = await blockValidator.provider.getBlock(i);
                 blockPayloads.push({
-                    number: BigNumber.from(String(i + 1)),
+                    number: block.number,
                     payload: {
                         coinbase: pickValidator(),
-                        blockHash: "0x0558d0e333d665da01c66a3cf8434c31be07b4a29556d56a6311839132fc24ed",
+                        blockHash: block.hash,
                         blockReward: toWei("1"),
                         isFinalized: false
                     }
@@ -294,6 +337,7 @@ describe("BlockValidator", function () {
 
             // init contracts
             await initContracts();
+            await mineBlock(ethers, 100);
 
             // set funds to rewards pool
             await network.provider.send("hardhat_setBalance", [
@@ -330,11 +374,12 @@ describe("BlockValidator", function () {
 
             // prepare payloads
             for (let i = 0; i < blockCount; i++) { 
+                const block = await blockValidator.provider.getBlock(i);
                 blockPayloads.push({
-                    number: BigNumber.from(String(i + 1)),
+                    number: block.number,
                     payload: {
                         coinbase: pickValidator(),
-                        blockHash: "0x0558d0e333d665da01c66a3cf8434c31be07b4a29556d56a6311839132fc24ed",
+                        blockHash: block.hash,
                         blockReward: toWei("1"),
                         isFinalized: false
                     }

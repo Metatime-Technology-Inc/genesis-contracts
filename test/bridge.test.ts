@@ -35,6 +35,13 @@ describe("Bridge", function () {
     };
   }
 
+  it("try to deploy with wrong parameters", async () => {
+    const { owner } = await loadFixture(initiateVariables);
+
+    const Bridge2 = await ethers.getContractFactory(CONTRACTS.utils.Bridge);
+    await expect(Bridge2.connect(owner).deploy(ethers.constants.AddressZero)).revertedWith("Bridge: cannot set zero address");
+  }); 
+
   // test Bridge
   describe("test bridge contract", async () => {
     const funds: BigNumber = toWei(String(100));

@@ -144,6 +144,19 @@ describe("MinerFormulas", function () {
             return step3;
         }
 
+        // try initialize function with zero address
+        it("try initialize function with zero address", async () => {
+            const { owner, minerFormulas } = await loadFixture(initiateVariables);
+    
+            await expect(
+                minerFormulas.connect(owner).initialize(
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero
+                )
+            ).to.be.revertedWith("MinerFormulas: cannot set zero address");
+        });
+
         // try calculateDailyPoolRewardsFromFirstFormula function with wrong nodeType
         it("try calculateDailyPoolRewardsFromFirstFormula function with wrong nodeType", async () => {
             const { minerFormulas } = await loadFixture(initiateVariables);

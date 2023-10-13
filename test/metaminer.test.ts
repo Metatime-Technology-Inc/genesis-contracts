@@ -2,7 +2,12 @@ import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers, network } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
-import { incrementBlocktimestamp, setBalance, toWei } from "../scripts/helpers";
+import {
+  incrementBlocktimestamp,
+  setBalance,
+  toWei,
+  mineBlock,
+} from "../scripts/helpers";
 import { BigNumber } from "ethers";
 import {
   BlockValidator,
@@ -208,6 +213,37 @@ describe("Metaminer", function () {
 
   // test Metaminer
   describe("test metaminer contract", async () => {
+    // try initialize function with zero address
+    it("try initialize function with zero address", async () => {
+      const { owner } = await loadFixture(initiateVariables);
+
+      const Metaminer2 = await ethers.getContractFactory(
+        CONTRACTS.utils.Metaminer
+      );
+      const metaminer = (await Metaminer2.connect(owner).deploy()) as Metaminer;
+
+      const RewardsPool2 = await ethers.getContractFactory(
+        CONTRACTS.core.RewardsPool
+      );
+      const rewardsPool = (await RewardsPool2.connect(
+        owner
+      ).deploy()) as RewardsPool;
+
+      await expect(
+        metaminer
+          .connect(owner)
+          .initialize(
+            ethers.constants.AddressZero,
+            ethers.constants.AddressZero,
+            ethers.constants.AddressZero,
+            ethers.constants.AddressZero
+          )
+      ).to.be.revertedWith("Metaminer: cannot set zero address");
+      await expect(
+        rewardsPool.connect(owner).initialize(ethers.constants.AddressZero)
+      ).to.be.revertedWith("RewardsPool: cannot set zero address");
+    });
+
     it("try to set miner with wrong amount of ether", async () => {
       const { metaminerContract, metaminer_1 } = await loadFixture(
         initiateVariables
@@ -289,6 +325,12 @@ describe("Metaminer", function () {
         metaminerContract.connect(user_1).setValidator(metaminer_2.address)
       ).revertedWith("RolesHandler: Owner role is needed for this action");
 
+      await expect(
+        metaminerContract
+          .connect(owner)
+          .setValidator(ethers.constants.AddressZero)
+      ).revertedWith("Metaminer: Validator cannot be zero address");
+
       expect(
         await metaminerContract
           .connect(owner)
@@ -301,9 +343,7 @@ describe("Metaminer", function () {
         initiateVariables
       );
 
-      await metaminerContract
-        .connect(owner)
-        .callStatic.setValidator(metaminer_1.address);
+      await metaminerContract.connect(owner).setValidator(metaminer_1.address);
 
       expect(
         await metaminerContract
@@ -327,6 +367,26 @@ describe("Metaminer", function () {
             [3_000, 10_000]
           )
       ).revertedWith("Metaminer: Total percent cannot exceed 100");
+
+      await expect(
+        metaminerContract
+          .connect(owner)
+          .setPercentages(
+            metaminer_1.address,
+            [user_1.address, user_2.address, ethers.constants.AddressZero],
+            [3_000, 1_000, 1_000]
+          )
+      ).revertedWith("Metaminer: Shareholder cannot set zero address");
+
+      await expect(
+        metaminerContract
+          .connect(owner)
+          .setPercentages(
+            metaminer_1.address,
+            [user_1.address, user_2.address],
+            [3_000, 0]
+          )
+      ).revertedWith("Metaminer: Shareholder percentage cannot be zero");
 
       expect(
         await metaminerContract
@@ -352,51 +412,58 @@ describe("Metaminer", function () {
 
       await metaminerContract.connect(owner).setValidator(metaminer_1.address);
 
+      // await mineBlock(ethers, 10);
+
+      const block_0 = await blockValidator.provider.getBlock("latest");
       const blockPayload_1: BlockValidator.BlockPayloadStruct = {
         coinbase: metaminer_1.address,
-        blockHash:
-          "0x0558d0e333d665da01c66a3cf8434c31be07b4a29556d56a6311839132fc24ed",
+        blockHash: block_0.hash,
         blockReward: toWei("1000"),
         isFinalized: false,
       };
+      await blockValidator
+        .connect(owner)
+        .setBlockPayload(block_0.number, blockPayload_1);
 
+      const block_1 = await blockValidator.provider.getBlock("latest");
       const blockPayload_2: BlockValidator.BlockPayloadStruct = {
         coinbase: metaminer_2.address,
-        blockHash:
-          "0x0558d0e333d665da01c66a3cf8434c31be07b4a29556d56a6311839132fc24ed",
+        blockHash: block_1.hash,
         blockReward: toWei("1000"),
         isFinalized: false,
       };
+      await blockValidator
+        .connect(owner)
+        .setBlockPayload(block_1.number, blockPayload_2);
 
+      const block_2 = await blockValidator.provider.getBlock("latest");
       const blockPayload_3: BlockValidator.BlockPayloadStruct = {
         coinbase: metaminer_3.address,
-        blockHash:
-          "0x0558d0e333d665da01c66a3cf8434c31be07b4a29556d56a6311839132fc24ed",
+        blockHash: block_2.hash,
         blockReward: toWei("100"),
         isFinalized: false,
       };
-
-      await blockValidator.connect(owner).setBlockPayload(0, blockPayload_1);
-      await blockValidator.connect(owner).setBlockPayload(1, blockPayload_2);
-      await blockValidator.connect(owner).setBlockPayload(2, blockPayload_3);
+      await blockValidator
+        .connect(owner)
+        .setBlockPayload(block_2.number, blockPayload_3);
       const {
         coinbase: blockPayload_1Coinbase,
         blockHash: blockPayload_1BlockHash,
         blockReward: blockPayload_1BlockReward,
         isFinalized: blockPayload_1IsFinalized,
-      } = await blockValidator.blockPayloads(0);
+      } = await blockValidator.blockPayloads(block_0.number);
       const {
         coinbase: blockPayload_2Coinbase,
         blockHash: blockPayload_2BlockHash,
         blockReward: blockPayload_2BlockReward,
         isFinalized: blockPayload_2IsFinalized,
-      } = await blockValidator.blockPayloads(1);
+      } = await blockValidator.blockPayloads(block_1.number);
       const {
         coinbase: blockPayload_3Coinbase,
         blockHash: blockPayload_3BlockHash,
         blockReward: blockPayload_3BlockReward,
         isFinalized: blockPayload_3IsFinalized,
-      } = await blockValidator.blockPayloads(2);
+      } = await blockValidator.blockPayloads(block_2.number);
 
       expect(blockPayload_1Coinbase).to.be.equal(blockPayload_1.coinbase);
       expect(blockPayload_1BlockHash).to.be.equal(blockPayload_1.blockHash);
@@ -414,7 +481,9 @@ describe("Metaminer", function () {
       expect(
         await metaminerContract
           .connect(metaminer_1)
-          .callStatic.finalizeBlock(0, { value: blockPayload_1.blockReward })
+          .callStatic.finalizeBlock(block_0.number, {
+            value: blockPayload_1.blockReward,
+          })
       ).to.be.equal(true);
 
       await setBalance(
@@ -440,23 +509,23 @@ describe("Metaminer", function () {
       await expect(
         metaminerContract
           .connect(metaminer_1)
-          .finalizeBlock(2, { value: blockPayload_3.blockReward })
+          .finalizeBlock(block_2.number, { value: blockPayload_3.blockReward })
       ).revertedWith("Metaminer: Wrong coinbase");
 
       await expect(
-        metaminerContract.connect(metaminer_3).finalizeBlock(2, {
+        metaminerContract.connect(metaminer_3).finalizeBlock(block_2.number, {
           value: ethers.BigNumber.from(blockPayload_3.blockReward).div(2),
         })
       ).revertedWith("Metaminer: Insufficient amount");
 
       await metaminerContract
         .connect(metaminer_3)
-        .finalizeBlock(2, { value: blockPayload_3.blockReward });
+        .finalizeBlock(block_2.number, { value: blockPayload_3.blockReward });
 
       await expect(
         metaminerContract
           .connect(metaminer_3)
-          .finalizeBlock(2, { value: blockPayload_3.blockReward })
+          .finalizeBlock(block_2.number, { value: blockPayload_3.blockReward })
       ).revertedWith("Metaminer: Already finalized");
 
       // increment blocktimestamp to 1 year and 35 days to revoke miners subscription
@@ -465,7 +534,9 @@ describe("Metaminer", function () {
       expect(
         await metaminerContract
           .connect(metaminer_2)
-          .callStatic.finalizeBlock(1, { value: blockPayload_2.blockReward })
+          .callStatic.finalizeBlock(block_1.number, {
+            value: blockPayload_2.blockReward,
+          })
       ).to.be.equal(false);
     });
 
