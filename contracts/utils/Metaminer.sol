@@ -33,9 +33,9 @@ contract Metaminer is Initializable, RolesHandler {
     /// @notice MinerFormulas instance address
     IMinerFormulas public minerFormulas;
     /// @notice needed stake amount for being metaminer
-    uint256 public STAKE_AMOUNT = 1_000_000 ether;
+    uint256 public constant STAKE_AMOUNT = 1_000_000 ether;
     /// @notice annual metaminer rental fee
-    uint256 public ANNUAL_AMOUNT = 100_000 ether;
+    uint256 public constant ANNUAL_AMOUNT = 100_000 ether;
     /// @notice year in seconds
     uint256 private constant YEAR = 31536000;
     /// @notice address of MinerPool contract

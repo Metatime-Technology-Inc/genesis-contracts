@@ -42,10 +42,10 @@ contract TxValidator is Initializable, RolesHandler {
     }
 
     /// @notice Parameters for transaction validation
-    uint256 public votePointLimit = 100 ether;
-    uint256 public voteCountLimit = 32;
-    uint256 public defaultVotePoint = 2 ether;
-    uint256 public defaultExpireTime = 5 minutes;
+    uint256 public constant VOTE_POINT_LIMIT = 100 ether;
+    uint256 public constant VOTE_COUNT_LIMIT = 32;
+    uint256 public constant VOTE_POINT = 2 ether;
+    uint256 public constant EXPIRE_TIME = 5 minutes;
     uint256 public constant HANDLER_PERCENT = 5_000;
 
     /// @notice Addresses of dependency contracts
@@ -140,7 +140,7 @@ contract TxValidator is Initializable, RolesHandler {
             0,
             false,
             false,
-            (block.timestamp + defaultExpireTime),
+            (block.timestamp + EXPIRE_TIME),
             false
         );
         emit AddTransaction(txHash, handler, reward);
@@ -226,8 +226,8 @@ contract TxValidator is Initializable, RolesHandler {
         TransactionState state = TransactionState.Pending;
 
         if (
-            (txPayload.votePoint >= votePointLimit ||
-                txVoteCount == voteCountLimit) && txPayload.done == false
+            (txPayload.votePoint >= VOTE_POINT_LIMIT ||
+                txVoteCount == VOTE_COUNT_LIMIT) && txPayload.done == false
         ) {
             txPayload.done = true;
             _shareRewards(txHash);
@@ -258,7 +258,7 @@ contract TxValidator is Initializable, RolesHandler {
         address voter,
         MinerTypes.NodeType nodeType
     ) internal view returns (uint256) {
-        uint256 votePoint = defaultVotePoint;
+        uint256 votePoint = VOTE_POINT;
         if (nodeType == MinerTypes.NodeType.Micro) {
             return votePoint;
         }

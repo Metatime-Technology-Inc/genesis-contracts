@@ -14,8 +14,6 @@ import "../interfaces/IMinerList.sol";
  * time for mining purposes.
  */
 contract RewardsPool is Initializable, RolesHandler {
-    /// @notice current block number
-    uint256 currentBlock = 0;
     /// @notice MinerFormulas instance address
     IMinerFormulas public minerFormulas;
     /// @notice a mapping that holds claimed amounts for each participant
