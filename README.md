@@ -1,4 +1,8 @@
+
 # Metatime Genesis Contracts
+This project encompasses block validation, transaction validation, miner structures, and reward distribution based on the actions of miners on the MetaChain network. Additionally, there are bridge contracts prepared for both MetaChain and BSC. The purpose of these bridge contracts is to facilitate the transfer or migration of MTC tokens from the BSC network to the MetaChain network.
+
+All miner structures and the reward system in this project are documented in the [Metatime whitepaper](https://docs.metatime.com/whitepaper).
 
 # Getting Started
 Recommended Node version is 16.0.0 and above.
@@ -7,7 +11,7 @@ Recommended Node version is 16.0.0 and above.
 
 ```bash
 # install dependencies
-$ npm install
+$ yarn install
 
 # compile contracts
 $ npx hardhat compile
@@ -15,14 +19,17 @@ $ npx hardhat compile
 # run tests
 $ npx hardhat test
 
-# compute tests coverage
-$ npm run coverage
+# generate typechain files
+$ npx hardhat typechain
+
+# compute tests coverage, run "npx hardhat typechain" before using it
+$ npx hardhat coverage
 
 # run prettier formatter
-$ npm run prettier:solidity
+$ yarn run prettier:solidity
 
 # run linter
-$ npm run solhint
+$ yarn run solhint
 
 # extract ABIs
 $ npx hardhat extract-abis --network <network-name>
@@ -74,8 +81,11 @@ genesis-contracts/
 ├── scripts/
 │   ├── constants/
 │   │   ├── chain-ids.ts
+│   │   ├── constructor-params.ts
 │   │   ├── contracts.ts
 │   │   └── index.ts
+│   ├── deploy/
+│   │   └── 00_bridge.ts
 │   └── helpers.ts
 ├── test/
 │   ├── blockvalidator.test.ts
