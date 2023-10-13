@@ -124,6 +124,9 @@ The MinerPool contract provides the following core functionalities:
 - **claimTxReward**: Permits a manager to claim transaction rewards and distribute them to the specified receiver.
 - **calculateClaimableAmount**: An internal function for calculating claimable reward amounts based on miner activity and specific formulas.
 
+### Architecture Overview
+![MinerPool Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/minerpool-schema.svg)
+
 ### Contract Details
 
 #### State Variables
@@ -182,6 +185,9 @@ The RewardsPool contract offers the following key functionalities:
 - **Deposit**: An event emitted when the pool receives MTC (Mainnet Coin) deposits.
 - **HasClaimed**: An event emitted when a beneficiary claims tokens. It includes the beneficiary's address and the claimed amount.
 
+### Architecture Overview
+![RewardsPool Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/rewardspool-schema.svg)
+
 ### Contract Details
 
 #### State Variables
@@ -233,6 +239,9 @@ The WMTC contract offers the following functionalities:
 - **Approve**: Enables users to approve another address to spend WMTC tokens on their behalf.
 - **Transfer**: Allows the transfer of WMTC tokens from one address to another.
 - **TransferFrom**: Permits the transfer of WMTC tokens from one address to another, with approval.
+
+### Architecture Overview
+![WMTC Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/wmtc-schema.svg)
 
 ### Contract Details
 
@@ -303,6 +312,9 @@ The BlockValidator contract offers the following key functionalities:
 - **Set Block Payload**: Allows validators to add a payload to a specific block. This payload typically includes information about the block, such as the coinbase address, block hash, and block reward.
 - **Finalize Block**: Permits managers to mark a block as finalized once all necessary information has been added to it.
 
+### Architecture Overview
+![BlockValidator Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/blockvalidator-schema.svg)
+
 ### Contract Details
 
 #### State Variables
@@ -358,6 +370,9 @@ The Bridge contract offers the following key functionalities:
 - **Blacklistable**: Utilizes a blacklist mechanism to restrict certain addresses from using the bridge.
 - **Freezeable**: Implements the ability to freeze the contract, preventing further token bridging.
 
+### Architecture Overview
+![Bridge Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/bridge-schema.svg)
+
 ### Contract Details
 
 #### State Variables
@@ -408,6 +423,9 @@ The Macrominer contract provides several important functionalities:
 - **Staking**: Macrominers are required to stake a specific amount of Ether (STAKE_AMOUNT) to become a macrominer of a particular node type.
 - **Health Checks**: The contract checks the health status of macrominers and allows other miners to initiate these checks.
 - **Voting System**: Macrominers can be voted out of their status if their health is found to be compromised. A voting system enables other miners to accumulate votes and kick out an unhealthy macrominer.
+
+### Architecture Overview
+![Macrominer Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/macrominer-schema.svg)
 
 ### Contract Details
 
@@ -478,6 +496,9 @@ The MainnetBridge contract facilitates the bridging of transactions to the Mainn
 - **Modifiers**: Custom modifiers, including `notExist`, are used to validate transaction statuses.
 - **Event**: The contract emits a `Bridge` event when a transaction is bridged.
 
+### Architecture Overview
+![MainnetBridge Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/mainnetbridge-schema.svg)
+
 ### Contract Details
 
 #### State Variables
@@ -531,6 +552,9 @@ The Metaminer contract offers the following core functionalities:
 - **Shareholders**: Metaminers can distribute a percentage share of their rewards to shareholders.
 - **Block Finalization**: Metaminers can finalize blocks and distribute rewards to their shareholders.
 - **Unsubscription**: Metaminers can unsubscribe and receive their staked amount back.
+
+### Architecture Overview
+![Metaminer Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/metaminer-schema.svg)
 
 ### Contract Details
 
@@ -607,6 +631,9 @@ The MetaPoints contract provides the following key features:
 - Transfer (Disabled): The transfer function is disabled, preventing token holders from transferring their tokens.
 - TransferFrom (Disabled): The transferFrom function is disabled, preventing the transfer of tokens between addresses.
 
+### Architecture Overview
+![MetaPoints Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/metapoints-schema.svg)
+
 ### Contract Details
 
 #### State Variables
@@ -665,6 +692,9 @@ The Microminer contract manages MicroMiners in the system and provides functions
 
 The Microminer contract allows users to become MicroMiners by staking a specific amount of cryptocurrency. It also provides a mechanism to remove MicroMiners and refund their stake.
 
+### Architecture Overview
+![MicroMiner Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/microminer-schema.svg)
+
 ### Contract Details
 
 #### State Variables
@@ -718,6 +748,9 @@ The MinerFormulas contract provides the following core functionalities and const
 - Access to MinerHealthCheck contract: The contract has access to the MinerHealthCheck contract to retrieve miner activity data.
 - Constants for calculations: The contract defines constants for various calculations and reward distribution.
 - Functions for calculating rewards: The contract provides functions to calculate rewards for MetaMiners, MetaPoints, and daily pool rewards for different types of macro miners.
+
+### Architecture Overview
+![MinerFormulas Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/minerformulas-schema.svg)
 
 ### Contract Details
 
@@ -793,6 +826,9 @@ The MinerHealthCheck contract offers several essential features and functionalit
 - **Manual Ping**: Managers have the privilege to manually update the uptime of miner nodes when necessary.
 - **Activity Tracking**: The contract maintains a record of daily activities for different types of miner nodes.
 
+### Architecture Overview
+![MinerHealthCheck Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/minerhealthcheck-schema.svg)
+
 ### Contract Details
 
 #### State Variables
@@ -844,6 +880,9 @@ The MinerList contract offers the following core functionalities:
 - Adding miners: Users with the appropriate permissions can add addresses as miners of a specified node type.
 - Deleting miners: Users with the appropriate permissions can delete miners from the list.
 - Checking miner status: The contract provides functions to check if an address is a miner and to retrieve the count of miners for a specific node type.
+
+### Architecture Overview
+![MinerList Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/minerlist-schema.svg)
 
 ### Contract Details
 
@@ -906,6 +945,9 @@ The Multicall3 contract provides the following key functionalities:
 - **Validator Queue**: The contract includes a feature for managing a queue of validators, which can be used for selecting validators based on the current block number.
 
 - **Value Transfer**: The contract supports aggregating function calls that involve value transfers (msg.value).
+
+### Architecture Overview
+![Multicall3 Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/multicall3-schema.svg)
 
 ### Contract Details
 
@@ -972,6 +1014,9 @@ The Multicall3 contract is particularly useful when you want to optimize gas cos
 ### Contract Overview
 
 The MultiSigWallet contract is designed to facilitate multi-signature wallet functionality. It enables multiple authorized parties (owners) to propose and execute transactions collectively. The contract offers a secure way for a group of owners to manage their shared funds.
+
+### Architecture Overview
+![MultiSigWallet Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/multisigwallet-schema.svg)
 
 ### Contract Details
 
@@ -1047,6 +1092,9 @@ The Roles contract provides the following core functionalities:
 
 - Validator Queue: Validators are selected based on their order in the queue, with the queue position determined by the block number. The `pickValidator` function returns the address of the validator based on the current block number.
 
+### Architecture Overview
+![Roles Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/roles-schema.svg)
+
 ### Contract Details
 
 #### State Variables
@@ -1091,6 +1139,9 @@ The TxValidator contract offers the following core functionalities:
 - Voting Mechanism: Users eligible to vote can express their decision (approve or disapprove) on a transaction. Their voting power is determined based on their Meta Points balance and the associated miner node type.
 
 - Consensus and Rewards: When a transaction receives a sufficient number of votes or exceeds a vote point limit, it is considered completed. Rewards are then distributed to voters and the handler based on the decision and the number of voters.
+
+### Architecture Overview
+![TxValidator Schema](https://raw.githubusercontent.com/Metatime-Technology-Inc/metachain/eec8b99da98cf010019747de4f76c35dafa1fb56/resources/schemas/txvalidator-schema.svg)
 
 ### Contract Details
 
