@@ -38,15 +38,6 @@ contract Bridge is Blacklistable, Freezeable {
         uint256 balance = bridgeToken.balanceOf(msg.sender);
         require(balance > 0, "Bridge: Address dont have balance");
 
-        uint256 senderAllowance = bridgeToken.allowance(
-            msg.sender,
-            address(this)
-        );
-        require(
-            senderAllowance == balance,
-            "Bridge: Allowance is not as required"
-        );
-
         bridgeToken.burnFrom(msg.sender, balance);
         emit BridgeTransfer(msg.sender, balance);
 

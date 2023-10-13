@@ -103,7 +103,7 @@ describe("Bridge", function () {
       await mtc.connect(owner).transfer(user.address, funds);
 
       await expect(bridge.connect(user).bridge()).to.be.revertedWith(
-        "Bridge: Allowance is not as required"
+        "ERC20: insufficient allowance"
       );
     });
 
