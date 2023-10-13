@@ -812,7 +812,7 @@ The MinerHealthCheck contract offers several essential features and functionalit
 - **ping**: Miners use this function to "ping" the contract, update their uptime, and receive rewards based on their activity.
 - **status**: Users can check the status of a miner node to determine if it is currently active.
 - **setTimeout**: Owners of the contract can configure the timeout duration for miner activity.
-- **manuelPing**: Managers can manually ping a miner node when necessary.
+- **manualPing**: Managers can manually ping a miner node when necessary.
 
 #### Internal Functions
 

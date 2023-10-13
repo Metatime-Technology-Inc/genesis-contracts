@@ -19,7 +19,7 @@ interface IMinerHealthCheck {
         MinerTypes.NodeType nodeType
     ) external view returns (uint256);
 
-    function manuelPing(
+    function manualPing(
         address minerAddress,
         MinerTypes.NodeType nodeType
     ) external;
