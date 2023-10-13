@@ -20,6 +20,7 @@ contract MetaPoints is
     PausableUpgradeable,
     RolesHandler
 {
+    /// @notice custom errors for prohibited functions
     error BurnDisabled(uint256 amount);
     error TransferDisabled(address to, uint256 amount);
     error TransferFromDisabled(address from, address to, uint256 amount);

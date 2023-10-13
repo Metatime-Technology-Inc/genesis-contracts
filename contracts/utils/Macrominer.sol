@@ -14,33 +14,42 @@ import "../interfaces/IMinerList.sol";
  * @dev A contract for managing and voting on the status of macrominers.
  */
 contract Macrominer is Initializable {
+    /// @notice Struct to represent a vote
+    struct Vote {
+        uint256 voteId; // Identifier for the vote.
+        uint256 point; // Accumulated voting points.
+        bool exist; // Indicates if a vote exists.
+    }
+
+    /// @notice Constants for stake and vote point limits.
     uint256 public constant STAKE_AMOUNT = 100 ether;
     uint256 public constant VOTE_POINT_LIMIT = 100 ether;
 
+    /// @notice Unique identifier for each vote.
     uint256 public voteId;
+
+    /// @notice Addresses of external contracts
     IMinerHealthCheck public minerHealthCheck;
     IMetaPoints public metapoints;
     IMinerList public minerList;
 
-    struct Vote {
-        uint256 voteId;
-        uint256 point;
-        bool exist;
-    }
-
+    /// @notice Mapping to store votes for each miner and node type.
     mapping(address => mapping(MinerTypes.NodeType => Vote)) public votes;
 
+    /// @notice voting begun
     event BeginVote(
         uint256 indexed voteId,
         address indexed miner,
         MinerTypes.NodeType indexed nodeType
     );
+    /// @notice voted
     event Voted(
         uint256 indexed voteId,
         address indexed miner,
         MinerTypes.NodeType indexed nodeType,
         uint256 point
     );
+    /// @notice voting ended
     event EndVote(
         uint256 indexed voteId,
         address indexed miner,
@@ -81,6 +90,9 @@ contract Macrominer is Initializable {
         _;
     }
 
+    /**
+     * @dev The receive function is a special function that allows the contract to accept MTC transactions.
+     */
     receive() external payable {}
 
     /**
@@ -94,6 +106,12 @@ contract Macrominer is Initializable {
         address metapointsAddress,
         address minerListAddress
     ) external initializer {
+        require(
+            minerHealthCheckAddress != address(0) &&
+                metapointsAddress != address(0) &&
+                minerListAddress != address(0),
+            "Macrominer: cannot set zero address"
+        );
         minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
         metapoints = IMetaPoints(metapointsAddress);
         minerList = IMinerList(minerListAddress);
@@ -202,9 +220,10 @@ contract Macrominer is Initializable {
     ) internal returns (bool) {
         delete votes[minerAddress][nodeType];
         minerList.deleteMiner(minerAddress, nodeType);
-        (bool sent, ) = payable(minerAddress).call{value: STAKE_AMOUNT}("");
 
+        (bool sent, ) = payable(minerAddress).call{value: STAKE_AMOUNT}("");
         require(sent, "Macrominer: Unstake failed");
+
         return (true);
     }
 }

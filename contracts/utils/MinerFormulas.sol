@@ -7,42 +7,60 @@ import "../interfaces/IMetaPoints.sol";
 import "../interfaces/IMinerHealthCheck.sol";
 import "../interfaces/IMinerList.sol";
 
-// This contract after unit tests & audit will be library
+/**
+ * @title Miner Formulas
+ * @dev A smart contract for managing reward calculation formulas for miners.
+ */
 contract MinerFormulas is Initializable {
+    /// @notice Address of the MetaPoints contract
     IMetaPoints public metaPoints;
+    /// @notice Address of the MinerList contract
     IMinerList public minerList;
+    /// @notice Address of the MinerHealthCheck contract
     IMinerHealthCheck public minerHealthCheck;
 
-    // Divider for percentage calculatations %100 => %10_000
+    /// @notice Divider for percentage calculatations %100 => %10_000
     uint256 public constant BASE_DIVIDER = 10_000;
-
+    /// @notice MinerPool contract's shareholder percent
     uint256 public constant METAMINER_MINER_POOL_SHARE_PERCENT = 5_000;
-
+    /// @notice daily block count
     uint256 public constant METAMINER_DAILY_BLOCK_COUNT = 17_280;
+    /// @notice prize pool for daily basis
     uint256 public constant METAMINER_DAILY_PRIZE_POOL = 166_666 * 10 ** 18;
+    /// @notice metaminer maximum daily prize
     uint256 public constant METAMINER_DAILY_PRIZE_LIMIT = 450 * 10 ** 18;
 
+    /// @notice macrominer(archive) maximum daily prize
     uint256 public constant MACROMINER_ARCHIVE_DAILY_MAX_REWARD =
         150 * 10 ** 18;
+    /// @notice macrominer(fullnode) maximum daily prize
     uint256 public constant MACROMINER_FULLNODE_DAILY_MAX_REWARD =
         100 * 10 ** 18;
+    /// @notice macrominer(light) maximum daily prize
     uint256 public constant MACROMINER_LIGHT_DAILY_MAX_REWARD = 50 * 10 ** 18;
 
+    /// @notice hardcap of macrominer(archive) according to first formula
     uint256 public constant MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA =
         135_000 * 10 ** 18;
+    /// @notice hardcap of macrominer(archive) according to second formula
     uint256 public constant MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA =
         15_000 * 10 ** 18;
 
+    /// @notice hardcap of macrominer(fullnode) according to first formula
     uint256 public constant MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA =
         90_000 * 10 ** 18;
+    /// @notice hardcap of macrominer(fullnode) according to second formula
     uint256 public constant MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA =
         10_000 * 10 ** 18;
 
+    /// @notice hardcap of macrominer(light) according to first formula
     uint256 public constant MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA =
         45_000 * 10 ** 18;
+    /// @notice hardcap of macrominer(light) according to second formula
     uint256 public constant MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA =
         5_000 * 10 ** 18;
 
+    /// @notice total seconds in a day
     uint256 public constant SECONDS_IN_A_DAY = 86_400;
 
     /**
@@ -56,6 +74,12 @@ contract MinerFormulas is Initializable {
         address minerListAddress,
         address minerHealthCheckAddress
     ) external initializer {
+        require(
+            metaPointsAddress != address(0) &&
+                minerListAddress != address(0) &&
+                minerHealthCheckAddress != address(0),
+            "MinerFormulas: cannot set zero address"
+        );
         metaPoints = IMetaPoints(metaPointsAddress);
         minerList = IMinerList(minerListAddress);
         minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
@@ -178,7 +202,8 @@ contract MinerFormulas is Initializable {
     }
 
     /**
-     * @dev Internal function to calculate the current date in terms of the number of days since the Unix epoch.
+     * @dev Internal function to calculate the current date in terms of
+     * the number of days since the Unix epoch.
      * @return The current date.
      */
     function _getDate() internal view returns (uint256) {

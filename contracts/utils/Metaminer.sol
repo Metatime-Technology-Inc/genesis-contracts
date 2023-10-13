@@ -11,33 +11,48 @@ import "../helpers/RolesHandler.sol";
 
 /**
  * @title Metaminer
- * @dev A smart contract representing a Metaminer, allowing users to stake and participate in block validation.
+ * @dev A smart contract representing a Metaminer,
+ * allowing users to stake and participate in block validation.
  */
 contract Metaminer is Initializable, RolesHandler {
-    IBlockValidator public blockValidator;
-    IMinerList public minerList;
-    IMinerFormulas public minerFormulas;
-    uint256 public STAKE_AMOUNT = 1_000_000 ether;
-    uint256 public ANNUAL_AMOUNT = 100_000 ether;
-    uint256 private constant YEAR = 31536000;
-    address private minerPool; // should be constant
-
+    /// @notice a struct that hold share for distribution
     struct Share {
         uint256 sharedPercent;
         uint256 shareHolderCount;
     }
-
+    /// @notice shareholder payload for distribution
     struct Shareholder {
         address addr;
         uint256 percent;
     }
 
+    /// @notice BlockValidator instance address
+    IBlockValidator public blockValidator;
+    /// @notice MinerList instance address
+    IMinerList public minerList;
+    /// @notice MinerFormulas instance address
+    IMinerFormulas public minerFormulas;
+    /// @notice needed stake amount for being metaminer
+    uint256 public STAKE_AMOUNT = 1_000_000 ether;
+    /// @notice annual metaminer rental fee
+    uint256 public ANNUAL_AMOUNT = 100_000 ether;
+    /// @notice year in seconds
+    uint256 private constant YEAR = 31536000;
+    /// @notice address of MinerPool contract
+    address private minerPool;
+
+    /// @notice a mapping that holds each addresses' shares
     mapping(address => Share) public shares;
+    /// @notice a mapping that holds miners' subscription dates
     mapping(address => uint256) public minerSubscription;
+    /// @notice a mapping that holds shareholders for each address
     mapping(address => mapping(uint256 => Shareholder)) public shareholders;
 
+    /// @notice miner is added
     event MinerAdded(address indexed miner, uint256 indexed validDate);
+    /// @notice miner is subscribed
     event MinerSubscribe(address indexed miner, uint256 indexed newValidDate);
+    /// @notice miner is unsubscribed
     event MinerUnsubscribe(address indexed miner);
 
     /**
@@ -64,10 +79,14 @@ contract Metaminer is Initializable, RolesHandler {
         _;
     }
 
+    /**
+     * @dev The receive function is a special function that allows the contract to accept MTC transactions.
+     */
     receive() external payable {}
 
     /**
-     * @dev Initializes the Metaminer contract with the addresses of the BlockValidator, MinerList, MinerFormulas, and MinerPool contracts.
+     * @dev Initializes the Metaminer contract with the addresses of the
+     * BlockValidator, MinerList, MinerFormulas, and MinerPool contracts.
      * @param blockValidatorAddress The address of the BlockValidator contract.
      * @param minerListAddress The address of the MinerList contract.
      * @param minerFormulasAddress The address of the MinerFormulas contract.
@@ -79,6 +98,13 @@ contract Metaminer is Initializable, RolesHandler {
         address minerFormulasAddress,
         address minerPoolAddress
     ) external initializer {
+        require(
+            blockValidatorAddress != address(0) &&
+                minerListAddress != address(0) &&
+                minerFormulasAddress != address(0) &&
+                minerPoolAddress != address(0),
+            "Metaminer: cannot set zero address"
+        );
         blockValidator = IBlockValidator(blockValidatorAddress);
         minerList = IMinerList(minerListAddress);
         minerFormulas = IMinerFormulas(minerFormulasAddress);
@@ -86,7 +112,8 @@ contract Metaminer is Initializable, RolesHandler {
     }
 
     /**
-     * @dev Allows a user to become a Metaminer by staking the required amount of MTC.
+     * @dev Allows a user to become a Metaminer
+     * by staking the required amount of MTC.
      * @return A boolean indicating whether the operation was successful.
      */
     function setMiner() external payable returns (bool) {
@@ -107,7 +134,8 @@ contract Metaminer is Initializable, RolesHandler {
     }
 
     /**
-     * @dev Allows a Metaminer to renew their subscription for another year by sending the required amount of MTC.
+     * @dev Allows a Metaminer to renew their subscription
+     * for another year by sending the required amount of MTC.
      * @return A boolean indicating whether the operation was successful.
      */
     function subscribe() external payable isMiner(msg.sender) returns (bool) {
@@ -137,6 +165,10 @@ contract Metaminer is Initializable, RolesHandler {
     function setValidator(
         address validator
     ) external onlyOwnerRole(msg.sender) returns (bool) {
+        require(
+            validator != address(0),
+            "Metaminer: Validator cannot be zero address"
+        );
         shares[validator] = Share(0, 0);
         minerSubscription[validator] = _nextYear(validator);
         minerList.addMiner(validator, MinerTypes.NodeType.Meta);
@@ -155,7 +187,7 @@ contract Metaminer is Initializable, RolesHandler {
      */
     function refreshValidator(
         address validator
-    ) external onlyOwnerRole(msg.sender) returns (bool) {
+    ) external onlyOwnerRole(msg.sender) isMiner(validator) returns (bool) {
         minerSubscription[validator] = _nextYear(validator);
         return (true);
     }
@@ -163,22 +195,30 @@ contract Metaminer is Initializable, RolesHandler {
     /**
      * @dev Allows the contract owner to set the percentage share for Metaminer's shareholders.
      * @param miner The address of the Metaminer.
-     * @param shareHolders_ The addresses of the shareholders.
+     * @param shareholders_ The addresses of the shareholders.
      * @param percentages The corresponding percentages for the shareholders.
      * @return A boolean indicating whether the operation was successful.
      */
     function setPercentages(
         address miner,
-        address[] memory shareHolders_,
+        address[] memory shareholders_,
         uint256[] memory percentages
-    ) external onlyOwnerRole(msg.sender) returns (bool) {
+    ) external onlyOwnerRole(msg.sender) isMiner(miner) returns (bool) {
         Share storage share = shares[miner];
-        uint256 shareHoldersLength = shareHolders_.length;
-        for (uint256 i = 0; i < shareHoldersLength; i++) {
-            address addr = shareHolders_[i];
+        uint256 shareholdersLength = shareholders_.length;
+        for (uint256 i = 0; i < shareholdersLength; i++) {
+            address addr = shareholders_[i];
             uint256 percentage = percentages[i];
             uint256 nextPercent = share.sharedPercent + percentage;
 
+            require(
+                addr != address(0),
+                "Metaminer: Shareholder cannot set zero address"
+            );
+            require(
+                percentage != 0,
+                "Metaminer: Shareholder percentage cannot be zero"
+            );
             require(
                 nextPercent <= minerFormulas.BASE_DIVIDER(),
                 "Metaminer: Total percent cannot exceed 100"
@@ -222,9 +262,9 @@ contract Metaminer is Initializable, RolesHandler {
     }
 
     /**
-     * @dev Calculates the timestamp for the start of the next year.
+     * @dev Calculates the timestamp for next year.
      * @param miner The address of the Metaminer.
-     * @return The timestamp for the start of the next year.
+     * @return The timestamp for next year.
      */
     function _nextYear(address miner) internal view returns (uint256) {
         return (
@@ -277,7 +317,8 @@ contract Metaminer is Initializable, RolesHandler {
     }
 
     /**
-     * @dev Unsubscribes a Metaminer by transferring their staked amount back to them.
+     * @dev Unsubscribes a Metaminer by transferring their staked amount back to them,
+     * but not annual subscription amount.
      * @param miner The address of the Metaminer to unsubscribe.
      * @return A boolean indicating whether the operation was successful.
      */

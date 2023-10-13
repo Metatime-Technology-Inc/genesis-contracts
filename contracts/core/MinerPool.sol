@@ -10,23 +10,34 @@ import "../interfaces/IMinerList.sol";
 /**
  * @title MinerPool
  * @notice Manages the distribution of tokens to miners based on their activity.
- * @dev This contract facilitates the reward distribution to miners for their participation in different miner node types.
+ * @dev This contract facilitates the reward distribution to miners for
+ * their participation in different miner node types.
  */
 contract MinerPool is Initializable, RolesHandler {
+    /// @notice This variable represents a contract instance of IMinerFormulas, which is used to access miner formulas.
     IMinerFormulas public minerFormulas;
+    /// @notice This mapping stores the claimed amounts for each address.
     mapping(address => uint256) public claimedAmounts;
+    /// @notice This mapping stores the total rewards from the first formula for a given miner type and a specific uint256 identifier.
     mapping(uint256 => mapping(MinerTypes.NodeType => uint256))
         public totalRewardsFromFirstFormula;
+    /// @notice This mapping stores the total rewards from the second formula for a given miner type and a specific uint256 identifier.
     mapping(uint256 => mapping(MinerTypes.NodeType => uint256))
         public totalRewardsFromSecondFormula;
 
+    /// @notice MTC claimed
     event HasClaimed(
         address indexed beneficiary,
         uint256 amount,
         string indexed claimType
     );
+    /// @notice MTC deposited
     event Deposit(address indexed sender, uint amount, uint balance);
 
+    /**
+     * @dev The receive function is a special function that allows the contract to accept MTC transactions.
+     * It emits a Deposit event to record the deposit details.
+     */
     receive() external payable {
         emit Deposit(msg.sender, msg.value, address(this).balance);
     }
@@ -36,6 +47,10 @@ contract MinerPool is Initializable, RolesHandler {
      * @param minerFormulasAddress Address of MinerFormulas contract.
      */
     function initialize(address minerFormulasAddress) external initializer {
+        require(
+            minerFormulasAddress != address(0),
+            "MinerPool: cannot set zero address"
+        );
         minerFormulas = IMinerFormulas(minerFormulasAddress);
     }
 

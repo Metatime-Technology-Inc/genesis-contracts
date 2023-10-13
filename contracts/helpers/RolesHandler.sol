@@ -8,6 +8,7 @@ import "../interfaces/IRoles.sol";
  * @dev An abstract contract for handling roles and permissions.
  */
 abstract contract RolesHandler {
+    /// @notice holds Roles instance address
     IRoles public roles;
 
     /**

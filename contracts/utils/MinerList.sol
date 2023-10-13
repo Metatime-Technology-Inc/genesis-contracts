@@ -12,14 +12,19 @@ import "../libs/MinerTypes.sol";
  * @dev A smart contract for managing a list of miners.
  */
 contract MinerList is Initializable, RolesHandler {
+    /// @notice The address of the MinerHealthCheck contract
     IMinerHealthCheck public minerHealthCheck;
+    /// @notice A mapping to store the list of miners by address and node type
     mapping(address => mapping(MinerTypes.NodeType => bool)) public list;
+    /// @notice  A mapping to store the count of miners by node type
     mapping(MinerTypes.NodeType => uint256) public count;
 
+    /// @notice new miner is added
     event AddMiner(
         address indexed minerAddress,
         MinerTypes.NodeType indexed nodeType
     );
+    /// @notice miner is deleted
     event DeleteMiner(
         address indexed minerAddress,
         MinerTypes.NodeType indexed nodeType
@@ -30,6 +35,10 @@ contract MinerList is Initializable, RolesHandler {
      * @param minerHealthCheckAddress The address of the MinerHealthCheck contract.
      */
     function initialize(address minerHealthCheckAddress) external initializer {
+        require(
+            minerHealthCheckAddress != address(0),
+            "MinerList: cannot set zero address"
+        );
         minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
     }
 
@@ -81,7 +90,7 @@ contract MinerList is Initializable, RolesHandler {
     ) internal {
         list[minerAddress][nodeType] = true;
         count[nodeType]++;
-        minerHealthCheck.manuelPing(minerAddress, nodeType);
+        minerHealthCheck.manualPing(minerAddress, nodeType);
 
         emit AddMiner(minerAddress, nodeType);
     }

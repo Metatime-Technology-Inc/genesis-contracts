@@ -8,8 +8,10 @@ import "./RolesHandler.sol";
  * @dev An abstract contract for managing the freeze status of a contract.
  */
 abstract contract Freezeable is RolesHandler {
+    /// @notice holds current freeze status
     bool public freezeStatus = true;
 
+    /// @notice contract has freezed
     event Freeze(bool indexed status);
 
     /**

@@ -10,8 +10,10 @@ import "../helpers/Freezeable.sol";
  * @dev A smart contract for bridging tokens to another chain.
  */
 contract Bridge is Blacklistable, Freezeable {
+    /// @notice address of bridged token
     IERC20 public immutable bridgeToken;
 
+    /// @notice token is bridged
     event BridgeTransfer(address indexed sender, uint256 indexed amount);
 
     /**
@@ -19,6 +21,7 @@ contract Bridge is Blacklistable, Freezeable {
      * @param tokenAddress The address of the token to be bridged.
      */
     constructor(address tokenAddress) {
+        require(tokenAddress != address(0), "Bridge: cannot set zero address");
         bridgeToken = IERC20(tokenAddress);
     }
 

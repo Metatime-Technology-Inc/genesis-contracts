@@ -1,20 +1,25 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 
-/// @title Multicall3
-/// @notice Aggregate results from multiple function calls
+/**
+ * @title Multicall3
+ * @notice Aggregate results from multiple function calls
+ */
 contract Multicall3 {
+    /// @notice a struct that contains target address and function calldata
     struct Call {
         address target;
         bytes callData;
     }
 
+    /// @notice a struct same as Call but consists allow failure statement
     struct Call3 {
         address target;
         bool allowFailure;
         bytes callData;
     }
 
+    /// @notice a struct same as Call3 but consists MTC amount
     struct Call3Value {
         address target;
         bool allowFailure;
@@ -22,15 +27,18 @@ contract Multicall3 {
         bytes callData;
     }
 
+    /// @notice result of a call
     struct Result {
         bool success;
         bytes returnData;
     }
 
-    /// @notice Backwards-compatible call aggregation with Multicall
-    /// @param calls An array of Call structs
-    /// @return blockNumber The block number where the calls were executed
-    /// @return returnData An array of bytes containing the responses
+    /**
+     * @notice Backwards-compatible call aggregation with Multicall
+     * @param calls An array of Call structs
+     * @return blockNumber The block number where the calls were executed
+     * @return returnData An array of bytes containing the responses
+     */
     function aggregate(
         Call[] calldata calls
     ) public payable returns (uint256 blockNumber, bytes[] memory returnData) {
@@ -49,11 +57,13 @@ contract Multicall3 {
         }
     }
 
-    /// @notice Backwards-compatible with Multicall2
-    /// @notice Aggregate calls without requiring success
-    /// @param requireSuccess If true, require all calls to succeed
-    /// @param calls An array of Call structs
-    /// @return returnData An array of Result structs
+    /**
+     * @notice Backwards-compatible with Multicall2
+     * @notice Aggregate calls without requiring success
+     * @param requireSuccess If true, require all calls to succeed
+     * @param calls An array of Call structs
+     *@return returnData An array of Result structs
+     */
     function tryAggregate(
         bool requireSuccess,
         Call[] calldata calls
@@ -75,12 +85,14 @@ contract Multicall3 {
         }
     }
 
-    /// @notice Backwards-compatible with Multicall2
-    /// @notice Aggregate calls and allow failures using tryAggregate
-    /// @param calls An array of Call structs
-    /// @return blockNumber The block number where the calls were executed
-    /// @return blockHash The hash of the block where the calls were executed
-    /// @return returnData An array of Result structs
+    /**
+     * @notice Backwards-compatible with Multicall2
+     * @notice Aggregate calls and allow failures using tryAggregate
+     * @param calls An array of Call structs
+     * @return blockNumber The block number where the calls were executed
+     * @return blockHash The hash of the block where the calls were executed
+     * @return returnData An array of Result structs
+     */
     function tryBlockAndAggregate(
         bool requireSuccess,
         Call[] calldata calls
@@ -98,12 +110,14 @@ contract Multicall3 {
         returnData = tryAggregate(requireSuccess, calls);
     }
 
-    /// @notice Backwards-compatible with Multicall2
-    /// @notice Aggregate calls and allow failures using tryAggregate
-    /// @param calls An array of Call structs
-    /// @return blockNumber The block number where the calls were executed
-    /// @return blockHash The hash of the block where the calls were executed
-    /// @return returnData An array of Result structs
+    /**
+     * @notice Backwards-compatible with Multicall2
+     * @notice Aggregate calls and allow failures using tryAggregate
+     * @param calls An array of Call structs
+     * @return blockNumber The block number where the calls were executed
+     * @return blockHash The hash of the block where the calls were executed
+     * @return returnData An array of Result structs
+     */
     function blockAndAggregate(
         Call[] calldata calls
     )
@@ -121,9 +135,11 @@ contract Multicall3 {
         );
     }
 
-    /// @notice Aggregate calls, ensuring each returns success if required
-    /// @param calls An array of Call3 structs
-    /// @return returnData An array of Result structs
+    /**
+     * @notice Aggregate calls, ensuring each returns success if required
+     * @param calls An array of Call3 structs
+     * @return returnData An array of Result structs
+     */
     function aggregate3(
         Call3[] calldata calls
     ) public payable returns (Result[] memory returnData) {
@@ -169,10 +185,12 @@ contract Multicall3 {
         }
     }
 
-    /// @notice Aggregate calls with a msg value
-    /// @notice Reverts if msg.value is less than the sum of the call values
-    /// @param calls An array of Call3Value structs
-    /// @return returnData An array of Result structs
+    /**
+     * @notice Aggregate calls with a msg value
+     * @notice Reverts if msg.value is less than the sum of the call values
+     * @param calls An array of Call3Value structs
+     * @return returnData An array of Result structs
+     */
     function aggregate3Value(
         Call3Value[] calldata calls
     ) public payable returns (Result[] memory returnData) {
@@ -227,25 +245,33 @@ contract Multicall3 {
         require(msg.value == valAccumulator, "Multicall3: value mismatch");
     }
 
-    /// @notice Returns the block hash for the given block number
-    /// @param blockNumber The block number
+    /**
+     * @notice Returns the block hash for the given block number
+     * @param blockNumber The block number
+     */
     function getBlockHash(
         uint256 blockNumber
     ) public view returns (bytes32 blockHash) {
         blockHash = blockhash(blockNumber);
     }
 
-    /// @notice Returns the block number
+    /**
+     * @notice Returns the block number
+     */
     function getBlockNumber() public view returns (uint256 blockNumber) {
         blockNumber = block.number;
     }
 
-    /// @notice Returns the block coinbase
+    /**
+     * @notice Returns the block coinbase
+     */
     function getCurrentBlockCoinbase() public view returns (address coinbase) {
         coinbase = block.coinbase;
     }
 
-    /// @notice Returns the block difficulty
+    /**
+     * @notice Returns the block difficulty
+     */
     function getCurrentBlockDifficulty()
         public
         view
@@ -254,12 +280,16 @@ contract Multicall3 {
         difficulty = block.difficulty;
     }
 
-    /// @notice Returns the block gas limit
+    /**
+     * @notice Returns the block gas limit
+     */
     function getCurrentBlockGasLimit() public view returns (uint256 gaslimit) {
         gaslimit = block.gaslimit;
     }
 
-    /// @notice Returns the block timestamp
+    /**
+     * @notice Returns the block timestamp
+     */
     function getCurrentBlockTimestamp()
         public
         view
@@ -268,25 +298,33 @@ contract Multicall3 {
         timestamp = block.timestamp;
     }
 
-    /// @notice Returns the (ETH) balance of a given address
+    /**
+     * @notice Returns the (ETH) balance of a given address
+     */
     function getEthBalance(address addr) public view returns (uint256 balance) {
         balance = addr.balance;
     }
 
-    /// @notice Returns the block hash of the last block
+    /**
+     * @notice Returns the block hash of the last block
+     */
     function getLastBlockHash() public view returns (bytes32 blockHash) {
         unchecked {
             blockHash = blockhash(block.number - 1);
         }
     }
 
-    /// @notice Gets the base fee of the given block
-    /// @notice Can revert if the BASEFEE opcode is not implemented by the given chain
+    /**
+     * @notice Gets the base fee of the given block
+     * @notice Can revert if the BASEFEE opcode is not implemented by the given chain
+     */
     function getBasefee() public view returns (uint256 basefee) {
         basefee = block.basefee;
     }
 
-    /// @notice Returns the chain id
+    /**
+     * @notice Returns the chain id
+     */
     function getChainId() public view returns (uint256 chainid) {
         chainid = block.chainid;
     }
