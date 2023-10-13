@@ -1,0 +1,68 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="273pt" height="362pt" viewBox="0.00 0.00 273.35 362.00">
+<g id="graph0" class="graph" transform="translate(4,358) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-358 269.35,-358 269.35,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterFreezeable">
+
+<path fill="#445773" stroke="#445773" d="M20,-8C20,-8 155.35,-8 155.35,-8 161.35,-8 167.35,-14 167.35,-20 167.35,-20 167.35,-197 167.35,-197 167.35,-203 161.35,-209 155.35,-209 155.35,-209 20,-209 20,-209 14,-209 8,-203 8,-197 8,-197 8,-20 8,-20 8,-14 14,-8 20,-8" style=""/>
+<text text-anchor="middle" x="87.67" y="-192.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">Freezeable</text>
+</g>
+<g id="clust2" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="14.67,-217 14.67,-346 257.35,-346 257.35,-217 14.67,-217" style=""/>
+<text text-anchor="middle" x="136.01" y="-329.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- Freezeable.isFreezed -->
+<g id="node1" class="node" pointer-events="visible" data-name="Freezeable.isFreezed">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="139.67,-146.54 139.67,-161.46 109.21,-172 66.14,-172 35.68,-161.46 35.68,-146.54 66.14,-136 109.21,-136 139.67,-146.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="143.67,-143.7 143.67,-164.3 109.88,-176 65.47,-176 31.68,-164.3 31.68,-143.7 65.47,-132 109.88,-132 143.67,-143.7" style=""/>
+<text text-anchor="middle" x="87.67" y="-149.8" font-family="Times,serif" font-size="14.00" style="">isFreezed</text>
+</g>
+<!-- Freezeable.isNotFreezed -->
+<g id="node2" class="node" pointer-events="visible" data-name="Freezeable.isNotFreezed">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="155.51,-84.54 155.51,-99.46 115.77,-110 59.57,-110 19.84,-99.46 19.84,-84.54 59.57,-74 115.77,-74 155.51,-84.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="159.52,-81.47 159.52,-102.53 116.3,-114 59.05,-114 15.83,-102.53 15.83,-81.47 59.05,-70 116.3,-70 159.52,-81.47" style=""/>
+<text text-anchor="middle" x="87.67" y="-87.8" font-family="Times,serif" font-size="14.00" style="">isNotFreezed</text>
+</g>
+<!-- Freezeable.setFreeze -->
+<g id="node3" class="node" pointer-events="visible" data-name="Freezeable.setFreeze">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="87.67" cy="-34" rx="47.49" ry="18" style=""/>
+<text text-anchor="middle" x="87.67" y="-29.8" font-family="Times,serif" font-size="14.00" style="">setFreeze</text>
+</g>
+<!-- key -->
+<g id="node4" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="152.67,-313 22.67,-313 22.67,-225 152.67,-225 152.67,-313" style=""/>
+<text text-anchor="start" x="72.31" y="-294.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="68.42" y="-274.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="45.88" y="-254.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="32.28" y="-234.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node5" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="249.35,-313 195.35,-313 195.35,-225 249.35,-225 249.35,-313" style=""/>
+<text text-anchor="start" x="212.35" y="-294.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="212.35" y="-274.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="210.35,-249 210.35,-269 235.35,-269 235.35,-249 210.35,-249" style=""/>
+<text text-anchor="start" x="212.35" y="-254.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="212.35,-231 212.35,-247 233.35,-247 233.35,-231 212.35,-231" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge1" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M145.67,-299C169.11,-299 177.99,-299 196.42,-299" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="196.32,-302.5 206.32,-299 196.32,-295.5 196.32,-302.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge2" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M145.67,-279C169.11,-279 177.99,-279 196.42,-279" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="196.32,-282.5 206.32,-279 196.32,-275.5 196.32,-282.5" style=""/>
+</g>
+</g>
+</svg>
