@@ -12,21 +12,31 @@ import "../libs/MinerTypes.sol";
  * @dev A smart contract for validating and finalizing blocks.
  */
 contract BlockValidator is Initializable, RolesHandler {
-    uint256[32] public lastVerifiedBlocknumbers;
-    uint8 public constant DELAY_LIMIT = 32;
-    mapping(uint256 => BlockPayload) public blockPayloads;
-    IRewardsPool public rewardsPool;
-    uint8 private _verifiedBlockId = 0;
-
+    /// @notice a struct contains block credentials
     struct BlockPayload {
-        address coinbase;
-        bytes32 blockHash;
-        uint256 blockReward;
-        bool isFinalized;
+        address coinbase; // miner address of block
+        bytes32 blockHash; // block hash of block
+        uint256 blockReward; // incentive for block miner
+        bool isFinalized; // finalization status of block
     }
 
+    /// @notice holds last finalized block numbers
+    uint256[32] public lastFinalizedBlockNumbers;
+    /// @notice holds delay limit for block finalization
+    uint8 public constant DELAY_LIMIT = 32;
+    /// @notice RewardsPool instance address
+    IRewardsPool public rewardsPool;
+    /// @notice last finalized block id
+    uint8 private _finalizedBlockId = 0;
+
+    /// @notice a mapping that holds block payloads
+    mapping(uint256 => BlockPayload) public blockPayloads;
+
+    /// @notice payload is set
     event SetPayload(uint256 blockNumber);
+    /// @notice block is finalized
     event FinalizeBlock(uint256 blockNumber);
+    /// @notice metaminer block reward has claimed
     event Claim(
         address indexed coinbase,
         bytes32 indexed blockNumber,
@@ -35,10 +45,14 @@ contract BlockValidator is Initializable, RolesHandler {
     );
 
     /**
-     * @dev Initializes the BlockValidator contract with the addresses of the MinerList and RewardsPool contracts.
+     * @dev Initializes the BlockValidator contract with the addresses of the RewardsPool contract.
      * @param rewardsPoolAddress The address of the RewardsPool contract.
      */
     function initialize(address rewardsPoolAddress) external initializer {
+        require(
+            rewardsPoolAddress != address(0),
+            "BlockValidator: cannot set zero address"
+        );
         rewardsPool = IRewardsPool(rewardsPoolAddress);
     }
 
@@ -56,8 +70,15 @@ contract BlockValidator is Initializable, RolesHandler {
             blockPayloads[blockNumber].coinbase == address(0),
             "BlockValidator: Unable to set block payload"
         );
+        require(
+            blockhash(blockNumber) == blockPayload.blockHash,
+            "BlockValidator: Mismatched block hash"
+        );
+        require(
+            blockPayload.isFinalized == false,
+            "BlockValidator: Block finalized before"
+        );
         blockPayloads[blockNumber] = blockPayload;
-
         emit SetPayload(blockNumber);
 
         return true;
@@ -78,23 +99,23 @@ contract BlockValidator is Initializable, RolesHandler {
 
         payload.isFinalized = true;
 
-        if (_verifiedBlockId == DELAY_LIMIT) {
+        if (_finalizedBlockId == DELAY_LIMIT) {
             uint8 i = 0;
             for (i; i < DELAY_LIMIT; i++) {
                 BlockPayload memory bp = blockPayloads[
-                    lastVerifiedBlocknumbers[i]
+                    lastFinalizedBlockNumbers[i]
                 ];
 
                 uint256 result = rewardsPool.claim(bp.coinbase);
                 emit Claim(bp.coinbase, bp.blockHash, result, bp.blockReward);
             }
 
-            _verifiedBlockId = 0;
-            delete lastVerifiedBlocknumbers;
+            _finalizedBlockId = 0;
+            delete lastFinalizedBlockNumbers;
         }
 
-        lastVerifiedBlocknumbers[_verifiedBlockId] = blockNumber;
-        _verifiedBlockId++;
+        lastFinalizedBlockNumbers[_finalizedBlockId] = blockNumber;
+        _finalizedBlockId++;
 
         emit FinalizeBlock(blockNumber);
     }

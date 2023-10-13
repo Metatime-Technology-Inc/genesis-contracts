@@ -1,0 +1,138 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="443pt" height="454pt" viewBox="0.00 0.00 442.94 454.00">
+<g id="graph0" class="graph" transform="translate(4,450) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-450 438.94,-450 438.94,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterWMTC">
+
+<path fill="#445773" stroke="#445773" d="M20,-8C20,-8 414.94,-8 414.94,-8 420.94,-8 426.94,-14 426.94,-20 426.94,-20 426.94,-289 426.94,-289 426.94,-295 420.94,-301 414.94,-301 414.94,-301 20,-301 20,-301 14,-301 8,-295 8,-289 8,-289 8,-20 8,-20 8,-14 14,-8 20,-8" style=""/>
+<text text-anchor="middle" x="217.47" y="-284.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">WMTC</text>
+</g>
+<g id="clust2" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="19.35,-309 19.35,-438 301.16,-438 301.16,-309 19.35,-309" style=""/>
+<text text-anchor="middle" x="160.26" y="-421.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- WMTC.&lt;Receive Ether&gt; -->
+<g id="node1" class="node" pointer-events="visible" data-name="WMTC.&lt;Receive Ether&gt;">
+
+<ellipse fill="#ffbdb9" stroke="brown" stroke-width="3" cx="92.35" cy="-250" rx="76.21" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-245.8" font-family="Times,serif" font-size="14.00" style="">&lt;Receive Ether&gt;</text>
+</g>
+<!-- WMTC.deposit -->
+<g id="node2" class="node" pointer-events="visible" data-name="WMTC.deposit">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="266.16" cy="-250" rx="38.86" ry="18" style=""/>
+<text text-anchor="middle" x="266.16" y="-245.8" font-family="Times,serif" font-size="14.00" style="">deposit</text>
+</g>
+<!-- WMTC.&lt;Receive Ether&gt;&#45;&gt;WMTC.deposit -->
+<g id="edge1" class="edge" data-name="WMTC.&lt;Receive Ether&gt;-&gt;WMTC.deposit">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M169.96,-250C184.61,-250 199.62,-250 213.27,-250" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="212.85,-253.5 222.85,-250 212.85,-246.5 212.85,-253.5" style=""/>
+</g>
+<!-- WMTC.withdraw -->
+<g id="node3" class="node" pointer-events="visible" data-name="WMTC.withdraw">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="92.35" cy="-196" rx="47.52" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-191.8" font-family="Times,serif" font-size="14.00" style="">withdraw</text>
+</g>
+<!-- WMTC.payable -->
+<g id="node8" class="node" pointer-events="visible" data-name="WMTC.payable">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="266.16" cy="-196" rx="41.13" ry="18" style=""/>
+<text text-anchor="middle" x="266.16" y="-191.8" font-family="Times,serif" font-size="14.00" style="">payable</text>
+</g>
+<!-- WMTC.withdraw&#45;&gt;WMTC.payable -->
+<g id="edge2" class="edge" data-name="WMTC.withdraw-&gt;WMTC.payable">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M141.21,-196C162.87,-196 188.58,-196 210.95,-196" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="210.66,-199.5 220.66,-196 210.66,-192.5 210.66,-199.5" style=""/>
+</g>
+<!-- WMTC.totalSupply -->
+<g id="node4" class="node" pointer-events="visible" data-name="WMTC.totalSupply">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="92.35" cy="-142" rx="55.64" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-137.8" font-family="Times,serif" font-size="14.00" style="">totalSupply</text>
+</g>
+<!-- WMTC.address -->
+<g id="node9" class="node" pointer-events="visible" data-name="WMTC.address">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="266.16" cy="-142" rx="40" ry="18" style=""/>
+<text text-anchor="middle" x="266.16" y="-137.8" font-family="Times,serif" font-size="14.00" style="">address</text>
+</g>
+<!-- WMTC.totalSupply&#45;&gt;WMTC.address -->
+<g id="edge3" class="edge" data-name="WMTC.totalSupply-&gt;WMTC.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M149.13,-142C169.29,-142 191.98,-142 211.92,-142" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="211.86,-145.5 221.86,-142 211.86,-138.5 211.86,-145.5" style=""/>
+</g>
+<!-- WMTC.approve -->
+<g id="node5" class="node" pointer-events="visible" data-name="WMTC.approve">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="92.35" cy="-88" rx="42.28" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-83.8" font-family="Times,serif" font-size="14.00" style="">approve</text>
+</g>
+<!-- WMTC.transfer -->
+<g id="node6" class="node" pointer-events="visible" data-name="WMTC.transfer">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="92.35" cy="-34" rx="40.55" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-29.8" font-family="Times,serif" font-size="14.00" style="">transfer</text>
+</g>
+<!-- WMTC.transferFrom -->
+<g id="node7" class="node" pointer-events="visible" data-name="WMTC.transferFrom">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="266.16" cy="-34" rx="61.41" ry="18" style=""/>
+<text text-anchor="middle" x="266.16" y="-29.8" font-family="Times,serif" font-size="14.00" style="">transferFrom</text>
+</g>
+<!-- WMTC.transfer&#45;&gt;WMTC.transferFrom -->
+<g id="edge4" class="edge" data-name="WMTC.transfer-&gt;WMTC.transferFrom">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M134.07,-34C151,-34 171.21,-34 190.62,-34" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="190.53,-37.5 200.53,-34 190.53,-30.5 190.53,-37.5" style=""/>
+</g>
+<!-- WMTC.type -->
+<g id="node10" class="node" pointer-events="visible" data-name="WMTC.type">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="391.27" cy="-34" rx="27.83" ry="18" style=""/>
+<text text-anchor="middle" x="391.27" y="-29.8" font-family="Times,serif" font-size="14.00" style="">type</text>
+</g>
+<!-- WMTC.transferFrom&#45;&gt;WMTC.type -->
+<g id="edge5" class="edge" data-name="WMTC.transferFrom-&gt;WMTC.type">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M328.72,-34C335.64,-34 342.56,-34 349.14,-34" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="349,-37.5 359,-34 349,-30.5 349,-37.5" style=""/>
+</g>
+<!-- key -->
+<g id="node11" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="157.35,-405 27.35,-405 27.35,-317 157.35,-317 157.35,-405" style=""/>
+<text text-anchor="start" x="76.99" y="-386.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="73.1" y="-366.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="50.56" y="-346.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="36.95" y="-326.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node12" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="293.16,-405 239.16,-405 239.16,-317 293.16,-317 293.16,-405" style=""/>
+<text text-anchor="start" x="256.16" y="-386.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="256.16" y="-366.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="254.16,-341 254.16,-361 279.16,-361 279.16,-341 254.16,-341" style=""/>
+<text text-anchor="start" x="256.16" y="-346.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="256.16,-323 256.16,-339 277.16,-339 277.16,-323 256.16,-323" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge6" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M150.35,-391C191.4,-391 204.79,-391 240.23,-391" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="240.13,-394.5 250.13,-391 240.13,-387.5 240.13,-394.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge7" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M150.35,-371C191.4,-371 204.79,-371 240.23,-371" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="240.13,-374.5 250.13,-371 240.13,-367.5 240.13,-374.5" style=""/>
+</g>
+</g>
+</svg>

@@ -119,6 +119,37 @@ describe("MinerHealthCheck", function () {
             );
         }
 
+        // try initialize function with zero address
+        it("try initialize function with zero address", async () => {
+            const { owner, minerHealthCheck, minerList, minerFormulas, minerPool, metaPoints } = await loadFixture(initiateVariables);
+    
+            await expect(
+                minerList.connect(owner).initialize(
+                    ethers.constants.AddressZero
+                )
+            ).to.be.revertedWith("MinerList: cannot set zero address");
+    
+            await expect(
+                minerHealthCheck.connect(owner).initialize(
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero,
+                    minerHealthCheckTimeout
+                )
+            ).to.be.revertedWith("MinerHealthCheck: cannot set zero address");
+    
+            await expect(
+                minerHealthCheck.connect(owner).initialize(
+                    minerList.address,
+                    minerFormulas.address,
+                    minerPool.address,
+                    metaPoints.address,
+                    BigNumber.from("0")
+                )
+            ).to.be.revertedWith("MinerHealthCheck: requiredTimeout must be bigger than 4 hours in secs");
+        });
+
         // try ping function when caller is not miner
         it("try ping function when caller is not miner", async () => {
             const { owner, minerHealthCheck } = await loadFixture(initiateVariables);
@@ -157,6 +188,10 @@ describe("MinerHealthCheck", function () {
             expect(
                 await minerHealthCheck.connect(owner).setTimeout(minerHealthCheckTimeout)
             ).to.be.ok;
+
+            await expect(
+                minerHealthCheck.connect(owner).setTimeout(minerHealthCheckTimeout.div(2))
+            ).to.be.revertedWith("MinerHealthCheck: New timeout must be bigger than 4 hours in secs");
         });
 
         // try ping function when minerpool dont have enough funds for formula 1

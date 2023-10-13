@@ -53,8 +53,10 @@ const incrementBlocktimestamp = async (
   await ethers.provider.send("evm_mine", []);
 };
 
-const mineBlock = async (ethers: HardhatEthersHelpers): Promise<void> => {
-  await ethers.provider.send("evm_mine", []);
+const mineBlock = async (ethers: HardhatEthersHelpers, count: number): Promise<void> => {
+  for (let i = 0; i < count; i++) {
+    await ethers.provider.send("evm_mine", []);
+  }
 };
 
 const getBlock = async (

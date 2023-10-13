@@ -8,6 +8,7 @@ import "../interfaces/IRoles.sol";
  * @dev An abstract contract for handling roles and permissions.
  */
 abstract contract RolesHandler {
+    /// @notice holds Roles instance address
     IRoles public roles;
 
     /**
@@ -46,6 +47,10 @@ abstract contract RolesHandler {
         _;
     }
 
+    /**
+     * @dev Initializes the roles contract.
+     * @param rolesAddress The address of the roles contract to be initialized.
+     */
     function initRoles(address rolesAddress) external {
         require(
             address(roles) == address(0),

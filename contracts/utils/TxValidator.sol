@@ -11,59 +11,85 @@ import "../interfaces/IMinerFormulas.sol";
 import "../interfaces/IMinerHealthCheck.sol";
 import "../libs/MinerTypes.sol";
 
-// A long time ago in a galaxy far, far away! :D
+/**
+ * @title TxValidator
+ * @dev Contract for validating transactions and managing votes on transactions.
+ */
+// A long time ago in a galaxy far, far away!
 contract TxValidator is Initializable, RolesHandler {
-    enum TransactionState {
-        Pending,
-        Completed,
-        Expired
+    /// @notice Struct to represent a vote
+    struct Vote {
+        MinerTypes.NodeType nodeType; // Type of miner node associated with the voter
+        address voter; // Address of the voter
+        bool decision; // The decision of the voter (true or false)
     }
-    uint256 public votePointLimit = 100 ether;
-    uint256 public voteCountLimit = 32;
-    uint256 public defaultVotePoint = 2 ether;
-    uint256 public defaultExpireTime = 5 minutes;
+    /// @notice Struct to store transaction data
+    struct TxPayload {
+        address handler; // The handler of the transaction
+        uint256 reward; // The reward associated with the transaction
+        uint256 votePoint; // The total vote points received for the transaction
+        bool voteResult; // The result of the transaction vote
+        bool expired; // Whether the transaction has expired
+        uint256 expireTime; // The timestamp when the transaction expires
+        bool done; // Whether the transaction is completed
+    }
+
+    /// @notice Enum to represent the state of a transaction
+    enum TransactionState {
+        Pending, // Transaction is pending validation
+        Completed, // Transaction has been completed successfully
+        Expired // Transaction has expired and is no longer valid
+    }
+
+    /// @notice Parameters for transaction validation
+    uint256 public constant VOTE_POINT_LIMIT = 100 ether;
+    uint256 public constant VOTE_COUNT_LIMIT = 32;
+    uint256 public constant VOTE_POINT = 2 ether;
+    uint256 public constant EXPIRE_TIME = 5 minutes;
     uint256 public constant HANDLER_PERCENT = 5_000;
 
+    /// @notice Addresses of dependency contracts
     IMinerList public minerList;
     IMinerPool public minerPool;
     IMetaPoints public metaPoints;
     IMinerFormulas public minerFormulas;
     IMinerHealthCheck public minerHealthCheck;
 
+    /// @notice Mapping to store transaction data based on its hash
     mapping(bytes32 => TxPayload) public txPayloads;
+    /// @notice Mapping to store votes for each transaction
     mapping(bytes32 => mapping(uint256 => Vote)) public txVotes;
+    /// @notice Mapping to store the count of votes for each transaction
     mapping(bytes32 => uint256) public txVotesCount;
+    /// @notice Mapping to keep track of whether an address has voted for a transaction
     mapping(bytes32 => mapping(address => bool)) public previousVotes;
 
-    struct Vote {
-        MinerTypes.NodeType nodeType;
-        address voter;
-        bool decision;
-    }
-
-    struct TxPayload {
-        address handler;
-        uint256 reward;
-        uint256 votePoint;
-        bool voteResult;
-        bool expired;
-        uint256 expireTime;
-        bool done;
-    }
-
+    /// @notice new transaction added
     event AddTransaction(
         bytes32 indexed txHash,
         address indexed handler,
         uint256 reward
     );
+    /// @notice voted for previously saved transaction
     event VoteTransaction(
         bytes32 indexed txHash,
         address indexed voter,
         bool decision
     );
+
+    /// @notice transaction voting completely done
     event DoneTransaction(bytes32 indexed txHash, uint256 reward);
+    /// @notice transaction is expired
     event ExpireTransaction(bytes32 indexed txHash);
 
+    /**
+     * @dev Initializes the contract with required addresses and parameters.
+     * @param minerListAddress Address of the MinerList contract.
+     * @param metaPointsAddress Address of the MetaPoints contract.
+     * @param minerFormulasAddress Address of the MinerFormulas contract.
+     * @param minerHealthCheckAddress Address of the MinerHealthCheck contract.
+     * @param minerPoolAddress Address of the MinerPool contract.
+     */
     function initialize(
         address minerListAddress,
         address metaPointsAddress,
@@ -71,6 +97,15 @@ contract TxValidator is Initializable, RolesHandler {
         address minerHealthCheckAddress,
         address minerPoolAddress
     ) external initializer {
+        require(
+            minerListAddress != address(0) &&
+                metaPointsAddress != address(0) &&
+                minerFormulasAddress != address(0) &&
+                minerHealthCheckAddress != address(0) &&
+                minerPoolAddress != address(0),
+            "TxValidator: cannot set zero address"
+        );
+
         minerList = IMinerList(minerListAddress);
         metaPoints = IMetaPoints(metaPointsAddress);
         minerFormulas = IMinerFormulas(minerFormulasAddress);
@@ -78,6 +113,14 @@ contract TxValidator is Initializable, RolesHandler {
         minerPool = IMinerPool(minerPoolAddress);
     }
 
+    /**
+     * @dev Allows a manager to add a new transaction for validation.
+     * @param txHash The hash of the transaction.
+     * @param handler The handler of the transaction.
+     * @param reward The reward associated with the transaction.
+     * @param nodeType The type of miner node associated with the transaction.
+     * @return A boolean indicating the success of the operation.
+     */
     function addTransaction(
         bytes32 txHash,
         address handler,
@@ -97,13 +140,20 @@ contract TxValidator is Initializable, RolesHandler {
             0,
             false,
             false,
-            (block.timestamp + defaultExpireTime),
+            (block.timestamp + EXPIRE_TIME),
             false
         );
         emit AddTransaction(txHash, handler, reward);
         return (true);
     }
 
+    /**
+     * @dev Allows a user to vote on a transaction.
+     * @param txHash The hash of the transaction.
+     * @param decision The decision of the voter (true or false).
+     * @param nodeType The type of miner node associated with the voter.
+     * @return A boolean indicating the success of the operation.
+     */
     function voteTransaction(
         bytes32 txHash,
         bool decision,
@@ -151,12 +201,22 @@ contract TxValidator is Initializable, RolesHandler {
         return (true);
     }
 
+    /**
+     * @dev Checks the current state of a transaction and handles the state transitions.
+     * @param txHash The hash of the transaction.
+     * @return The state of the transaction (Pending, Completed, or Expired).
+     */
     function checkTransactionState(
         bytes32 txHash
     ) external returns (TransactionState) {
         return (_checkTransactionState(txHash));
     }
 
+    /**
+     * @dev Internal function to check the state of a transaction and handle state transitions.
+     * @param txHash The hash of the transaction.
+     * @return The state of the transaction (Pending, Completed, or Expired).
+     */
     function _checkTransactionState(
         bytes32 txHash
     ) internal returns (TransactionState) {
@@ -166,8 +226,8 @@ contract TxValidator is Initializable, RolesHandler {
         TransactionState state = TransactionState.Pending;
 
         if (
-            (txPayload.votePoint >= votePointLimit ||
-                txVoteCount == voteCountLimit) && txPayload.done == false
+            (txPayload.votePoint >= VOTE_POINT_LIMIT ||
+                txVoteCount == VOTE_COUNT_LIMIT) && txPayload.done == false
         ) {
             txPayload.done = true;
             _shareRewards(txHash);
@@ -188,11 +248,17 @@ contract TxValidator is Initializable, RolesHandler {
         return state;
     }
 
+    /**
+     * @dev Internal function to calculate the vote point for a voter.
+     * @param voter The address of the voter.
+     * @param nodeType The type of miner node associated with the voter.
+     * @return The calculated vote point.
+     */
     function _calculateVotePoint(
         address voter,
         MinerTypes.NodeType nodeType
     ) internal view returns (uint256) {
-        uint256 votePoint = defaultVotePoint;
+        uint256 votePoint = VOTE_POINT;
         if (nodeType == MinerTypes.NodeType.Micro) {
             return votePoint;
         }
@@ -203,6 +269,11 @@ contract TxValidator is Initializable, RolesHandler {
         return votePoint;
     }
 
+    /**
+     * @dev Internal function to distribute rewards for a completed transaction.
+     * @param txHash The hash of the completed transaction.
+     * @return A boolean indicating the success of the operation.
+     */
     function _shareRewards(bytes32 txHash) internal returns (bool) {
         TxPayload storage txPayload = txPayloads[txHash];
         uint256 txVoteCount = txVotesCount[txHash];

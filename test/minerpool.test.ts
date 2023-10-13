@@ -125,6 +125,15 @@ describe("MinerPool", function () {
             );
         }
 
+        // try initialize function with zero address
+        it("try initialize function with zero address", async () => {
+            const { owner, minerPool } = await loadFixture(initiateVariables);
+    
+            await expect(
+                minerPool.connect(owner).initialize(ethers.constants.AddressZero)
+            ).to.be.revertedWith("MinerPool: cannot set zero address");
+        });
+
         // try claimTxReward function when contract dont have enough funds
         it("try claimTxReward function when contract dont have enough funds", async () => {
             const { manager, miner_1, minerPool } = await loadFixture(initiateVariables);

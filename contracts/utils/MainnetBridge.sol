@@ -6,16 +6,19 @@ import "../helpers/Freezeable.sol";
 
 /**
  * @title MainnetBridge
- * @dev A smart contract for bridging transactions to Mainnet chain.
+ * @dev A smart contract for bridging MTC(BSC) to Metatime Mainnet.
  */
 contract MainnetBridge is Blacklistable, Freezeable {
+    /// @notice basic transaction payload for bridge
     struct Transaction {
-        address receiver;
-        uint256 amount;
+        address receiver; // Address of the receiver on the mainnet chain.
+        uint256 amount; // The amount of tokens to be bridged.
     }
 
+    /// @notice A mapping of transaction hash to Transaction structure.
     mapping(bytes32 => Transaction) public history;
 
+    /// @notice bridge has completed
     event Bridge(
         bytes32 indexed txHash,
         address indexed receiver,
@@ -34,6 +37,9 @@ contract MainnetBridge is Blacklistable, Freezeable {
         _;
     }
 
+    /**
+     * @dev The receive function is a special function that allows the contract to accept MTC transactions.
+     */
     receive() external payable {}
 
     /**

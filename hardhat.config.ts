@@ -28,8 +28,15 @@ if (!process.env.DEPLOYER)
 const deployer = process.env.DEPLOYER;
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.16",
-  // defaultNetwork: "ganache",
+  solidity: {
+    version: "0.8.16",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200
+      }
+    }
+  },
   networks: {
     ganache: {
       url: process.env.GANACHE_URL || "",

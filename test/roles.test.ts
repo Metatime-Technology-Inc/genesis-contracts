@@ -25,6 +25,16 @@ describe("Roles", function () {
 
   // test Roles
   describe("test validator picking", async () => {
+
+    // try initialize function with zero address
+    it("try initialize function with zero address", async () => {
+        const { owner, roles } = await loadFixture(initiateVariables);
+
+        await expect(
+            roles.connect(owner).initialize(ethers.constants.AddressZero)
+        ).to.be.revertedWith("Roles: cannot set zero address");
+    });
+
     // try to grant validator role and pick
     it("try to grant validator role and pick", async () => {
       const { roles, owner, validator_1, validator_2, validator_3 } =
@@ -53,7 +63,7 @@ describe("Roles", function () {
         const queueNumber = Number(block.number) % Number(currentValidatorId);
         const pickedValidator = await roles.pickValidator();
         expect(pickedValidator).to.be.equal(await roles.validatorList(queueNumber));
-        await mineBlock(ethers);
+        await mineBlock(ethers, 1);
       }
     });
   });

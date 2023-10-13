@@ -1,0 +1,170 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="458pt" height="671pt" viewBox="0.00 0.00 458.29 671.00">
+<g id="graph0" class="graph" transform="translate(25.1211082166715,578.4610220992379) scale(0.7977452398090329)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-667 454.29,-667 454.29,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterRolesHandler">
+
+<path fill="#445773" stroke="#445773" d="M20,-255C20,-255 372.89,-255 372.89,-255 378.89,-255 384.89,-261 384.89,-267 384.89,-267 384.89,-506 384.89,-506 384.89,-512 378.89,-518 372.89,-518 372.89,-518 20,-518 20,-518 14,-518 8,-512 8,-506 8,-506 8,-267 8,-267 8,-261 14,-255 20,-255" style=""/>
+<text text-anchor="middle" x="196.44" y="-501.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">RolesHandler</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterIRoles">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M243.49,-8C243.49,-8 430.29,-8 430.29,-8 436.29,-8 442.29,-14 442.29,-20 442.29,-20 442.29,-235 442.29,-235 442.29,-241 436.29,-247 430.29,-247 430.29,-247 243.49,-247 243.49,-247 237.49,-247 231.49,-241 231.49,-235 231.49,-235 231.49,-20 231.49,-20 231.49,-14 237.49,-8 243.49,-8" style=""/>
+<text text-anchor="middle" x="336.89" y="-230.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IRoles</text>
+</g>
+<g id="clust3" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="36.74,-526 36.74,-655 371.89,-655 371.89,-526 36.74,-526" style=""/>
+<text text-anchor="middle" x="204.32" y="-638.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- RolesHandler.onlyOwnerRole -->
+<g id="node1" class="node" pointer-events="visible" data-name="RolesHandler.onlyOwnerRole">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="188.66,-401.54 188.66,-416.46 142.43,-427 77.05,-427 30.83,-416.46 30.83,-401.54 77.05,-391 142.43,-391 188.66,-401.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="192.67,-398.36 192.67,-419.64 142.88,-431 76.6,-431 26.81,-419.64 26.81,-398.36 76.6,-387 142.88,-387 192.67,-398.36" style=""/>
+<text text-anchor="middle" x="109.74" y="-404.8" font-family="Times,serif" font-size="14.00" style="">onlyOwnerRole</text>
+</g>
+<!-- IRoles.hasRole -->
+<g id="node7" class="node" pointer-events="visible" data-name="IRoles.hasRole">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="336.89" cy="-88" rx="42.3" ry="18" style=""/>
+<text text-anchor="middle" x="336.89" y="-83.8" font-family="Times,serif" font-size="14.00" style="">hasRole</text>
+</g>
+<!-- RolesHandler.onlyOwnerRole&#45;&gt;IRoles.hasRole -->
+<g id="edge1" class="edge" data-name="RolesHandler.onlyOwnerRole-&gt;IRoles.hasRole">
+
+<path fill="none" stroke="white" stroke-width="2" d="M182.57,-394.66C190.57,-390.45 197.85,-385.01 203.49,-378 277.14,-286.39 154.69,-204 231.49,-115 243.75,-100.79 262.42,-93.57 280.6,-90.04" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="280.98,-93.52 290.34,-88.57 279.93,-86.6 280.98,-93.52" style=""/>
+</g>
+<!-- IRoles.OWNER_ROLE -->
+<g id="node8" class="node" pointer-events="visible" data-name="IRoles.OWNER_ROLE">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="336.89" cy="-196" rx="76.46" ry="18" style=""/>
+<text text-anchor="middle" x="336.89" y="-191.8" font-family="Times,serif" font-size="14.00" style="">OWNER_ROLE</text>
+</g>
+<!-- RolesHandler.onlyOwnerRole&#45;&gt;IRoles.OWNER_ROLE -->
+<g id="edge2" class="edge" data-name="RolesHandler.onlyOwnerRole-&gt;IRoles.OWNER_ROLE">
+
+<path fill="none" stroke="white" stroke-width="2" d="M181.4,-394.29C189.68,-390.13 197.36,-384.82 203.49,-378 242.14,-335.03 196.44,-296.96 231.49,-251 242.89,-236.04 259.54,-224.74 276.21,-216.39" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="277.34,-219.73 284.95,-212.35 274.4,-213.38 277.34,-219.73" style=""/>
+</g>
+<!-- RolesHandler.onlyManagerRole -->
+<g id="node2" class="node" pointer-events="visible" data-name="RolesHandler.onlyManagerRole">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="197.08,-339.54 197.08,-354.46 145.92,-365 73.57,-365 22.41,-354.46 22.41,-339.54 73.57,-329 145.92,-329 197.08,-339.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="201.07,-336.28 201.07,-357.72 146.33,-369 73.16,-369 18.41,-357.72 18.41,-336.28 73.16,-325 146.33,-325 201.07,-336.28" style=""/>
+<text text-anchor="middle" x="109.74" y="-342.8" font-family="Times,serif" font-size="14.00" style="">onlyManagerRole</text>
+</g>
+<!-- RolesHandler.onlyManagerRole&#45;&gt;IRoles.hasRole -->
+<g id="edge3" class="edge" data-name="RolesHandler.onlyManagerRole-&gt;IRoles.hasRole">
+
+<path fill="none" stroke="white" stroke-width="2" d="M184.17,-331.52C191.49,-327.48 198.17,-322.4 203.49,-316 261.13,-246.63 171.47,-182.33 231.49,-115 243.93,-101.04 262.55,-93.87 280.64,-90.31" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="280.96,-93.8 290.31,-88.81 279.89,-86.88 280.96,-93.8" style=""/>
+</g>
+<!-- IRoles.MANAGER_ROLE -->
+<g id="node9" class="node" pointer-events="visible" data-name="IRoles.MANAGER_ROLE">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="336.89" cy="-142" rx="89.8" ry="18" style=""/>
+<text text-anchor="middle" x="336.89" y="-137.8" font-family="Times,serif" font-size="14.00" style="">MANAGER_ROLE</text>
+</g>
+<!-- RolesHandler.onlyManagerRole&#45;&gt;IRoles.MANAGER_ROLE -->
+<g id="edge4" class="edge" data-name="RolesHandler.onlyManagerRole-&gt;IRoles.MANAGER_ROLE">
+
+<path fill="none" stroke="white" stroke-width="2" d="M183.86,-331.26C191.24,-327.27 198.01,-322.26 203.49,-316 247.25,-265.92 186.01,-217.53 231.49,-169 235.78,-164.42 240.74,-160.57 246.12,-157.35" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="247.59,-160.53 254.97,-152.93 244.46,-154.27 247.59,-160.53" style=""/>
+</g>
+<!-- RolesHandler.onlyValidatorRole -->
+<g id="node3" class="node" pointer-events="visible" data-name="RolesHandler.onlyValidatorRole">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="199.72,-277.54 199.72,-292.46 147.01,-303 72.47,-303 19.77,-292.46 19.77,-277.54 72.47,-267 147.01,-267 199.72,-277.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="203.73,-274.27 203.73,-295.73 147.41,-307 72.08,-307 15.76,-295.73 15.76,-274.27 72.08,-263 147.41,-263 203.73,-274.27" style=""/>
+<text text-anchor="middle" x="109.74" y="-280.8" font-family="Times,serif" font-size="14.00" style="">onlyValidatorRole</text>
+</g>
+<!-- RolesHandler.onlyValidatorRole&#45;&gt;IRoles.hasRole -->
+<g id="edge5" class="edge" data-name="RolesHandler.onlyValidatorRole-&gt;IRoles.hasRole">
+
+<path fill="none" stroke="white" stroke-width="2" d="M120.73,-261.79C137.84,-224.85 176.33,-152.99 231.49,-115 246.17,-104.89 264.37,-98.56 281.45,-94.61" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="282.14,-98.04 291.24,-92.62 280.75,-91.18 282.14,-98.04" style=""/>
+</g>
+<!-- IRoles.VALIDATOR_ROLE -->
+<g id="node10" class="node" pointer-events="visible" data-name="IRoles.VALIDATOR_ROLE">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="336.89" cy="-34" rx="97.3" ry="18" style=""/>
+<text text-anchor="middle" x="336.89" y="-29.8" font-family="Times,serif" font-size="14.00" style="">VALIDATOR_ROLE</text>
+</g>
+<!-- RolesHandler.onlyValidatorRole&#45;&gt;IRoles.VALIDATOR_ROLE -->
+<g id="edge6" class="edge" data-name="RolesHandler.onlyValidatorRole-&gt;IRoles.VALIDATOR_ROLE">
+
+<path fill="none" stroke="white" stroke-width="2" d="M116.59,-261.61C129.29,-215.77 163.85,-114.01 231.49,-61 236.34,-57.19 241.68,-53.92 247.29,-51.11" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="248.58,-54.36 256.35,-47.16 245.79,-47.94 248.58,-54.36" style=""/>
+</g>
+<!-- RolesHandler.initRoles -->
+<g id="node4" class="node" pointer-events="visible" data-name="RolesHandler.initRoles">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="109.74" cy="-467" rx="45.82" ry="18" style=""/>
+<text text-anchor="middle" x="109.74" y="-462.8" font-family="Times,serif" font-size="14.00" style="">initRoles</text>
+</g>
+<!-- RolesHandler.address -->
+<g id="node5" class="node" pointer-events="visible" data-name="RolesHandler.address">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="336.89" cy="-413" rx="40" ry="18" style=""/>
+<text text-anchor="middle" x="336.89" y="-408.8" font-family="Times,serif" font-size="14.00" style="">address</text>
+</g>
+<!-- RolesHandler.initRoles&#45;&gt;RolesHandler.address -->
+<g id="edge7" class="edge" data-name="RolesHandler.initRoles-&gt;RolesHandler.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M144.45,-453.93C181.36,-443.04 241,-428.46 283.91,-419.67" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="284.55,-423.12 293.67,-417.73 283.18,-416.25 284.55,-423.12" style=""/>
+</g>
+<!-- RolesHandler.initRoles&#45;&gt;RolesHandler.address -->
+<g id="edge8" class="edge" data-name="RolesHandler.initRoles-&gt;RolesHandler.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M155.22,-461.84C195.03,-453.96 253.04,-440.04 292.51,-428.86" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="293.34,-432.26 301.97,-426.11 291.39,-425.54 293.34,-432.26" style=""/>
+</g>
+<!-- RolesHandler.IRoles -->
+<g id="node6" class="node" pointer-events="visible" data-name="RolesHandler.IRoles">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="336.89" cy="-467" rx="36.5" ry="18" style=""/>
+<text text-anchor="middle" x="336.89" y="-462.8" font-family="Times,serif" font-size="14.00" style="">IRoles</text>
+</g>
+<!-- RolesHandler.initRoles&#45;&gt;RolesHandler.IRoles -->
+<g id="edge9" class="edge" data-name="RolesHandler.initRoles-&gt;RolesHandler.IRoles">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M156.85,-467C194.48,-467 247.55,-467 286.14,-467" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="286.11,-470.5 296.11,-467 286.11,-463.5 286.11,-470.5" style=""/>
+</g>
+<!-- key -->
+<g id="node11" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="174.74,-622 44.74,-622 44.74,-534 174.74,-534 174.74,-622" style=""/>
+<text text-anchor="start" x="94.38" y="-603.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="90.49" y="-583.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="67.95" y="-563.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="54.34" y="-543.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node12" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="363.89,-622 309.89,-622 309.89,-534 363.89,-534 363.89,-622" style=""/>
+<text text-anchor="start" x="326.89" y="-603.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="326.89" y="-583.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="324.89,-558 324.89,-578 349.89,-578 349.89,-558 324.89,-558" style=""/>
+<text text-anchor="start" x="326.89" y="-563.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="326.89,-540 326.89,-556 347.89,-556 347.89,-540 326.89,-540" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge10" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M167.74,-608C232.67,-608 252.04,-608 311.09,-608" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="310.86,-611.5 320.86,-608 310.86,-604.5 310.86,-611.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge11" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M167.74,-588C232.67,-588 252.04,-588 311.09,-588" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="310.86,-591.5 320.86,-588 310.86,-584.5 310.86,-591.5" style=""/>
+</g>
+</g>
+</svg>

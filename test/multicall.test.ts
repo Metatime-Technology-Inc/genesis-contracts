@@ -161,7 +161,7 @@ describe("Multicall", function () {
     it("test view functions", async () => {
       const { owner, multicall } = await loadFixture(initiateVariables);
 
-      await mineBlock(ethers);
+      await mineBlock(ethers, 1);
 
       const block = await getBlock(ethers);
       const secondBlock = await getBlock(ethers, 2);

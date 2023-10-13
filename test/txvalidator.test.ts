@@ -165,6 +165,21 @@ describe("TxValidator", function () {
             );
         }
 
+        // try initialize function when any contract address is zero address
+        it("try initialize function when any contract address is zero address", async () => {
+            const { owner, txValidator } = await loadFixture(initiateVariables);
+
+            await expect(
+                txValidator.connect(owner).initialize(
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero
+                )
+            ).to.be.revertedWith("TxValidator: cannot set zero address");
+        });
+
         // try addTransaction function when caller dont have required role
         it("try addTransaction function when caller dont have required role", async () => {
             const { miner_1, txValidator } = await loadFixture(initiateVariables);

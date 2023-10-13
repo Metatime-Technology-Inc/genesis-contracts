@@ -10,16 +10,24 @@ import "../interfaces/IMinerList.sol";
 /**
  * @title RewardsPool
  * @notice Holds tokens for miners to claim.
- * @dev A contract for distributing tokens over a specified period of time for mining purposes.
+ * @dev A contract for distributing tokens over a specified period of
+ * time for mining purposes.
  */
 contract RewardsPool is Initializable, RolesHandler {
-    uint256 currentBlock = 0;
+    /// @notice MinerFormulas instance address
     IMinerFormulas public minerFormulas;
-    mapping(address => uint256) public claimedAmounts; // Total amount of tokens claimed so far
+    /// @notice a mapping that holds claimed amounts for each participant
+    mapping(address => uint256) public claimedAmounts;
 
-    event HasClaimed(address indexed beneficiary, uint256 amount); // Event emitted when a beneficiary has claimed tokens
-    event Deposit(address indexed sender, uint amount, uint balance); // Event emitted when pool received mtc
+    /// @notice Event emitted when a beneficiary has claimed tokens
+    event HasClaimed(address indexed beneficiary, uint256 amount);
+    /// @notice Event emitted when pool received mtc
+    event Deposit(address indexed sender, uint amount, uint balance);
 
+    /**
+     * @dev The receive function is a special function that allows the contract to accept MTC transactions.
+     * It emits a Deposit event to record the deposit details.
+     */
     receive() external payable {
         emit Deposit(msg.sender, msg.value, address(this).balance);
     }
@@ -29,6 +37,10 @@ contract RewardsPool is Initializable, RolesHandler {
      * @param minerFormulasAddress Address of MinerFormulas contract.
      */
     function initialize(address minerFormulasAddress) external initializer {
+        require(
+            minerFormulasAddress != address(0),
+            "RewardsPool: cannot set zero address"
+        );
         minerFormulas = IMinerFormulas(minerFormulasAddress);
     }
 
@@ -39,7 +51,6 @@ contract RewardsPool is Initializable, RolesHandler {
     function claim(
         address receiver
     ) external onlyManagerRole(msg.sender) returns (uint256) {
-        // external call blok yapısını al
         uint256 amount = calculateClaimableAmount();
 
         claimedAmounts[receiver] += amount;

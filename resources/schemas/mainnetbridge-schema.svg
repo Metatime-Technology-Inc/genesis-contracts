@@ -1,0 +1,115 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="438pt" height="408pt" viewBox="0.00 0.00 437.54 408.00">
+<g id="graph0" class="graph" transform="translate(4,404) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-404 433.54,-404 433.54,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterMainnetBridge">
+
+<path fill="#445773" stroke="#445773" d="M20,-8C20,-8 409.54,-8 409.54,-8 415.54,-8 421.54,-14 421.54,-20 421.54,-20 421.54,-243 421.54,-243 421.54,-249 415.54,-255 409.54,-255 409.54,-255 20,-255 20,-255 14,-255 8,-249 8,-243 8,-243 8,-20 8,-20 8,-14 14,-8 20,-8" style=""/>
+<text text-anchor="middle" x="214.77" y="-238.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">MainnetBridge</text>
+</g>
+<g id="clust2" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="19.35,-263 19.35,-392 285.06,-392 285.06,-263 19.35,-263" style=""/>
+<text text-anchor="middle" x="152.21" y="-375.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- MainnetBridge.notExist -->
+<g id="node1" class="node" pointer-events="visible" data-name="MainnetBridge.notExist">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="138.95,-192.54 138.95,-207.46 111.65,-218 73.05,-218 45.76,-207.46 45.76,-192.54 73.05,-182 111.65,-182 138.95,-192.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="142.93,-189.8 142.93,-210.2 112.39,-222 72.31,-222 41.77,-210.2 41.77,-189.8 72.31,-178 112.39,-178 142.93,-189.8" style=""/>
+<text text-anchor="middle" x="92.35" y="-195.8" font-family="Times,serif" font-size="14.00" style="">notExist</text>
+</g>
+<!-- MainnetBridge.&lt;Receive Ether&gt; -->
+<g id="node2" class="node" pointer-events="visible" data-name="MainnetBridge.&lt;Receive Ether&gt;">
+
+<ellipse fill="#ffbdb9" stroke="brown" stroke-width="3" cx="92.35" cy="-142" rx="76.21" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-137.8" font-family="Times,serif" font-size="14.00" style="">&lt;Receive Ether&gt;</text>
+</g>
+<!-- MainnetBridge.bridge -->
+<g id="node3" class="node" pointer-events="visible" data-name="MainnetBridge.bridge">
+
+<ellipse fill="#ffbdb9" stroke="brown" stroke-width="3" cx="92.35" cy="-88" rx="35.92" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-83.8" font-family="Times,serif" font-size="14.00" style="">bridge</text>
+</g>
+<!-- MainnetBridge._transfer -->
+<g id="node5" class="node" pointer-events="visible" data-name="MainnetBridge._transfer">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="250.06" cy="-74" rx="45.21" ry="18" style=""/>
+<text text-anchor="middle" x="250.06" y="-69.8" font-family="Times,serif" font-size="14.00" style="">_transfer</text>
+</g>
+<!-- MainnetBridge.bridge&#45;&gt;MainnetBridge._transfer -->
+<g id="edge1" class="edge" data-name="MainnetBridge.bridge-&gt;MainnetBridge._transfer">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M129.08,-84.79C147.66,-83.12 170.84,-81.03 191.85,-79.14" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="191.93,-82.65 201.58,-78.27 191.3,-75.68 191.93,-82.65" style=""/>
+</g>
+<!-- MainnetBridge.transfer -->
+<g id="node4" class="node" pointer-events="visible" data-name="MainnetBridge.transfer">
+
+<ellipse fill="#ffbdb9" stroke="brown" stroke-width="3" cx="92.35" cy="-34" rx="40.55" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-29.8" font-family="Times,serif" font-size="14.00" style="">transfer</text>
+</g>
+<!-- MainnetBridge.transfer&#45;&gt;MainnetBridge._transfer -->
+<g id="edge2" class="edge" data-name="MainnetBridge.transfer-&gt;MainnetBridge._transfer">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M129.08,-43.18C149.43,-48.41 175.3,-55.05 197.79,-60.83" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="196.74,-64.17 207.3,-63.27 198.48,-57.39 196.74,-64.17" style=""/>
+</g>
+<!-- MainnetBridge.address -->
+<g id="node6" class="node" pointer-events="visible" data-name="MainnetBridge.address">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="372.48" cy="-61" rx="40" ry="18" style=""/>
+<text text-anchor="middle" x="372.48" y="-56.8" font-family="Times,serif" font-size="14.00" style="">address</text>
+</g>
+<!-- MainnetBridge._transfer&#45;&gt;MainnetBridge.address -->
+<g id="edge3" class="edge" data-name="MainnetBridge._transfer-&gt;MainnetBridge.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M295.22,-69.23C303.05,-68.39 311.28,-67.5 319.31,-66.63" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="319.53,-70.13 329.1,-65.58 318.78,-63.17 319.53,-70.13" style=""/>
+</g>
+<!-- MainnetBridge.payable -->
+<g id="node7" class="node" pointer-events="visible" data-name="MainnetBridge.payable">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="372.48" cy="-115" rx="41.13" ry="18" style=""/>
+<text text-anchor="middle" x="372.48" y="-110.8" font-family="Times,serif" font-size="14.00" style="">payable</text>
+</g>
+<!-- MainnetBridge._transfer&#45;&gt;MainnetBridge.payable -->
+<g id="edge4" class="edge" data-name="MainnetBridge._transfer-&gt;MainnetBridge.payable">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M286.54,-86.08C298.95,-90.3 313.05,-95.11 326.15,-99.57" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="324.85,-102.82 335.45,-102.73 327.11,-96.2 324.85,-102.82" style=""/>
+</g>
+<!-- key -->
+<g id="node8" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="157.35,-359 27.35,-359 27.35,-271 157.35,-271 157.35,-359" style=""/>
+<text text-anchor="start" x="76.99" y="-340.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="73.1" y="-320.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="50.56" y="-300.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="36.95" y="-280.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node9" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="277.06,-359 223.06,-359 223.06,-271 277.06,-271 277.06,-359" style=""/>
+<text text-anchor="start" x="240.06" y="-340.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="240.06" y="-320.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="238.06,-295 238.06,-315 263.06,-315 263.06,-295 238.06,-295" style=""/>
+<text text-anchor="start" x="240.06" y="-300.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="240.06,-277 240.06,-293 261.06,-293 261.06,-277 240.06,-277" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge5" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M150.35,-345C184.22,-345 195.77,-345 224.23,-345" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="224.03,-348.5 234.03,-345 224.03,-341.5 224.03,-348.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge6" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M150.35,-325C184.22,-325 195.77,-325 224.23,-325" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="224.03,-328.5 234.03,-325 224.03,-321.5 224.03,-328.5" style=""/>
+</g>
+</g>
+</svg>

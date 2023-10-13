@@ -1,0 +1,61 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="270pt" height="300pt" viewBox="0.00 0.00 269.89 300.00">
+<g id="graph0" class="graph" transform="translate(4,296) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-296 265.89,-296 265.89,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterBlacklistable">
+
+<path fill="#445773" stroke="#445773" d="M20,-8C20,-8 151.89,-8 151.89,-8 157.89,-8 163.89,-14 163.89,-20 163.89,-20 163.89,-135 163.89,-135 163.89,-141 157.89,-147 151.89,-147 151.89,-147 20,-147 20,-147 14,-147 8,-141 8,-135 8,-135 8,-20 8,-20 8,-14 14,-8 20,-8" style=""/>
+<text text-anchor="middle" x="85.94" y="-130.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">Blacklistable</text>
+</g>
+<g id="clust2" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="12.94,-155 12.94,-284 253.89,-284 253.89,-155 12.94,-155" style=""/>
+<text text-anchor="middle" x="133.42" y="-267.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- Blacklistable.isBlacklisted -->
+<g id="node1" class="node" pointer-events="visible" data-name="Blacklistable.isBlacklisted">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="151.84,-84.54 151.84,-99.46 113.24,-110 58.65,-110 20.05,-99.46 20.05,-84.54 58.65,-74 113.24,-74 151.84,-84.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="155.83,-81.49 155.83,-102.51 113.77,-114 58.12,-114 16.06,-102.51 16.06,-81.49 58.12,-70 113.77,-70 155.83,-81.49" style=""/>
+<text text-anchor="middle" x="85.94" y="-87.8" font-family="Times,serif" font-size="14.00" style="">isBlacklisted</text>
+</g>
+<!-- Blacklistable.setBlacklist -->
+<g id="node2" class="node" pointer-events="visible" data-name="Blacklistable.setBlacklist">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="85.94" cy="-34" rx="56.19" ry="18" style=""/>
+<text text-anchor="middle" x="85.94" y="-29.8" font-family="Times,serif" font-size="14.00" style="">setBlacklist</text>
+</g>
+<!-- key -->
+<g id="node3" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="150.94,-251 20.94,-251 20.94,-163 150.94,-163 150.94,-251" style=""/>
+<text text-anchor="start" x="70.58" y="-232.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="66.69" y="-212.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="44.15" y="-192.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="30.55" y="-172.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node4" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="245.89,-251 191.89,-251 191.89,-163 245.89,-163 245.89,-251" style=""/>
+<text text-anchor="start" x="208.89" y="-232.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="208.89" y="-212.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="206.89,-187 206.89,-207 231.89,-207 231.89,-187 206.89,-187" style=""/>
+<text text-anchor="start" x="208.89" y="-192.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="208.89,-169 208.89,-185 229.89,-185 229.89,-169 208.89,-169" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge1" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M143.94,-237C166.64,-237 175.3,-237 193.06,-237" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="192.86,-240.5 202.86,-237 192.86,-233.5 192.86,-240.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge2" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M143.94,-217C166.64,-217 175.3,-217 193.06,-217" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="192.86,-220.5 202.86,-217 192.86,-213.5 192.86,-220.5" style=""/>
+</g>
+</g>
+</svg>

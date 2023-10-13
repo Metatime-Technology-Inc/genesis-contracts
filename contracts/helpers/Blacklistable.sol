@@ -8,8 +8,10 @@ import "./RolesHandler.sol";
  * @dev An abstract contract for managing a blacklist of addresses.
  */
 abstract contract Blacklistable is RolesHandler {
+    /// @notice a mapping that holds blacklisted addresses
     mapping(address => bool) public blacklist;
 
+    /// @notice address is blacklisted
     event Blacklist(address indexed wallet, bool indexed status);
 
     /**
@@ -27,7 +29,8 @@ abstract contract Blacklistable is RolesHandler {
     /**
      * @dev Sets the blacklist status of an address.
      * @param wallet The address to set the blacklist status for.
-     * @param status The new blacklist status (true for blacklisted, false for not blacklisted).
+     * @param status The new blacklist status (true for blacklisted,
+     * false for not blacklisted).
      */
     function setBlacklist(
         address wallet,

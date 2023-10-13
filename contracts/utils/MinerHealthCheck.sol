@@ -14,17 +14,27 @@ import "../helpers/RolesHandler.sol";
  * @dev A smart contract for checking and managing miner health status.
  */
 contract MinerHealthCheck is Initializable, RolesHandler {
+    /// @notice Address of the MinerList contract
     IMinerList public minerList;
+    /// @notice Address of the MinerFormulas contract
     IMinerFormulas public minerFormulas;
+    /// @notice Address of the MinerPool contract
     IMinerPool public minerPool;
+    /// @notice Address of the MetaPoints contract
     IMetaPoints public metaPoints;
+
+    /// @notice The timeout duration for miner activity
+    uint256 public timeout;
+
+    /// @notice A mapping to store the last uptime of miners by address and node type
     mapping(address => mapping(MinerTypes.NodeType => uint256))
         public lastUptime;
+    /// @notice A mapping to store the daily activities of nodes by date and node type
     mapping(uint256 => mapping(MinerTypes.NodeType => uint256))
-        public dailyNodesActivities; // TA
+        public dailyNodesActivities;
+    /// @notice A mapping to store daily activities of nodes by date, address, and node type
     mapping(uint256 => mapping(address => mapping(MinerTypes.NodeType => uint256)))
-        public dailyNodeActivity; // A
-    uint256 public timeout;
+        public dailyNodeActivity;
 
     /**
      * @dev Modifier to check if an address is a miner of the specified node type.
@@ -54,6 +64,17 @@ contract MinerHealthCheck is Initializable, RolesHandler {
         address metaPointsAddress,
         uint256 requiredTimeout
     ) external initializer {
+        require(
+            minerListAddress != address(0) &&
+                minerFormulasAddress != address(0) &&
+                minerPoolAddress != address(0) &&
+                metaPointsAddress != address(0),
+            "MinerHealthCheck: cannot set zero address"
+        );
+        require(
+            requiredTimeout >= 14400,
+            "MinerHealthCheck: requiredTimeout must be bigger than 4 hours in secs"
+        );
         minerList = IMinerList(minerListAddress);
         minerFormulas = IMinerFormulas(minerFormulasAddress);
         minerPool = IMinerPool(minerPoolAddress);
@@ -111,6 +132,10 @@ contract MinerHealthCheck is Initializable, RolesHandler {
     function setTimeout(
         uint256 newTimeout
     ) external onlyOwnerRole(msg.sender) returns (bool) {
+        require(
+            newTimeout >= 14400,
+            "MinerHealthCheck: New timeout must be bigger than 4 hours in secs"
+        );
         timeout = newTimeout;
         return (true);
     }
@@ -120,7 +145,7 @@ contract MinerHealthCheck is Initializable, RolesHandler {
      * @param minerAddress The address of the miner node to ping.
      * @param nodeType The type of miner node to ping.
      */
-    function manuelPing(
+    function manualPing(
         address minerAddress,
         MinerTypes.NodeType nodeType
     ) external isMiner(minerAddress, nodeType) onlyManagerRole(msg.sender) {

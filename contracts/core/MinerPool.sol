@@ -9,24 +9,35 @@ import "../interfaces/IMinerList.sol";
 
 /**
  * @title MinerPool
- * @notice Holds tokens for miners to claim.
- * @dev A contract for distributing tokens over a specified period of time for mining purposes.
+ * @notice Manages the distribution of tokens to miners based on their activity.
+ * @dev This contract facilitates the reward distribution to miners for
+ * their participation in different miner node types.
  */
 contract MinerPool is Initializable, RolesHandler {
+    /// @notice This variable represents a contract instance of IMinerFormulas, which is used to access miner formulas.
     IMinerFormulas public minerFormulas;
-    mapping(address => uint256) public claimedAmounts; // Total amount of tokens claimed so far
+    /// @notice This mapping stores the claimed amounts for each address.
+    mapping(address => uint256) public claimedAmounts;
+    /// @notice This mapping stores the total rewards from the first formula for a given miner type and a specific uint256 identifier.
     mapping(uint256 => mapping(MinerTypes.NodeType => uint256))
         public totalRewardsFromFirstFormula;
+    /// @notice This mapping stores the total rewards from the second formula for a given miner type and a specific uint256 identifier.
     mapping(uint256 => mapping(MinerTypes.NodeType => uint256))
         public totalRewardsFromSecondFormula;
 
+    /// @notice MTC claimed
     event HasClaimed(
         address indexed beneficiary,
         uint256 amount,
         string indexed claimType
-    ); // Event emitted when a beneficiary has claimed tokens
-    event Deposit(address indexed sender, uint amount, uint balance); // Event emitted when pool received mtc
+    );
+    /// @notice MTC deposited
+    event Deposit(address indexed sender, uint amount, uint balance);
 
+    /**
+     * @dev The receive function is a special function that allows the contract to accept MTC transactions.
+     * It emits a Deposit event to record the deposit details.
+     */
     receive() external payable {
         emit Deposit(msg.sender, msg.value, address(this).balance);
     }
@@ -36,12 +47,19 @@ contract MinerPool is Initializable, RolesHandler {
      * @param minerFormulasAddress Address of MinerFormulas contract.
      */
     function initialize(address minerFormulasAddress) external initializer {
+        require(
+            minerFormulasAddress != address(0),
+            "MinerPool: cannot set zero address"
+        );
         minerFormulas = IMinerFormulas(minerFormulasAddress);
     }
 
     /**
-     * @dev Claim tokens for the sender.
-     * @return A boolean indicating whether the claim was successful.
+     * @dev Claim tokens for the sender. Called by a manager.
+     * @param receiver Address of the receiver.
+     * @param nodeType Type of miner node.
+     * @param activityTime The time duration for which the miner has been active.
+     * @return A tuple containing the claimed amounts from the first and second formulas.
      */
     function claimMacroDailyReward(
         address receiver,
@@ -73,6 +91,11 @@ contract MinerPool is Initializable, RolesHandler {
         return (firstAmount, secondAmount);
     }
 
+    /**
+     * @dev Claim a transaction reward for the sender. Called by a manager.
+     * @param receiver Address of the receiver.
+     * @param amount The amount to claim.
+     */
     function claimTxReward(
         address receiver,
         uint256 amount
@@ -82,6 +105,13 @@ contract MinerPool is Initializable, RolesHandler {
         require(sent, "MinerPool: Unable to send");
     }
 
+    /**
+     * @dev Calculate the claimable amounts for the sender based on the mining activity.
+     * @param minerAddress Address of the miner.
+     * @param nodeType Type of miner node.
+     * @param activityTime The time duration for which the miner has been active.
+     * @return A tuple containing the claimable amounts from the first and second formulas.
+     */
     function _calculateClaimableAmount(
         address minerAddress,
         MinerTypes.NodeType nodeType,

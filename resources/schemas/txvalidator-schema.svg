@@ -1,0 +1,319 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1131pt" height="786pt" viewBox="0.00 0.00 1130.97 786.00">
+<g id="graph0" class="graph" transform="translate(4,782) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-782 1126.97,-782 1126.97,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterTxValidator">
+
+<path fill="#445773" stroke="#445773" d="M20,-178C20,-178 627.49,-178 627.49,-178 633.49,-178 639.49,-184 639.49,-190 639.49,-190 639.49,-621 639.49,-621 639.49,-627 633.49,-633 627.49,-633 627.49,-633 20,-633 20,-633 14,-633 8,-627 8,-621 8,-621 8,-190 8,-190 8,-184 14,-178 20,-178" style=""/>
+<text text-anchor="middle" x="323.75" y="-616.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">TxValidator</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterIMinerHealthCheck">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M301.13,-93C301.13,-93 404.19,-93 404.19,-93 410.19,-93 416.19,-99 416.19,-105 416.19,-105 416.19,-158 416.19,-158 416.19,-164 410.19,-170 404.19,-170 404.19,-170 301.13,-170 301.13,-170 295.13,-170 289.13,-164 289.13,-158 289.13,-158 289.13,-105 289.13,-105 289.13,-99 295.13,-93 301.13,-93" style=""/>
+<text text-anchor="middle" x="352.66" y="-153.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMinerHealthCheck</text>
+</g>
+<g id="clust3" class="cluster" data-name="clusterIMinerList">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M326.16,-8C326.16,-8 378.16,-8 378.16,-8 384.16,-8 390.16,-14 390.16,-20 390.16,-20 390.16,-73 390.16,-73 390.16,-79 384.16,-85 378.16,-85 378.16,-85 326.16,-85 326.16,-85 320.16,-85 314.16,-79 314.16,-73 314.16,-73 314.16,-20 314.16,-20 314.16,-14 320.16,-8 326.16,-8" style=""/>
+<text text-anchor="middle" x="352.16" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMinerList</text>
+</g>
+<g id="clust4" class="cluster" data-name="clusterIMetaPoints">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M514.75,-93C514.75,-93 608.17,-93 608.17,-93 614.17,-93 620.17,-99 620.17,-105 620.17,-105 620.17,-158 620.17,-158 620.17,-164 614.17,-170 608.17,-170 608.17,-170 514.75,-170 514.75,-170 508.75,-170 502.75,-164 502.75,-158 502.75,-158 502.75,-105 502.75,-105 502.75,-99 508.75,-93 514.75,-93" style=""/>
+<text text-anchor="middle" x="561.46" y="-153.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMetaPoints</text>
+</g>
+<g id="clust5" class="cluster" data-name="clusterIMinerFormulas">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M671.49,-328C671.49,-328 1102.97,-328 1102.97,-328 1108.97,-328 1114.97,-334 1114.97,-340 1114.97,-340 1114.97,-447 1114.97,-447 1114.97,-453 1108.97,-459 1102.97,-459 1102.97,-459 671.49,-459 671.49,-459 665.49,-459 659.49,-453 659.49,-447 659.49,-447 659.49,-340 659.49,-340 659.49,-334 665.49,-328 671.49,-328" style=""/>
+<text text-anchor="middle" x="887.23" y="-442.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMinerFormulas</text>
+</g>
+<g id="clust6" class="cluster" data-name="clusterIMinerPool">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M817.99,-243C817.99,-243 956.48,-243 956.48,-243 962.48,-243 968.48,-249 968.48,-255 968.48,-255 968.48,-308 968.48,-308 968.48,-314 962.48,-320 956.48,-320 956.48,-320 817.99,-320 817.99,-320 811.99,-320 805.99,-314 805.99,-308 805.99,-308 805.99,-255 805.99,-255 805.99,-249 811.99,-243 817.99,-243" style=""/>
+<text text-anchor="middle" x="887.23" y="-303.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMinerPool</text>
+</g>
+<g id="clust7" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="41.44,-641 41.44,-770 387.16,-770 387.16,-641 41.44,-641" style=""/>
+<text text-anchor="middle" x="214.3" y="-753.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- TxValidator.initialize -->
+<g id="node1" class="node" pointer-events="visible" data-name="TxValidator.initialize">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="114.44" cy="-474" rx="44.64" ry="18" style=""/>
+<text text-anchor="middle" x="114.44" y="-469.8" font-family="Times,serif" font-size="14.00" style="">initialize</text>
+</g>
+<!-- TxValidator.IMinerList -->
+<g id="node8" class="node" pointer-events="visible" data-name="TxValidator.IMinerList">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="352.16" cy="-582" rx="52.75" ry="18" style=""/>
+<text text-anchor="middle" x="352.16" y="-577.8" font-family="Times,serif" font-size="14.00" style="">IMinerList</text>
+</g>
+<!-- TxValidator.initialize&#45;&gt;TxValidator.IMinerList -->
+<g id="edge1" class="edge" data-name="TxValidator.initialize-&gt;TxValidator.IMinerList">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M137.97,-490.47C163.67,-508.57 207.48,-537.4 248.89,-555 262.55,-560.8 277.78,-565.64 292.22,-569.53" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="291.17,-572.87 301.72,-571.96 292.9,-566.09 291.17,-572.87" style=""/>
+</g>
+<!-- TxValidator.IMetaPoints -->
+<g id="node9" class="node" pointer-events="visible" data-name="TxValidator.IMetaPoints">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="352.16" cy="-366" rx="58.49" ry="18" style=""/>
+<text text-anchor="middle" x="352.16" y="-361.8" font-family="Times,serif" font-size="14.00" style="">IMetaPoints</text>
+</g>
+<!-- TxValidator.initialize&#45;&gt;TxValidator.IMetaPoints -->
+<g id="edge2" class="edge" data-name="TxValidator.initialize-&gt;TxValidator.IMetaPoints">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M137.97,-457.53C163.67,-439.43 207.48,-410.6 248.89,-393 261.38,-387.69 275.17,-383.2 288.49,-379.49" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="289.34,-382.89 298.12,-376.95 287.55,-376.12 289.34,-382.89" style=""/>
+</g>
+<!-- TxValidator.IMinerFormulas -->
+<g id="node10" class="node" pointer-events="visible" data-name="TxValidator.IMinerFormulas">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="352.16" cy="-420" rx="74.17" ry="18" style=""/>
+<text text-anchor="middle" x="352.16" y="-415.8" font-family="Times,serif" font-size="14.00" style="">IMinerFormulas</text>
+</g>
+<!-- TxValidator.initialize&#45;&gt;TxValidator.IMinerFormulas -->
+<g id="edge3" class="edge" data-name="TxValidator.initialize-&gt;TxValidator.IMinerFormulas">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M155.16,-464.9C190,-456.92 241.42,-445.14 282.85,-435.65" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="283.44,-439.1 292.41,-433.46 281.88,-432.28 283.44,-439.1" style=""/>
+</g>
+<!-- TxValidator.IMinerHealthCheck -->
+<g id="node11" class="node" pointer-events="visible" data-name="TxValidator.IMinerHealthCheck">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="352.16" cy="-474" rx="88.03" ry="18" style=""/>
+<text text-anchor="middle" x="352.16" y="-469.8" font-family="Times,serif" font-size="14.00" style="">IMinerHealthCheck</text>
+</g>
+<!-- TxValidator.initialize&#45;&gt;TxValidator.IMinerHealthCheck -->
+<g id="edge4" class="edge" data-name="TxValidator.initialize-&gt;TxValidator.IMinerHealthCheck">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M160.34,-474C185.81,-474 218.79,-474 250.14,-474" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="249.95,-477.5 259.95,-474 249.95,-470.5 249.95,-477.5" style=""/>
+</g>
+<!-- TxValidator.IMinerPool -->
+<g id="node12" class="node" pointer-events="visible" data-name="TxValidator.IMinerPool">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="352.16" cy="-528" rx="55.63" ry="18" style=""/>
+<text text-anchor="middle" x="352.16" y="-523.8" font-family="Times,serif" font-size="14.00" style="">IMinerPool</text>
+</g>
+<!-- TxValidator.initialize&#45;&gt;TxValidator.IMinerPool -->
+<g id="edge5" class="edge" data-name="TxValidator.initialize-&gt;TxValidator.IMinerPool">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M155.16,-483.1C192.7,-491.7 249.48,-504.71 292.28,-514.51" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="291.32,-517.88 301.85,-516.7 292.88,-511.06 291.32,-517.88" style=""/>
+</g>
+<!-- TxValidator.addTransaction -->
+<g id="node2" class="node" pointer-events="visible" data-name="TxValidator.addTransaction">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="114.44" cy="-204" rx="70.63" ry="18" style=""/>
+<text text-anchor="middle" x="114.44" y="-199.8" font-family="Times,serif" font-size="14.00" style="">addTransaction</text>
+</g>
+<!-- TxValidator.address -->
+<g id="node13" class="node" pointer-events="visible" data-name="TxValidator.address">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="352.16" cy="-204" rx="40" ry="18" style=""/>
+<text text-anchor="middle" x="352.16" y="-199.8" font-family="Times,serif" font-size="14.00" style="">address</text>
+</g>
+<!-- TxValidator.addTransaction&#45;&gt;TxValidator.address -->
+<g id="edge7" class="edge" data-name="TxValidator.addTransaction-&gt;TxValidator.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M186.49,-204C222.23,-204 264.83,-204 297.75,-204" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="297.73,-207.5 307.73,-204 297.73,-200.5 297.73,-207.5" style=""/>
+</g>
+<!-- IMinerHealthCheck.status -->
+<g id="node14" class="node" pointer-events="visible" data-name="IMinerHealthCheck.status">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="352.16" cy="-119" rx="33.07" ry="18" style=""/>
+<text text-anchor="middle" x="352.16" y="-114.8" font-family="Times,serif" font-size="14.00" style="">status</text>
+</g>
+<!-- TxValidator.addTransaction&#45;&gt;IMinerHealthCheck.status -->
+<g id="edge6" class="edge" data-name="TxValidator.addTransaction-&gt;IMinerHealthCheck.status">
+
+<path fill="none" stroke="white" stroke-width="2" d="M158.13,-188.61C201.51,-172.97 268.2,-148.92 310.74,-133.58" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="311.78,-136.92 320,-130.23 309.41,-130.33 311.78,-136.92" style=""/>
+</g>
+<!-- TxValidator.voteTransaction -->
+<g id="node3" class="node" pointer-events="visible" data-name="TxValidator.voteTransaction">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="114.44" cy="-258" rx="73.49" ry="18" style=""/>
+<text text-anchor="middle" x="114.44" y="-253.8" font-family="Times,serif" font-size="14.00" style="">voteTransaction</text>
+</g>
+<!-- TxValidator._checkTransactionState -->
+<g id="node5" class="node" pointer-events="visible" data-name="TxValidator._checkTransactionState">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="352.16" cy="-312" rx="103.05" ry="18" style=""/>
+<text text-anchor="middle" x="352.16" y="-307.8" font-family="Times,serif" font-size="14.00" style="">_checkTransactionState</text>
+</g>
+<!-- TxValidator.voteTransaction&#45;&gt;TxValidator._checkTransactionState -->
+<g id="edge9" class="edge" data-name="TxValidator.voteTransaction-&gt;TxValidator._checkTransactionState">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M181.1,-266.92C214.93,-273.8 255.94,-283.23 289.21,-291.78" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="288.06,-295.1 298.62,-294.25 289.83,-288.33 288.06,-295.1" style=""/>
+</g>
+<!-- TxValidator.voteTransaction&#45;&gt;TxValidator._checkTransactionState -->
+<g id="edge13" class="edge" data-name="TxValidator.voteTransaction-&gt;TxValidator._checkTransactionState">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M159.5,-273.49C187.27,-281.04 224.19,-289.9 258.21,-297.32" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="257.12,-300.66 267.63,-299.35 258.59,-293.82 257.12,-300.66" style=""/>
+</g>
+<!-- TxValidator._calculateVotePoint -->
+<g id="node6" class="node" pointer-events="visible" data-name="TxValidator._calculateVotePoint">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="352.16" cy="-258" rx="89.18" ry="18" style=""/>
+<text text-anchor="middle" x="352.16" y="-253.8" font-family="Times,serif" font-size="14.00" style="">_calculateVotePoint</text>
+</g>
+<!-- TxValidator.voteTransaction&#45;&gt;TxValidator._calculateVotePoint -->
+<g id="edge12" class="edge" data-name="TxValidator.voteTransaction-&gt;TxValidator._calculateVotePoint">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M189.38,-258C208.21,-258 228.78,-258 248.75,-258" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="248.74,-261.5 258.74,-258 248.74,-254.5 248.74,-261.5" style=""/>
+</g>
+<!-- TxValidator.voteTransaction&#45;&gt;TxValidator.address -->
+<g id="edge10" class="edge" data-name="TxValidator.voteTransaction-&gt;TxValidator.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M171.01,-245.27C210.87,-236.14 264.08,-223.95 302.32,-215.19" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="302.76,-218.68 311.73,-213.03 301.2,-211.86 302.76,-218.68" style=""/>
+</g>
+<!-- TxValidator.voteTransaction&#45;&gt;IMinerHealthCheck.status -->
+<g id="edge8" class="edge" data-name="TxValidator.voteTransaction-&gt;IMinerHealthCheck.status">
+
+<path fill="none" stroke="white" stroke-width="2" d="M178.38,-247.89C190.59,-243.97 202.74,-238.54 212.89,-231 236.94,-213.13 226.97,-194.43 248.89,-174 266.92,-157.18 291.07,-143.88 311.37,-134.57" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="312.59,-137.86 320.34,-130.64 309.78,-131.45 312.59,-137.86" style=""/>
+</g>
+<!-- IMinerList.list -->
+<g id="node15" class="node" pointer-events="visible" data-name="IMinerList.list">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="352.16" cy="-34" rx="27" ry="18" style=""/>
+<text text-anchor="middle" x="352.16" y="-29.8" font-family="Times,serif" font-size="14.00" style="">list</text>
+</g>
+<!-- TxValidator.voteTransaction&#45;&gt;IMinerList.list -->
+<g id="edge11" class="edge" data-name="TxValidator.voteTransaction-&gt;IMinerList.list">
+
+<path fill="none" stroke="white" stroke-width="2" d="M181.91,-249.69C193.43,-245.61 204.42,-239.66 212.89,-231 258.42,-184.46 208.82,-140.32 248.89,-89 265.25,-68.05 291.88,-54.09 313.87,-45.48" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="314.8,-48.86 323,-42.16 312.41,-42.29 314.8,-48.86" style=""/>
+</g>
+<!-- TxValidator.checkTransactionState -->
+<g id="node4" class="node" pointer-events="visible" data-name="TxValidator.checkTransactionState">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="114.44" cy="-312" rx="98.39" ry="18" style=""/>
+<text text-anchor="middle" x="114.44" y="-307.8" font-family="Times,serif" font-size="14.00" style="">checkTransactionState</text>
+</g>
+<!-- TxValidator.checkTransactionState&#45;&gt;TxValidator._checkTransactionState -->
+<g id="edge14" class="edge" data-name="TxValidator.checkTransactionState-&gt;TxValidator._checkTransactionState">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M214.04,-312C220.9,-312 227.84,-312 234.77,-312" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="234.62,-315.5 244.62,-312 234.62,-308.5 234.62,-315.5" style=""/>
+</g>
+<!-- TxValidator._shareRewards -->
+<g id="node7" class="node" pointer-events="visible" data-name="TxValidator._shareRewards">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="561.46" cy="-312" rx="70.06" ry="18" style=""/>
+<text text-anchor="middle" x="561.46" y="-307.8" font-family="Times,serif" font-size="14.00" style="">_shareRewards</text>
+</g>
+<!-- TxValidator._checkTransactionState&#45;&gt;TxValidator._shareRewards -->
+<g id="edge15" class="edge" data-name="TxValidator._checkTransactionState-&gt;TxValidator._shareRewards">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M456.51,-312C463.43,-312 470.35,-312 477.16,-312" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="477.03,-315.5 487.03,-312 477.03,-308.5 477.03,-315.5" style=""/>
+</g>
+<!-- IMetaPoints.balanceOf -->
+<g id="node16" class="node" pointer-events="visible" data-name="IMetaPoints.balanceOf">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="561.46" cy="-119" rx="50.92" ry="18" style=""/>
+<text text-anchor="middle" x="561.46" y="-114.8" font-family="Times,serif" font-size="14.00" style="">balanceOf</text>
+</g>
+<!-- TxValidator._calculateVotePoint&#45;&gt;IMetaPoints.balanceOf -->
+<g id="edge16" class="edge" data-name="TxValidator._calculateVotePoint-&gt;IMetaPoints.balanceOf">
+
+<path fill="none" stroke="white" stroke-width="2" d="M424.79,-246.49C435.69,-242.71 446.33,-237.68 455.43,-231 479.59,-213.28 471.44,-196.31 491.43,-174 501.38,-162.9 513.73,-152.3 525.22,-143.42" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="527.1,-146.38 533.01,-137.59 522.91,-140.78 527.1,-146.38" style=""/>
+</g>
+<!-- IMinerFormulas.BASE_DIVIDER -->
+<g id="node17" class="node" pointer-events="visible" data-name="IMinerFormulas.BASE_DIVIDER">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="887.23" cy="-408" rx="80.49" ry="18" style=""/>
+<text text-anchor="middle" x="887.23" y="-403.8" font-family="Times,serif" font-size="14.00" style="">BASE_DIVIDER</text>
+</g>
+<!-- TxValidator._shareRewards&#45;&gt;IMinerFormulas.BASE_DIVIDER -->
+<g id="edge17" class="edge" data-name="TxValidator._shareRewards-&gt;IMinerFormulas.BASE_DIVIDER">
+
+<path fill="none" stroke="white" stroke-width="2" d="M589.96,-329.57C608.28,-343.59 633.65,-362.03 659.49,-372 703.49,-388.98 755.57,-396.01 798.71,-399.57" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="798.24,-403.05 808.48,-400.32 798.78,-396.07 798.24,-403.05" style=""/>
+</g>
+<!-- TxValidator._shareRewards&#45;&gt;IMinerFormulas.BASE_DIVIDER -->
+<g id="edge19" class="edge" data-name="TxValidator._shareRewards-&gt;IMinerFormulas.BASE_DIVIDER">
+
+<path fill="none" stroke="white" stroke-width="2" d="M575.62,-330.89C593.17,-349.83 625.94,-377.05 659.49,-390 703.91,-407.14 756.56,-414.14 799.94,-415.82" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="799.68,-419.31 809.77,-416.08 799.87,-412.31 799.68,-419.31" style=""/>
+</g>
+<!-- IMinerFormulas.METAMINER_MINER_POOL_SHARE_PERCENT -->
+<g id="node18" class="node" pointer-events="visible" data-name="IMinerFormulas.METAMINER_MINER_POOL_SHARE_PERCENT">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="887.23" cy="-354" rx="219.98" ry="18" style=""/>
+<text text-anchor="middle" x="887.23" y="-349.8" font-family="Times,serif" font-size="14.00" style="">METAMINER_MINER_POOL_SHARE_PERCENT</text>
+</g>
+<!-- TxValidator._shareRewards&#45;&gt;IMinerFormulas.METAMINER_MINER_POOL_SHARE_PERCENT -->
+<g id="edge18" class="edge" data-name="TxValidator._shareRewards-&gt;IMinerFormulas.METAMINER_MINER_POOL_SHARE_PERCENT">
+
+<path fill="none" stroke="white" stroke-width="2" d="M626.04,-320.25C661.41,-324.84 706.85,-330.73 749.83,-336.31" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="749.11,-339.74 759.48,-337.56 750.01,-332.8 749.11,-339.74" style=""/>
+</g>
+<!-- IMinerPool.claimTxReward -->
+<g id="node19" class="node" pointer-events="visible" data-name="IMinerPool.claimTxReward">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="887.23" cy="-269" rx="73.49" ry="18" style=""/>
+<text text-anchor="middle" x="887.23" y="-264.8" font-family="Times,serif" font-size="14.00" style="">claimTxReward</text>
+</g>
+<!-- TxValidator._shareRewards&#45;&gt;IMinerPool.claimTxReward -->
+<g id="edge20" class="edge" data-name="TxValidator._shareRewards-&gt;IMinerPool.claimTxReward">
+
+<path fill="none" stroke="white" stroke-width="2" d="M605.79,-296.7C655.28,-285.91 737.5,-274.15 800.15,-268.35" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="800.13,-271.86 809.79,-267.5 799.52,-264.89 800.13,-271.86" style=""/>
+</g>
+<!-- TxValidator._shareRewards&#45;&gt;IMinerPool.claimTxReward -->
+<g id="edge21" class="edge" data-name="TxValidator._shareRewards-&gt;IMinerPool.claimTxReward">
+
+<path fill="none" stroke="white" stroke-width="2" d="M625.66,-303.61C677.73,-296.69 751.83,-286.85 807.71,-279.43" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="807.97,-282.93 817.42,-278.14 807.05,-275.99 807.97,-282.93" style=""/>
+</g>
+<!-- TxValidator._shareRewards&#45;&gt;IMinerPool.claimTxReward -->
+<g id="edge22" class="edge" data-name="TxValidator._shareRewards-&gt;IMinerPool.claimTxReward">
+
+<path fill="none" stroke="white" stroke-width="2" d="M632.32,-314.06C691.18,-309.36 774.34,-298.06 829.24,-287.14" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="829.82,-290.6 838.91,-285.14 828.4,-283.74 829.82,-290.6" style=""/>
+</g>
+<!-- key -->
+<g id="node20" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="179.44,-737 49.44,-737 49.44,-649 179.44,-649 179.44,-737" style=""/>
+<text text-anchor="start" x="99.08" y="-718.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="95.19" y="-698.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="72.65" y="-678.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="59.05" y="-658.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node21" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="379.16,-737 325.16,-737 325.16,-649 379.16,-649 379.16,-737" style=""/>
+<text text-anchor="start" x="342.16" y="-718.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="342.16" y="-698.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="340.16,-673 340.16,-693 365.16,-693 365.16,-673 340.16,-673" style=""/>
+<text text-anchor="start" x="342.16" y="-678.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="342.16,-655 342.16,-671 363.16,-671 363.16,-655 342.16,-655" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge23" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M172.44,-723C242.05,-723 262.62,-723 326.29,-723" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="326.13,-726.5 336.13,-723 326.13,-719.5 326.13,-726.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge24" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M172.44,-703C242.05,-703 262.62,-703 326.29,-703" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="326.13,-706.5 336.13,-703 326.13,-699.5 326.13,-706.5" style=""/>
+</g>
+</g>
+</svg>

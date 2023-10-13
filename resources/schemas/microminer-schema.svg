@@ -1,0 +1,193 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="557pt" height="717pt" viewBox="0.00 0.00 556.61 717.00">
+<g id="graph0" class="graph" transform="translate(4,713) scale(1)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-713 552.61,-713 552.61,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterMicrominer">
+
+<path fill="#445773" stroke="#445773" d="M20,-201C20,-201 511.99,-201 511.99,-201 517.99,-201 523.99,-207 523.99,-213 523.99,-213 523.99,-552 523.99,-552 523.99,-558 517.99,-564 511.99,-564 511.99,-564 20,-564 20,-564 14,-564 8,-558 8,-552 8,-552 8,-213 8,-213 8,-207 14,-201 20,-201" style=""/>
+<text text-anchor="middle" x="265.99" y="-547.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">Microminer</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterIMinerList">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M421.23,-8C421.23,-8 528.61,-8 528.61,-8 534.61,-8 540.61,-14 540.61,-20 540.61,-20 540.61,-181 540.61,-181 540.61,-187 534.61,-193 528.61,-193 528.61,-193 421.23,-193 421.23,-193 415.23,-193 409.23,-187 409.23,-181 409.23,-181 409.23,-20 409.23,-20 409.23,-14 415.23,-8 421.23,-8" style=""/>
+<text text-anchor="middle" x="474.92" y="-176.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">IMinerList</text>
+</g>
+<g id="clust3" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="19.35,-572 19.35,-701 327.97,-701 327.97,-572 19.35,-572" style=""/>
+<text text-anchor="middle" x="173.66" y="-684.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- Microminer.isMiner -->
+<g id="node1" class="node" pointer-events="visible" data-name="Microminer.isMiner">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="136.78,-339.54 136.78,-354.46 110.76,-365 73.95,-365 47.93,-354.46 47.93,-339.54 73.95,-329 110.76,-329 136.78,-339.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="140.78,-336.85 140.78,-357.15 111.53,-369 73.17,-369 43.93,-357.15 43.93,-336.85 73.17,-325 111.53,-325 140.78,-336.85" style=""/>
+<text text-anchor="middle" x="92.35" y="-342.8" font-family="Times,serif" font-size="14.00" style="">isMiner</text>
+</g>
+<!-- IMinerList.isMiner -->
+<g id="node12" class="node" pointer-events="visible" data-name="IMinerList.isMiner">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="474.92" cy="-88" rx="41.16" ry="18" style=""/>
+<text text-anchor="middle" x="474.92" y="-83.8" font-family="Times,serif" font-size="14.00" style="">isMiner</text>
+</g>
+<!-- Microminer.isMiner&#45;&gt;IMinerList.isMiner -->
+<g id="edge1" class="edge" data-name="Microminer.isMiner-&gt;IMinerList.isMiner">
+
+<path fill="none" stroke="white" stroke-width="2" d="M137.24,-334.02C148.24,-329.46 159.52,-323.53 168.71,-316 191.02,-297.72 183.29,-281.32 204.71,-262 270.56,-202.61 318.73,-231.91 381.23,-169 400.29,-149.82 389.34,-133.31 409.23,-115 414.33,-110.31 420.35,-106.38 426.64,-103.09" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="427.71,-106.45 435.35,-99.1 424.8,-100.08 427.71,-106.45" style=""/>
+</g>
+<!-- Microminer.notMiner -->
+<g id="node2" class="node" pointer-events="visible" data-name="Microminer.notMiner">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="143.06,-277.54 143.06,-292.46 113.36,-303 71.35,-303 41.65,-292.46 41.65,-277.54 71.35,-267 113.36,-267 143.06,-277.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="147.05,-274.72 147.05,-295.28 114.04,-307 70.66,-307 37.66,-295.28 37.66,-274.72 70.66,-263 114.04,-263 147.05,-274.72" style=""/>
+<text text-anchor="middle" x="92.35" y="-280.8" font-family="Times,serif" font-size="14.00" style="">notMiner</text>
+</g>
+<!-- Microminer.notMiner&#45;&gt;IMinerList.isMiner -->
+<g id="edge2" class="edge" data-name="Microminer.notMiner-&gt;IMinerList.isMiner">
+
+<path fill="none" stroke="white" stroke-width="2" d="M140.04,-270.91C150.15,-266.51 160.31,-260.94 168.71,-254 191.22,-235.39 182.2,-217.62 204.71,-199 270.26,-144.77 365.95,-113.88 423.84,-99.07" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="424.49,-102.51 433.36,-96.71 422.81,-95.72 424.49,-102.51" style=""/>
+</g>
+<!-- Microminer.&lt;Receive Ether&gt; -->
+<g id="node3" class="node" pointer-events="visible" data-name="Microminer.&lt;Receive Ether&gt;">
+
+<ellipse fill="#ffbdb9" stroke="brown" stroke-width="3" cx="92.35" cy="-405" rx="76.21" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-400.8" font-family="Times,serif" font-size="14.00" style="">&lt;Receive Ether&gt;</text>
+</g>
+<!-- Microminer.initialize -->
+<g id="node4" class="node" pointer-events="visible" data-name="Microminer.initialize">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="92.35" cy="-513" rx="44.64" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-508.8" font-family="Times,serif" font-size="14.00" style="">initialize</text>
+</g>
+<!-- Microminer.IMinerHealthCheck -->
+<g id="node8" class="node" pointer-events="visible" data-name="Microminer.IMinerHealthCheck">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="292.97" cy="-513" rx="88.03" ry="18" style=""/>
+<text text-anchor="middle" x="292.97" y="-508.8" font-family="Times,serif" font-size="14.00" style="">IMinerHealthCheck</text>
+</g>
+<!-- Microminer.initialize&#45;&gt;Microminer.IMinerHealthCheck -->
+<g id="edge3" class="edge" data-name="Microminer.initialize-&gt;Microminer.IMinerHealthCheck">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M138.42,-513C154.06,-513 172.29,-513 190.61,-513" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="190.58,-516.5 200.58,-513 190.58,-509.5 190.58,-516.5" style=""/>
+</g>
+<!-- Microminer.IMetaPoints -->
+<g id="node9" class="node" pointer-events="visible" data-name="Microminer.IMetaPoints">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="292.97" cy="-405" rx="58.49" ry="18" style=""/>
+<text text-anchor="middle" x="292.97" y="-400.8" font-family="Times,serif" font-size="14.00" style="">IMetaPoints</text>
+</g>
+<!-- Microminer.initialize&#45;&gt;Microminer.IMetaPoints -->
+<g id="edge4" class="edge" data-name="Microminer.initialize-&gt;Microminer.IMetaPoints">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M132.93,-504.04C145.25,-499.94 158.3,-494.13 168.71,-486 191.43,-468.24 181.59,-449.26 204.71,-432 211.87,-426.65 220.12,-422.34 228.62,-418.88" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="229.65,-422.23 237.88,-415.56 227.28,-415.65 229.65,-422.23" style=""/>
+</g>
+<!-- Microminer.IMinerList -->
+<g id="node10" class="node" pointer-events="visible" data-name="Microminer.IMinerList">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="292.97" cy="-459" rx="52.75" ry="18" style=""/>
+<text text-anchor="middle" x="292.97" y="-454.8" font-family="Times,serif" font-size="14.00" style="">IMinerList</text>
+</g>
+<!-- Microminer.initialize&#45;&gt;Microminer.IMinerList -->
+<g id="edge5" class="edge" data-name="Microminer.initialize-&gt;Microminer.IMinerList">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M131.18,-502.72C161.12,-494.58 203.35,-483.09 237.02,-473.94" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="237.81,-477.35 246.54,-471.35 235.98,-470.6 237.81,-477.35" style=""/>
+</g>
+<!-- Microminer.setMiner -->
+<g id="node5" class="node" pointer-events="visible" data-name="Microminer.setMiner">
+
+<ellipse fill="#ffbdb9" stroke="brown" stroke-width="3" cx="92.35" cy="-227" rx="45.23" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-222.8" font-family="Times,serif" font-size="14.00" style="">setMiner</text>
+</g>
+<!-- IMinerList.addMiner -->
+<g id="node13" class="node" pointer-events="visible" data-name="IMinerList.addMiner">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="474.92" cy="-34" rx="48.66" ry="18" style=""/>
+<text text-anchor="middle" x="474.92" y="-29.8" font-family="Times,serif" font-size="14.00" style="">addMiner</text>
+</g>
+<!-- Microminer.setMiner&#45;&gt;IMinerList.addMiner -->
+<g id="edge6" class="edge" data-name="Microminer.setMiner-&gt;IMinerList.addMiner">
+
+<path fill="none" stroke="white" stroke-width="2" d="M104.89,-208.3C122.8,-180.89 159.92,-130.15 204.71,-103 269.4,-63.78 355.83,-46.72 413.11,-39.39" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="413.42,-42.87 422.93,-38.21 412.59,-35.92 413.42,-42.87" style=""/>
+</g>
+<!-- Microminer.kickMiner -->
+<g id="node6" class="node" pointer-events="visible" data-name="Microminer.kickMiner">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="92.35" cy="-459" rx="51.03" ry="18" style=""/>
+<text text-anchor="middle" x="92.35" y="-454.8" font-family="Times,serif" font-size="14.00" style="">kickMiner</text>
+</g>
+<!-- Microminer._kickMiner -->
+<g id="node7" class="node" pointer-events="visible" data-name="Microminer._kickMiner">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="292.97" cy="-289" rx="56.18" ry="18" style=""/>
+<text text-anchor="middle" x="292.97" y="-284.8" font-family="Times,serif" font-size="14.00" style="">_kickMiner</text>
+</g>
+<!-- Microminer.kickMiner&#45;&gt;Microminer._kickMiner -->
+<g id="edge7" class="edge" data-name="Microminer.kickMiner-&gt;Microminer._kickMiner">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M136.84,-448.69C147.97,-444.69 159.4,-439.27 168.71,-432 191.43,-414.24 186.53,-400.4 204.71,-378 222.66,-355.88 245.22,-332.98 262.9,-315.95" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="265.14,-318.65 269.97,-309.22 260.31,-313.58 265.14,-318.65" style=""/>
+</g>
+<!-- Microminer.payable -->
+<g id="node11" class="node" pointer-events="visible" data-name="Microminer.payable">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="474.92" cy="-289" rx="41.13" ry="18" style=""/>
+<text text-anchor="middle" x="474.92" y="-284.8" font-family="Times,serif" font-size="14.00" style="">payable</text>
+</g>
+<!-- Microminer._kickMiner&#45;&gt;Microminer.payable -->
+<g id="edge9" class="edge" data-name="Microminer._kickMiner-&gt;Microminer.payable">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M350.41,-289C372.54,-289 397.82,-289 419.73,-289" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="419.5,-292.5 429.5,-289 419.5,-285.5 419.5,-292.5" style=""/>
+</g>
+<!-- IMinerList.deleteMiner -->
+<g id="node14" class="node" pointer-events="visible" data-name="IMinerList.deleteMiner">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="474.92" cy="-142" rx="57.88" ry="18" style=""/>
+<text text-anchor="middle" x="474.92" y="-137.8" font-family="Times,serif" font-size="14.00" style="">deleteMiner</text>
+</g>
+<!-- Microminer._kickMiner&#45;&gt;IMinerList.deleteMiner -->
+<g id="edge8" class="edge" data-name="Microminer._kickMiner-&gt;IMinerList.deleteMiner">
+
+<path fill="none" stroke="white" stroke-width="2" d="M320.59,-272.13C338.43,-260.34 362.07,-243.77 381.23,-227 394.96,-214.99 396.04,-209.59 409.23,-197 419.58,-187.13 431.37,-176.84 442.03,-167.87" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="444.04,-170.75 449.49,-161.66 439.56,-165.37 444.04,-170.75" style=""/>
+</g>
+<!-- key -->
+<g id="node15" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="157.35,-668 27.35,-668 27.35,-580 157.35,-580 157.35,-668" style=""/>
+<text text-anchor="start" x="76.99" y="-649.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="73.1" y="-629.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="50.56" y="-609.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="36.95" y="-589.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node16" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="319.97,-668 265.97,-668 265.97,-580 319.97,-580 319.97,-668" style=""/>
+<text text-anchor="start" x="282.97" y="-649.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="282.97" y="-629.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="280.97,-604 280.97,-624 305.97,-624 305.97,-604 280.97,-604" style=""/>
+<text text-anchor="start" x="282.97" y="-609.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="282.97,-586 282.97,-602 303.97,-602 303.97,-586 282.97,-586" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge10" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M150.35,-654C203.46,-654 219.85,-654 267.22,-654" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="266.94,-657.5 276.94,-654 266.94,-650.5 266.94,-657.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge11" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M150.35,-634C203.46,-634 219.85,-634 267.22,-634" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="266.94,-637.5 276.94,-634 266.94,-630.5 266.94,-637.5" style=""/>
+</g>
+</g>
+</svg>
