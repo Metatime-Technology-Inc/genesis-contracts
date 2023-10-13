@@ -12,15 +12,18 @@ contract Roles is AccessControl, Initializable {
     bytes32 public constant OWNER_ROLE = keccak256("OWNER_ROLE");
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
     bytes32 public constant VALIDATOR_ROLE = keccak256("VALIDATOR_ROLE");
-
-    mapping(uint256 => address) public validatorList;
+    /// @notice  The current number of validators
     uint256 public currentValidatorId;
+
+    /// @notice An array to maintain the list of validators
+    mapping(uint256 => address) public validatorList;
 
     /**
      * @dev Initializes the Roles contract with the initial owner's address.
      * @param ownerAddress The address of the initial owner.
      */
     function initialize(address ownerAddress) external initializer {
+        require(ownerAddress != address(0), "Roles: cannot set zero address");
         _grantRole(OWNER_ROLE, ownerAddress);
         _setRoleAdmin(MANAGER_ROLE, OWNER_ROLE);
         _setRoleAdmin(VALIDATOR_ROLE, OWNER_ROLE);

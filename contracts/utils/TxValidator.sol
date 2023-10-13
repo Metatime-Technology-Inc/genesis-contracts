@@ -15,57 +15,71 @@ import "../libs/MinerTypes.sol";
  * @title TxValidator
  * @dev Contract for validating transactions and managing votes on transactions.
  */
-// A long time ago in a galaxy far, far away! :D
+// A long time ago in a galaxy far, far away!
 contract TxValidator is Initializable, RolesHandler {
-    enum TransactionState {
-        Pending,
-        Completed,
-        Expired
+    /// @notice Struct to represent a vote
+    struct Vote {
+        MinerTypes.NodeType nodeType; // Type of miner node associated with the voter
+        address voter; // Address of the voter
+        bool decision; // The decision of the voter (true or false)
     }
+    /// @notice Struct to store transaction data
+    struct TxPayload {
+        address handler; // The handler of the transaction
+        uint256 reward; // The reward associated with the transaction
+        uint256 votePoint; // The total vote points received for the transaction
+        bool voteResult; // The result of the transaction vote
+        bool expired; // Whether the transaction has expired
+        uint256 expireTime; // The timestamp when the transaction expires
+        bool done; // Whether the transaction is completed
+    }
+
+    /// @notice Enum to represent the state of a transaction
+    enum TransactionState {
+        Pending, // Transaction is pending validation
+        Completed, // Transaction has been completed successfully
+        Expired // Transaction has expired and is no longer valid
+    }
+
+    /// @notice Parameters for transaction validation
     uint256 public votePointLimit = 100 ether;
     uint256 public voteCountLimit = 32;
     uint256 public defaultVotePoint = 2 ether;
     uint256 public defaultExpireTime = 5 minutes;
     uint256 public constant HANDLER_PERCENT = 5_000;
 
+    /// @notice Addresses of dependency contracts
     IMinerList public minerList;
     IMinerPool public minerPool;
     IMetaPoints public metaPoints;
     IMinerFormulas public minerFormulas;
     IMinerHealthCheck public minerHealthCheck;
 
+    /// @notice Mapping to store transaction data based on its hash
     mapping(bytes32 => TxPayload) public txPayloads;
+    /// @notice Mapping to store votes for each transaction
     mapping(bytes32 => mapping(uint256 => Vote)) public txVotes;
+    /// @notice Mapping to store the count of votes for each transaction
     mapping(bytes32 => uint256) public txVotesCount;
+    /// @notice Mapping to keep track of whether an address has voted for a transaction
     mapping(bytes32 => mapping(address => bool)) public previousVotes;
 
-    struct Vote {
-        MinerTypes.NodeType nodeType;
-        address voter;
-        bool decision;
-    }
-
-    struct TxPayload {
-        address handler;
-        uint256 reward;
-        uint256 votePoint;
-        bool voteResult;
-        bool expired;
-        uint256 expireTime;
-        bool done;
-    }
-
+    /// @notice new transaction added
     event AddTransaction(
         bytes32 indexed txHash,
         address indexed handler,
         uint256 reward
     );
+    /// @notice voted for previously saved transaction
     event VoteTransaction(
         bytes32 indexed txHash,
         address indexed voter,
         bool decision
     );
+
+    /// @notice transaction voting completely done
     event DoneTransaction(bytes32 indexed txHash, uint256 reward);
+    /// @notice transaction is expired
     event ExpireTransaction(bytes32 indexed txHash);
 
     /**
@@ -83,6 +97,15 @@ contract TxValidator is Initializable, RolesHandler {
         address minerHealthCheckAddress,
         address minerPoolAddress
     ) external initializer {
+        require(
+            minerListAddress != address(0) &&
+                metaPointsAddress != address(0) &&
+                minerFormulasAddress != address(0) &&
+                minerHealthCheckAddress != address(0) &&
+                minerPoolAddress != address(0),
+            "TxValidator: cannot set zero address"
+        );
+
         minerList = IMinerList(minerListAddress);
         metaPoints = IMetaPoints(metaPointsAddress);
         minerFormulas = IMinerFormulas(minerFormulasAddress);
