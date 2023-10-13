@@ -78,14 +78,14 @@
 <path fill="none" stroke="#1bc6a6" stroke-width="2" d="M140.22,-34C157.16,-34 175.9,-34 193.74,-34" style=""/>
 <polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="193.5,-37.5 203.5,-34 193.5,-30.5 193.5,-37.5" style=""/>
 </g>
-<!-- IMinerHealthCheck.manuelPing -->
-<g id="node8" class="node" pointer-events="visible" data-name="IMinerHealthCheck.manuelPing">
+<!-- IMinerHealthCheck.manualPing -->
+<g id="node8" class="node" pointer-events="visible" data-name="IMinerHealthCheck.manualPing">
 
 <ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="451.7" cy="-88" rx="57.34" ry="18" style=""/>
-<text text-anchor="middle" x="451.7" y="-83.8" font-family="Times,serif" font-size="14.00" style="">manuelPing</text>
+<text text-anchor="middle" x="451.7" y="-83.8" font-family="Times,serif" font-size="14.00" style="">manualPing</text>
 </g>
-<!-- MinerList._addMiner&#45;&gt;IMinerHealthCheck.manuelPing -->
-<g id="edge4" class="edge" data-name="MinerList._addMiner-&gt;IMinerHealthCheck.manuelPing">
+<!-- MinerList._addMiner&#45;&gt;IMinerHealthCheck.manualPing -->
+<g id="edge4" class="edge" data-name="MinerList._addMiner-&gt;IMinerHealthCheck.manualPing">
 
 <path fill="none" stroke="white" stroke-width="2" d="M324.61,-88C341.99,-88 361.55,-88 380,-88" style=""/>
 <polygon fill="white" stroke="white" stroke-width="2" points="379.83,-91.5 389.83,-88 379.83,-84.5 379.83,-91.5" style=""/>

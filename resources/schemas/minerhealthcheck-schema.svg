@@ -184,11 +184,11 @@
 <ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="81" cy="-373" rx="54.47" ry="18" style=""/>
 <text text-anchor="middle" x="81" y="-368.8" font-family="Times,serif" font-size="14.00" style="">setTimeout</text>
 </g>
-<!-- MinerHealthCheck.manuelPing -->
-<g id="node6" class="node" pointer-events="visible" data-name="MinerHealthCheck.manuelPing">
+<!-- MinerHealthCheck.manualPing -->
+<g id="node6" class="node" pointer-events="visible" data-name="MinerHealthCheck.manualPing">
 
 <ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="81" cy="-319" rx="57.34" ry="18" style=""/>
-<text text-anchor="middle" x="81" y="-314.8" font-family="Times,serif" font-size="14.00" style="">manuelPing</text>
+<text text-anchor="middle" x="81" y="-314.8" font-family="Times,serif" font-size="14.00" style="">manualPing</text>
 </g>
 <!-- IMinerFormulas.getDate -->
 <g id="node15" class="node" pointer-events="visible" data-name="IMinerFormulas.getDate">
