@@ -11,4 +11,8 @@ contract MockMetaminer is Metaminer {
     function shareIncome() public payable returns (bool) {
         return _shareIncome(msg.sender, 100 ether);
     }
+
+    function burn(uint256 amount) public {
+        _burn(amount);
+    }
 }

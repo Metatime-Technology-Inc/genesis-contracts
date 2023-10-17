@@ -2,6 +2,7 @@
 pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "../libs/MinerTypes.sol";
 import "../interfaces/IBlockValidator.sol";
@@ -14,7 +15,7 @@ import "../helpers/RolesHandler.sol";
  * @dev A smart contract representing a Metaminer,
  * allowing users to stake and participate in block validation.
  */
-contract Metaminer is Initializable, RolesHandler {
+contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
     /// @notice a struct that hold share for distribution
     struct Share {
         uint256 sharedPercent;
@@ -40,6 +41,8 @@ contract Metaminer is Initializable, RolesHandler {
     uint256 private constant YEAR = 31536000;
     /// @notice address of MinerPool contract
     address private minerPool;
+    /// @notice address of burn address that receives burned amounts
+    address public constant BURN_ADDRESS = address(0);
 
     /// @notice a mapping that holds each addresses' shares
     mapping(address => Share) public shares;
@@ -54,6 +57,8 @@ contract Metaminer is Initializable, RolesHandler {
     event MinerSubscribe(address indexed miner, uint256 indexed newValidDate);
     /// @notice miner is unsubscribed
     event MinerUnsubscribe(address indexed miner);
+    /// @notice coin is burned
+    event Burn(uint256 amount);
 
     /**
      * @dev Modifier to check if an address is a Metaminer.
@@ -123,6 +128,7 @@ contract Metaminer is Initializable, RolesHandler {
         );
         shares[msg.sender] = Share(0, 0);
         minerSubscription[msg.sender] = _nextYear(msg.sender);
+        _burn(ANNUAL_AMOUNT);
         minerList.addMiner(msg.sender, MinerTypes.NodeType.Meta);
         _addShareHolder(
             msg.sender,
@@ -144,6 +150,7 @@ contract Metaminer is Initializable, RolesHandler {
             "Metaminer: Required MTC was not sent"
         );
         minerSubscription[msg.sender] = _nextYear(msg.sender);
+        _burn(ANNUAL_AMOUNT);
         emit MinerSubscribe(msg.sender, minerSubscription[msg.sender]);
         return (true);
     }
@@ -152,7 +159,12 @@ contract Metaminer is Initializable, RolesHandler {
      * @dev Allows a Metaminer to unsubscribe by unstaking their funds.
      * @return A boolean indicating whether the operation was successful.
      */
-    function unsubscribe() external isMiner(msg.sender) returns (bool) {
+    function unsubscribe()
+        external
+        nonReentrant
+        isMiner(msg.sender)
+        returns (bool)
+    {
         _unsubscribe(msg.sender);
         emit MinerUnsubscribe(msg.sender);
         return (true);
@@ -304,15 +316,22 @@ contract Metaminer is Initializable, RolesHandler {
         uint256 balance
     ) internal isMiner(miner) validMinerSubscription(miner) returns (bool) {
         uint256 _shareholderCount = shares[miner].shareHolderCount;
+        uint256 leftover = balance;
         for (uint256 i = 0; i < _shareholderCount; i++) {
             Shareholder memory shareHolder = shareholders[miner][i];
-            uint256 holderPercent = (balance * shareHolder.percent) /
+            uint256 sharedAmount = (balance * shareHolder.percent) /
                 minerFormulas.BASE_DIVIDER();
-            (bool sent, ) = address(shareHolder.addr).call{
-                value: holderPercent
-            }("");
+            leftover -= sharedAmount;
+            (bool sent, ) = address(shareHolder.addr).call{value: sharedAmount}(
+                ""
+            );
             require(sent, "Metaminer: Income sharing failed");
         }
+
+        if (leftover > 0) {
+            _burn(leftover);
+        }
+
         return (true);
     }
 
@@ -340,8 +359,18 @@ contract Metaminer is Initializable, RolesHandler {
         if (minerSubscription[miner] < block.timestamp) {
             _unsubscribe(miner);
             return (false);
-        } else {
-            return (true);
         }
+        return (true);
+    }
+
+    /**
+     * @dev Burns coins from the contract.
+     * @param amount The amount of coins to burn
+     */
+    function _burn(uint256 amount) internal {
+        (bool sent, ) = BURN_ADDRESS.call{value: amount}("");
+        require(sent, "Metaminer: Unable to burn");
+
+        emit Burn(amount);
     }
 }

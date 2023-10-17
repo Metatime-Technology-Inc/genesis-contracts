@@ -540,6 +540,174 @@ describe("Metaminer", function () {
       ).to.be.equal(false);
     });
 
+    it("try to finalize block 2", async () => {
+      const {
+        owner,
+        metaminerContract,
+        blockValidator,
+        metaminer_1,
+        metaminer_2,
+        metaminer_3,
+        totalCharge,
+        user_1,
+        user_2
+      } = await loadFixture(initiateVariables);
+
+      await metaminerContract.connect(owner).setValidator(metaminer_1.address);
+
+      await metaminerContract.connect(owner).setPercentages(
+        metaminer_1.address,
+        [user_1.address, user_2.address],
+        [3_000, 2_000]
+      );
+
+      // await mineBlock(ethers, 10);
+
+      const block_0 = await blockValidator.provider.getBlock("latest");
+      const blockPayload_1: BlockValidator.BlockPayloadStruct = {
+        coinbase: metaminer_1.address,
+        blockHash: block_0.hash,
+        blockReward: toWei("1000"),
+        isFinalized: false,
+      };
+      await blockValidator
+        .connect(owner)
+        .setBlockPayload(block_0.number, blockPayload_1);
+
+      const block_1 = await blockValidator.provider.getBlock("latest");
+      const blockPayload_2: BlockValidator.BlockPayloadStruct = {
+        coinbase: metaminer_2.address,
+        blockHash: block_1.hash,
+        blockReward: toWei("1000"),
+        isFinalized: false,
+      };
+      await blockValidator
+        .connect(owner)
+        .setBlockPayload(block_1.number, blockPayload_2);
+
+      const block_2 = await blockValidator.provider.getBlock("latest");
+      const blockPayload_3: BlockValidator.BlockPayloadStruct = {
+        coinbase: metaminer_3.address,
+        blockHash: block_2.hash,
+        blockReward: toWei("100"),
+        isFinalized: false,
+      };
+      await blockValidator
+        .connect(owner)
+        .setBlockPayload(block_2.number, blockPayload_3);
+      const {
+        coinbase: blockPayload_1Coinbase,
+        blockHash: blockPayload_1BlockHash,
+        blockReward: blockPayload_1BlockReward,
+        isFinalized: blockPayload_1IsFinalized,
+      } = await blockValidator.blockPayloads(block_0.number);
+      const {
+        coinbase: blockPayload_2Coinbase,
+        blockHash: blockPayload_2BlockHash,
+        blockReward: blockPayload_2BlockReward,
+        isFinalized: blockPayload_2IsFinalized,
+      } = await blockValidator.blockPayloads(block_1.number);
+      const {
+        coinbase: blockPayload_3Coinbase,
+        blockHash: blockPayload_3BlockHash,
+        blockReward: blockPayload_3BlockReward,
+        isFinalized: blockPayload_3IsFinalized,
+      } = await blockValidator.blockPayloads(block_2.number);
+
+      expect(blockPayload_1Coinbase).to.be.equal(blockPayload_1.coinbase);
+      expect(blockPayload_1BlockHash).to.be.equal(blockPayload_1.blockHash);
+      expect(blockPayload_1BlockReward).to.be.equal(blockPayload_1.blockReward);
+      expect(blockPayload_1IsFinalized).to.be.equal(blockPayload_1.isFinalized);
+      expect(blockPayload_2Coinbase).to.be.equal(blockPayload_2.coinbase);
+      expect(blockPayload_2BlockHash).to.be.equal(blockPayload_2.blockHash);
+      expect(blockPayload_2BlockReward).to.be.equal(blockPayload_2.blockReward);
+      expect(blockPayload_2IsFinalized).to.be.equal(blockPayload_2.isFinalized);
+      expect(blockPayload_3Coinbase).to.be.equal(blockPayload_3.coinbase);
+      expect(blockPayload_3BlockHash).to.be.equal(blockPayload_3.blockHash);
+      expect(blockPayload_3BlockReward).to.be.equal(blockPayload_3.blockReward);
+      expect(blockPayload_3IsFinalized).to.be.equal(blockPayload_3.isFinalized);
+
+      expect(
+        await metaminerContract
+          .connect(metaminer_1)
+          .callStatic.finalizeBlock(block_0.number, {
+            value: blockPayload_1.blockReward,
+          })
+      ).to.be.equal(true);
+
+      await setBalance(
+        network,
+        metaminer_2.address,
+        "0x33b2e3c9fd0803ce8000000"
+      );
+
+      await setBalance(
+        network,
+        metaminer_3.address,
+        "0x33b2e3c9fd0803ce8000000"
+      );
+
+      await metaminerContract
+        .connect(metaminer_2)
+        .setMiner({ value: totalCharge });
+
+      await metaminerContract
+        .connect(metaminer_3)
+        .setMiner({ value: totalCharge });
+
+      await expect(
+        metaminerContract
+          .connect(metaminer_1)
+          .finalizeBlock(block_2.number, { value: blockPayload_3.blockReward })
+      ).revertedWith("Metaminer: Wrong coinbase");
+
+      await expect(
+        metaminerContract.connect(metaminer_3).finalizeBlock(block_2.number, {
+          value: ethers.BigNumber.from(blockPayload_3.blockReward).div(2),
+        })
+      ).revertedWith("Metaminer: Insufficient amount");
+
+      await metaminerContract
+        .connect(metaminer_3)
+        .finalizeBlock(block_2.number, { value: blockPayload_3.blockReward });
+
+      await expect(
+        metaminerContract
+          .connect(metaminer_3)
+          .finalizeBlock(block_2.number, { value: blockPayload_3.blockReward })
+      ).revertedWith("Metaminer: Already finalized");
+
+      // increment blocktimestamp to 1 year and 35 days to revoke miners subscription
+      await incrementBlocktimestamp(ethers, 86400 * 400);
+
+      expect(
+        await metaminerContract
+          .connect(metaminer_2)
+          .callStatic.finalizeBlock(block_1.number, {
+            value: blockPayload_2.blockReward,
+          })
+      ).to.be.equal(false);
+    });
+
+    it("test burn mechanism", async () => {
+      const { mockMetaminer, metaminer_1 } = await loadFixture(
+        initiateVariables
+      );
+
+      const BURNED_AMOUNT = toWei(String(10));
+
+      await metaminer_1.sendTransaction({
+        to: mockMetaminer.address,
+        value: BURNED_AMOUNT,
+      });
+
+      await mockMetaminer.connect(metaminer_1).burn(BURNED_AMOUNT);
+
+      await expect(
+        mockMetaminer.connect(metaminer_1).burn(BURNED_AMOUNT)
+      ).revertedWith("Metaminer: Unable to burn");
+    });
+
     it("test share income function and expect it to fail", async () => {
       const { mockMetaminer, metaminer_1, totalCharge } = await loadFixture(
         initiateVariables
