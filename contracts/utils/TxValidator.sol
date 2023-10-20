@@ -264,7 +264,10 @@ contract TxValidator is Initializable, RolesHandler {
         }
 
         uint256 metaPointsBalance = metaPoints.balanceOf(voter);
-        votePoint *= (metaPointsBalance > 0 ? metaPointsBalance / 1 ether : 1);
+
+        if (metaPointsBalance >= 100) {
+            votePoint += metaPointsBalance / 100;
+        }
 
         return votePoint;
     }
