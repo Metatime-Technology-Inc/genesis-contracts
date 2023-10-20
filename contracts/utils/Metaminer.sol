@@ -249,7 +249,7 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
      */
     function finalizeBlock(
         uint256 blockNumber
-    ) external payable returns (bool) {
+    ) external payable nonReentrant returns (bool) {
         bool status = _minerCheck(msg.sender);
 
         if (!status) {
