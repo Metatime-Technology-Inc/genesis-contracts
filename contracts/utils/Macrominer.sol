@@ -155,17 +155,26 @@ contract Macrominer is Initializable {
         isNodeTypeValid(nodeType)
         isMiner(votedMinerAddress, votedMinerNodeType)
         isMiner(msg.sender, nodeType)
+        returns (bool)
     {
         // Check the health status of the voted miner.
         bool isAlive = minerHealthCheck.status(
             votedMinerAddress,
             votedMinerNodeType
         );
+        // Check the health status of the caller miner.
+        bool isCallerAlive = minerHealthCheck.status(msg.sender, nodeType);
+        // Balance of voter
+        uint256 mpBalance = metapoints.balanceOf(msg.sender);
+
+        // Prevent ghost voting
+        if (mpBalance == 0 || isCallerAlive == false) {
+            return (false);
+        }
 
         Vote storage vote = votes[votedMinerAddress][votedMinerNodeType];
 
         if (isAlive == false) {
-            uint256 mpBalance = metapoints.balanceOf(msg.sender);
             if (mpBalance + vote.point >= VOTE_POINT_LIMIT) {
                 // If enough votes have been collected, kick the miner.
                 _kickMiner(votedMinerAddress, votedMinerNodeType);
@@ -206,6 +215,7 @@ contract Macrominer is Initializable {
 
             emit EndVote(vote.voteId, votedMinerAddress, votedMinerNodeType);
         }
+        return (true);
     }
 
     /**
