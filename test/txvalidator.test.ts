@@ -502,7 +502,7 @@ describe("TxValidator", function () {
             await addTransaction.wait();
 
             // add extra metapoint to miner_2
-            const extraMP = await metaPoints.connect(manager).mint(miner_2.address, toWei(String(200)));
+            const extraMP = await metaPoints.connect(manager).mint(miner_2.address, toWei(String(20000)));
             extraMP.wait();
 
             // voteTransaction
@@ -551,7 +551,7 @@ describe("TxValidator", function () {
             await addTransaction.wait();
 
             // add extra metapoint to miner_2
-            const extraMP = await metaPoints.connect(manager).mint(miner_2.address, toWei(String(200)));
+            const extraMP = await metaPoints.connect(manager).mint(miner_2.address, toWei(String(20000)));
             extraMP.wait();
 
             // voteTransaction
@@ -608,11 +608,11 @@ describe("TxValidator", function () {
             await addTransaction.wait();
 
             // add extra metapoint to miner_2
-            const extraMP = await metaPoints.connect(manager).mint(miner_2.address, toWei(String(5)));
+            const extraMP = await metaPoints.connect(manager).mint(miner_2.address, toWei(String(500)));
             extraMP.wait();
 
             // add extra metapoint to miner_3
-            const extraMP2 = await metaPoints.connect(manager).mint(miner_3.address, toWei(String(100)));
+            const extraMP2 = await metaPoints.connect(manager).mint(miner_3.address, toWei(String(10000)));
             extraMP2.wait();
 
             // voteTransaction
@@ -716,7 +716,7 @@ describe("TxValidator", function () {
             await addTransaction.wait();
 
             // add extra metapoint to miner_2
-            const extraMP = await metaPoints.connect(manager).mint(miner_2.address, toWei(String(200)));
+            const extraMP = await metaPoints.connect(manager).mint(miner_2.address, toWei(String(20000)));
             extraMP.wait();
 
             // voteTransaction
