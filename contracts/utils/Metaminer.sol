@@ -20,6 +20,7 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
     struct Share {
         uint256 sharedPercent;
         uint256 shareHolderCount;
+        bool client;
     }
     /// @notice shareholder payload for distribution
     struct Shareholder {
@@ -126,7 +127,7 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
             msg.value == (ANNUAL_AMOUNT + STAKE_AMOUNT),
             "Metaminer: Required MTC is not sent"
         );
-        shares[msg.sender] = Share(0, 0);
+        shares[msg.sender] = Share(0, 0, true);
         minerSubscription[msg.sender] = _nextYear(msg.sender);
         _burn(ANNUAL_AMOUNT);
         minerList.addMiner(msg.sender, MinerTypes.NodeType.Meta);
@@ -181,7 +182,7 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
             validator != address(0),
             "Metaminer: Validator cannot be zero address"
         );
-        shares[validator] = Share(0, 0);
+        shares[validator] = Share(0, 0, false);
         minerSubscription[validator] = _nextYear(validator);
         minerList.addMiner(validator, MinerTypes.NodeType.Meta);
         _addShareHolder(
@@ -342,8 +343,11 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
      * @return A boolean indicating whether the operation was successful.
      */
     function _unsubscribe(address miner) internal returns (bool) {
-        (bool sent, ) = address(miner).call{value: STAKE_AMOUNT}("");
-        require(sent, "Metaminer: Unsubsribe failed");
+        bool isClient = shares[miner].client;
+        if (isClient) {
+            (bool sent, ) = address(miner).call{value: STAKE_AMOUNT}("");
+            require(sent, "Metaminer: Unsubsribe failed");
+        }
         minerList.deleteMiner(miner, MinerTypes.NodeType.Meta);
         minerSubscription[miner] = 0;
         // must be delete old shareholders

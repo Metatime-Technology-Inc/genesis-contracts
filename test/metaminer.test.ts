@@ -318,7 +318,7 @@ describe("Metaminer", function () {
     });
 
     it("try to set validator", async () => {
-      const { owner, metaminerContract, metaminer_2, user_1 } =
+      const { owner, metaminerContract, metaminer_2, metaminer_1, user_1 } =
         await loadFixture(initiateVariables);
 
       await expect(
@@ -336,6 +336,16 @@ describe("Metaminer", function () {
           .connect(owner)
           .callStatic.setValidator(metaminer_2.address)
       ).to.be.equal(true);
+
+      await metaminerContract
+          .connect(owner)
+          .setValidator(metaminer_1.address)
+
+      expect(
+        await metaminerContract
+            .connect(metaminer_1)
+            .callStatic.unsubscribe()
+        ).to.be.equal(true);
     });
 
     it("try to refresh validator", async () => {
