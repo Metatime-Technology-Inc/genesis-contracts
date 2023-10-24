@@ -110,6 +110,42 @@ contract MinerFormulas is Initializable {
         return (1 ether / SECONDS_IN_A_DAY);
     }
 
+    function formulaProportion(
+        uint256 firstFormulaResult,
+        uint256 secondFormulaResult,
+        uint256 minerDailyHardCap
+    ) external pure returns (uint256, uint256) {
+        uint256 totalAmount = firstFormulaResult + secondFormulaResult;
+
+        if (totalAmount > minerDailyHardCap) {
+            uint256 firstFormula = firstFormulaResult /
+                (totalAmount / minerDailyHardCap);
+            uint256 secondFormula = secondFormulaResult /
+                (totalAmount / minerDailyHardCap);
+
+            uint256 totalCalculated = (firstFormula + secondFormula);
+            uint256 extendedAmount = totalCalculated > minerDailyHardCap
+                ? (totalCalculated - minerDailyHardCap)
+                : 0;
+
+            if (extendedAmount > 0) {
+                if (firstFormula > (extendedAmount / 2)) {
+                    firstFormula -= extendedAmount / 2;
+                    if (secondFormula > (extendedAmount / 2)) {
+                        secondFormula -= extendedAmount / 2;
+                    } else {
+                        firstFormula -= extendedAmount / 2;
+                    }
+                } else {
+                    secondFormula -= extendedAmount;
+                }
+            }
+            return (firstFormula, secondFormula);
+        } else {
+            return (firstFormulaResult, secondFormulaResult);
+        }
+    }
+
     /**
      * @dev Calculate the daily pool rewards from the first formula for macro miners.
      * @param nodeType The type of macro miner.

@@ -118,8 +118,8 @@ contract MinerPool is Initializable, RolesHandler {
         uint256 activityTime
     ) internal returns (uint256, uint256) {
         uint256 firstFormulaHardCap = 0;
-        uint256 firstFormulaMinerHardCap = 0;
         uint256 secondFormulaHardCap = 0;
+        uint256 dailyHardCap = 0;
 
         if (nodeType == MinerTypes.NodeType.MacroArchive) {
             firstFormulaHardCap = minerFormulas
@@ -127,7 +127,7 @@ contract MinerPool is Initializable, RolesHandler {
             secondFormulaHardCap = minerFormulas
                 .MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA();
 
-            firstFormulaMinerHardCap = (minerFormulas
+            dailyHardCap = (minerFormulas
                 .MACROMINER_ARCHIVE_DAILY_MAX_REWARD() /
                 minerFormulas.SECONDS_IN_A_DAY());
         } else if (nodeType == MinerTypes.NodeType.MacroFullnode) {
@@ -136,7 +136,7 @@ contract MinerPool is Initializable, RolesHandler {
             secondFormulaHardCap = minerFormulas
                 .MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA();
 
-            firstFormulaMinerHardCap = (minerFormulas
+            dailyHardCap = (minerFormulas
                 .MACROMINER_FULLNODE_DAILY_MAX_REWARD() /
                 minerFormulas.SECONDS_IN_A_DAY());
         } else if (nodeType == MinerTypes.NodeType.MacroLight) {
@@ -145,8 +145,7 @@ contract MinerPool is Initializable, RolesHandler {
             secondFormulaHardCap = minerFormulas
                 .MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA();
 
-            firstFormulaMinerHardCap = (minerFormulas
-                .MACROMINER_LIGHT_DAILY_MAX_REWARD() /
+            dailyHardCap = (minerFormulas.MACROMINER_LIGHT_DAILY_MAX_REWARD() /
                 minerFormulas.SECONDS_IN_A_DAY());
         } else {
             return (uint256(0), uint256(0));
@@ -160,11 +159,19 @@ contract MinerPool is Initializable, RolesHandler {
 
         firstFormulaAmount *= activityTime;
         secondFormulaAmount *= activityTime;
-        firstFormulaMinerHardCap *= activityTime;
+        dailyHardCap *= activityTime;
 
-        if (firstFormulaAmount > firstFormulaMinerHardCap) {
-            firstFormulaAmount = firstFormulaMinerHardCap;
-        }
+        (
+            uint256 firstFormulaProportion,
+            uint256 secondFormulaProportion
+        ) = minerFormulas.formulaProportion(
+                firstFormulaAmount,
+                secondFormulaAmount,
+                dailyHardCap
+            );
+
+        firstFormulaAmount = firstFormulaProportion;
+        secondFormulaAmount = secondFormulaProportion;
 
         if (
             (totalRewardsFromFirstFormula[currentDateIndex][nodeType] +

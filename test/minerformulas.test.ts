@@ -233,5 +233,28 @@ describe("MinerFormulas", function () {
                 contractCalc
             ).to.be.equal(jsCalc);
         });
+
+        // try formulaProportion function test calculate
+        it("try formulaProportion function test calculate", async () => {
+            const { manager, minerFormulas, minerList, minerHealthCheck, minerPool } = await loadFixture(initiateVariables);
+
+            // init contracts
+            await initContracts();
+
+            const calc1 = await minerFormulas.formulaProportion(200, 100, 150);
+            expect(
+                calc1[0]
+            ).to.be.equal(100);
+            
+            const calc2 = await minerFormulas.formulaProportion(204, 100, 150);
+            expect(
+                calc2[0]
+            ).to.be.equal(101);
+            
+            const calc3 = await minerFormulas.formulaProportion(1, 204, 150);
+            expect(
+                calc3[0]
+            ).to.be.equal(1);
+        });
     });
 });

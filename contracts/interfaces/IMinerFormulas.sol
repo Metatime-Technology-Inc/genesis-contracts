@@ -72,4 +72,10 @@ interface IMinerFormulas {
     ) external view returns (uint256);
 
     function getDate() external pure returns (uint256);
+
+    function formulaProportion(
+        uint256 firstFormulaResult,
+        uint256 secondFormulaResult,
+        uint256 minerDailyHardCap
+    ) external pure returns (uint256, uint256);
 }

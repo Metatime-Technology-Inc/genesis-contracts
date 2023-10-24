@@ -223,7 +223,7 @@ describe("MinerHealthCheck", function () {
             // sent funds to miner pool
             const fundsTX = await owner.sendTransaction({
                 to: minerPool.address,
-                value: toWei(String(150))
+                value: toWei(String(10))
             });
             await fundsTX.wait();
 

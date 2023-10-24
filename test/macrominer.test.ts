@@ -1133,6 +1133,37 @@ describe("MacroMiner", function () {
         value2,
       ]);
 
+      const slotOfTotalRewardsFromSecondFormula =
+        getSlotOfTotalRewardsFromFirstFormula(
+          BigNumber.from(4),
+          date,
+          BigNumber.from(2)
+        );
+
+      const value3 = ethers.utils.hexlify(
+        ethers.utils.zeroPad(toWei("9999").toHexString(), 32)
+      );
+      await network.provider.send("hardhat_setStorageAt", [
+        minerPool.address,
+        slotOfTotalRewardsFromSecondFormula,
+        value3,
+      ]);
+      const slotOfTotalRewardsFromSecondFormula2 =
+        getSlotOfTotalRewardsFromFirstFormula(
+          BigNumber.from(4),
+          date.add(1),
+          BigNumber.from(2)
+        );
+
+      const value4 = ethers.utils.hexlify(
+        ethers.utils.zeroPad(toWei("9999").toHexString(), 32)
+      );
+      await network.provider.send("hardhat_setStorageAt", [
+        minerPool.address,
+        slotOfTotalRewardsFromSecondFormula2,
+        value4,
+      ]);
+
       for (let i = 0; i < 20; i++) {
         // increment
         await incrementBlocktimestamp(
