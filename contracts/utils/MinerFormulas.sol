@@ -118,32 +118,35 @@ contract MinerFormulas is Initializable {
         uint256 totalAmount = firstFormulaResult + secondFormulaResult;
 
         if (totalAmount > minerDailyHardCap) {
-            uint256 firstFormula = firstFormulaResult /
+            uint256 firstFormulaPortion = firstFormulaResult /
                 (totalAmount / minerDailyHardCap);
-            uint256 secondFormula = secondFormulaResult /
+            uint256 secondFormulaPortion = secondFormulaResult /
                 (totalAmount / minerDailyHardCap);
 
-            uint256 totalCalculated = (firstFormula + secondFormula);
+            uint256 totalCalculated = (firstFormulaPortion +
+                secondFormulaPortion);
             uint256 extendedAmount = totalCalculated > minerDailyHardCap
                 ? (totalCalculated - minerDailyHardCap)
                 : 0;
 
             if (extendedAmount > 0) {
-                if (firstFormula > (extendedAmount / 2)) {
-                    firstFormula -= extendedAmount / 2;
-                    if (secondFormula > (extendedAmount / 2)) {
-                        secondFormula -= extendedAmount / 2;
-                    } else {
-                        firstFormula -= extendedAmount / 2;
-                    }
+                uint256 halfOfExtendedAmount = extendedAmount / 2;
+                if (
+                    firstFormulaPortion > halfOfExtendedAmount &&
+                    secondFormulaPortion > halfOfExtendedAmount
+                ) {
+                    firstFormulaPortion -= halfOfExtendedAmount;
+                    secondFormulaPortion -= halfOfExtendedAmount;
+                } else if (firstFormulaPortion > halfOfExtendedAmount) {
+                    firstFormulaPortion -= extendedAmount;
                 } else {
-                    secondFormula -= extendedAmount;
+                    secondFormulaPortion -= extendedAmount;
                 }
             }
-            return (firstFormula, secondFormula);
-        } else {
-            return (firstFormulaResult, secondFormulaResult);
+            return (firstFormulaPortion, secondFormulaPortion);
         }
+
+        return (firstFormulaResult, secondFormulaResult);
     }
 
     /**

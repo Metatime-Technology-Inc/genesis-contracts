@@ -255,6 +255,11 @@ describe("MinerFormulas", function () {
             expect(
                 calc3[0]
             ).to.be.equal(1);
+
+            const calc4 = await minerFormulas.formulaProportion(1, 166, 150);
+            expect(
+                calc4[1]
+            ).to.be.equal(149);
         });
     });
 });
