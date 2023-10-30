@@ -65,10 +65,19 @@ contract MinerHealthCheck is Initializable, RolesHandler {
         uint256 requiredTimeout
     ) external initializer {
         require(
-            minerListAddress != address(0) &&
-                minerFormulasAddress != address(0) &&
-                minerPoolAddress != address(0) &&
-                metaPointsAddress != address(0),
+            minerListAddress != address(0),
+            "MinerHealthCheck: cannot set zero address"
+        );
+        require(
+            minerFormulasAddress != address(0),
+            "MinerHealthCheck: cannot set zero address"
+        );
+        require(
+            minerPoolAddress != address(0),
+            "MinerHealthCheck: cannot set zero address"
+        );
+        require(
+            metaPointsAddress != address(0),
             "MinerHealthCheck: cannot set zero address"
         );
         require(

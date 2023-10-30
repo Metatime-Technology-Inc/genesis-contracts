@@ -36,7 +36,7 @@ contract Bridge is Blacklistable, Freezeable {
         returns (bool)
     {
         uint256 balance = bridgeToken.balanceOf(msg.sender);
-        require(balance > 0, "Bridge: Address dont have balance");
+        require(balance != 0, "Bridge: Address dont have balance");
 
         bridgeToken.burnFrom(msg.sender, balance);
         emit BridgeTransfer(msg.sender, balance);

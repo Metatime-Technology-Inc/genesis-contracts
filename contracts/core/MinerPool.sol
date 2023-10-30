@@ -72,14 +72,14 @@ contract MinerPool is Initializable, RolesHandler {
             activityTime
         );
 
-        if (firstAmount > 0) {
+        if (firstAmount != 0) {
             (bool isFirstAmountSent, ) = receiver.call{value: firstAmount}("");
             require(isFirstAmountSent, "MinerPool: Unable to claim");
 
             emit HasClaimed(receiver, firstAmount, "MACRO_DAILY_REWARD");
         }
 
-        if (secondAmount > 0) {
+        if (secondAmount != 0) {
             (bool isSecondAmountSent, ) = receiver.call{value: secondAmount}(
                 ""
             );

@@ -98,11 +98,23 @@ contract TxValidator is Initializable, RolesHandler {
         address minerPoolAddress
     ) external initializer {
         require(
-            minerListAddress != address(0) &&
-                metaPointsAddress != address(0) &&
-                minerFormulasAddress != address(0) &&
-                minerHealthCheckAddress != address(0) &&
-                minerPoolAddress != address(0),
+            minerListAddress != address(0),
+            "TxValidator: cannot set zero address"
+        );
+        require(
+            metaPointsAddress != address(0),
+            "TxValidator: cannot set zero address"
+        );
+        require(
+            minerFormulasAddress != address(0),
+            "TxValidator: cannot set zero address"
+        );
+        require(
+            minerHealthCheckAddress != address(0),
+            "TxValidator: cannot set zero address"
+        );
+        require(
+            minerPoolAddress != address(0),
             "TxValidator: cannot set zero address"
         );
 
@@ -182,8 +194,11 @@ contract TxValidator is Initializable, RolesHandler {
             "TxValidator: Handler cannot vote for tx"
         );
         require(
-            minerList.list(voter, nodeType) == true &&
-                nodeType != MinerTypes.NodeType.Meta,
+            minerList.list(voter, nodeType) == true,
+            "TxValidator: Address is not eligible to vote"
+        );
+        require(
+            nodeType != MinerTypes.NodeType.Meta,
             "TxValidator: Address is not eligible to vote"
         );
 

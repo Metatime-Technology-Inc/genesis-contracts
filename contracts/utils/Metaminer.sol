@@ -105,10 +105,19 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
         address minerPoolAddress
     ) external initializer {
         require(
-            blockValidatorAddress != address(0) &&
-                minerListAddress != address(0) &&
-                minerFormulasAddress != address(0) &&
-                minerPoolAddress != address(0),
+            blockValidatorAddress != address(0),
+            "Metaminer: cannot set zero address"
+        );
+        require(
+            minerListAddress != address(0),
+            "Metaminer: cannot set zero address"
+        );
+        require(
+            minerFormulasAddress != address(0),
+            "Metaminer: cannot set zero address"
+        );
+        require(
+            minerPoolAddress != address(0),
             "Metaminer: cannot set zero address"
         );
         blockValidator = IBlockValidator(blockValidatorAddress);
@@ -329,7 +338,7 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
             require(sent, "Metaminer: Income sharing failed");
         }
 
-        if (leftover > 0) {
+        if (leftover != 0) {
             _burn(leftover);
         }
 

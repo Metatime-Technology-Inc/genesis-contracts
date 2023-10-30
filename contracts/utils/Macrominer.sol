@@ -107,9 +107,15 @@ contract Macrominer is Initializable {
         address minerListAddress
     ) external initializer {
         require(
-            minerHealthCheckAddress != address(0) &&
-                metapointsAddress != address(0) &&
-                minerListAddress != address(0),
+            minerHealthCheckAddress != address(0),
+            "Macrominer: cannot set zero address"
+        );
+        require(
+            metapointsAddress != address(0),
+            "Macrominer: cannot set zero address"
+        );
+        require(
+            minerListAddress != address(0),
             "Macrominer: cannot set zero address"
         );
         minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
