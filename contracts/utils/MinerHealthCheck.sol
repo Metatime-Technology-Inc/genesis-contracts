@@ -44,7 +44,7 @@ contract MinerHealthCheck is Initializable, RolesHandler {
     modifier isMiner(address miner, MinerTypes.NodeType nodeType) {
         require(
             minerList.isMiner(miner, nodeType),
-            "MinerHealthCheck: Address is not miner"
+            "MinerHealthCheck: Not a miner"
         );
         _;
     }
@@ -66,24 +66,21 @@ contract MinerHealthCheck is Initializable, RolesHandler {
     ) external initializer {
         require(
             minerListAddress != address(0),
-            "MinerHealthCheck: cannot set zero address"
+            "MinerHealthCheck: No zero address"
         );
         require(
             minerFormulasAddress != address(0),
-            "MinerHealthCheck: cannot set zero address"
+            "MinerHealthCheck: No zero address"
         );
         require(
             minerPoolAddress != address(0),
-            "MinerHealthCheck: cannot set zero address"
+            "MinerHealthCheck: No zero address"
         );
         require(
             metaPointsAddress != address(0),
-            "MinerHealthCheck: cannot set zero address"
+            "MinerHealthCheck: No zero address"
         );
-        require(
-            requiredTimeout >= 14400,
-            "MinerHealthCheck: requiredTimeout must be bigger than 4 hours in secs"
-        );
+        require(requiredTimeout >= 14400, "MinerHealthCheck: Timeout > 4h");
         minerList = IMinerList(minerListAddress);
         minerFormulas = IMinerFormulas(minerFormulasAddress);
         minerPool = IMinerPool(minerPoolAddress);
@@ -141,10 +138,7 @@ contract MinerHealthCheck is Initializable, RolesHandler {
     function setTimeout(
         uint256 newTimeout
     ) external onlyOwnerRole(msg.sender) returns (bool) {
-        require(
-            newTimeout >= 14400,
-            "MinerHealthCheck: New timeout must be bigger than 4 hours in secs"
-        );
+        require(newTimeout >= 14400, "MinerHealthCheck: Timeout > 4h");
         timeout = newTimeout;
         return (true);
     }

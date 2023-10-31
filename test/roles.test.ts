@@ -32,7 +32,7 @@ describe("Roles", function () {
 
         await expect(
             roles.connect(owner).initialize(ethers.constants.AddressZero)
-        ).to.be.revertedWith("Roles: cannot set zero address");
+        ).to.be.revertedWith("Roles: No zero address");
     });
 
     // try to grant validator role and pick

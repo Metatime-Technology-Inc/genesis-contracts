@@ -62,7 +62,7 @@ contract Macrominer is Initializable {
     modifier isMiner(address miner, MinerTypes.NodeType nodeType) {
         require(
             minerList.isMiner(miner, nodeType),
-            "Macrominer: Address is not macrominer"
+            "Macrominer: Not a macrominer"
         );
         _;
     }
@@ -73,7 +73,7 @@ contract Macrominer is Initializable {
     modifier notMiner(address miner, MinerTypes.NodeType nodeType) {
         require(
             !minerList.isMiner(miner, nodeType),
-            "Macrominer: Address is already macrominer"
+            "Macrominer: Already macrominer"
         );
         _;
     }
@@ -108,16 +108,10 @@ contract Macrominer is Initializable {
     ) external initializer {
         require(
             minerHealthCheckAddress != address(0),
-            "Macrominer: cannot set zero address"
+            "Macrominer: No zero address"
         );
-        require(
-            metapointsAddress != address(0),
-            "Macrominer: cannot set zero address"
-        );
-        require(
-            minerListAddress != address(0),
-            "Macrominer: cannot set zero address"
-        );
+        require(metapointsAddress != address(0), "Macrominer: No zero address");
+        require(minerListAddress != address(0), "Macrominer: No zero address");
         minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
         metapoints = IMetaPoints(metapointsAddress);
         minerList = IMinerList(minerListAddress);
@@ -137,10 +131,7 @@ contract Macrominer is Initializable {
         notMiner(msg.sender, nodeType)
         returns (bool)
     {
-        require(
-            msg.value == STAKE_AMOUNT,
-            "Macrominer: You have to stake as required STAKE_AMOUNT"
-        );
+        require(msg.value == STAKE_AMOUNT, "Macrominer: Stake required");
         minerList.addMiner(msg.sender, nodeType);
         return (true);
     }

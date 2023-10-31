@@ -97,26 +97,20 @@ contract TxValidator is Initializable, RolesHandler {
         address minerHealthCheckAddress,
         address minerPoolAddress
     ) external initializer {
-        require(
-            minerListAddress != address(0),
-            "TxValidator: cannot set zero address"
-        );
+        require(minerListAddress != address(0), "TxValidator: No zero address");
         require(
             metaPointsAddress != address(0),
-            "TxValidator: cannot set zero address"
+            "TxValidator: No zero address"
         );
         require(
             minerFormulasAddress != address(0),
-            "TxValidator: cannot set zero address"
+            "TxValidator: No zero address"
         );
         require(
             minerHealthCheckAddress != address(0),
-            "TxValidator: cannot set zero address"
+            "TxValidator: No zero address"
         );
-        require(
-            minerPoolAddress != address(0),
-            "TxValidator: cannot set zero address"
-        );
+        require(minerPoolAddress != address(0), "TxValidator: No zero address");
 
         minerList = IMinerList(minerListAddress);
         metaPoints = IMetaPoints(metaPointsAddress);
@@ -189,17 +183,14 @@ contract TxValidator is Initializable, RolesHandler {
             previousVotes[txHash][voter] != true,
             "TxValidator: Already voted"
         );
-        require(
-            voter != txPayload.handler,
-            "TxValidator: Handler cannot vote for tx"
-        );
+        require(voter != txPayload.handler, "TxValidator: Handler cant vote");
         require(
             minerList.list(voter, nodeType) == true,
-            "TxValidator: Address is not eligible to vote"
+            "TxValidator: Ineligible to vote"
         );
         require(
             nodeType != MinerTypes.NodeType.Meta,
-            "TxValidator: Address is not eligible to vote"
+            "TxValidator: Ineligible to vote"
         );
 
         uint256 votePoint = _calculateVotePoint(voter, nodeType);

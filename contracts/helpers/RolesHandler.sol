@@ -18,7 +18,7 @@ abstract contract RolesHandler {
     modifier onlyOwnerRole(address account) {
         require(
             roles.hasRole(roles.OWNER_ROLE(), account),
-            "RolesHandler: Owner role is needed for this action"
+            "Roles: Owner role needed"
         );
         _;
     }
@@ -30,7 +30,7 @@ abstract contract RolesHandler {
     modifier onlyManagerRole(address account) {
         require(
             roles.hasRole(roles.MANAGER_ROLE(), account),
-            "RolesHandler: Manager role is needed for this action"
+            "Roles: Manager role needed"
         );
         _;
     }
@@ -42,7 +42,7 @@ abstract contract RolesHandler {
     modifier onlyValidatorRole(address account) {
         require(
             roles.hasRole(roles.VALIDATOR_ROLE(), account),
-            "RolesHandler: Validator role is needed for this action"
+            "Roles: Validator role needed"
         );
         _;
     }
@@ -52,10 +52,7 @@ abstract contract RolesHandler {
      * @param rolesAddress The address of the roles contract to be initialized.
      */
     function initRoles(address rolesAddress) external {
-        require(
-            address(roles) == address(0),
-            "RolesHandler: roles already initialiazed"
-        );
+        require(address(roles) == address(0), "Roles: Already initialiazed");
         roles = IRoles(rolesAddress);
     }
 }

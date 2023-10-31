@@ -23,7 +23,7 @@ contract Roles is AccessControl, Initializable {
      * @param ownerAddress The address of the initial owner.
      */
     function initialize(address ownerAddress) external initializer {
-        require(ownerAddress != address(0), "Roles: cannot set zero address");
+        require(ownerAddress != address(0), "Roles: No zero address");
         _grantRole(OWNER_ROLE, ownerAddress);
         _setRoleAdmin(MANAGER_ROLE, OWNER_ROLE);
         _setRoleAdmin(VALIDATOR_ROLE, OWNER_ROLE);

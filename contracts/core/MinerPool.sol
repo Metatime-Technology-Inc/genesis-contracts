@@ -49,7 +49,7 @@ contract MinerPool is Initializable, RolesHandler {
     function initialize(address minerFormulasAddress) external initializer {
         require(
             minerFormulasAddress != address(0),
-            "MinerPool: cannot set zero address"
+            "MinerPool: No zero address"
         );
         minerFormulas = IMinerFormulas(minerFormulasAddress);
     }

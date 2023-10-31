@@ -76,15 +76,15 @@ contract MinerFormulas is Initializable {
     ) external initializer {
         require(
             metaPointsAddress != address(0),
-            "MinerFormulas: cannot set zero address"
+            "MinerFormulas: No zero address"
         );
         require(
             minerListAddress != address(0),
-            "MinerFormulas: cannot set zero address"
+            "MinerFormulas: No zero address"
         );
         require(
             minerHealthCheckAddress != address(0),
-            "MinerFormulas: cannot set zero address"
+            "MinerFormulas: No zero address"
         );
         metaPoints = IMetaPoints(metaPointsAddress);
         minerList = IMinerList(minerListAddress);

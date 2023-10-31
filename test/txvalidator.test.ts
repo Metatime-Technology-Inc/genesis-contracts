@@ -177,7 +177,47 @@ describe("TxValidator", function () {
                     ethers.constants.AddressZero,
                     ethers.constants.AddressZero
                 )
-            ).to.be.revertedWith("TxValidator: cannot set zero address");
+            ).to.be.revertedWith("TxValidator: No zero address");
+
+            await expect(
+                txValidator.connect(owner).initialize(
+                    "0x0000000000000000000000000000000000000001",
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero
+                )
+            ).to.be.revertedWith("TxValidator: No zero address");
+
+            await expect(
+                txValidator.connect(owner).initialize(
+                    "0x0000000000000000000000000000000000000001",
+                    "0x0000000000000000000000000000000000000001",
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero
+                )
+            ).to.be.revertedWith("TxValidator: No zero address");
+
+            await expect(
+                txValidator.connect(owner).initialize(
+                    "0x0000000000000000000000000000000000000001",
+                    "0x0000000000000000000000000000000000000001",
+                    "0x0000000000000000000000000000000000000001",
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero
+                )
+            ).to.be.revertedWith("TxValidator: No zero address");
+
+            await expect(
+                txValidator.connect(owner).initialize(
+                    "0x0000000000000000000000000000000000000001",
+                    "0x0000000000000000000000000000000000000001",
+                    "0x0000000000000000000000000000000000000001",
+                    "0x0000000000000000000000000000000000000001",
+                    ethers.constants.AddressZero
+                )
+            ).to.be.revertedWith("TxValidator: No zero address");
         });
 
         // try addTransaction function when caller dont have required role
@@ -189,7 +229,7 @@ describe("TxValidator", function () {
 
             await expect(
                 txValidator.connect(miner_1).addTransaction(txHash, miner_1.address, reward, macrominerArchiveType)
-            ).to.be.revertedWith("RolesHandler: Manager role is needed for this action");
+            ).to.be.revertedWith("Roles: Manager role needed");
         });
 
         // try addTransaction function when handler is not active
@@ -293,17 +333,25 @@ describe("TxValidator", function () {
             });
             await setMiner.wait();
 
-            // addMiner with manager
-            const setMiner2 = await minerList.connect(manager).addMiner(miner_2.address, metaminerType);
-            await setMiner2.wait();
-
             // addTransaction
             const addTransaction = await txValidator.connect(manager).addTransaction(txHash, miner_1.address, reward, macrominerArchiveType);
             await addTransaction.wait();
 
+            // addMiner with manager
+            const setMiner2 = await minerList.connect(manager).addMiner(miner_2.address, metaminerType);
+            await setMiner2.wait();
+
             await expect(
                 txValidator.connect(miner_2).voteTransaction(txHash, true, metaminerType)
-            ).to.be.revertedWith("TxValidator: Address is not eligible to vote");
+            ).to.be.revertedWith("TxValidator: Ineligible to vote");
+
+            // deleteMiner with manager
+            const deleteMiner = await minerList.connect(manager).deleteMiner(miner_2.address, metaminerType);
+            await deleteMiner.wait();
+
+            await expect(
+                txValidator.connect(miner_2).voteTransaction(txHash, true, metaminerType)
+            ).to.be.revertedWith("TxValidator: Ineligible to vote");
         });
 
         // try voteTransaction function when txHash is not exist
@@ -387,7 +435,7 @@ describe("TxValidator", function () {
 
             await expect(
                 txValidator.connect(miner_1).voteTransaction(txHash, true, macrominerArchiveType)
-            ).to.be.revertedWith("TxValidator: Handler cannot vote for tx");
+            ).to.be.revertedWith("TxValidator: Handler cant vote");
         });
 
         // try voteTransaction function when tx already voted

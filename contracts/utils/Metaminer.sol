@@ -68,7 +68,7 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
     modifier isMiner(address miner) {
         require(
             minerList.isMiner(miner, MinerTypes.NodeType.Meta),
-            "Metaminer: Address is not metaminer"
+            "Metaminer: Address not metaminer"
         );
         _;
     }
@@ -80,7 +80,7 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
     modifier validMinerSubscription(address miner) {
         require(
             minerSubscription[miner] > block.timestamp,
-            "Metaminer: Miner subscription is not as required"
+            "Metaminer: Invalid subscription"
         );
         _;
     }
@@ -106,20 +106,14 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
     ) external initializer {
         require(
             blockValidatorAddress != address(0),
-            "Metaminer: cannot set zero address"
+            "Metaminer: No zero address"
         );
-        require(
-            minerListAddress != address(0),
-            "Metaminer: cannot set zero address"
-        );
+        require(minerListAddress != address(0), "Metaminer: No zero address");
         require(
             minerFormulasAddress != address(0),
-            "Metaminer: cannot set zero address"
+            "Metaminer: No zero address"
         );
-        require(
-            minerPoolAddress != address(0),
-            "Metaminer: cannot set zero address"
-        );
+        require(minerPoolAddress != address(0), "Metaminer: No zero address");
         blockValidator = IBlockValidator(blockValidatorAddress);
         minerList = IMinerList(minerListAddress);
         minerFormulas = IMinerFormulas(minerFormulasAddress);
@@ -134,7 +128,7 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
     function setMiner() external payable returns (bool) {
         require(
             msg.value == (ANNUAL_AMOUNT + STAKE_AMOUNT),
-            "Metaminer: Required MTC is not sent"
+            "Metaminer: Missing required MTC"
         );
         shares[msg.sender] = Share(0, 0, true);
         minerSubscription[msg.sender] = _nextYear(msg.sender);
@@ -155,10 +149,7 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
      * @return A boolean indicating whether the operation was successful.
      */
     function subscribe() external payable isMiner(msg.sender) returns (bool) {
-        require(
-            msg.value == ANNUAL_AMOUNT,
-            "Metaminer: Required MTC was not sent"
-        );
+        require(msg.value == ANNUAL_AMOUNT, "Metaminer: Missing required MTC");
         minerSubscription[msg.sender] = _nextYear(msg.sender);
         _burn(ANNUAL_AMOUNT);
         emit MinerSubscribe(msg.sender, minerSubscription[msg.sender]);
@@ -187,10 +178,7 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
     function setValidator(
         address validator
     ) external onlyOwnerRole(msg.sender) returns (bool) {
-        require(
-            validator != address(0),
-            "Metaminer: Validator cannot be zero address"
-        );
+        require(validator != address(0), "Metaminer: No zero validator");
         shares[validator] = Share(0, 0, false);
         minerSubscription[validator] = _nextYear(validator);
         minerList.addMiner(validator, MinerTypes.NodeType.Meta);
@@ -233,17 +221,11 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
             uint256 percentage = percentages[i];
             uint256 nextPercent = share.sharedPercent + percentage;
 
-            require(
-                addr != address(0),
-                "Metaminer: Shareholder cannot set zero address"
-            );
-            require(
-                percentage != 0,
-                "Metaminer: Shareholder percentage cannot be zero"
-            );
+            require(addr != address(0), "Metaminer: No zero shareholder");
+            require(percentage != 0, "Metaminer: Non-zero % holder");
             require(
                 nextPercent <= minerFormulas.BASE_DIVIDER(),
-                "Metaminer: Total percent cannot exceed 100"
+                "Metaminer: Max 100% total share"
             );
 
             _addShareHolder(miner, addr, percentage);

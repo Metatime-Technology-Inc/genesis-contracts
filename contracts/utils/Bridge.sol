@@ -21,7 +21,7 @@ contract Bridge is Blacklistable, Freezeable {
      * @param tokenAddress The address of the token to be bridged.
      */
     constructor(address tokenAddress) {
-        require(tokenAddress != address(0), "Bridge: cannot set zero address");
+        require(tokenAddress != address(0), "Bridge: No zero address");
         bridgeToken = IERC20(tokenAddress);
     }
 
@@ -36,7 +36,7 @@ contract Bridge is Blacklistable, Freezeable {
         returns (bool)
     {
         uint256 balance = bridgeToken.balanceOf(msg.sender);
-        require(balance != 0, "Bridge: Address dont have balance");
+        require(balance != 0, "Bridge: Insufficient balance");
 
         bridgeToken.burnFrom(msg.sender, balance);
         emit BridgeTransfer(msg.sender, balance);

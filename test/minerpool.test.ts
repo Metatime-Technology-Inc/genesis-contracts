@@ -131,7 +131,7 @@ describe("MinerPool", function () {
     
             await expect(
                 minerPool.connect(owner).initialize(ethers.constants.AddressZero)
-            ).to.be.revertedWith("MinerPool: cannot set zero address");
+            ).to.be.revertedWith("MinerPool: No zero address");
         });
 
         // try claimTxReward function when contract dont have enough funds

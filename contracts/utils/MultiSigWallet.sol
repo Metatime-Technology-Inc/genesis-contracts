@@ -101,12 +101,9 @@ contract MultiSigWallet is Initializable {
         require(_owners.length != 0, "owners required");
         require(
             _numConfirmationsRequired <= _owners.length,
-            "invalid number of required confirmations"
+            "Invalid confirmations number"
         );
-        require(
-            _numConfirmationsRequired != 0,
-            "invalid number of required confirmations"
-        );
+        require(_numConfirmationsRequired != 0, "Invalid confirmations number");
 
         for (uint i = 0; i < _owners.length; i++) {
             address owner = _owners[i];

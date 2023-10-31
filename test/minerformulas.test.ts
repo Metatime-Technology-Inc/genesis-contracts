@@ -154,7 +154,23 @@ describe("MinerFormulas", function () {
                     ethers.constants.AddressZero,
                     ethers.constants.AddressZero
                 )
-            ).to.be.revertedWith("MinerFormulas: cannot set zero address");
+            ).to.be.revertedWith("MinerFormulas: No zero address");
+    
+            await expect(
+                minerFormulas.connect(owner).initialize(
+                    "0x0000000000000000000000000000000000000001",
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero
+                )
+            ).to.be.revertedWith("MinerFormulas: No zero address");
+    
+            await expect(
+                minerFormulas.connect(owner).initialize(
+                    "0x0000000000000000000000000000000000000001",
+                    "0x0000000000000000000000000000000000000001",
+                    ethers.constants.AddressZero
+                )
+            ).to.be.revertedWith("MinerFormulas: No zero address");
         });
 
         // try calculateDailyPoolRewardsFromFirstFormula function with wrong nodeType

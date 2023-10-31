@@ -39,7 +39,7 @@ contract RewardsPool is Initializable, RolesHandler {
     function initialize(address minerFormulasAddress) external initializer {
         require(
             minerFormulasAddress != address(0),
-            "RewardsPool: cannot set zero address"
+            "RewardsPool: No zero address"
         );
         minerFormulas = IMinerFormulas(minerFormulasAddress);
     }

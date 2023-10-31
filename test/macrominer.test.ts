@@ -186,7 +186,25 @@ describe("MacroMiner", function () {
             ethers.constants.AddressZero,
             ethers.constants.AddressZero
           )
-      ).revertedWith("Macrominer: cannot set zero address");
+      ).revertedWith("Macrominer: No zero address");
+      await expect(
+        macroMiner
+          .connect(owner)
+          .initialize(
+            "0x0000000000000000000000000000000000000001",
+            ethers.constants.AddressZero,
+            ethers.constants.AddressZero
+          )
+      ).revertedWith("Macrominer: No zero address");
+      await expect(
+        macroMiner
+          .connect(owner)
+          .initialize(
+            "0x0000000000000000000000000000000000000001",
+            "0x0000000000000000000000000000000000000001",
+            ethers.constants.AddressZero
+          )
+      ).revertedWith("Macrominer: No zero address");
     });
 
     // try setMiner function when caller dont have enough funds
@@ -199,7 +217,7 @@ describe("MacroMiner", function () {
       await expect(
         macroMiner.connect(miner_1).setMiner(macrominerArchiveType)
       ).to.be.revertedWith(
-        "Macrominer: You have to stake as required STAKE_AMOUNT"
+        "Macrominer: Stake required"
       );
     });
 
@@ -222,7 +240,7 @@ describe("MacroMiner", function () {
 
       await expect(
         macroMiner.connect(miner_1).setMiner(macrominerArchiveType)
-      ).to.be.revertedWith("Macrominer: Address is already macrominer");
+      ).to.be.revertedWith("Macrominer: Already macrominer");
     });
 
     // try setMiner function when nodeType is wrong
@@ -272,7 +290,7 @@ describe("MacroMiner", function () {
             macrominerArchiveType,
             macrominerArchiveType
           )
-      ).to.be.revertedWith("Macrominer: Address is not macrominer");
+      ).to.be.revertedWith("Macrominer: Not a macrominer");
     });
 
     // try checkMinerStatus function when voted is not a miner
@@ -302,7 +320,7 @@ describe("MacroMiner", function () {
             macrominerArchiveType,
             macrominerArchiveType
           )
-      ).to.be.revertedWith("Macrominer: Address is not macrominer");
+      ).to.be.revertedWith("Macrominer: Not a macrominer");
     });
 
     // try checkMinerStatus function when voted miner is not expired

@@ -18,7 +18,7 @@ abstract contract Freezeable is RolesHandler {
      * @dev Modifier to check if the contract is not freezed.
      */
     modifier isFreezed() {
-        require(freezeStatus == true, "Freezeable: Contract is not freezed");
+        require(freezeStatus == true, "Freezeable: Contract not freezed");
         _;
     }
 

@@ -39,7 +39,7 @@ describe("Bridge", function () {
     const { owner } = await loadFixture(initiateVariables);
 
     const Bridge2 = await ethers.getContractFactory(CONTRACTS.utils.Bridge);
-    await expect(Bridge2.connect(owner).deploy(ethers.constants.AddressZero)).revertedWith("Bridge: cannot set zero address");
+    await expect(Bridge2.connect(owner).deploy(ethers.constants.AddressZero)).revertedWith("Bridge: No zero address");
   }); 
 
   // test Bridge
@@ -73,7 +73,7 @@ describe("Bridge", function () {
       await bridge.connect(owner).setBlacklist(user.address, true);
 
       await expect(bridge.connect(user).bridge()).to.be.revertedWith(
-        "Blacklistable: Wallet is blacklisted"
+        "Blacklistable: Wallet is banned"
       );
     });
 
@@ -87,7 +87,7 @@ describe("Bridge", function () {
       await bridge.connect(owner).setFreeze(false);
 
       await expect(bridge.connect(user).bridge()).to.be.revertedWith(
-        "Bridge: Address dont have balance"
+        "Bridge: Insufficient balance"
       );
     });
 
@@ -131,7 +131,7 @@ describe("Bridge", function () {
 
       await expect(
         bridge.connect(owner).initRoles(roles.address)
-      ).to.be.revertedWith("RolesHandler: roles already initialiazed");
+      ).to.be.revertedWith("Roles: Already initialiazed");
     });
   });
 });

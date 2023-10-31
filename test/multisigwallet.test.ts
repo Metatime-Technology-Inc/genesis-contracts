@@ -61,12 +61,12 @@ describe("MultiSigWallet", function () {
         multisigwallet
           .connect(owner_1)
           .initialize([owner_1.address, owner_2.address, owner_3.address], 0)
-      ).revertedWith("invalid number of required confirmations");
+      ).revertedWith("Invalid confirmations number");
       await expect(
         multisigwallet
           .connect(owner_1)
           .initialize([owner_1.address, owner_2.address, owner_3.address], 4)
-      ).revertedWith("invalid number of required confirmations");
+      ).revertedWith("Invalid confirmations number");
       await expect(
         multisigwallet
           .connect(owner_1)

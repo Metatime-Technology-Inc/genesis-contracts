@@ -37,7 +37,7 @@ contract MinerList is Initializable, RolesHandler {
     function initialize(address minerHealthCheckAddress) external initializer {
         require(
             minerHealthCheckAddress != address(0),
-            "MinerList: cannot set zero address"
+            "MinerList: No zero address"
         );
         minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
     }

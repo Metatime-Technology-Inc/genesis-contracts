@@ -51,7 +51,7 @@ contract BlockValidator is Initializable, RolesHandler {
     function initialize(address rewardsPoolAddress) external initializer {
         require(
             rewardsPoolAddress != address(0),
-            "BlockValidator: cannot set zero address"
+            "BlockValidator: No zero address"
         );
         rewardsPool = IRewardsPool(rewardsPoolAddress);
     }
@@ -68,15 +68,15 @@ contract BlockValidator is Initializable, RolesHandler {
     ) external onlyValidatorRole(msg.sender) returns (bool) {
         require(
             blockPayloads[blockNumber].coinbase == address(0),
-            "BlockValidator: Unable to set block payload"
+            "BlockValidator: Payload issue"
         );
         require(
             blockhash(blockNumber) == blockPayload.blockHash,
-            "BlockValidator: Mismatched block hash"
+            "BlockValidator: Hash mismatch"
         );
         require(
             blockPayload.isFinalized == false,
-            "BlockValidator: Block finalized before"
+            "BlockValidator: Block finalized"
         );
         blockPayloads[blockNumber] = blockPayload;
         emit SetPayload(blockNumber);
@@ -94,7 +94,7 @@ contract BlockValidator is Initializable, RolesHandler {
         BlockPayload storage payload = blockPayloads[blockNumber];
         require(
             payload.coinbase != address(0),
-            "BlockValidator: Unable to finalize block"
+            "BlockValidator: Can't finalize"
         );
 
         payload.isFinalized = true;
