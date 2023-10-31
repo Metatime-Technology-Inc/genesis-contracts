@@ -2,6 +2,7 @@
 pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "../helpers/RolesHandler.sol";
 import "../interfaces/IRewardsPool.sol";
@@ -11,7 +12,7 @@ import "../libs/MinerTypes.sol";
  * @title BlockValidator
  * @dev A smart contract for validating and finalizing blocks.
  */
-contract BlockValidator is Initializable, RolesHandler {
+contract BlockValidator is Initializable, RolesHandler, ReentrancyGuard {
     /// @notice a struct contains block credentials
     struct BlockPayload {
         address coinbase; // miner address of block
@@ -90,7 +91,7 @@ contract BlockValidator is Initializable, RolesHandler {
      */
     function finalizeBlock(
         uint256 blockNumber
-    ) external onlyManagerRole(msg.sender) {
+    ) external onlyManagerRole(msg.sender) nonReentrant {
         BlockPayload storage payload = blockPayloads[blockNumber];
         require(
             payload.coinbase != address(0),

@@ -1121,7 +1121,7 @@ describe("MacroMiner", function () {
 
       const slotOfTotalRewardsFromFirstFormula =
         getSlotOfTotalRewardsFromFirstFormula(
-          BigNumber.from(3),
+          BigNumber.from(4),
           date,
           BigNumber.from(2)
         );
@@ -1137,7 +1137,7 @@ describe("MacroMiner", function () {
 
       const slotOfTotalRewardsFromFirstFormula2 =
         getSlotOfTotalRewardsFromFirstFormula(
-          BigNumber.from(3),
+          BigNumber.from(4),
           date.add(1),
           BigNumber.from(2)
         );
@@ -1153,7 +1153,7 @@ describe("MacroMiner", function () {
 
       const slotOfTotalRewardsFromSecondFormula =
         getSlotOfTotalRewardsFromFirstFormula(
-          BigNumber.from(4),
+          BigNumber.from(5),
           date,
           BigNumber.from(2)
         );
@@ -1168,7 +1168,7 @@ describe("MacroMiner", function () {
       ]);
       const slotOfTotalRewardsFromSecondFormula2 =
         getSlotOfTotalRewardsFromFirstFormula(
-          BigNumber.from(4),
+          BigNumber.from(5),
           date.add(1),
           BigNumber.from(2)
         );

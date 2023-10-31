@@ -2,6 +2,7 @@
 pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "../helpers/RolesHandler.sol";
 import "../interfaces/IMinerFormulas.sol";
@@ -13,7 +14,7 @@ import "../interfaces/IMinerList.sol";
  * @dev This contract facilitates the reward distribution to miners for
  * their participation in different miner node types.
  */
-contract MinerPool is Initializable, RolesHandler {
+contract MinerPool is Initializable, RolesHandler, ReentrancyGuard {
     /// @notice This variable represents a contract instance of IMinerFormulas, which is used to access miner formulas.
     IMinerFormulas public minerFormulas;
     /// @notice This mapping stores the claimed amounts for each address.
@@ -65,7 +66,12 @@ contract MinerPool is Initializable, RolesHandler {
         address receiver,
         MinerTypes.NodeType nodeType,
         uint256 activityTime
-    ) external onlyManagerRole(msg.sender) returns (uint256, uint256) {
+    )
+        external
+        onlyManagerRole(msg.sender)
+        nonReentrant
+        returns (uint256, uint256)
+    {
         (uint256 firstAmount, uint256 secondAmount) = _calculateClaimableAmount(
             receiver,
             nodeType,
@@ -99,7 +105,7 @@ contract MinerPool is Initializable, RolesHandler {
     function claimTxReward(
         address receiver,
         uint256 amount
-    ) external onlyManagerRole(msg.sender) {
+    ) external onlyManagerRole(msg.sender) nonReentrant {
         (bool sent, ) = receiver.call{value: amount}("");
         emit HasClaimed(receiver, amount, "TX_REWARD");
         require(sent, "MinerPool: Unable to send");

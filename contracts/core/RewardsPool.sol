@@ -2,6 +2,7 @@
 pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "../helpers/RolesHandler.sol";
 import "../interfaces/IMinerFormulas.sol";
@@ -13,7 +14,7 @@ import "../interfaces/IMinerList.sol";
  * @dev A contract for distributing tokens over a specified period of
  * time for mining purposes.
  */
-contract RewardsPool is Initializable, RolesHandler {
+contract RewardsPool is Initializable, RolesHandler, ReentrancyGuard {
     /// @notice MinerFormulas instance address
     IMinerFormulas public minerFormulas;
     /// @notice a mapping that holds claimed amounts for each participant
@@ -50,7 +51,7 @@ contract RewardsPool is Initializable, RolesHandler {
      */
     function claim(
         address receiver
-    ) external onlyManagerRole(msg.sender) returns (uint256) {
+    ) external onlyManagerRole(msg.sender) nonReentrant returns (uint256) {
         uint256 amount = calculateClaimableAmount();
 
         claimedAmounts[receiver] += amount;

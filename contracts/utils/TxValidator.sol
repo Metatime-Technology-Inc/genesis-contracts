@@ -2,6 +2,7 @@
 pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "../helpers/RolesHandler.sol";
 import "../interfaces/IMinerList.sol";
@@ -16,7 +17,7 @@ import "../libs/MinerTypes.sol";
  * @dev Contract for validating transactions and managing votes on transactions.
  */
 // A long time ago in a galaxy far, far away!
-contract TxValidator is Initializable, RolesHandler {
+contract TxValidator is Initializable, RolesHandler, ReentrancyGuard {
     /// @notice Struct to represent a vote
     struct Vote {
         MinerTypes.NodeType nodeType; // Type of miner node associated with the voter
@@ -164,7 +165,7 @@ contract TxValidator is Initializable, RolesHandler {
         bytes32 txHash,
         bool decision,
         MinerTypes.NodeType nodeType
-    ) external returns (bool) {
+    ) external nonReentrant returns (bool) {
         bool isAlive = minerHealthCheck.status(msg.sender, nodeType);
         require(isAlive, "TxValidator: Activity is not as expected");
         TxPayload storage txPayload = txPayloads[txHash];
@@ -314,16 +315,16 @@ contract TxValidator is Initializable, RolesHandler {
 
             uint256 handlerReward = txReward /
                 (minerFormulas.BASE_DIVIDER() / HANDLER_PERCENT);
+            uint256 voteReward = (txReward - handlerReward);
             if (decision) {
-                uint256 voteReward = (txReward - handlerReward) /
-                    trueVotersLength;
+                voteReward /= trueVotersLength;
                 minerPool.claimTxReward(txPayload.handler, handlerReward);
                 for (uint256 i = 0; i < trueVotersLength; i++) {
                     address trueVoter = trueVoters[i];
                     minerPool.claimTxReward(trueVoter, voteReward);
                 }
             } else {
-                uint256 voteReward = txReward / falseVotersLength;
+                voteReward /= falseVotersLength;
                 for (uint256 i = 0; i < falseVotersLength; i++) {
                     address falseVoter = falseVoters[i];
                     minerPool.claimTxReward(falseVoter, voteReward);
