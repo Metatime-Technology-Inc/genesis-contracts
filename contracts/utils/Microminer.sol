@@ -32,7 +32,7 @@ contract Microminer is Initializable, RolesHandler {
     modifier isMiner(address miner) {
         require(
             minerList.isMiner(miner, MinerTypes.NodeType.Micro),
-            "Microminer: Address is not microminer"
+            "Microminer: Not a microminer"
         );
         _;
     }
@@ -44,7 +44,7 @@ contract Microminer is Initializable, RolesHandler {
     modifier notMiner(address miner) {
         require(
             !minerList.isMiner(miner, MinerTypes.NodeType.Micro),
-            "Microminer: Address is already microminer"
+            "Microminer: Already microminer"
         );
         _;
     }
@@ -66,11 +66,11 @@ contract Microminer is Initializable, RolesHandler {
         address minerListAddress
     ) external initializer {
         require(
-            minerHealthCheckAddress != address(0) &&
-                metapointsAddress != address(0) &&
-                minerListAddress != address(0),
-            "Microminer: cannot set zero address"
+            minerHealthCheckAddress != address(0),
+            "Microminer: No zero address"
         );
+        require(metapointsAddress != address(0), "Microminer: No zero address");
+        require(minerListAddress != address(0), "Microminer: No zero address");
         minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
         metapoints = IMetaPoints(metapointsAddress);
         minerList = IMinerList(minerListAddress);
@@ -81,10 +81,7 @@ contract Microminer is Initializable, RolesHandler {
      * @return A boolean indicating whether the operation was successful.
      */
     function setMiner() external payable notMiner(msg.sender) returns (bool) {
-        require(
-            msg.value == STAKE_AMOUNT,
-            "Microminer: You have to stake as required STAKE_AMOUNT"
-        );
+        require(msg.value == STAKE_AMOUNT, "Microminer: Stake required");
         minerList.addMiner(msg.sender, MinerTypes.NodeType.Micro);
         return (true);
     }

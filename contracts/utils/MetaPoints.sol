@@ -120,18 +120,4 @@ contract MetaPoints is
     ) public virtual override returns (bool) {
         revert TransferFromDisabled(from, to, amount);
     }
-
-    /**
-     * @dev Hook called before any token transfer to ensure that the token is not paused.
-     * @param from The address from which tokens are transferred.
-     * @param to The address to which tokens are transferred.
-     * @param amount The amount of tokens to transfer.
-     */
-    function _beforeTokenTransfer(
-        address from,
-        address to,
-        uint256 amount
-    ) internal override whenNotPaused {
-        super._beforeTokenTransfer(from, to, amount);
-    }
 }

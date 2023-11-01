@@ -2,6 +2,7 @@
 pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "../helpers/RolesHandler.sol";
 import "../interfaces/IRewardsPool.sol";
@@ -11,7 +12,7 @@ import "../libs/MinerTypes.sol";
  * @title BlockValidator
  * @dev A smart contract for validating and finalizing blocks.
  */
-contract BlockValidator is Initializable, RolesHandler {
+contract BlockValidator is Initializable, RolesHandler, ReentrancyGuard {
     /// @notice a struct contains block credentials
     struct BlockPayload {
         address coinbase; // miner address of block
@@ -27,7 +28,7 @@ contract BlockValidator is Initializable, RolesHandler {
     /// @notice RewardsPool instance address
     IRewardsPool public rewardsPool;
     /// @notice last finalized block id
-    uint8 private _finalizedBlockId = 0;
+    uint8 private _finalizedBlockId;
 
     /// @notice a mapping that holds block payloads
     mapping(uint256 => BlockPayload) public blockPayloads;
@@ -51,7 +52,7 @@ contract BlockValidator is Initializable, RolesHandler {
     function initialize(address rewardsPoolAddress) external initializer {
         require(
             rewardsPoolAddress != address(0),
-            "BlockValidator: cannot set zero address"
+            "BlockValidator: No zero address"
         );
         rewardsPool = IRewardsPool(rewardsPoolAddress);
     }
@@ -68,15 +69,15 @@ contract BlockValidator is Initializable, RolesHandler {
     ) external onlyValidatorRole(msg.sender) returns (bool) {
         require(
             blockPayloads[blockNumber].coinbase == address(0),
-            "BlockValidator: Unable to set block payload"
+            "BlockValidator: Payload issue"
         );
         require(
             blockhash(blockNumber) == blockPayload.blockHash,
-            "BlockValidator: Mismatched block hash"
+            "BlockValidator: Hash mismatch"
         );
         require(
             blockPayload.isFinalized == false,
-            "BlockValidator: Block finalized before"
+            "BlockValidator: Block finalized"
         );
         blockPayloads[blockNumber] = blockPayload;
         emit SetPayload(blockNumber);
@@ -90,18 +91,17 @@ contract BlockValidator is Initializable, RolesHandler {
      */
     function finalizeBlock(
         uint256 blockNumber
-    ) external onlyManagerRole(msg.sender) {
+    ) external onlyManagerRole(msg.sender) nonReentrant {
         BlockPayload storage payload = blockPayloads[blockNumber];
         require(
             payload.coinbase != address(0),
-            "BlockValidator: Unable to finalize block"
+            "BlockValidator: Can't finalize"
         );
 
         payload.isFinalized = true;
 
         if (_finalizedBlockId == DELAY_LIMIT) {
-            uint8 i = 0;
-            for (i; i < DELAY_LIMIT; i++) {
+            for (uint8 i; i < DELAY_LIMIT; i++) {
                 BlockPayload memory bp = blockPayloads[
                     lastFinalizedBlockNumbers[i]
                 ];

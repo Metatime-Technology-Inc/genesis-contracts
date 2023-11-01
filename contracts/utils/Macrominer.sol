@@ -35,6 +35,8 @@ contract Macrominer is Initializable {
 
     /// @notice Mapping to store votes for each miner and node type.
     mapping(address => mapping(MinerTypes.NodeType => Vote)) public votes;
+    /// @notice Mapping to keep track of whether an address has voted for a miner
+    mapping(uint256 => mapping(address => bool)) public previousVotes;
 
     /// @notice voting begun
     event BeginVote(
@@ -62,7 +64,7 @@ contract Macrominer is Initializable {
     modifier isMiner(address miner, MinerTypes.NodeType nodeType) {
         require(
             minerList.isMiner(miner, nodeType),
-            "Macrominer: Address is not macrominer"
+            "Macrominer: Not a macrominer"
         );
         _;
     }
@@ -73,7 +75,7 @@ contract Macrominer is Initializable {
     modifier notMiner(address miner, MinerTypes.NodeType nodeType) {
         require(
             !minerList.isMiner(miner, nodeType),
-            "Macrominer: Address is already macrominer"
+            "Macrominer: Already macrominer"
         );
         _;
     }
@@ -107,11 +109,11 @@ contract Macrominer is Initializable {
         address minerListAddress
     ) external initializer {
         require(
-            minerHealthCheckAddress != address(0) &&
-                metapointsAddress != address(0) &&
-                minerListAddress != address(0),
-            "Macrominer: cannot set zero address"
+            minerHealthCheckAddress != address(0),
+            "Macrominer: No zero address"
         );
+        require(metapointsAddress != address(0), "Macrominer: No zero address");
+        require(minerListAddress != address(0), "Macrominer: No zero address");
         minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
         metapoints = IMetaPoints(metapointsAddress);
         minerList = IMinerList(minerListAddress);
@@ -131,10 +133,7 @@ contract Macrominer is Initializable {
         notMiner(msg.sender, nodeType)
         returns (bool)
     {
-        require(
-            msg.value == STAKE_AMOUNT,
-            "Macrominer: You have to stake as required STAKE_AMOUNT"
-        );
+        require(msg.value == STAKE_AMOUNT, "Macrominer: Stake required");
         minerList.addMiner(msg.sender, nodeType);
         return (true);
     }
@@ -173,8 +172,13 @@ contract Macrominer is Initializable {
         }
 
         Vote storage vote = votes[votedMinerAddress][votedMinerNodeType];
+        require(
+            previousVotes[vote.voteId][msg.sender] != true,
+            "Macrominer: Already voted"
+        );
 
         if (isAlive == false) {
+            previousVotes[vote.voteId][msg.sender] = true;
             if (mpBalance + vote.point >= VOTE_POINT_LIMIT) {
                 // If enough votes have been collected, kick the miner.
                 _kickMiner(votedMinerAddress, votedMinerNodeType);

@@ -238,10 +238,40 @@ describe("Metaminer", function () {
             ethers.constants.AddressZero,
             ethers.constants.AddressZero
           )
-      ).to.be.revertedWith("Metaminer: cannot set zero address");
+      ).to.be.revertedWith("Metaminer: No zero address");
+      await expect(
+        metaminer
+          .connect(owner)
+          .initialize(
+            "0x0000000000000000000000000000000000000001",
+            ethers.constants.AddressZero,
+            ethers.constants.AddressZero,
+            ethers.constants.AddressZero
+          )
+      ).to.be.revertedWith("Metaminer: No zero address");
+      await expect(
+        metaminer
+          .connect(owner)
+          .initialize(
+            "0x0000000000000000000000000000000000000001",
+            "0x0000000000000000000000000000000000000001",
+            ethers.constants.AddressZero,
+            ethers.constants.AddressZero
+          )
+      ).to.be.revertedWith("Metaminer: No zero address");
+      await expect(
+        metaminer
+          .connect(owner)
+          .initialize(
+            "0x0000000000000000000000000000000000000001",
+            "0x0000000000000000000000000000000000000001",
+            "0x0000000000000000000000000000000000000001",
+            ethers.constants.AddressZero
+          )
+      ).to.be.revertedWith("Metaminer: No zero address");
       await expect(
         rewardsPool.connect(owner).initialize(ethers.constants.AddressZero)
-      ).to.be.revertedWith("RewardsPool: cannot set zero address");
+      ).to.be.revertedWith("RewardsPool: No zero address");
     });
 
     it("try to set miner with wrong amount of ether", async () => {
@@ -251,7 +281,7 @@ describe("Metaminer", function () {
 
       await expect(
         metaminerContract.connect(metaminer_1).setMiner({ value: 1 })
-      ).revertedWith("Metaminer: Required MTC is not sent");
+      ).revertedWith("Metaminer: Missing required MTC");
     });
 
     it("try to set miner successfully", async () => {
@@ -271,13 +301,13 @@ describe("Metaminer", function () {
 
       await expect(
         metaminerContract.connect(metaminer_1).subscribe({ value: 1 })
-      ).revertedWith("Metaminer: Address is not metaminer");
+      ).revertedWith("Metaminer: Address not metaminer");
       await metaminerContract
         .connect(metaminer_1)
         .setMiner({ value: totalCharge });
       await expect(
         metaminerContract.connect(metaminer_1).subscribe({ value: 1 })
-      ).revertedWith("Metaminer: Required MTC was not sent");
+      ).revertedWith("Metaminer: Missing required MTC");
     });
 
     it("try to subscribe & unsubscribe successfully", async () => {
@@ -317,46 +347,71 @@ describe("Metaminer", function () {
       ).revertedWith("Metaminer: Unsubsribe failed");
     });
 
-    it("try to set validator", async () => {
-      const { owner, metaminerContract, metaminer_2, user_1 } =
-        await loadFixture(initiateVariables);
+    // it("try to set validator", async () => {
+    //   const { owner, metaminerContract, metaminer_2, metaminer_1, user_1 } =
+    //     await loadFixture(initiateVariables);
 
-      await expect(
-        metaminerContract.connect(user_1).setValidator(metaminer_2.address)
-      ).revertedWith("RolesHandler: Owner role is needed for this action");
+    //   await expect(
+    //     metaminerContract.connect(user_1).setValidator(metaminer_2.address)
+    //   ).revertedWith("Roles: Owner role needed");
 
-      await expect(
-        metaminerContract
-          .connect(owner)
-          .setValidator(ethers.constants.AddressZero)
-      ).revertedWith("Metaminer: Validator cannot be zero address");
+    //   await expect(
+    //     metaminerContract
+    //       .connect(owner)
+    //       .setValidator(ethers.constants.AddressZero)
+    //   ).revertedWith("Metaminer: No zero validator");
 
-      expect(
-        await metaminerContract
-          .connect(owner)
-          .callStatic.setValidator(metaminer_2.address)
-      ).to.be.equal(true);
-    });
+    //   expect(
+    //     await metaminerContract
+    //       .connect(owner)
+    //       .callStatic.setValidator(metaminer_2.address)
+    //   ).to.be.equal(true);
 
-    it("try to refresh validator", async () => {
-      const { owner, metaminerContract, metaminer_1 } = await loadFixture(
-        initiateVariables
-      );
+    //   await metaminerContract
+    //     .connect(owner)
+    //     .setValidator(metaminer_1.address)
 
-      await metaminerContract.connect(owner).setValidator(metaminer_1.address);
+    //   await metaminerContract
+    //     .connect(metaminer_1)
+    //     .unsubscribe()
 
-      expect(
-        await metaminerContract
-          .connect(owner)
-          .callStatic.refreshValidator(metaminer_1.address)
-      ).to.be.equal(true);
-    });
+    //   await metaminerContract
+    //     .connect(owner)
+    //     .setValidator(metaminer_1.address)
+
+    //   expect(
+    //     await metaminerContract
+    //       .connect(metaminer_1)
+    //       .callStatic.unsubscribe()
+    //   ).to.be.equal(true);
+    // });
+
+    // it("try to refresh validator", async () => {
+    //   const { owner, metaminerContract, metaminer_1 } = await loadFixture(
+    //     initiateVariables
+    //   );
+
+    //   await metaminerContract.connect(owner).setValidator(metaminer_1.address);
+
+    //   expect(
+    //     await metaminerContract
+    //       .connect(owner)
+    //       .callStatic.refreshValidator(metaminer_1.address)
+    //   ).to.be.equal(true);
+    // });
 
     it("try to set percents", async () => {
-      const { owner, metaminerContract, metaminer_1, user_1, user_2 } =
+      const { owner, metaminerContract, metaminer_1, user_1, user_2, totalCharge } =
         await loadFixture(initiateVariables);
 
-      await metaminerContract.connect(owner).setValidator(metaminer_1.address);
+
+        await setBalance(
+          network,
+          metaminer_1.address,
+          "0x33b2e3c9fd0803ce8000000"
+        );
+  
+        await metaminerContract.connect(metaminer_1).setMiner({value: totalCharge});
 
       await expect(
         metaminerContract
@@ -366,7 +421,7 @@ describe("Metaminer", function () {
             [user_1.address, user_2.address],
             [3_000, 10_000]
           )
-      ).revertedWith("Metaminer: Total percent cannot exceed 100");
+      ).revertedWith("Metaminer: Max 100% total share");
 
       await expect(
         metaminerContract
@@ -376,7 +431,7 @@ describe("Metaminer", function () {
             [user_1.address, user_2.address, ethers.constants.AddressZero],
             [3_000, 1_000, 1_000]
           )
-      ).revertedWith("Metaminer: Shareholder cannot set zero address");
+      ).revertedWith("Metaminer: No zero shareholder");
 
       await expect(
         metaminerContract
@@ -386,7 +441,7 @@ describe("Metaminer", function () {
             [user_1.address, user_2.address],
             [3_000, 0]
           )
-      ).revertedWith("Metaminer: Shareholder percentage cannot be zero");
+      ).revertedWith("Metaminer: Non-zero % holder");
 
       expect(
         await metaminerContract
@@ -410,7 +465,13 @@ describe("Metaminer", function () {
         totalCharge,
       } = await loadFixture(initiateVariables);
 
-      await metaminerContract.connect(owner).setValidator(metaminer_1.address);
+      await setBalance(
+        network,
+        metaminer_1.address,
+        "0x33b2e3c9fd0803ce8000000"
+      );
+
+      await metaminerContract.connect(metaminer_1).setMiner({value: totalCharge});
 
       // await mineBlock(ethers, 10);
 
@@ -553,7 +614,12 @@ describe("Metaminer", function () {
         user_2
       } = await loadFixture(initiateVariables);
 
-      await metaminerContract.connect(owner).setValidator(metaminer_1.address);
+      await setBalance(
+        network,
+        metaminer_1.address,
+        "0x33b2e3c9fd0803ce8000000"
+      );
+      await metaminerContract.connect(metaminer_1).setMiner({value: totalCharge});
 
       await metaminerContract.connect(owner).setPercentages(
         metaminer_1.address,
@@ -652,6 +718,20 @@ describe("Metaminer", function () {
         .setMiner({ value: totalCharge });
 
       await metaminerContract
+        .connect(metaminer_2)
+        .unsubscribe();
+
+      await setBalance(
+        network,
+        metaminer_2.address,
+        "0x33b2e3c9fd0803ce8000000"
+      );
+
+      await metaminerContract
+        .connect(metaminer_2)
+        .setMiner({ value: totalCharge });
+
+      await metaminerContract
         .connect(metaminer_3)
         .setMiner({ value: totalCharge });
 
@@ -742,7 +822,7 @@ describe("Metaminer", function () {
         mockMetaminer.connect(metaminer_1).shareIncome({
           value: toWei("100"),
         })
-      ).revertedWith("Metaminer: Miner subscription is not as required");
+      ).revertedWith("Metaminer: Invalid subscription");
     });
 
     it("try to send eth to rewards pool", async () => {

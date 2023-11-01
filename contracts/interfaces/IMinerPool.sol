@@ -8,7 +8,7 @@ interface IMinerPool {
         address receiver,
         MinerTypes.NodeType nodeType,
         uint256 activityTime
-    ) external returns (uint256, uint256);
+    ) external;
 
     function claimTxReward(address receiver, uint256 amount) external;
 }

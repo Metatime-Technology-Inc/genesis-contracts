@@ -44,7 +44,7 @@ contract MinerHealthCheck is Initializable, RolesHandler {
     modifier isMiner(address miner, MinerTypes.NodeType nodeType) {
         require(
             minerList.isMiner(miner, nodeType),
-            "MinerHealthCheck: Address is not miner"
+            "MinerHealthCheck: Not a miner"
         );
         _;
     }
@@ -65,16 +65,22 @@ contract MinerHealthCheck is Initializable, RolesHandler {
         uint256 requiredTimeout
     ) external initializer {
         require(
-            minerListAddress != address(0) &&
-                minerFormulasAddress != address(0) &&
-                minerPoolAddress != address(0) &&
-                metaPointsAddress != address(0),
-            "MinerHealthCheck: cannot set zero address"
+            minerListAddress != address(0),
+            "MinerHealthCheck: No zero address"
         );
         require(
-            requiredTimeout >= 14400,
-            "MinerHealthCheck: requiredTimeout must be bigger than 4 hours in secs"
+            minerFormulasAddress != address(0),
+            "MinerHealthCheck: No zero address"
         );
+        require(
+            minerPoolAddress != address(0),
+            "MinerHealthCheck: No zero address"
+        );
+        require(
+            metaPointsAddress != address(0),
+            "MinerHealthCheck: No zero address"
+        );
+        require(requiredTimeout >= 14400, "MinerHealthCheck: Timeout > 4h");
         minerList = IMinerList(minerListAddress);
         minerFormulas = IMinerFormulas(minerFormulasAddress);
         minerPool = IMinerPool(minerPoolAddress);
@@ -132,10 +138,7 @@ contract MinerHealthCheck is Initializable, RolesHandler {
     function setTimeout(
         uint256 newTimeout
     ) external onlyOwnerRole(msg.sender) returns (bool) {
-        require(
-            newTimeout >= 14400,
-            "MinerHealthCheck: New timeout must be bigger than 4 hours in secs"
-        );
+        require(newTimeout >= 14400, "MinerHealthCheck: Timeout > 4h");
         timeout = newTimeout;
         return (true);
     }
@@ -156,14 +159,12 @@ contract MinerHealthCheck is Initializable, RolesHandler {
      * @dev Internal function to increment daily total active times for a node type.
      * @param nodeType The type of miner node.
      * @param activityTime The activity time to increment.
-     * @return A boolean indicating whether the operation was successful.
      */
     function _incrementDailyTotalActiveTimes(
         MinerTypes.NodeType nodeType,
         uint256 activityTime
-    ) internal returns (bool) {
+    ) internal {
         dailyNodesActivities[minerFormulas.getDate()][nodeType] += activityTime;
-        return (true);
     }
 
     /**
@@ -171,16 +172,14 @@ contract MinerHealthCheck is Initializable, RolesHandler {
      * @param minerAddress The address of the miner node.
      * @param nodeType The type of miner node.
      * @param activityTime The activity time to increment.
-     * @return A boolean indicating whether the operation was successful.
      */
     function _incrementDailyActiveTimes(
         address minerAddress,
         MinerTypes.NodeType nodeType,
         uint256 activityTime
-    ) internal returns (bool) {
+    ) internal {
         dailyNodeActivity[minerFormulas.getDate()][minerAddress][
             nodeType
         ] += activityTime;
-        return (true);
     }
 }

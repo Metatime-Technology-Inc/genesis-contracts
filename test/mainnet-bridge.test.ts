@@ -47,6 +47,10 @@ describe("MainnetBridge", function () {
         // try bridge function when contract is frezeed and expect revert
         it("try bridge function when contract is frezeed and expect revert", async () => {
             const { owner, user, mainnetBridge } = await loadFixture(initiateVariables);
+            // init roles
+            await initRoles();
+            // set freeze
+            await mainnetBridge.connect(owner).setFreeze(true);
 
             await expect(mainnetBridge.connect(owner).bridge(txHash, user.address, funds)).to.be.revertedWith("Freezeable: Contract is freezed");
         });
@@ -62,7 +66,7 @@ describe("MainnetBridge", function () {
             // set user as blacklisted
             await mainnetBridge.connect(owner).setBlacklist(user.address, true);
 
-            await expect(mainnetBridge.connect(owner).bridge(txHash, user.address, funds)).to.be.revertedWith("Blacklistable: Wallet is blacklisted");
+            await expect(mainnetBridge.connect(owner).bridge(txHash, user.address, funds)).to.be.revertedWith("Blacklistable: Wallet is banned");
         });
 
         // try bridge function when receiver is zero address
@@ -74,7 +78,7 @@ describe("MainnetBridge", function () {
             // set freeze
             await mainnetBridge.connect(owner).setFreeze(false);
 
-            await expect(mainnetBridge.connect(owner).bridge(txHash, "0x0000000000000000000000000000000000000000", funds)).to.be.revertedWith("MainnetBridge: Receiver cannot be zero address");
+            await expect(mainnetBridge.connect(owner).bridge(txHash, "0x0000000000000000000000000000000000000000", funds)).to.be.revertedWith("MainnetBridge: No zero receiver");
         });
 
         // try bridge function when amount is 0
@@ -86,7 +90,7 @@ describe("MainnetBridge", function () {
             // set freeze
             await mainnetBridge.connect(owner).setFreeze(false);
 
-            await expect(mainnetBridge.connect(owner).bridge(txHash, user.address, toWei(String(0)))).to.be.revertedWith("MainnetBridge: Amount must be higher than 0");
+            await expect(mainnetBridge.connect(owner).bridge(txHash, user.address, toWei(String(0)))).to.be.revertedWith("MainnetBridge: Amount > 0");
         });
 
         // try bridge function when contract dont have enough funds
@@ -115,7 +119,7 @@ describe("MainnetBridge", function () {
             // first bridge
             await mainnetBridge.connect(owner).bridge(txHash, user.address, funds)
 
-            await expect(mainnetBridge.connect(owner).bridge(txHash, user.address, funds)).to.be.revertedWith("MainnetBridge: Transaction is already setted");
+            await expect(mainnetBridge.connect(owner).bridge(txHash, user.address, funds)).to.be.revertedWith("MainnetBridge: Already set");
         });
 
         // try bridge function when contract everything is ok
@@ -138,8 +142,10 @@ describe("MainnetBridge", function () {
 
             // init roles
             await initRoles();
+            // set freeze
+            await mainnetBridge.connect(owner).setFreeze(true);
 
-            await expect(mainnetBridge.connect(owner).transfer(user.address, funds)).to.be.revertedWith("RolesHandler: Manager role is needed for this action");
+            await expect(mainnetBridge.connect(owner).transfer(user.address, funds)).to.be.revertedWith("Roles: Manager role needed");
         });
 
         // try transfer function when contract is not freezed
@@ -151,7 +157,7 @@ describe("MainnetBridge", function () {
             // set freeze
             await mainnetBridge.connect(owner).setFreeze(false);
 
-            await expect(mainnetBridge.connect(owner).transfer(user.address, funds)).to.be.revertedWith("Freezeable: Contract is not freezed");
+            await expect(mainnetBridge.connect(owner).transfer(user.address, funds)).to.be.revertedWith("Freezeable: Contract not freezed");
         });
 
         // try transfer function when contract dont have enough funds
@@ -160,6 +166,8 @@ describe("MainnetBridge", function () {
 
             // init roles
             await initRoles();
+            // set freeze
+            await mainnetBridge.connect(owner).setFreeze(true);
 
             await expect(mainnetBridge.connect(owner).transfer(manager.address, funds)).to.be.revertedWith("MainnetBridge: Transfer failed");
         });
@@ -170,6 +178,8 @@ describe("MainnetBridge", function () {
 
             // init roles
             await initRoles();
+            // set freeze
+            await mainnetBridge.connect(owner).setFreeze(true);
             // send funds to contract
             await owner.sendTransaction({to: mainnetBridge.address, value: funds});
 

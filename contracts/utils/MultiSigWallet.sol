@@ -98,14 +98,14 @@ contract MultiSigWallet is Initializable {
         address[] memory _owners,
         uint _numConfirmationsRequired
     ) external initializer {
-        require(_owners.length > 0, "owners required");
+        require(_owners.length != 0, "owners required");
         require(
-            _numConfirmationsRequired > 0 &&
-                _numConfirmationsRequired <= _owners.length,
-            "invalid number of required confirmations"
+            _numConfirmationsRequired <= _owners.length,
+            "Invalid confirmations number"
         );
+        require(_numConfirmationsRequired != 0, "Invalid confirmations number");
 
-        for (uint i = 0; i < _owners.length; i++) {
+        for (uint i; i < _owners.length; i++) {
             address owner = _owners[i];
 
             require(owner != address(0), "invalid owner");

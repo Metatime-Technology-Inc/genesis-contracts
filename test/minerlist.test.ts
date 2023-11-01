@@ -1,14 +1,14 @@
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
-import { ethers } from "hardhat";
+import { ethers, network } from "hardhat";
 import { CONTRACTS } from "../scripts/constants";
 import { toWei } from "../scripts/helpers";
-import { BigNumber, BigNumberish, BytesLike } from "ethers";
+import { BigNumber, BigNumberish } from "ethers";
 import { MinerHealthCheck, MinerFormulas, MinerPool, MetaPoints, MinerList, Roles } from "../typechain-types";
 
-describe("MinerPool", function () {
+describe("MinerList", function () {
     async function initiateVariables() {
-        const [owner, manager, miner_1, miner_2, miner_3] =
+        const [owner, manager, miner] =
             await ethers.getSigners();
 
         const MinerHealthCheck_ = await ethers.getContractFactory(
@@ -56,28 +56,19 @@ describe("MinerPool", function () {
             roles,
             owner,
             manager,
-            miner_1,
-            miner_2,
-            miner_3
+            miner,
         };
     }
 
-    // test MinerPool
-    describe("test minerpool contract", async () => {
-
-        const minerHealthCheckTimeoutNumber:number = 14_400; // 4 hours
-        const txValidatorDefaultExpireTime:number = 300; // 5 minutes
-        const minerHealthCheckTimeout:BigNumberish = BigNumber.from(String(minerHealthCheckTimeoutNumber));
-        const metaminerType:BigNumber = BigNumber.from(String(0));
-        const macrominerArchiveType:BigNumberish = BigNumber.from(String(1));
-        const microminerType:BigNumberish = BigNumber.from(String(4));
-        const funds:BigNumberish = toWei(String(100));
+    // test MinerList
+    describe("test minerlist contract", async () => {
+        const minerHealthCheckTimeout:BigNumberish = BigNumber.from(String(14_400)); // 4 hours
+        const metaminerType: BigNumber = BigNumber.from(String(0));
 
         const initContracts = async () => {
             const {
                 owner,
                 manager,
-                miner_1,
                 roles,
                 minerHealthCheck,
                 minerFormulas,
@@ -86,10 +77,9 @@ describe("MinerPool", function () {
                 minerList,
             } = await loadFixture(initiateVariables);
 
-            await minerList.connect(owner).initRoles(roles.address);
-            await minerPool.connect(owner).initRoles(roles.address);
-            await metaPoints.connect(owner).initRoles(roles.address);
-            await minerHealthCheck.connect(owner).initRoles(roles.address);
+            await minerHealthCheck.initRoles(roles.address);
+            await minerPool.initRoles(roles.address);
+            await minerList.initRoles(roles.address);
 
             await roles.connect(owner).initialize(owner.address);
             await roles.connect(owner).grantRole(await roles.MANAGER_ROLE(), manager.address);
@@ -127,23 +117,39 @@ describe("MinerPool", function () {
 
         // try initialize function with zero address
         it("try initialize function with zero address", async () => {
-            const { owner, minerPool } = await loadFixture(initiateVariables);
+            const { owner, minerList } = await loadFixture(initiateVariables);
     
             await expect(
-                minerPool.connect(owner).initialize(ethers.constants.AddressZero)
-            ).to.be.revertedWith("MinerPool: No zero address");
+                minerList.connect(owner).initialize(
+                    ethers.constants.AddressZero
+                )
+            ).to.be.revertedWith("MinerList: No zero address");
         });
 
-        // try claimTxReward function when contract dont have enough funds
-        it("try claimTxReward function when contract dont have enough funds", async () => {
-            const { manager, miner_1, minerPool } = await loadFixture(initiateVariables);
-
+        // try addMiner function when miner already miner
+        it("try addMiner function when miner already miner", async () => {
+            const { miner, manager, minerList } = await loadFixture(initiateVariables);
+    
             // init contracts
             await initContracts();
 
+            await minerList.connect(manager).addMiner(miner.address, metaminerType);
+    
             await expect(
-                minerPool.connect(manager).claimTxReward(miner_1.address, funds)
-            ).to.be.revertedWith("MinerPool: Unable to send");
+                minerList.connect(manager).addMiner(miner.address, metaminerType)
+            ).to.be.revertedWith("MinerList: Already miner");
+        });
+
+        // try deleteMiner function when miner not a miner
+        it("try deleteMiner function when miner not a miner", async () => {
+            const { miner, manager, minerList } = await loadFixture(initiateVariables);
+    
+            // init contracts
+            await initContracts();
+    
+            await expect(
+                minerList.connect(manager).deleteMiner(miner.address, metaminerType)
+            ).to.be.revertedWith("MinerList: Not a miner");
         });
     });
 });

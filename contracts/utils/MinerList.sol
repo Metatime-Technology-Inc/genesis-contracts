@@ -37,7 +37,7 @@ contract MinerList is Initializable, RolesHandler {
     function initialize(address minerHealthCheckAddress) external initializer {
         require(
             minerHealthCheckAddress != address(0),
-            "MinerList: cannot set zero address"
+            "MinerList: No zero address"
         );
         minerHealthCheck = IMinerHealthCheck(minerHealthCheckAddress);
     }
@@ -51,7 +51,7 @@ contract MinerList is Initializable, RolesHandler {
     function isMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
-    ) external view returns (bool) {
+    ) public view returns (bool) {
         return list[minerAddress][nodeType];
     }
 
@@ -64,7 +64,11 @@ contract MinerList is Initializable, RolesHandler {
         address minerAddress,
         MinerTypes.NodeType nodeType
     ) external onlyManagerRole(msg.sender) {
-        _addMiner(minerAddress, nodeType);
+        if (!isMiner(minerAddress, nodeType)) {
+            _addMiner(minerAddress, nodeType);
+        } else {
+            revert("MinerList: Already miner");
+        }
     }
 
     /**
@@ -76,18 +80,22 @@ contract MinerList is Initializable, RolesHandler {
         address minerAddress,
         MinerTypes.NodeType nodeType
     ) external onlyManagerRole(msg.sender) {
-        _deleteMiner(minerAddress, nodeType);
+        if (isMiner(minerAddress, nodeType)) {
+            _deleteMiner(minerAddress, nodeType);
+        } else {
+            revert("MinerList: Not a miner");
+        }
     }
 
     /**
-     * @dev Internal function to add an address as a miner of the specified node type.
+     * @dev Private function to add an address as a miner of the specified node type.
      * @param minerAddress The address to add as a miner.
      * @param nodeType The type of miner node to add.
      */
     function _addMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
-    ) internal {
+    ) private {
         list[minerAddress][nodeType] = true;
         count[nodeType]++;
         minerHealthCheck.manualPing(minerAddress, nodeType);
@@ -96,14 +104,14 @@ contract MinerList is Initializable, RolesHandler {
     }
 
     /**
-     * @dev Internal function to delete an address from the list of miners of the specified node type.
+     * @dev Private function to delete an address from the list of miners of the specified node type.
      * @param minerAddress The address to delete from the list of miners.
      * @param nodeType The type of miner node to delete from.
      */
     function _deleteMiner(
         address minerAddress,
         MinerTypes.NodeType nodeType
-    ) internal {
+    ) private {
         delete list[minerAddress][nodeType];
         count[nodeType]--;
 

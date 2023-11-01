@@ -127,7 +127,7 @@ describe("MinerHealthCheck", function () {
                 minerList.connect(owner).initialize(
                     ethers.constants.AddressZero
                 )
-            ).to.be.revertedWith("MinerList: cannot set zero address");
+            ).to.be.revertedWith("MinerList: No zero address");
     
             await expect(
                 minerHealthCheck.connect(owner).initialize(
@@ -137,7 +137,37 @@ describe("MinerHealthCheck", function () {
                     ethers.constants.AddressZero,
                     minerHealthCheckTimeout
                 )
-            ).to.be.revertedWith("MinerHealthCheck: cannot set zero address");
+            ).to.be.revertedWith("MinerHealthCheck: No zero address");
+    
+            await expect(
+                minerHealthCheck.connect(owner).initialize(
+                    "0x0000000000000000000000000000000000000001",
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero,
+                    minerHealthCheckTimeout
+                )
+            ).to.be.revertedWith("MinerHealthCheck: No zero address");
+    
+            await expect(
+                minerHealthCheck.connect(owner).initialize(
+                    "0x0000000000000000000000000000000000000001",
+                    "0x0000000000000000000000000000000000000001",
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero,
+                    minerHealthCheckTimeout
+                )
+            ).to.be.revertedWith("MinerHealthCheck: No zero address");
+    
+            await expect(
+                minerHealthCheck.connect(owner).initialize(
+                    "0x0000000000000000000000000000000000000001",
+                    "0x0000000000000000000000000000000000000001",
+                    "0x0000000000000000000000000000000000000001",
+                    ethers.constants.AddressZero,
+                    minerHealthCheckTimeout
+                )
+            ).to.be.revertedWith("MinerHealthCheck: No zero address");
     
             await expect(
                 minerHealthCheck.connect(owner).initialize(
@@ -147,7 +177,7 @@ describe("MinerHealthCheck", function () {
                     metaPoints.address,
                     BigNumber.from("0")
                 )
-            ).to.be.revertedWith("MinerHealthCheck: requiredTimeout must be bigger than 4 hours in secs");
+            ).to.be.revertedWith("MinerHealthCheck: Timeout > 4h");
         });
 
         // try ping function when caller is not miner
@@ -159,7 +189,7 @@ describe("MinerHealthCheck", function () {
 
             await expect(
                 minerHealthCheck.connect(owner).ping(metaminerType)
-            ).to.be.revertedWith("MinerHealthCheck: Address is not miner");
+            ).to.be.revertedWith("MinerHealthCheck: Not a miner");
         });
 
         // try ping function when caller is metaminer
@@ -191,7 +221,7 @@ describe("MinerHealthCheck", function () {
 
             await expect(
                 minerHealthCheck.connect(owner).setTimeout(minerHealthCheckTimeout.div(2))
-            ).to.be.revertedWith("MinerHealthCheck: New timeout must be bigger than 4 hours in secs");
+            ).to.be.revertedWith("MinerHealthCheck: Timeout > 4h");
         });
 
         // try ping function when minerpool dont have enough funds for formula 1
@@ -223,7 +253,7 @@ describe("MinerHealthCheck", function () {
             // sent funds to miner pool
             const fundsTX = await owner.sendTransaction({
                 to: minerPool.address,
-                value: toWei(String(150))
+                value: toWei(String(10))
             });
             await fundsTX.wait();
 

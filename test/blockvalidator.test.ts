@@ -159,7 +159,7 @@ describe("BlockValidator", function () {
 
             await expect(blockValidator.connect(owner).initialize(
                 ethers.constants.AddressZero
-            )).revertedWith("BlockValidator: cannot set zero address");
+            )).revertedWith("BlockValidator: No zero address");
         }); 
 
         it("try to setBlockPayload with wrong payloads", async () => {
@@ -179,7 +179,7 @@ describe("BlockValidator", function () {
                     blockReward: toWei("1"),
                     isFinalized: false
                 })
-            ).to.be.revertedWith("BlockValidator: Mismatched block hash");
+            ).to.be.revertedWith("BlockValidator: Hash mismatch");
             await expect(
                 blockValidator.connect(validator_1).setBlockPayload(blockNumber, {
                     coinbase: validator_1.address,
@@ -187,7 +187,7 @@ describe("BlockValidator", function () {
                     blockReward: toWei("1"),
                     isFinalized: true
                 })
-            ).to.be.revertedWith("BlockValidator: Block finalized before");
+            ).to.be.revertedWith("BlockValidator: Block finalized");
         }); 
 
         // try setBlockPayload with wallet which is dont have Validator role
@@ -209,7 +209,7 @@ describe("BlockValidator", function () {
 
             await expect(
                 blockValidator.connect(manager).setBlockPayload(blockNumber, blockPayload)
-            ).to.be.revertedWith("RolesHandler: Validator role is needed for this action");
+            ).to.be.revertedWith("Roles: Validator role needed");
         });
 
         // try setBlockPayload with payload which is already setted
@@ -232,7 +232,7 @@ describe("BlockValidator", function () {
 
             await expect(
                 blockValidator.connect(validator_1).setBlockPayload(blockNumber, blockPayload)
-            ).to.be.revertedWith("BlockValidator: Unable to set block payload");
+            ).to.be.revertedWith("BlockValidator: Payload issue");
         });
 
         // try finalizeBlock with wallet which is dont have Manager role
@@ -246,7 +246,7 @@ describe("BlockValidator", function () {
 
             await expect(
                 blockValidator.connect(validator_1).finalizeBlock(blockNumber)
-            ).to.be.revertedWith("RolesHandler: Manager role is needed for this action");
+            ).to.be.revertedWith("Roles: Manager role needed");
         });
 
         // try finalizeBlock with payload which is not setted
@@ -260,7 +260,7 @@ describe("BlockValidator", function () {
 
             await expect(
                 blockValidator.connect(manager).finalizeBlock(blockNumber)
-            ).to.be.revertedWith("BlockValidator: Unable to finalize block");
+            ).to.be.revertedWith("BlockValidator: Can't finalize");
         });
 
         // try finalizeBlock when RewardsPool dont have enough balance
