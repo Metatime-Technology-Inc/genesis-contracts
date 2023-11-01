@@ -599,8 +599,6 @@ The Metaminer contract offers the following core functionalities:
 
 #### Management Functions
 
-- **setValidator**: Allows the contract owner to set a Metaminer by address. This function also initializes the Metaminer's details.
-- **refreshValidator**: Allows the contract owner to refresh the subscription of a Metaminer.
 - **setPercentages**: Allows the contract owner to set the percentage share for a Metaminer's shareholders.
 
 #### Block Finalization and Income Sharing
