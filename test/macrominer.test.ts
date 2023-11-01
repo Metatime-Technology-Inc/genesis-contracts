@@ -493,6 +493,113 @@ describe("MacroMiner", function () {
       );
     });
 
+    // try checkMinerStatus function when voter already voted
+    it("try checkMinerStatus function when voter already voted", async () => {
+      const {
+        owner,
+        miner_1,
+        miner_2,
+        miner_3,
+        macroMiner,
+        minerHealthCheck,
+        metaPoints,
+        minerPool,
+      } = await loadFixture(initiateVariables);
+
+      // init contracts
+      await initContracts();
+
+      // sent funds to miner pool
+      const fundsTX = await owner.sendTransaction({
+        to: minerPool.address,
+        value: toWei(String(9_000)),
+      });
+      await fundsTX.wait();
+
+      // setMiner with STAKE_AMOUNT
+      const preparedContractTranscation = await macroMiner
+        .connect(miner_1)
+        .populateTransaction.setMiner(macrominerArchiveType);
+      const transaction = await miner_1.sendTransaction({
+        ...preparedContractTranscation,
+        value: STAKE_AMOUNT,
+      });
+      await transaction.wait();
+
+      // setMiner with STAKE_AMOUNT
+      const preparedContractTranscation2 = await macroMiner
+        .connect(miner_2)
+        .populateTransaction.setMiner(macrominerArchiveType);
+      const transaction2 = await miner_2.sendTransaction({
+        ...preparedContractTranscation2,
+        value: STAKE_AMOUNT,
+      });
+      await transaction2.wait();
+
+      // increment
+      await incrementBlocktimestamp(ethers, minerHealthCheckTimeoutNumber / 2);
+
+      // ping with miner_2
+      const pingTX2 = await minerHealthCheck
+        .connect(miner_2)
+        .ping(macrominerArchiveType);
+      await pingTX2.wait();
+
+      // increment
+      await incrementBlocktimestamp(ethers, minerHealthCheckTimeoutNumber / 2);
+
+      // ping with miner_2
+      const pingTX3 = await minerHealthCheck
+        .connect(miner_2)
+        .ping(macrominerArchiveType);
+      await pingTX3.wait();
+
+      // increment
+      await incrementBlocktimestamp(ethers, minerHealthCheckTimeoutNumber / 2);
+
+      // ping with miner_2
+      const pingTX4 = await minerHealthCheck
+        .connect(miner_2)
+        .ping(macrominerArchiveType);
+      await pingTX4.wait();
+
+      // setMiner with STAKE_AMOUNT
+      const preparedContractTranscation3 = await macroMiner
+        .connect(miner_3)
+        .populateTransaction.setMiner(macrominerArchiveType);
+      const transaction3 = await miner_3.sendTransaction({
+        ...preparedContractTranscation3,
+        value: STAKE_AMOUNT,
+      });
+      await transaction3.wait();
+
+      // ping with miner_3
+      const pingTX5 = await minerHealthCheck
+        .connect(miner_3)
+        .ping(macrominerArchiveType);
+      await pingTX5.wait();
+
+      // vote miner_1 with miner_2
+      const vote1 = await macroMiner
+        .connect(miner_2)
+        .checkMinerStatus(
+          miner_1.address,
+          macrominerArchiveType,
+          macrominerArchiveType
+        );
+      await vote1.wait();
+      
+      await expect(
+        macroMiner
+        .connect(miner_2)
+        .checkMinerStatus(
+          miner_1.address,
+          macrominerArchiveType,
+          macrominerArchiveType
+        )
+      ).revertedWith("Macrominer: Already voted");
+    });
+
     // try checkMinerStatus function when vote expired miner and kick
     it("try checkMinerStatus function when vote expired miner and kick", async () => {
       const {

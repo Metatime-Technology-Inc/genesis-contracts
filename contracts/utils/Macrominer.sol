@@ -35,6 +35,8 @@ contract Macrominer is Initializable {
 
     /// @notice Mapping to store votes for each miner and node type.
     mapping(address => mapping(MinerTypes.NodeType => Vote)) public votes;
+    /// @notice Mapping to keep track of whether an address has voted for a miner
+    mapping(uint256 => mapping(address => bool)) public previousVotes;
 
     /// @notice voting begun
     event BeginVote(
@@ -170,8 +172,13 @@ contract Macrominer is Initializable {
         }
 
         Vote storage vote = votes[votedMinerAddress][votedMinerNodeType];
+        require(
+            previousVotes[vote.voteId][msg.sender] != true,
+            "Macrominer: Already voted"
+        );
 
         if (isAlive == false) {
+            previousVotes[vote.voteId][msg.sender] = true;
             if (mpBalance + vote.point >= VOTE_POINT_LIMIT) {
                 // If enough votes have been collected, kick the miner.
                 _kickMiner(votedMinerAddress, votedMinerNodeType);
