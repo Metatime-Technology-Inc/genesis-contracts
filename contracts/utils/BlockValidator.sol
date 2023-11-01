@@ -28,7 +28,7 @@ contract BlockValidator is Initializable, RolesHandler, ReentrancyGuard {
     /// @notice RewardsPool instance address
     IRewardsPool public rewardsPool;
     /// @notice last finalized block id
-    uint8 private _finalizedBlockId = 0;
+    uint8 private _finalizedBlockId;
 
     /// @notice a mapping that holds block payloads
     mapping(uint256 => BlockPayload) public blockPayloads;
@@ -101,8 +101,7 @@ contract BlockValidator is Initializable, RolesHandler, ReentrancyGuard {
         payload.isFinalized = true;
 
         if (_finalizedBlockId == DELAY_LIMIT) {
-            uint8 i = 0;
-            for (i; i < DELAY_LIMIT; i++) {
+            for (uint8 i; i < DELAY_LIMIT; i++) {
                 BlockPayload memory bp = blockPayloads[
                     lastFinalizedBlockNumbers[i]
                 ];

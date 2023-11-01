@@ -159,14 +159,12 @@ contract MinerHealthCheck is Initializable, RolesHandler {
      * @dev Internal function to increment daily total active times for a node type.
      * @param nodeType The type of miner node.
      * @param activityTime The activity time to increment.
-     * @return A boolean indicating whether the operation was successful.
      */
     function _incrementDailyTotalActiveTimes(
         MinerTypes.NodeType nodeType,
         uint256 activityTime
-    ) internal returns (bool) {
+    ) internal {
         dailyNodesActivities[minerFormulas.getDate()][nodeType] += activityTime;
-        return (true);
     }
 
     /**
@@ -174,16 +172,14 @@ contract MinerHealthCheck is Initializable, RolesHandler {
      * @param minerAddress The address of the miner node.
      * @param nodeType The type of miner node.
      * @param activityTime The activity time to increment.
-     * @return A boolean indicating whether the operation was successful.
      */
     function _incrementDailyActiveTimes(
         address minerAddress,
         MinerTypes.NodeType nodeType,
         uint256 activityTime
-    ) internal returns (bool) {
+    ) internal {
         dailyNodeActivity[minerFormulas.getDate()][minerAddress][
             nodeType
         ] += activityTime;
-        return (true);
     }
 }

@@ -60,18 +60,12 @@ contract MinerPool is Initializable, RolesHandler, ReentrancyGuard {
      * @param receiver Address of the receiver.
      * @param nodeType Type of miner node.
      * @param activityTime The time duration for which the miner has been active.
-     * @return A tuple containing the claimed amounts from the first and second formulas.
      */
     function claimMacroDailyReward(
         address receiver,
         MinerTypes.NodeType nodeType,
         uint256 activityTime
-    )
-        external
-        onlyManagerRole(msg.sender)
-        nonReentrant
-        returns (uint256, uint256)
-    {
+    ) external onlyManagerRole(msg.sender) nonReentrant {
         (uint256 firstAmount, uint256 secondAmount) = _calculateClaimableAmount(
             receiver,
             nodeType,
@@ -93,8 +87,6 @@ contract MinerPool is Initializable, RolesHandler, ReentrancyGuard {
 
             emit HasClaimed(receiver, secondAmount, "MACRO_DAILY_REWARD");
         }
-
-        return (firstAmount, secondAmount);
     }
 
     /**
@@ -123,9 +115,9 @@ contract MinerPool is Initializable, RolesHandler, ReentrancyGuard {
         MinerTypes.NodeType nodeType,
         uint256 activityTime
     ) internal returns (uint256, uint256) {
-        uint256 firstFormulaHardCap = 0;
-        uint256 secondFormulaHardCap = 0;
-        uint256 dailyHardCap = 0;
+        uint256 firstFormulaHardCap;
+        uint256 secondFormulaHardCap;
+        uint256 dailyHardCap;
 
         if (nodeType == MinerTypes.NodeType.MacroArchive) {
             firstFormulaHardCap = minerFormulas

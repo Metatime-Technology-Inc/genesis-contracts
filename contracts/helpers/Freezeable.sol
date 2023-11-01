@@ -9,7 +9,7 @@ import "./RolesHandler.sol";
  */
 abstract contract Freezeable is RolesHandler {
     /// @notice holds current freeze status
-    bool public freezeStatus = true;
+    bool public freezeStatus;
 
     /// @notice contract has freezed
     event Freeze(bool indexed status);

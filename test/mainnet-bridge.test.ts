@@ -47,6 +47,10 @@ describe("MainnetBridge", function () {
         // try bridge function when contract is frezeed and expect revert
         it("try bridge function when contract is frezeed and expect revert", async () => {
             const { owner, user, mainnetBridge } = await loadFixture(initiateVariables);
+            // init roles
+            await initRoles();
+            // set freeze
+            await mainnetBridge.connect(owner).setFreeze(true);
 
             await expect(mainnetBridge.connect(owner).bridge(txHash, user.address, funds)).to.be.revertedWith("Freezeable: Contract is freezed");
         });
@@ -138,6 +142,8 @@ describe("MainnetBridge", function () {
 
             // init roles
             await initRoles();
+            // set freeze
+            await mainnetBridge.connect(owner).setFreeze(true);
 
             await expect(mainnetBridge.connect(owner).transfer(user.address, funds)).to.be.revertedWith("Roles: Manager role needed");
         });
@@ -160,6 +166,8 @@ describe("MainnetBridge", function () {
 
             // init roles
             await initRoles();
+            // set freeze
+            await mainnetBridge.connect(owner).setFreeze(true);
 
             await expect(mainnetBridge.connect(owner).transfer(manager.address, funds)).to.be.revertedWith("MainnetBridge: Transfer failed");
         });
@@ -170,6 +178,8 @@ describe("MainnetBridge", function () {
 
             // init roles
             await initRoles();
+            // set freeze
+            await mainnetBridge.connect(owner).setFreeze(true);
             // send funds to contract
             await owner.sendTransaction({to: mainnetBridge.address, value: funds});
 

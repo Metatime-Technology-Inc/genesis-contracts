@@ -163,8 +163,8 @@ contract MinerFormulas is Initializable {
     function calculateDailyPoolRewardsFromFirstFormula(
         MinerTypes.NodeType nodeType
     ) external view returns (uint256) {
-        uint256 TOTAL_NODE_COUNT = 0;
-        uint256 DAILY_CALC_POOL_REWARD = 0;
+        uint256 TOTAL_NODE_COUNT;
+        uint256 DAILY_CALC_POOL_REWARD;
 
         if (nodeType == MinerTypes.NodeType.MacroArchive) {
             TOTAL_NODE_COUNT = minerList.count(
@@ -198,8 +198,8 @@ contract MinerFormulas is Initializable {
         address minerAddress,
         MinerTypes.NodeType nodeType
     ) external view returns (uint256) {
-        uint256 TOTAL_NODE_COUNT = 0;
-        uint256 REST_POOL_AMOUNT = 0;
+        uint256 TOTAL_NODE_COUNT;
+        uint256 REST_POOL_AMOUNT;
         uint256 MINER_META_POINT = _balaceOfMP(minerAddress);
         uint256 TOTAL_SUPPLY_META_POINTS = _totalSupplyMP();
 

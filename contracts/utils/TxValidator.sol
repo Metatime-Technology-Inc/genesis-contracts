@@ -290,10 +290,10 @@ contract TxValidator is Initializable, RolesHandler, ReentrancyGuard {
 
         address[32] memory trueVoters;
         address[32] memory falseVoters;
-        uint256 trueVotersLength = 0;
-        uint256 falseVotersLength = 0;
+        uint256 trueVotersLength;
+        uint256 falseVotersLength;
 
-        for (uint256 i = 0; i < txVoteCount; i++) {
+        for (uint256 i; i < txVoteCount; i++) {
             Vote memory vote = txVotes[txHash][i];
             if (vote.decision) {
                 trueVoters[trueVotersLength] = vote.voter;
@@ -319,13 +319,13 @@ contract TxValidator is Initializable, RolesHandler, ReentrancyGuard {
             if (decision) {
                 voteReward /= trueVotersLength;
                 minerPool.claimTxReward(txPayload.handler, handlerReward);
-                for (uint256 i = 0; i < trueVotersLength; i++) {
+                for (uint256 i; i < trueVotersLength; i++) {
                     address trueVoter = trueVoters[i];
                     minerPool.claimTxReward(trueVoter, voteReward);
                 }
             } else {
                 voteReward /= falseVotersLength;
-                for (uint256 i = 0; i < falseVotersLength; i++) {
+                for (uint256 i; i < falseVotersLength; i++) {
                     address falseVoter = falseVoters[i];
                     minerPool.claimTxReward(falseVoter, voteReward);
                 }

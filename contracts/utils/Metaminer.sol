@@ -186,7 +186,7 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
     ) external onlyOwnerRole(msg.sender) isMiner(miner) returns (bool) {
         Share storage share = shares[miner];
         uint256 shareholdersLength = shareholders_.length;
-        for (uint256 i = 0; i < shareholdersLength; i++) {
+        for (uint256 i; i < shareholdersLength; i++) {
             address addr = shareholders_[i];
             uint256 percentage = percentages[i];
             uint256 nextPercent = share.sharedPercent + percentage;
@@ -279,7 +279,7 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
     ) internal isMiner(miner) validMinerSubscription(miner) returns (bool) {
         uint256 _shareholderCount = shares[miner].shareHolderCount;
         uint256 leftover = balance;
-        for (uint256 i = 0; i < _shareholderCount; i++) {
+        for (uint256 i; i < _shareholderCount; i++) {
             Shareholder memory shareHolder = shareholders[miner][i];
             uint256 sharedAmount = (balance * shareHolder.percent) /
                 minerFormulas.BASE_DIVIDER();
@@ -307,7 +307,7 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
         (bool sent, ) = address(miner).call{value: STAKE_AMOUNT}("");
         require(sent, "Metaminer: Unsubsribe failed");
         minerList.deleteMiner(miner, MinerTypes.NodeType.Meta);
-        minerSubscription[miner] = 0;
+        delete minerSubscription[miner];
         // must be delete old shareholders
         return (true);
     }

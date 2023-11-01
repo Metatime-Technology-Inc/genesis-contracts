@@ -54,7 +54,13 @@ describe("Bridge", function () {
 
     // try bridge function when contract is frezeed and expect revert
     it("try bridge function when contract is frezeed and expect revert", async () => {
-      const { user, bridge } = await loadFixture(initiateVariables);
+      const { owner, user, bridge } = await loadFixture(initiateVariables);
+
+      // init roles
+      await initRoles();
+      
+      // set freeze
+      await bridge.connect(owner).setFreeze(true);
 
       await expect(bridge.connect(user).bridge()).to.be.revertedWith(
         "Freezeable: Contract is freezed"
