@@ -2,6 +2,7 @@
 pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "../helpers/RolesHandler.sol";
 import "../interfaces/IMinerFormulas.sol";
@@ -13,7 +14,7 @@ import "../interfaces/IMinerList.sol";
  * @dev This contract facilitates the reward distribution to miners for
  * their participation in different miner node types.
  */
-contract MinerPool is Initializable, RolesHandler {
+contract MinerPool is Initializable, RolesHandler, ReentrancyGuard {
     /// @notice This variable represents a contract instance of IMinerFormulas, which is used to access miner formulas.
     IMinerFormulas public minerFormulas;
     /// @notice This mapping stores the claimed amounts for each address.
@@ -49,7 +50,7 @@ contract MinerPool is Initializable, RolesHandler {
     function initialize(address minerFormulasAddress) external initializer {
         require(
             minerFormulasAddress != address(0),
-            "MinerPool: cannot set zero address"
+            "MinerPool: No zero address"
         );
         minerFormulas = IMinerFormulas(minerFormulasAddress);
     }
@@ -59,27 +60,26 @@ contract MinerPool is Initializable, RolesHandler {
      * @param receiver Address of the receiver.
      * @param nodeType Type of miner node.
      * @param activityTime The time duration for which the miner has been active.
-     * @return A tuple containing the claimed amounts from the first and second formulas.
      */
     function claimMacroDailyReward(
         address receiver,
         MinerTypes.NodeType nodeType,
         uint256 activityTime
-    ) external onlyManagerRole(msg.sender) returns (uint256, uint256) {
+    ) external onlyManagerRole(msg.sender) nonReentrant {
         (uint256 firstAmount, uint256 secondAmount) = _calculateClaimableAmount(
             receiver,
             nodeType,
             activityTime
         );
 
-        if (firstAmount > 0) {
+        if (firstAmount != 0) {
             (bool isFirstAmountSent, ) = receiver.call{value: firstAmount}("");
             require(isFirstAmountSent, "MinerPool: Unable to claim");
 
             emit HasClaimed(receiver, firstAmount, "MACRO_DAILY_REWARD");
         }
 
-        if (secondAmount > 0) {
+        if (secondAmount != 0) {
             (bool isSecondAmountSent, ) = receiver.call{value: secondAmount}(
                 ""
             );
@@ -87,8 +87,6 @@ contract MinerPool is Initializable, RolesHandler {
 
             emit HasClaimed(receiver, secondAmount, "MACRO_DAILY_REWARD");
         }
-
-        return (firstAmount, secondAmount);
     }
 
     /**
@@ -99,7 +97,7 @@ contract MinerPool is Initializable, RolesHandler {
     function claimTxReward(
         address receiver,
         uint256 amount
-    ) external onlyManagerRole(msg.sender) {
+    ) external onlyManagerRole(msg.sender) nonReentrant {
         (bool sent, ) = receiver.call{value: amount}("");
         emit HasClaimed(receiver, amount, "TX_REWARD");
         require(sent, "MinerPool: Unable to send");
@@ -117,9 +115,9 @@ contract MinerPool is Initializable, RolesHandler {
         MinerTypes.NodeType nodeType,
         uint256 activityTime
     ) internal returns (uint256, uint256) {
-        uint256 firstFormulaHardCap = 0;
-        uint256 firstFormulaMinerHardCap = 0;
-        uint256 secondFormulaHardCap = 0;
+        uint256 firstFormulaHardCap;
+        uint256 secondFormulaHardCap;
+        uint256 dailyHardCap;
 
         if (nodeType == MinerTypes.NodeType.MacroArchive) {
             firstFormulaHardCap = minerFormulas
@@ -127,7 +125,7 @@ contract MinerPool is Initializable, RolesHandler {
             secondFormulaHardCap = minerFormulas
                 .MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA();
 
-            firstFormulaMinerHardCap = (minerFormulas
+            dailyHardCap = (minerFormulas
                 .MACROMINER_ARCHIVE_DAILY_MAX_REWARD() /
                 minerFormulas.SECONDS_IN_A_DAY());
         } else if (nodeType == MinerTypes.NodeType.MacroFullnode) {
@@ -136,7 +134,7 @@ contract MinerPool is Initializable, RolesHandler {
             secondFormulaHardCap = minerFormulas
                 .MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA();
 
-            firstFormulaMinerHardCap = (minerFormulas
+            dailyHardCap = (minerFormulas
                 .MACROMINER_FULLNODE_DAILY_MAX_REWARD() /
                 minerFormulas.SECONDS_IN_A_DAY());
         } else if (nodeType == MinerTypes.NodeType.MacroLight) {
@@ -145,8 +143,7 @@ contract MinerPool is Initializable, RolesHandler {
             secondFormulaHardCap = minerFormulas
                 .MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA();
 
-            firstFormulaMinerHardCap = (minerFormulas
-                .MACROMINER_LIGHT_DAILY_MAX_REWARD() /
+            dailyHardCap = (minerFormulas.MACROMINER_LIGHT_DAILY_MAX_REWARD() /
                 minerFormulas.SECONDS_IN_A_DAY());
         } else {
             return (uint256(0), uint256(0));
@@ -160,11 +157,19 @@ contract MinerPool is Initializable, RolesHandler {
 
         firstFormulaAmount *= activityTime;
         secondFormulaAmount *= activityTime;
-        firstFormulaMinerHardCap *= activityTime;
+        dailyHardCap *= activityTime;
 
-        if (firstFormulaAmount > firstFormulaMinerHardCap) {
-            firstFormulaAmount = firstFormulaMinerHardCap;
-        }
+        (
+            uint256 firstFormulaProportion,
+            uint256 secondFormulaProportion
+        ) = minerFormulas.formulaProportion(
+                firstFormulaAmount,
+                secondFormulaAmount,
+                dailyHardCap
+            );
+
+        firstFormulaAmount = firstFormulaProportion;
+        secondFormulaAmount = secondFormulaProportion;
 
         if (
             (totalRewardsFromFirstFormula[currentDateIndex][nodeType] +

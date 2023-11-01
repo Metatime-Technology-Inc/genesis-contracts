@@ -154,7 +154,23 @@ describe("MinerFormulas", function () {
                     ethers.constants.AddressZero,
                     ethers.constants.AddressZero
                 )
-            ).to.be.revertedWith("MinerFormulas: cannot set zero address");
+            ).to.be.revertedWith("MinerFormulas: No zero address");
+    
+            await expect(
+                minerFormulas.connect(owner).initialize(
+                    "0x0000000000000000000000000000000000000001",
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero
+                )
+            ).to.be.revertedWith("MinerFormulas: No zero address");
+    
+            await expect(
+                minerFormulas.connect(owner).initialize(
+                    "0x0000000000000000000000000000000000000001",
+                    "0x0000000000000000000000000000000000000001",
+                    ethers.constants.AddressZero
+                )
+            ).to.be.revertedWith("MinerFormulas: No zero address");
         });
 
         // try calculateDailyPoolRewardsFromFirstFormula function with wrong nodeType
@@ -232,6 +248,34 @@ describe("MinerFormulas", function () {
             expect(
                 contractCalc
             ).to.be.equal(jsCalc);
+        });
+
+        // try formulaProportion function test calculate
+        it("try formulaProportion function test calculate", async () => {
+            const { manager, minerFormulas, minerList, minerHealthCheck, minerPool } = await loadFixture(initiateVariables);
+
+            // init contracts
+            await initContracts();
+
+            const calc1 = await minerFormulas.formulaProportion(200, 100, 150);
+            expect(
+                calc1[0]
+            ).to.be.equal(100);
+            
+            const calc2 = await minerFormulas.formulaProportion(204, 100, 150);
+            expect(
+                calc2[0]
+            ).to.be.equal(101);
+            
+            const calc3 = await minerFormulas.formulaProportion(1, 204, 150);
+            expect(
+                calc3[0]
+            ).to.be.equal(1);
+
+            const calc4 = await minerFormulas.formulaProportion(1, 166, 150);
+            expect(
+                calc4[1]
+            ).to.be.equal(149);
         });
     });
 });

@@ -9,7 +9,7 @@ import "./RolesHandler.sol";
  */
 abstract contract Freezeable is RolesHandler {
     /// @notice holds current freeze status
-    bool public freezeStatus = true;
+    bool public freezeStatus;
 
     /// @notice contract has freezed
     event Freeze(bool indexed status);
@@ -18,7 +18,7 @@ abstract contract Freezeable is RolesHandler {
      * @dev Modifier to check if the contract is not freezed.
      */
     modifier isFreezed() {
-        require(freezeStatus == true, "Freezeable: Contract is not freezed");
+        require(freezeStatus == true, "Freezeable: Contract not freezed");
         _;
     }
 

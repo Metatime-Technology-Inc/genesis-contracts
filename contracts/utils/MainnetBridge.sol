@@ -30,10 +30,7 @@ contract MainnetBridge is Blacklistable, Freezeable {
      * @param txHash The hash of the transaction.
      */
     modifier notExist(bytes32 txHash) {
-        require(
-            history[txHash].amount == 0,
-            "MainnetBridge: Transaction is already setted"
-        );
+        require(history[txHash].amount == 0, "MainnetBridge: Already set");
         _;
     }
 
@@ -89,11 +86,8 @@ contract MainnetBridge is Blacklistable, Freezeable {
      * @param amount The amount to be transferred.
      */
     function _transfer(address receiver, uint256 amount) internal {
-        require(amount > 0, "MainnetBridge: Amount must be higher than 0");
-        require(
-            receiver != address(0),
-            "MainnetBridge: Receiver cannot be zero address"
-        );
+        require(amount != 0, "MainnetBridge: Amount > 0");
+        require(receiver != address(0), "MainnetBridge: No zero receiver");
         (bool sent, ) = payable(receiver).call{value: amount}("");
         require(sent, "MainnetBridge: Transfer failed");
     }

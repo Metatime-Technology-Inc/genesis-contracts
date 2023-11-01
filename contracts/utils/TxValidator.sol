@@ -2,6 +2,7 @@
 pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "../helpers/RolesHandler.sol";
 import "../interfaces/IMinerList.sol";
@@ -16,7 +17,7 @@ import "../libs/MinerTypes.sol";
  * @dev Contract for validating transactions and managing votes on transactions.
  */
 // A long time ago in a galaxy far, far away!
-contract TxValidator is Initializable, RolesHandler {
+contract TxValidator is Initializable, RolesHandler, ReentrancyGuard {
     /// @notice Struct to represent a vote
     struct Vote {
         MinerTypes.NodeType nodeType; // Type of miner node associated with the voter
@@ -97,14 +98,20 @@ contract TxValidator is Initializable, RolesHandler {
         address minerHealthCheckAddress,
         address minerPoolAddress
     ) external initializer {
+        require(minerListAddress != address(0), "TxValidator: No zero address");
         require(
-            minerListAddress != address(0) &&
-                metaPointsAddress != address(0) &&
-                minerFormulasAddress != address(0) &&
-                minerHealthCheckAddress != address(0) &&
-                minerPoolAddress != address(0),
-            "TxValidator: cannot set zero address"
+            metaPointsAddress != address(0),
+            "TxValidator: No zero address"
         );
+        require(
+            minerFormulasAddress != address(0),
+            "TxValidator: No zero address"
+        );
+        require(
+            minerHealthCheckAddress != address(0),
+            "TxValidator: No zero address"
+        );
+        require(minerPoolAddress != address(0), "TxValidator: No zero address");
 
         minerList = IMinerList(minerListAddress);
         metaPoints = IMetaPoints(metaPointsAddress);
@@ -158,7 +165,7 @@ contract TxValidator is Initializable, RolesHandler {
         bytes32 txHash,
         bool decision,
         MinerTypes.NodeType nodeType
-    ) external returns (bool) {
+    ) external nonReentrant returns (bool) {
         bool isAlive = minerHealthCheck.status(msg.sender, nodeType);
         require(isAlive, "TxValidator: Activity is not as expected");
         TxPayload storage txPayload = txPayloads[txHash];
@@ -177,14 +184,14 @@ contract TxValidator is Initializable, RolesHandler {
             previousVotes[txHash][voter] != true,
             "TxValidator: Already voted"
         );
+        require(voter != txPayload.handler, "TxValidator: Handler cant vote");
         require(
-            voter != txPayload.handler,
-            "TxValidator: Handler cannot vote for tx"
+            minerList.list(voter, nodeType) == true,
+            "TxValidator: Ineligible to vote"
         );
         require(
-            minerList.list(voter, nodeType) == true &&
-                nodeType != MinerTypes.NodeType.Meta,
-            "TxValidator: Address is not eligible to vote"
+            nodeType != MinerTypes.NodeType.Meta,
+            "TxValidator: Ineligible to vote"
         );
 
         uint256 votePoint = _calculateVotePoint(voter, nodeType);
@@ -264,7 +271,10 @@ contract TxValidator is Initializable, RolesHandler {
         }
 
         uint256 metaPointsBalance = metaPoints.balanceOf(voter);
-        votePoint *= (metaPointsBalance > 0 ? metaPointsBalance / 1 ether : 1);
+
+        if (metaPointsBalance >= 100) {
+            votePoint += metaPointsBalance / 100;
+        }
 
         return votePoint;
     }
@@ -280,10 +290,10 @@ contract TxValidator is Initializable, RolesHandler {
 
         address[32] memory trueVoters;
         address[32] memory falseVoters;
-        uint256 trueVotersLength = 0;
-        uint256 falseVotersLength = 0;
+        uint256 trueVotersLength;
+        uint256 falseVotersLength;
 
-        for (uint256 i = 0; i < txVoteCount; i++) {
+        for (uint256 i; i < txVoteCount; i++) {
             Vote memory vote = txVotes[txHash][i];
             if (vote.decision) {
                 trueVoters[trueVotersLength] = vote.voter;
@@ -305,17 +315,17 @@ contract TxValidator is Initializable, RolesHandler {
 
             uint256 handlerReward = txReward /
                 (minerFormulas.BASE_DIVIDER() / HANDLER_PERCENT);
+            uint256 voteReward = (txReward - handlerReward);
             if (decision) {
-                uint256 voteReward = (txReward - handlerReward) /
-                    trueVotersLength;
+                voteReward /= trueVotersLength;
                 minerPool.claimTxReward(txPayload.handler, handlerReward);
-                for (uint256 i = 0; i < trueVotersLength; i++) {
+                for (uint256 i; i < trueVotersLength; i++) {
                     address trueVoter = trueVoters[i];
                     minerPool.claimTxReward(trueVoter, voteReward);
                 }
             } else {
-                uint256 voteReward = txReward / falseVotersLength;
-                for (uint256 i = 0; i < falseVotersLength; i++) {
+                voteReward /= falseVotersLength;
+                for (uint256 i; i < falseVotersLength; i++) {
                     address falseVoter = falseVoters[i];
                     minerPool.claimTxReward(falseVoter, voteReward);
                 }

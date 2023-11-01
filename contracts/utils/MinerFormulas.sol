@@ -75,10 +75,16 @@ contract MinerFormulas is Initializable {
         address minerHealthCheckAddress
     ) external initializer {
         require(
-            metaPointsAddress != address(0) &&
-                minerListAddress != address(0) &&
-                minerHealthCheckAddress != address(0),
-            "MinerFormulas: cannot set zero address"
+            metaPointsAddress != address(0),
+            "MinerFormulas: No zero address"
+        );
+        require(
+            minerListAddress != address(0),
+            "MinerFormulas: No zero address"
+        );
+        require(
+            minerHealthCheckAddress != address(0),
+            "MinerFormulas: No zero address"
         );
         metaPoints = IMetaPoints(metaPointsAddress);
         minerList = IMinerList(minerListAddress);
@@ -110,6 +116,45 @@ contract MinerFormulas is Initializable {
         return (1 ether / SECONDS_IN_A_DAY);
     }
 
+    function formulaProportion(
+        uint256 firstFormulaResult,
+        uint256 secondFormulaResult,
+        uint256 minerDailyHardCap
+    ) external pure returns (uint256, uint256) {
+        uint256 totalAmount = firstFormulaResult + secondFormulaResult;
+
+        if (totalAmount > minerDailyHardCap) {
+            uint256 firstFormulaPortion = firstFormulaResult /
+                (totalAmount / minerDailyHardCap);
+            uint256 secondFormulaPortion = secondFormulaResult /
+                (totalAmount / minerDailyHardCap);
+
+            uint256 totalCalculated = (firstFormulaPortion +
+                secondFormulaPortion);
+            uint256 extendedAmount = totalCalculated > minerDailyHardCap
+                ? (totalCalculated - minerDailyHardCap)
+                : 0;
+
+            if (extendedAmount != 0) {
+                uint256 halfOfExtendedAmount = extendedAmount / 2;
+                if (
+                    firstFormulaPortion > halfOfExtendedAmount &&
+                    secondFormulaPortion > halfOfExtendedAmount
+                ) {
+                    firstFormulaPortion -= halfOfExtendedAmount;
+                    secondFormulaPortion -= halfOfExtendedAmount;
+                } else if (firstFormulaPortion > halfOfExtendedAmount) {
+                    firstFormulaPortion -= extendedAmount;
+                } else {
+                    secondFormulaPortion -= extendedAmount;
+                }
+            }
+            return (firstFormulaPortion, secondFormulaPortion);
+        }
+
+        return (firstFormulaResult, secondFormulaResult);
+    }
+
     /**
      * @dev Calculate the daily pool rewards from the first formula for macro miners.
      * @param nodeType The type of macro miner.
@@ -118,8 +163,8 @@ contract MinerFormulas is Initializable {
     function calculateDailyPoolRewardsFromFirstFormula(
         MinerTypes.NodeType nodeType
     ) external view returns (uint256) {
-        uint256 TOTAL_NODE_COUNT = 0;
-        uint256 DAILY_CALC_POOL_REWARD = 0;
+        uint256 TOTAL_NODE_COUNT;
+        uint256 DAILY_CALC_POOL_REWARD;
 
         if (nodeType == MinerTypes.NodeType.MacroArchive) {
             TOTAL_NODE_COUNT = minerList.count(
@@ -153,8 +198,8 @@ contract MinerFormulas is Initializable {
         address minerAddress,
         MinerTypes.NodeType nodeType
     ) external view returns (uint256) {
-        uint256 TOTAL_NODE_COUNT = 0;
-        uint256 REST_POOL_AMOUNT = 0;
+        uint256 TOTAL_NODE_COUNT;
+        uint256 REST_POOL_AMOUNT;
         uint256 MINER_META_POINT = _balaceOfMP(minerAddress);
         uint256 TOTAL_SUPPLY_META_POINTS = _totalSupplyMP();
 

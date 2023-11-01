@@ -186,7 +186,25 @@ describe("MacroMiner", function () {
             ethers.constants.AddressZero,
             ethers.constants.AddressZero
           )
-      ).revertedWith("Macrominer: cannot set zero address");
+      ).revertedWith("Macrominer: No zero address");
+      await expect(
+        macroMiner
+          .connect(owner)
+          .initialize(
+            "0x0000000000000000000000000000000000000001",
+            ethers.constants.AddressZero,
+            ethers.constants.AddressZero
+          )
+      ).revertedWith("Macrominer: No zero address");
+      await expect(
+        macroMiner
+          .connect(owner)
+          .initialize(
+            "0x0000000000000000000000000000000000000001",
+            "0x0000000000000000000000000000000000000001",
+            ethers.constants.AddressZero
+          )
+      ).revertedWith("Macrominer: No zero address");
     });
 
     // try setMiner function when caller dont have enough funds
@@ -199,7 +217,7 @@ describe("MacroMiner", function () {
       await expect(
         macroMiner.connect(miner_1).setMiner(macrominerArchiveType)
       ).to.be.revertedWith(
-        "Macrominer: You have to stake as required STAKE_AMOUNT"
+        "Macrominer: Stake required"
       );
     });
 
@@ -222,7 +240,7 @@ describe("MacroMiner", function () {
 
       await expect(
         macroMiner.connect(miner_1).setMiner(macrominerArchiveType)
-      ).to.be.revertedWith("Macrominer: Address is already macrominer");
+      ).to.be.revertedWith("Macrominer: Already macrominer");
     });
 
     // try setMiner function when nodeType is wrong
@@ -272,7 +290,7 @@ describe("MacroMiner", function () {
             macrominerArchiveType,
             macrominerArchiveType
           )
-      ).to.be.revertedWith("Macrominer: Address is not macrominer");
+      ).to.be.revertedWith("Macrominer: Not a macrominer");
     });
 
     // try checkMinerStatus function when voted is not a miner
@@ -302,7 +320,7 @@ describe("MacroMiner", function () {
             macrominerArchiveType,
             macrominerArchiveType
           )
-      ).to.be.revertedWith("Macrominer: Address is not macrominer");
+      ).to.be.revertedWith("Macrominer: Not a macrominer");
     });
 
     // try checkMinerStatus function when voted miner is not expired
@@ -473,6 +491,113 @@ describe("MacroMiner", function () {
       expect(voteResult[1]).to.be.equal(
         voterMetaPointsBalance.add(voterMetaPointsBalance2)
       );
+    });
+
+    // try checkMinerStatus function when voter already voted
+    it("try checkMinerStatus function when voter already voted", async () => {
+      const {
+        owner,
+        miner_1,
+        miner_2,
+        miner_3,
+        macroMiner,
+        minerHealthCheck,
+        metaPoints,
+        minerPool,
+      } = await loadFixture(initiateVariables);
+
+      // init contracts
+      await initContracts();
+
+      // sent funds to miner pool
+      const fundsTX = await owner.sendTransaction({
+        to: minerPool.address,
+        value: toWei(String(9_000)),
+      });
+      await fundsTX.wait();
+
+      // setMiner with STAKE_AMOUNT
+      const preparedContractTranscation = await macroMiner
+        .connect(miner_1)
+        .populateTransaction.setMiner(macrominerArchiveType);
+      const transaction = await miner_1.sendTransaction({
+        ...preparedContractTranscation,
+        value: STAKE_AMOUNT,
+      });
+      await transaction.wait();
+
+      // setMiner with STAKE_AMOUNT
+      const preparedContractTranscation2 = await macroMiner
+        .connect(miner_2)
+        .populateTransaction.setMiner(macrominerArchiveType);
+      const transaction2 = await miner_2.sendTransaction({
+        ...preparedContractTranscation2,
+        value: STAKE_AMOUNT,
+      });
+      await transaction2.wait();
+
+      // increment
+      await incrementBlocktimestamp(ethers, minerHealthCheckTimeoutNumber / 2);
+
+      // ping with miner_2
+      const pingTX2 = await minerHealthCheck
+        .connect(miner_2)
+        .ping(macrominerArchiveType);
+      await pingTX2.wait();
+
+      // increment
+      await incrementBlocktimestamp(ethers, minerHealthCheckTimeoutNumber / 2);
+
+      // ping with miner_2
+      const pingTX3 = await minerHealthCheck
+        .connect(miner_2)
+        .ping(macrominerArchiveType);
+      await pingTX3.wait();
+
+      // increment
+      await incrementBlocktimestamp(ethers, minerHealthCheckTimeoutNumber / 2);
+
+      // ping with miner_2
+      const pingTX4 = await minerHealthCheck
+        .connect(miner_2)
+        .ping(macrominerArchiveType);
+      await pingTX4.wait();
+
+      // setMiner with STAKE_AMOUNT
+      const preparedContractTranscation3 = await macroMiner
+        .connect(miner_3)
+        .populateTransaction.setMiner(macrominerArchiveType);
+      const transaction3 = await miner_3.sendTransaction({
+        ...preparedContractTranscation3,
+        value: STAKE_AMOUNT,
+      });
+      await transaction3.wait();
+
+      // ping with miner_3
+      const pingTX5 = await minerHealthCheck
+        .connect(miner_3)
+        .ping(macrominerArchiveType);
+      await pingTX5.wait();
+
+      // vote miner_1 with miner_2
+      const vote1 = await macroMiner
+        .connect(miner_2)
+        .checkMinerStatus(
+          miner_1.address,
+          macrominerArchiveType,
+          macrominerArchiveType
+        );
+      await vote1.wait();
+      
+      await expect(
+        macroMiner
+        .connect(miner_2)
+        .checkMinerStatus(
+          miner_1.address,
+          macrominerArchiveType,
+          macrominerArchiveType
+        )
+      ).revertedWith("Macrominer: Already voted");
     });
 
     // try checkMinerStatus function when vote expired miner and kick
@@ -663,6 +788,68 @@ describe("MacroMiner", function () {
       ).to.be.revertedWith("Macrominer: Unstake failed");
     });
 
+    // try checkMinerStatus function when voter is ghost
+    it("try checkMinerStatus function when voter is ghost", async () => {
+        const {
+          owner,
+          miner_1,
+          miner_2,
+          macroMiner,
+          minerHealthCheck,
+          minerPool,
+        } = await loadFixture(initiateVariables);
+  
+        // init contracts
+        await initContracts();
+  
+        // sent funds to miner pool
+        const fundsTX = await owner.sendTransaction({
+          to: minerPool.address,
+          value: toWei(String(8_000)),
+        });
+        await fundsTX.wait();
+  
+        // setMiner with STAKE_AMOUNT
+        const preparedContractTranscation = await macroMiner
+          .connect(miner_1)
+          .populateTransaction.setMiner(macrominerArchiveType);
+        const transaction = await miner_1.sendTransaction({
+          ...preparedContractTranscation,
+          value: STAKE_AMOUNT,
+        });
+        await transaction.wait();
+
+        // setMiner with STAKE_AMOUNT
+        const preparedContractTranscation2 = await macroMiner
+          .connect(miner_2)
+          .populateTransaction.setMiner(macrominerArchiveType);
+        const transaction2 = await miner_2.sendTransaction({
+          ...preparedContractTranscation2,
+          value: STAKE_AMOUNT,
+        });
+        await transaction2.wait();
+  
+        // increment
+        await incrementBlocktimestamp(ethers, minerHealthCheckTimeoutNumber * 2);
+
+        // ping with miner_2
+        const pingTX = await minerHealthCheck
+          .connect(miner_2)
+          .ping(macrominerArchiveType);
+        await pingTX.wait();
+
+        const vote = await macroMiner
+        .connect(miner_1)
+        .callStatic
+        .checkMinerStatus(
+          miner_2.address,
+          macrominerArchiveType,
+          macrominerArchiveType
+        );
+
+        expect(vote).to.be.equal(false);
+    });
+
     // try checkMinerStatus function when voted miner being active again and close vote
     it("try checkMinerStatus function when voted miner being active again and close vote", async () => {
       const {
@@ -747,6 +934,15 @@ describe("MacroMiner", function () {
         .ping(macrominerArchiveType);
       await pingTX5.wait();
 
+      // increment
+      await incrementBlocktimestamp(ethers, minerHealthCheckTimeoutNumber / 2);
+
+      // ping with miner_1
+      const pingTX6 = await minerHealthCheck
+        .connect(miner_1)
+        .ping(macrominerArchiveType);
+      await pingTX6.wait();
+
       // vote miner_1 with miner_1
       const vote2 = await macroMiner
         .connect(miner_1)
@@ -763,6 +959,16 @@ describe("MacroMiner", function () {
       );
 
       expect(voteResult[2]).to.be.equal(false);
+
+      // vote miner_1 with miner_1
+      const vote3 = await macroMiner
+        .connect(miner_1)
+        .checkMinerStatus(
+          miner_1.address,
+          macrominerArchiveType,
+          macrominerArchiveType
+        );
+      await vote3.wait();
     });
 
     // try checkMinerStatus function when voted miner is expired -- fullnode test
@@ -1022,7 +1228,7 @@ describe("MacroMiner", function () {
 
       const slotOfTotalRewardsFromFirstFormula =
         getSlotOfTotalRewardsFromFirstFormula(
-          BigNumber.from(3),
+          BigNumber.from(4),
           date,
           BigNumber.from(2)
         );
@@ -1038,7 +1244,7 @@ describe("MacroMiner", function () {
 
       const slotOfTotalRewardsFromFirstFormula2 =
         getSlotOfTotalRewardsFromFirstFormula(
-          BigNumber.from(3),
+          BigNumber.from(4),
           date.add(1),
           BigNumber.from(2)
         );
@@ -1050,6 +1256,37 @@ describe("MacroMiner", function () {
         minerPool.address,
         slotOfTotalRewardsFromFirstFormula2,
         value2,
+      ]);
+
+      const slotOfTotalRewardsFromSecondFormula =
+        getSlotOfTotalRewardsFromFirstFormula(
+          BigNumber.from(5),
+          date,
+          BigNumber.from(2)
+        );
+
+      const value3 = ethers.utils.hexlify(
+        ethers.utils.zeroPad(toWei("9999").toHexString(), 32)
+      );
+      await network.provider.send("hardhat_setStorageAt", [
+        minerPool.address,
+        slotOfTotalRewardsFromSecondFormula,
+        value3,
+      ]);
+      const slotOfTotalRewardsFromSecondFormula2 =
+        getSlotOfTotalRewardsFromFirstFormula(
+          BigNumber.from(5),
+          date.add(1),
+          BigNumber.from(2)
+        );
+
+      const value4 = ethers.utils.hexlify(
+        ethers.utils.zeroPad(toWei("9999").toHexString(), 32)
+      );
+      await network.provider.send("hardhat_setStorageAt", [
+        minerPool.address,
+        slotOfTotalRewardsFromSecondFormula2,
+        value4,
       ]);
 
       for (let i = 0; i < 20; i++) {

@@ -83,7 +83,7 @@ describe("MetaPoints", function () {
       await initContracts();
 
       await expect(metaPoints.connect(manager).pause()).to.be.revertedWith(
-        "RolesHandler: Owner role is needed for this action"
+        "Roles: Owner role needed"
       );
     });
 
@@ -127,7 +127,7 @@ describe("MetaPoints", function () {
       await tx.wait();
 
       await expect(metaPoints.connect(manager).unpause()).to.be.revertedWith(
-        "RolesHandler: Owner role is needed for this action"
+        "Roles: Owner role needed"
       );
     });
 
@@ -141,7 +141,7 @@ describe("MetaPoints", function () {
       await expect(
         metaPoints.connect(owner).mint(owner.address, funds)
       ).to.be.revertedWith(
-        "RolesHandler: Manager role is needed for this action"
+        "Roles: Manager role needed"
       );
     });
 

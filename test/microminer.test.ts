@@ -142,7 +142,23 @@ describe("Microminer", function () {
                     ethers.constants.AddressZero,
                     ethers.constants.AddressZero
                 )
-            ).to.be.revertedWith("Microminer: cannot set zero address");
+            ).to.be.revertedWith("Microminer: No zero address");
+    
+            await expect(
+                microMiner.connect(owner).initialize(
+                    "0x0000000000000000000000000000000000000001",
+                    ethers.constants.AddressZero,
+                    ethers.constants.AddressZero
+                )
+            ).to.be.revertedWith("Microminer: No zero address");
+    
+            await expect(
+                microMiner.connect(owner).initialize(
+                    "0x0000000000000000000000000000000000000001",
+                    "0x0000000000000000000000000000000000000001",
+                    ethers.constants.AddressZero
+                )
+            ).to.be.revertedWith("Microminer: No zero address");
         });
 
         // try setMiner function when caller dont have enough funds
@@ -154,7 +170,7 @@ describe("Microminer", function () {
     
             await expect(
                 microMiner.connect(user).setMiner()
-            ).to.be.revertedWith("Microminer: You have to stake as required STAKE_AMOUNT");
+            ).to.be.revertedWith("Microminer: Stake required");
         });
 
         // try setMiner function when everything is ok
@@ -198,7 +214,7 @@ describe("Microminer", function () {
                     ...preparedContractTranscation2,
                     value: STAKE_AMOUNT
                 })
-            ).to.be.revertedWith("Microminer: Address is already microminer");
+            ).to.be.revertedWith("Microminer: Already microminer");
         });
 
         // try kickMiner function when given minerAddress is not miner
@@ -210,7 +226,7 @@ describe("Microminer", function () {
     
             await expect(
                 microMiner.connect(manager).kickMiner(user.address)
-            ).to.be.revertedWith("Microminer: Address is not microminer");
+            ).to.be.revertedWith("Microminer: Not a microminer");
         });
 
         // try kickMiner function when everything is ok
@@ -275,7 +291,7 @@ describe("Microminer", function () {
     
             await expect(
                 microMiner.connect(user).kickMiner(user.address)
-            ).to.be.revertedWith("RolesHandler: Manager role is needed for this action");
+            ).to.be.revertedWith("Roles: Manager role needed");
         });
     });
 });
