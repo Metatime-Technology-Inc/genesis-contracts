@@ -11,12 +11,12 @@ interface IMinerFormulas {
         view
         returns (uint256);
 
-    function MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA()
+    function MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_FIRST_FORMULA()
         external
         view
         returns (uint256);
 
-    function MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA()
+    function MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_SECOND_FORMULA()
         external
         view
         returns (uint256);
@@ -26,12 +26,12 @@ interface IMinerFormulas {
         view
         returns (uint256);
 
-    function MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA()
+    function MACROMINER_FULLNODE_POOL_HARD_CAP_OF_FIRST_FORMULA()
         external
         view
         returns (uint256);
 
-    function MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA()
+    function MACROMINER_FULLNODE_POOL_HARD_CAP_OF_SECOND_FORMULA()
         external
         view
         returns (uint256);
@@ -41,12 +41,12 @@ interface IMinerFormulas {
         view
         returns (uint256);
 
-    function MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA()
+    function MACROMINER_LIGHT_POOL_HARD_CAP_OF_FIRST_FORMULA()
         external
         view
         returns (uint256);
 
-    function MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA()
+    function MACROMINER_LIGHT_POOL_HARD_CAP_OF_SECOND_FORMULA()
         external
         view
         returns (uint256);
