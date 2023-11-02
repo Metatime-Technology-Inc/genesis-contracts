@@ -4,6 +4,8 @@ This project encompasses block validation, transaction validation, miner structu
 
 All miner structures and the reward system in this project are documented in the [Metatime whitepaper](https://docs.metatime.com/whitepaper).
 
+Also, If you would like check use cases of Metatime Genesis Contracts, you can check our [use case diagram](https://www.figma.com/file/4H0BwNCsVvCbz8W5xc3rFv).
+
 # Getting Started
 Recommended Node version is 16.0.0 and above.
 
@@ -778,12 +780,12 @@ The MinerFormulas contract provides the following core functionalities and const
 - **MACROMINER_ARCHIVE_DAILY_MAX_REWARD**: The daily max reward for Macro Archive miners.
 - **MACROMINER_FULLNODE_DAILY_MAX_REWARD**: The daily max reward for Macro Fullnode miners.
 - **MACROMINER_LIGHT_DAILY_MAX_REWARD**: The daily max reward for Macro Light miners.
-- **MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA**: The hard cap of the first formula for Macro Archive miners.
-- **MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA**: The hard cap of the second formula for Macro Archive miners.
-- **MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA**: The hard cap of the first formula for Macro Fullnode miners.
-- **MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA**: The hard cap of the second formula for Macro Fullnode miners.
-- **MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA**: The hard cap of the first formula for Macro Light miners.
-- **MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA**: The hard cap of the second formula for Macro Light miners.
+- **MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_FIRST_FORMULA**: The hard cap of the first formula for Macro Archive miners.
+- **MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_SECOND_FORMULA**: The hard cap of the second formula for Macro Archive miners.
+- **MACROMINER_FULLNODE_POOL_HARD_CAP_OF_FIRST_FORMULA**: The hard cap of the first formula for Macro Fullnode miners.
+- **MACROMINER_FULLNODE_POOL_HARD_CAP_OF_SECOND_FORMULA**: The hard cap of the second formula for Macro Fullnode miners.
+- **MACROMINER_LIGHT_POOL_HARD_CAP_OF_FIRST_FORMULA**: The hard cap of the first formula for Macro Light miners.
+- **MACROMINER_LIGHT_POOL_HARD_CAP_OF_SECOND_FORMULA**: The hard cap of the second formula for Macro Light miners.
 - **SECONDS_IN_A_DAY**: The number of seconds in a day.
 
 ### Contract Functions

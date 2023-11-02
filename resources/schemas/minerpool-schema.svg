@@ -78,26 +78,26 @@
 <ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="125.18" cy="-358" rx="73.49" ry="18" style=""/>
 <text text-anchor="middle" x="125.18" y="-353.8" font-family="Times,serif" font-size="14.00" style="">claimTxReward</text>
 </g>
-<!-- IMinerFormulas.MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA -->
-<g id="node8" class="node" pointer-events="visible" data-name="IMinerFormulas.MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA">
+<!-- IMinerFormulas.MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_FIRST_FORMULA -->
+<g id="node8" class="node" pointer-events="visible" data-name="IMinerFormulas.MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_FIRST_FORMULA">
 
 <ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="851.23" cy="-682" rx="281.44" ry="18" style=""/>
-<text text-anchor="middle" x="851.23" y="-677.8" font-family="Times,serif" font-size="14.00" style="">MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA</text>
+<text text-anchor="middle" x="851.23" y="-677.8" font-family="Times,serif" font-size="14.00" style="">MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_FIRST_FORMULA</text>
 </g>
-<!-- MinerPool._calculateClaimableAmount&#45;&gt;IMinerFormulas.MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA -->
-<g id="edge4" class="edge" data-name="MinerPool._calculateClaimableAmount-&gt;IMinerFormulas.MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA">
+<!-- MinerPool._calculateClaimableAmount&#45;&gt;IMinerFormulas.MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_FIRST_FORMULA -->
+<g id="edge4" class="edge" data-name="MinerPool._calculateClaimableAmount-&gt;IMinerFormulas.MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_FIRST_FORMULA">
 
 <path fill="none" stroke="white" stroke-width="2" d="M498.18,-421.77C506.9,-426.06 514.86,-431.68 521.38,-439 553.46,-474.98 507.21,-621 541.38,-655 596.34,-709.68 687.23,-711.38 756.21,-702.4" style=""/>
 <polygon fill="white" stroke="white" stroke-width="2" points="756.42,-705.91 765.83,-701.04 755.44,-698.98 756.42,-705.91" style=""/>
 </g>
-<!-- IMinerFormulas.MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA -->
-<g id="node9" class="node" pointer-events="visible" data-name="IMinerFormulas.MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA">
+<!-- IMinerFormulas.MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_SECOND_FORMULA -->
+<g id="node9" class="node" pointer-events="visible" data-name="IMinerFormulas.MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_SECOND_FORMULA">
 
 <ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="851.23" cy="-628" rx="293.61" ry="18" style=""/>
-<text text-anchor="middle" x="851.23" y="-623.8" font-family="Times,serif" font-size="14.00" style="">MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA</text>
+<text text-anchor="middle" x="851.23" y="-623.8" font-family="Times,serif" font-size="14.00" style="">MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_SECOND_FORMULA</text>
 </g>
-<!-- MinerPool._calculateClaimableAmount&#45;&gt;IMinerFormulas.MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA -->
-<g id="edge5" class="edge" data-name="MinerPool._calculateClaimableAmount-&gt;IMinerFormulas.MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA">
+<!-- MinerPool._calculateClaimableAmount&#45;&gt;IMinerFormulas.MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_SECOND_FORMULA -->
+<g id="edge5" class="edge" data-name="MinerPool._calculateClaimableAmount-&gt;IMinerFormulas.MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_SECOND_FORMULA">
 
 <path fill="none" stroke="white" stroke-width="2" d="M497.64,-421.83C506.53,-426.1 514.67,-431.7 521.38,-439 570.48,-492.41 489.18,-550.62 541.38,-601 596.35,-654.04 685.29,-656.57 753.64,-648.29" style=""/>
 <polygon fill="white" stroke="white" stroke-width="2" points="753.7,-651.82 763.15,-647.03 752.78,-644.88 753.7,-651.82" style=""/>
@@ -138,26 +138,26 @@
 <path fill="none" stroke="white" stroke-width="2" d="M452.06,-428.92C475.99,-433.33 502.39,-440.62 521.38,-457 540.77,-473.71 521.04,-495.48 541.38,-511 617.81,-569.3 737.92,-559.4 803.56,-541.97" style=""/>
 <polygon fill="white" stroke="white" stroke-width="2" points="804.39,-545.37 813.03,-539.24 802.45,-538.64 804.39,-545.37" style=""/>
 </g>
-<!-- IMinerFormulas.MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA -->
-<g id="node12" class="node" pointer-events="visible" data-name="IMinerFormulas.MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA">
+<!-- IMinerFormulas.MACROMINER_FULLNODE_POOL_HARD_CAP_OF_FIRST_FORMULA -->
+<g id="node12" class="node" pointer-events="visible" data-name="IMinerFormulas.MACROMINER_FULLNODE_POOL_HARD_CAP_OF_FIRST_FORMULA">
 
 <ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="851.23" cy="-466" rx="289.53" ry="18" style=""/>
-<text text-anchor="middle" x="851.23" y="-461.8" font-family="Times,serif" font-size="14.00" style="">MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA</text>
+<text text-anchor="middle" x="851.23" y="-461.8" font-family="Times,serif" font-size="14.00" style="">MACROMINER_FULLNODE_POOL_HARD_CAP_OF_FIRST_FORMULA</text>
 </g>
-<!-- MinerPool._calculateClaimableAmount&#45;&gt;IMinerFormulas.MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA -->
-<g id="edge8" class="edge" data-name="MinerPool._calculateClaimableAmount-&gt;IMinerFormulas.MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA">
+<!-- MinerPool._calculateClaimableAmount&#45;&gt;IMinerFormulas.MACROMINER_FULLNODE_POOL_HARD_CAP_OF_FIRST_FORMULA -->
+<g id="edge8" class="edge" data-name="MinerPool._calculateClaimableAmount-&gt;IMinerFormulas.MACROMINER_FULLNODE_POOL_HARD_CAP_OF_FIRST_FORMULA">
 
 <path fill="none" stroke="white" stroke-width="2" d="M468.59,-427.16C491.87,-431.45 517.62,-435.81 541.38,-439 573.79,-443.35 608.2,-447.16 641.84,-450.43" style=""/>
 <polygon fill="white" stroke="white" stroke-width="2" points="641.4,-453.91 651.68,-451.38 642.06,-446.94 641.4,-453.91" style=""/>
 </g>
-<!-- IMinerFormulas.MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA -->
-<g id="node13" class="node" pointer-events="visible" data-name="IMinerFormulas.MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA">
+<!-- IMinerFormulas.MACROMINER_FULLNODE_POOL_HARD_CAP_OF_SECOND_FORMULA -->
+<g id="node13" class="node" pointer-events="visible" data-name="IMinerFormulas.MACROMINER_FULLNODE_POOL_HARD_CAP_OF_SECOND_FORMULA">
 
 <ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="851.23" cy="-412" rx="301.7" ry="18" style=""/>
-<text text-anchor="middle" x="851.23" y="-407.8" font-family="Times,serif" font-size="14.00" style="">MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA</text>
+<text text-anchor="middle" x="851.23" y="-407.8" font-family="Times,serif" font-size="14.00" style="">MACROMINER_FULLNODE_POOL_HARD_CAP_OF_SECOND_FORMULA</text>
 </g>
-<!-- MinerPool._calculateClaimableAmount&#45;&gt;IMinerFormulas.MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA -->
-<g id="edge9" class="edge" data-name="MinerPool._calculateClaimableAmount-&gt;IMinerFormulas.MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA">
+<!-- MinerPool._calculateClaimableAmount&#45;&gt;IMinerFormulas.MACROMINER_FULLNODE_POOL_HARD_CAP_OF_SECOND_FORMULA -->
+<g id="edge9" class="edge" data-name="MinerPool._calculateClaimableAmount-&gt;IMinerFormulas.MACROMINER_FULLNODE_POOL_HARD_CAP_OF_SECOND_FORMULA">
 
 <path fill="none" stroke="white" stroke-width="2" d="M514.83,-412C521.45,-412 528.22,-412 535.11,-412" style=""/>
 <polygon fill="white" stroke="white" stroke-width="2" points="535.04,-415.5 545.04,-412 535.04,-408.5 535.04,-415.5" style=""/>
@@ -174,26 +174,26 @@
 <path fill="none" stroke="white" stroke-width="2" d="M468.59,-396.84C491.87,-392.55 517.62,-388.19 541.38,-385 578.53,-380.01 618.31,-375.74 656.56,-372.16" style=""/>
 <polygon fill="white" stroke="white" stroke-width="2" points="656.81,-375.65 666.45,-371.25 656.17,-368.68 656.81,-375.65" style=""/>
 </g>
-<!-- IMinerFormulas.MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA -->
-<g id="node15" class="node" pointer-events="visible" data-name="IMinerFormulas.MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA">
+<!-- IMinerFormulas.MACROMINER_LIGHT_POOL_HARD_CAP_OF_FIRST_FORMULA -->
+<g id="node15" class="node" pointer-events="visible" data-name="IMinerFormulas.MACROMINER_LIGHT_POOL_HARD_CAP_OF_FIRST_FORMULA">
 
 <ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="851.23" cy="-304" rx="267.52" ry="18" style=""/>
-<text text-anchor="middle" x="851.23" y="-299.8" font-family="Times,serif" font-size="14.00" style="">MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA</text>
+<text text-anchor="middle" x="851.23" y="-299.8" font-family="Times,serif" font-size="14.00" style="">MACROMINER_LIGHT_POOL_HARD_CAP_OF_FIRST_FORMULA</text>
 </g>
-<!-- MinerPool._calculateClaimableAmount&#45;&gt;IMinerFormulas.MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA -->
-<g id="edge12" class="edge" data-name="MinerPool._calculateClaimableAmount-&gt;IMinerFormulas.MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA">
+<!-- MinerPool._calculateClaimableAmount&#45;&gt;IMinerFormulas.MACROMINER_LIGHT_POOL_HARD_CAP_OF_FIRST_FORMULA -->
+<g id="edge12" class="edge" data-name="MinerPool._calculateClaimableAmount-&gt;IMinerFormulas.MACROMINER_LIGHT_POOL_HARD_CAP_OF_FIRST_FORMULA">
 
 <path fill="none" stroke="white" stroke-width="2" d="M419.28,-393.18C447.88,-373.89 495.56,-344.84 541.38,-331 562.16,-324.73 584.04,-319.76 606.18,-315.85" style=""/>
 <polygon fill="white" stroke="white" stroke-width="2" points="606.6,-319.32 615.88,-314.22 605.44,-312.42 606.6,-319.32" style=""/>
 </g>
-<!-- IMinerFormulas.MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA -->
-<g id="node16" class="node" pointer-events="visible" data-name="IMinerFormulas.MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA">
+<!-- IMinerFormulas.MACROMINER_LIGHT_POOL_HARD_CAP_OF_SECOND_FORMULA -->
+<g id="node16" class="node" pointer-events="visible" data-name="IMinerFormulas.MACROMINER_LIGHT_POOL_HARD_CAP_OF_SECOND_FORMULA">
 
 <ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="851.23" cy="-250" rx="279.69" ry="18" style=""/>
-<text text-anchor="middle" x="851.23" y="-245.8" font-family="Times,serif" font-size="14.00" style="">MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA</text>
+<text text-anchor="middle" x="851.23" y="-245.8" font-family="Times,serif" font-size="14.00" style="">MACROMINER_LIGHT_POOL_HARD_CAP_OF_SECOND_FORMULA</text>
 </g>
-<!-- MinerPool._calculateClaimableAmount&#45;&gt;IMinerFormulas.MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA -->
-<g id="edge13" class="edge" data-name="MinerPool._calculateClaimableAmount-&gt;IMinerFormulas.MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA">
+<!-- MinerPool._calculateClaimableAmount&#45;&gt;IMinerFormulas.MACROMINER_LIGHT_POOL_HARD_CAP_OF_SECOND_FORMULA -->
+<g id="edge13" class="edge" data-name="MinerPool._calculateClaimableAmount-&gt;IMinerFormulas.MACROMINER_LIGHT_POOL_HARD_CAP_OF_SECOND_FORMULA">
 
 <path fill="none" stroke="white" stroke-width="2" d="M406.79,-393.07C430.51,-362.47 482.01,-302.98 541.38,-277 555.39,-270.87 570.09,-265.77 585.16,-261.54" style=""/>
 <polygon fill="white" stroke="white" stroke-width="2" points="585.61,-265.04 594.39,-259.11 583.83,-258.27 585.61,-265.04" style=""/>
