@@ -121,27 +121,27 @@ contract MinerPool is Initializable, RolesHandler, ReentrancyGuard {
 
         if (nodeType == MinerTypes.NodeType.MacroArchive) {
             firstFormulaHardCap = minerFormulas
-                .MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA();
+                .MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_FIRST_FORMULA();
             secondFormulaHardCap = minerFormulas
-                .MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA();
+                .MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_SECOND_FORMULA();
 
             dailyHardCap = (minerFormulas
                 .MACROMINER_ARCHIVE_DAILY_MAX_REWARD() /
                 minerFormulas.SECONDS_IN_A_DAY());
         } else if (nodeType == MinerTypes.NodeType.MacroFullnode) {
             firstFormulaHardCap = minerFormulas
-                .MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA();
+                .MACROMINER_FULLNODE_POOL_HARD_CAP_OF_FIRST_FORMULA();
             secondFormulaHardCap = minerFormulas
-                .MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA();
+                .MACROMINER_FULLNODE_POOL_HARD_CAP_OF_SECOND_FORMULA();
 
             dailyHardCap = (minerFormulas
                 .MACROMINER_FULLNODE_DAILY_MAX_REWARD() /
                 minerFormulas.SECONDS_IN_A_DAY());
         } else if (nodeType == MinerTypes.NodeType.MacroLight) {
             firstFormulaHardCap = minerFormulas
-                .MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA();
+                .MACROMINER_LIGHT_POOL_HARD_CAP_OF_FIRST_FORMULA();
             secondFormulaHardCap = minerFormulas
-                .MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA();
+                .MACROMINER_LIGHT_POOL_HARD_CAP_OF_SECOND_FORMULA();
 
             dailyHardCap = (minerFormulas.MACROMINER_LIGHT_DAILY_MAX_REWARD() /
                 minerFormulas.SECONDS_IN_A_DAY());

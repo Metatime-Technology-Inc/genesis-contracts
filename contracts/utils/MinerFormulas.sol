@@ -39,25 +39,25 @@ contract MinerFormulas is Initializable {
     /// @notice macrominer(light) maximum daily prize
     uint256 public constant MACROMINER_LIGHT_DAILY_MAX_REWARD = 50 * 10 ** 18;
 
-    /// @notice hardcap of macrominer(archive) according to first formula
-    uint256 public constant MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA =
+    /// @notice pool hardcap of macrominer(archive) according to first formula
+    uint256 public constant MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_FIRST_FORMULA =
         135_000 * 10 ** 18;
-    /// @notice hardcap of macrominer(archive) according to second formula
-    uint256 public constant MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA =
+    /// @notice pool hardcap of macrominer(archive) according to second formula
+    uint256 public constant MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_SECOND_FORMULA =
         15_000 * 10 ** 18;
 
-    /// @notice hardcap of macrominer(fullnode) according to first formula
-    uint256 public constant MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA =
+    /// @notice pool hardcap of macrominer(fullnode) according to first formula
+    uint256 public constant MACROMINER_FULLNODE_POOL_HARD_CAP_OF_FIRST_FORMULA =
         90_000 * 10 ** 18;
-    /// @notice hardcap of macrominer(fullnode) according to second formula
-    uint256 public constant MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA =
+    /// @notice pool hardcap of macrominer(fullnode) according to second formula
+    uint256 public constant MACROMINER_FULLNODE_POOL_HARD_CAP_OF_SECOND_FORMULA =
         10_000 * 10 ** 18;
 
-    /// @notice hardcap of macrominer(light) according to first formula
-    uint256 public constant MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA =
+    /// @notice pool hardcap of macrominer(light) according to first formula
+    uint256 public constant MACROMINER_LIGHT_POOL_HARD_CAP_OF_FIRST_FORMULA =
         45_000 * 10 ** 18;
-    /// @notice hardcap of macrominer(light) according to second formula
-    uint256 public constant MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA =
+    /// @notice pool hardcap of macrominer(light) according to second formula
+    uint256 public constant MACROMINER_LIGHT_POOL_HARD_CAP_OF_SECOND_FORMULA =
         5_000 * 10 ** 18;
 
     /// @notice total seconds in a day
@@ -170,15 +170,15 @@ contract MinerFormulas is Initializable {
             TOTAL_NODE_COUNT = minerList.count(
                 MinerTypes.NodeType.MacroArchive
             );
-            DAILY_CALC_POOL_REWARD = MACROMINER_ARCHIVE_HARD_CAP_OF_FIRST_FORMULA;
+            DAILY_CALC_POOL_REWARD = MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_FIRST_FORMULA;
         } else if (nodeType == MinerTypes.NodeType.MacroFullnode) {
             TOTAL_NODE_COUNT = minerList.count(
                 MinerTypes.NodeType.MacroFullnode
             );
-            DAILY_CALC_POOL_REWARD = MACROMINER_FULLNODE_HARD_CAP_OF_FIRST_FORMULA;
+            DAILY_CALC_POOL_REWARD = MACROMINER_FULLNODE_POOL_HARD_CAP_OF_FIRST_FORMULA;
         } else if (nodeType == MinerTypes.NodeType.MacroLight) {
             TOTAL_NODE_COUNT = minerList.count(MinerTypes.NodeType.MacroLight);
-            DAILY_CALC_POOL_REWARD = MACROMINER_LIGHT_HARD_CAP_OF_FIRST_FORMULA;
+            DAILY_CALC_POOL_REWARD = MACROMINER_LIGHT_POOL_HARD_CAP_OF_FIRST_FORMULA;
         } else {
             return (0);
         }
@@ -218,15 +218,15 @@ contract MinerFormulas is Initializable {
             TOTAL_NODE_COUNT = minerList.count(
                 MinerTypes.NodeType.MacroArchive
             );
-            REST_POOL_AMOUNT = MACROMINER_ARCHIVE_HARD_CAP_OF_SECOND_FORMULA;
+            REST_POOL_AMOUNT = MACROMINER_ARCHIVE_POOL_HARD_CAP_OF_SECOND_FORMULA;
         } else if (nodeType == MinerTypes.NodeType.MacroFullnode) {
             TOTAL_NODE_COUNT = minerList.count(
                 MinerTypes.NodeType.MacroFullnode
             );
-            REST_POOL_AMOUNT = MACROMINER_FULLNODE_HARD_CAP_OF_SECOND_FORMULA;
+            REST_POOL_AMOUNT = MACROMINER_FULLNODE_POOL_HARD_CAP_OF_SECOND_FORMULA;
         } else if (nodeType == MinerTypes.NodeType.MacroLight) {
             TOTAL_NODE_COUNT = minerList.count(MinerTypes.NodeType.MacroLight);
-            REST_POOL_AMOUNT = MACROMINER_LIGHT_HARD_CAP_OF_SECOND_FORMULA;
+            REST_POOL_AMOUNT = MACROMINER_LIGHT_POOL_HARD_CAP_OF_SECOND_FORMULA;
         } else {
             return (0);
         }
