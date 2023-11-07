@@ -17,8 +17,6 @@ import "../interfaces/IMinerList.sol";
 contract MinerPool is Initializable, RolesHandler, ReentrancyGuard {
     /// @notice This variable represents a contract instance of IMinerFormulas, which is used to access miner formulas.
     IMinerFormulas public minerFormulas;
-    /// @notice This mapping stores the claimed amounts for each address.
-    mapping(address => uint256) public claimedAmounts;
     /// @notice This mapping stores the total rewards from the first formula for a given miner type and a specific uint256 identifier.
     mapping(uint256 => mapping(MinerTypes.NodeType => uint256))
         public totalRewardsFromFirstFormula;
