@@ -50,7 +50,8 @@ contract MinerFormulas is Initializable {
     uint256 public constant MACROMINER_FULLNODE_POOL_HARD_CAP_OF_FIRST_FORMULA =
         90_000 * 10 ** 18;
     /// @notice pool hardcap of macrominer(fullnode) according to second formula
-    uint256 public constant MACROMINER_FULLNODE_POOL_HARD_CAP_OF_SECOND_FORMULA =
+    uint256
+        public constant MACROMINER_FULLNODE_POOL_HARD_CAP_OF_SECOND_FORMULA =
         10_000 * 10 ** 18;
 
     /// @notice pool hardcap of macrominer(light) according to first formula

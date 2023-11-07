@@ -184,22 +184,15 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
         address[] memory shareholders_,
         uint256[] memory percentages
     ) external onlyOwnerRole(msg.sender) isMiner(miner) returns (bool) {
-        Share storage share = shares[miner];
         uint256 shareholdersLength = shareholders_.length;
         for (uint256 i; i < shareholdersLength; i++) {
             address addr = shareholders_[i];
             uint256 percentage = percentages[i];
-            uint256 nextPercent = share.sharedPercent + percentage;
 
             require(addr != address(0), "Metaminer: No zero shareholder");
             require(percentage != 0, "Metaminer: Non-zero % holder");
-            require(
-                nextPercent <= minerFormulas.BASE_DIVIDER(),
-                "Metaminer: Max 100% total share"
-            );
 
             _addShareHolder(miner, addr, percentage);
-            share.sharedPercent = nextPercent;
         }
         return (true);
     }
@@ -260,11 +253,17 @@ contract Metaminer is Initializable, RolesHandler, ReentrancyGuard {
         uint256 percentage
     ) internal isMiner(miner) {
         Share storage share = shares[miner];
+        uint256 nextPercent = share.sharedPercent + percentage;
+        require(
+            nextPercent <= minerFormulas.BASE_DIVIDER(),
+            "Metaminer: Max 100% total share"
+        );
         shareholders[miner][share.shareHolderCount] = Shareholder(
             shareholder,
             percentage
         );
         share.shareHolderCount++;
+        share.sharedPercent = nextPercent;
     }
 
     /**
